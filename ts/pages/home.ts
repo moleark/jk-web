@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import * as ejs from 'ejs';
 import { tableFromSql } from "../db";
 
 let lastTime: Date = new Date();

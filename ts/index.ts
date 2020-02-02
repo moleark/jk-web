@@ -5,7 +5,7 @@ import * as ejs from 'ejs';
 import * as path from 'path';
 import { Request, Response, NextFunction, Application } from 'express';
 import * as express from 'express';
-import { home } from './pages';
+import { homeRouter } from './pages';
 import { easyTime } from './tools';
 
 (async function () {
@@ -75,8 +75,10 @@ import { easyTime } from './tools';
     });
 
     //buildRouter(app, pages);
-    app.get('/a', home);
-    app.get('/jk-web', home);
+    app.use('/', homeRouter);
+    app.use('/jk-web', homeRouter);
+    //app.get('/wayne-ligsh-text', wayneLigshTest);
+    //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
 
     // 监听服务
     let port = config.get<number>('port');

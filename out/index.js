@@ -79,8 +79,10 @@ const tools_1 = require("./tools");
             next();
         });
         //buildRouter(app, pages);
-        app.get('/a', pages_1.home);
-        app.get('/jk-web', pages_1.home);
+        app.use('/', pages_1.homeRouter);
+        app.use('/jk-web', pages_1.homeRouter);
+        //app.get('/wayne-ligsh-text', wayneLigshTest);
+        //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
         // 监听服务
         let port = config.get('port');
         app.listen(port, '0.0.0.0', () => __awaiter(this, void 0, void 0, function* () {
