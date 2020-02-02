@@ -39,6 +39,20 @@ const tools_1 = require("./tools");
                 return undefined;
             return value;
         });
+        app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            //let json = res.json;
+            let s = req.socket;
+            let p = '';
+            if (req.method !== 'GET')
+                p = JSON.stringify(req.body);
+            console.log('\n=== %s:%s - %s %s %s', s.remoteAddress, s.remotePort, req.method, req.originalUrl, p);
+            try {
+                yield next();
+            }
+            catch (e) {
+                console.error(e);
+            }
+        }));
         //挂载静态资源处理中间件,设置css或者js引用文件的静态路径
         //app.use(express.static(__dirname + "/public"));
         // 或者以下这个也可以

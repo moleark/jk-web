@@ -32,6 +32,20 @@ import { easyTime } from './tools';
         return value;
     });
 
+    app.use(async (req:express.Request, res:express.Response, next:express.NextFunction) => {
+        //let json = res.json;
+        let s= req.socket;
+        let p = '';
+        if (req.method !== 'GET') p = JSON.stringify(req.body);
+        console.log('\n=== %s:%s - %s %s %s', s.remoteAddress, s.remotePort, req.method, req.originalUrl, p);
+        try {
+            await next();
+        }
+        catch (e) {
+            console.error(e);
+        }
+    });
+    
     //挂载静态资源处理中间件,设置css或者js引用文件的静态路径
     //app.use(express.static(__dirname + "/public"));
 
