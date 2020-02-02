@@ -52,6 +52,7 @@ import { easyTime } from './tools';
     // 或者以下这个也可以
     let p = path.join(__dirname, '../public');
     app.use((express.static as any)(p, {maxAge: 36000}));
+    app.use('/jk-web', (express.static as any)(p, {maxAge: 36000}));
     //设置模板视图的目录
     app.set("views", "./public/views");
     //设置是否启用视图编译缓存，启用将加快服务器执行效率
