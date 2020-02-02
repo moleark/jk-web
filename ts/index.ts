@@ -67,13 +67,15 @@ import { easyTime } from './tools';
         next();
     });
 
-    app.get('/', (req, res) => res.send('Hello World!'))
+    app.get('/', (req, res) => res.send('Hello World!'));
+    app.get('/jk-web', (req, res) => res.send('Hello World!'));
     app.use((req: Request, res: Response, next: NextFunction) => {
         next();
     });
 
     //buildRouter(app, pages);
     app.get('/a', home);
+    app.get('/jk-web', home);
 
     // 监听服务
     let port = config.get<number>('port');
