@@ -21,10 +21,10 @@ function buildCall(proc, values) {
     }
     return ret + ');';
 }
-function execSql(sql) {
+function execSql(sql, params) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
-            pool.query(sql, (err, result) => {
+            pool.query(sql, params, (err, result) => {
                 if (err !== null) {
                     reject(err);
                     return;
@@ -37,7 +37,7 @@ function execSql(sql) {
 exports.execSql = execSql;
 function tableFromSql(sql, values) {
     return __awaiter(this, void 0, void 0, function* () {
-        let res = yield execSql(sql);
+        let res = yield execSql(sql, values);
         if (Array.isArray(res) === false)
             return [];
         if (res.length === 0)
@@ -51,7 +51,7 @@ function tableFromSql(sql, values) {
 exports.tableFromSql = tableFromSql;
 function tablesFromSql(sql, values) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield execSql(sql);
+        return yield execSql(sql, values);
     });
 }
 exports.tablesFromSql = tablesFromSql;
