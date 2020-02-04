@@ -4,7 +4,7 @@ import { sql } from '../sql';
 
 let lastTime: Date = new Date();
 let cacheHtml:string;
-
+//测试
 export async function home(req: Request, res:Response) {
     if (false && cacheHtml !== undefined) {
         if (Date.now() - lastTime.getTime() < 3600*1000) {
