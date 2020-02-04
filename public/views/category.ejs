@@ -1,0 +1,39 @@
+<%- include('headers/home-header.ejs') -%>
+<%
+    var len = categories.length;
+%>
+<div class="container my-3">
+<div class="row">
+    <div class="col-sm-3">
+        <ul class="list-group">
+            <% for (let i=0; i<len; i++) { 
+            if (i==current) continue;
+            let {caption, icon, subs, color} = categories[i];
+            %>
+                <a href="<%=i%>" class="list-group-item list-group-item-action px-2 mb-3" target="blank">
+                    <img class="float-left" src="<%=icon%>" style="width: 2.5rem;height:2.5rem; margin: -0.3rem 0.5rem -0.3rem 0;" />
+                    <div class="mb-2 text-center text-<%=color%>"><b><%=caption%></b></div>
+                    <div class="small text-muted">
+                        <span class="small"><%=subs.map(v=>v.sub).join(' / ')%></span>
+                    </div>
+                </a>
+            <% } %>
+        </ul>
+    </div>
+    <div class="col-sm-9">
+        <%
+            let {caption, icon, subs, color} = categories[current];
+        %>
+        <img class="float-right ml-5" src="<%=icon%>" style="width: 4rem;height:4rem;" />
+        <div class="h2 text-<%=color%> text-center border-bottom border-<%=color%> py-3">
+            <%=caption%>
+        </div>
+        <% for (let s of subs) {
+            let {sub} = s;
+        %>
+            <div class="border-muted border-bottom p-3 my-2"><%=sub%></div>
+        <% } %>
+    </div>
+</div>
+</div>
+<%- include('footers/home-footer.ejs') -%>

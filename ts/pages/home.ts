@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { tableFromSql } from "../db";
 import { sql } from '../sql';
+import { categories } from "../data";
+import { ejsError } from "../tools";
 
 let lastTime: Date = new Date();
 let cacheHtml:string;
@@ -15,10 +17,13 @@ export async function home(req: Request, res:Response) {
     const ret = await tableFromSql(sql.homePostList);
     //let content = ejs.fileLoader('./ejs/a.ejs').toString();
     let data = {
+        title: undefined,
         path: 'post/', // 'https://c.jkchemical.com/webBuilder/post/',
         news: ret,
+        categories: categories,
     };
     res.render('home.ejs', data, (err, html) => {
+        if (ejsError(err, res) === true) return;
         res.end(cacheHtml = html);
     });
 };

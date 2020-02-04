@@ -11,8 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../db");
 const sql_1 = require("../sql");
+const data_1 = require("../data");
+const tools_1 = require("../tools");
 let lastTime = new Date();
 let cacheHtml;
+//测试
 function home(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         if (false && cacheHtml !== undefined) {
@@ -25,10 +28,14 @@ function home(req, res) {
         const ret = yield db_1.tableFromSql(sql_1.sql.homePostList);
         //let content = ejs.fileLoader('./ejs/a.ejs').toString();
         let data = {
+            title: undefined,
             path: 'post/',
             news: ret,
+            categories: data_1.categories,
         };
         res.render('home.ejs', data, (err, html) => {
+            if (tools_1.ejsError(err, res) === true)
+                return;
             res.end(cacheHtml = html);
         });
     });

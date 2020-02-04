@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { tableFromSql } from "../db";
 import { sql } from '../sql';
+import { ejsError } from "../tools";
 
 export async function post(req: Request, res:Response) {
     let id = req.params.id;
@@ -14,10 +15,12 @@ export async function post(req: Request, res:Response) {
     }
     //let content = ejs.fileLoader('./ejs/a.ejs').toString();
     let data = {
+        title: undefined,
         //path: 'post/'  'https://c.jkchemical.com/webBuilder/post/',
         content: content,
     };
     res.render('post.ejs', data, (err, html) => {
+        if (ejsError(err, res) === true) return;
         res.end(html);
     });
 };
