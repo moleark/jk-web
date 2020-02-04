@@ -4,4 +4,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./categories"));
+__export(require("./productNews"));
+__export(require("./news"));
+__export(require("./latestProducts"));
 //# sourceMappingURL=index.js.map
