@@ -111,22 +111,11 @@
     <div class="col-sm-3 my-3">
         <div class="bg-info text-white small rounded-pill px-4 pt-1 pb-2 mb-1">最新产品</div>
         <ul class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">A simple primary list group item</a>
-            <a href="http://www.jkchemical.com" class="list-group-item list-group-item-action list-group-item-primary">百灵威首页</a>
-            <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">A simple secondary list group item</a>
-            <a href="#" class="list-group-item list-group-item-action list-group-item-success">A simple success list group item</a>
-            <a href="#" class="list-group-item list-group-item-action list-group-item-danger">A simple danger list group item</a>
-            <a href="#" class="list-group-item list-group-item-action list-group-item-warning">A simple warning list group item</a>
-            <a href="#" class="list-group-item list-group-item-action list-group-item-info">A simple info list group item</a>
-            <a href="#" class="list-group-item list-group-item-action list-group-item-light">A simple light list group item</a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">List group item heading</h5>
-                  <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small class="text-muted">Donec id elit non mi porta.</small>
-              </a>
+            <% for (let pn of productNews) {
+                let {caption} = pn;
+            %>
+                <a href="#" class="list-group-item list-group-item-action"><%=caption%></a>    
+            <% } %>
         </ul>        
     </div>
 </div>
