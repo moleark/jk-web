@@ -68,8 +68,8 @@
             <% for (let pn of productNews) {
                 let {caption} = pn;
             %>
-                <a href="#" class="list-group-item list-group-item-action py-2 pl-2">
-                    <small><i class="text-warning fa fa-chevron-right"></i></small> &nbsp;<%=caption%>
+                <a href="#" class="list-group-item list-group-item-action py-2">
+                    <small><small><i class="text-warning fa fa-chevron-right"></i></small></small> &nbsp;<%=caption%>
                 </a>
             <% } %>
         </ul>        
@@ -78,7 +78,9 @@
             <% for (let pn of newsletter) {
                 let {caption} = pn;
             %>
-                <a href="#" class="list-group-item list-group-item-action py-2"><%=caption%></a>
+                <a href="#" class="list-group-item list-group-item-action py-2">
+                    <small><small><i class="text-success fa fa-chevron-circle-right"></i></small></small> &nbsp;<%=caption%>
+                </a>
             <% } %>
         </ul>        
     </div>
