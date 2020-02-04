@@ -34,6 +34,7 @@ function home(req, res) {
             categories: data_1.categories,
             productNews: data_1.productNews,
             newsletter: data_1.newsletter,
+            latestProducts: data_1.latestProducts,
         };
         res.render('home.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
