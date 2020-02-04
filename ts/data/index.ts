@@ -1,4 +1,4 @@
 export * from './categories';
 export * from './productNews';
-export * from './news';
+export * from './newsletter';
 export * from './latestProducts';

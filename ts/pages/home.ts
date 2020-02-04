@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { tableFromSql } from "../db";
 import { sql } from '../sql';
-import { categories, productNews } from "../data";
+import { categories, productNews, newsletter } from "../data";
 import { ejsError } from "../tools";
 
 let lastTime: Date = new Date();
@@ -22,6 +22,8 @@ export async function home(req: Request, res:Response) {
         news: ret,
         categories: categories,
         productNews: productNews,
+        newsletter: newsletter,
+
     };
     res.render('home.ejs', data, (err, html) => {
         if (ejsError(err, res) === true) return;
