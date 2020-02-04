@@ -4,6 +4,20 @@
 %>
 <div class="container my-3">
 <div class="row">
+    <div class="col-sm-9">
+        <%
+            let {caption, icon, subs, color} = categories[current];
+        %>
+        <img class="float-right ml-5" src="<%=icon%>" style="width: 4rem;height:4rem;" />
+        <div class="h2 text-<%=color%> text-center border-bottom border-<%=color%> py-3">
+            <%=caption%>
+        </div>
+        <% for (let s of subs) {
+            let {sub} = s;
+        %>
+            <div class="border-muted border-bottom p-3 my-2"><%=sub%></div>
+        <% } %>
+    </div>
     <div class="col-sm-3">
         <ul class="list-group">
             <% for (let i=0; i<len; i++) { 
@@ -19,20 +33,6 @@
                 </a>
             <% } %>
         </ul>
-    </div>
-    <div class="col-sm-9">
-        <%
-            let {caption, icon, subs, color} = categories[current];
-        %>
-        <img class="float-right ml-5" src="<%=icon%>" style="width: 4rem;height:4rem;" />
-        <div class="h2 text-<%=color%> text-center border-bottom border-<%=color%> py-3">
-            <%=caption%>
-        </div>
-        <% for (let s of subs) {
-            let {sub} = s;
-        %>
-            <div class="border-muted border-bottom p-3 my-2"><%=sub%></div>
-        <% } %>
     </div>
 </div>
 </div>
