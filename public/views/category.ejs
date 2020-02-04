@@ -23,7 +23,7 @@
             <% for (let i=0; i<len; i++) { 
             let {caption, icon, subs, color} = categories[i];
             %>
-                <a href="<%=i%>" class="list-group-item <%i==current?'list-group-item-primary':'list-group-item-action'%> px-2 mb-3" target="blank">
+                <a href="<%=i%>" class="list-group-item list-group-item-action <%i==current&&'list-group-item-primary'%> px-2 mb-3" target="blank">
                     <img class="float-left" src="<%=icon%>" style="width: 2.5rem;height:2.5rem; margin: -0.3rem 0.5rem -0.3rem 0;" />
                     <div class="mb-2 text-center text-<%=color%>"><b><%=caption%></b></div>
                     <div class="small text-muted">
