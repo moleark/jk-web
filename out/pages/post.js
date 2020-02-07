@@ -16,16 +16,17 @@ function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let id = req.params.id;
         const ret = yield db_1.tableFromSql(sql_1.sql.postFromId, [id]);
-        let content;
+        let content, title;
         if (ret.length === 0) {
             content = `post id=${id} is not defined`;
         }
         else {
             content = ret[0].content;
+            title = ret[0].caption;
         }
         //let content = ejs.fileLoader('./ejs/a.ejs').toString();
         let data = {
-            title: undefined,
+            title: title,
             //path: 'post/'  'https://c.jkchemical.com/webBuilder/post/',
             content: content,
         };

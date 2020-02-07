@@ -11,7 +11,7 @@ export const sql = {
     `,
 
     postFromId: `
-    SELECT a.content
+    SELECT a.content, a.caption
         FROM ${db}.tv_post a
         WHERE a.id= ? ;
     `,
