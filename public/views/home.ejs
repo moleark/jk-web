@@ -1,20 +1,45 @@
 <%- include('headers/home-header.ejs') -%>
+<script>
+    var countInCart = 1;
+    function showCart() {
+        let a = document.getElementById('cart');
+        a.innerText = countInCart > 0? countInCart : '';
+    }
+    function cartClick() {
+        if (countInCart<=0) return;
+        --countInCart;
+        showCart();
+    }
+    window.onfocus = function() {
+        countInCart++;
+        showCart();
+    };
+    window.onload = function() {
+        showCart();
+    }
+    window.onblur = cartClick;
+</script>
 <div class="container">
 
-<form class="my-3" onsubmit="return (function(e){alert('搜索正在实现中！');return false;})()">
+<form class="my-3" onsubmit="return (function(e){alert('搜索正在实现中！'); countInCart++; return false;})()">
     <div class="form-row align-items-center justify-content-center">
-      <div class="col-9 col-sm-8 col-md-6">
+      <div class="col-8 col-sm-8 col-md-6">
         <div class="input-group border border-primary rounded">
-          <div class="input-group-prepend">
-            <div class="input-group-text bg-primary text-white"><i class="fa fa-search"></i></div>
-          </div>
-          <input type="text" class="form-control border-0" 
-          placeholder="查询产品，或点击下面产品大类"
-          data-a="品名、货号、CAS号、MDL号或关键词">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-primary text-white"><i class="fa fa-search"></i></div>
+            </div>
+            <input type="text" class="form-control border-0" 
+                placeholder="品名、货号、CAS号、MDL号或关键词"/>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">搜索</button>
+            </div>
         </div>
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-primary">搜索</button>
+        <button type="button" class="btn btn-outline-primary position-relative" onclick="cartClick()">
+            <i class="fa fa-shopping-cart"></i> <small>购物车</small>
+            <span class="badge badge-pill badge-danger position-absolute" id='cart' style="right:-0.6rem;top:-0.1rem"></span>
+        </button>
       </div>
     </div>
 </form>
@@ -24,11 +49,11 @@
     <% for (let i=0; i<categories.length; i++) { 
         let {caption, icon, subs, color} = categories[i];
     %>
-        <a href="category/<%=i%>" class="list-group-item list-group-item-action px-2" target="blank">
-            <img class="position-absolute d-sm-none d-md-none d-lg-block" 
-                src="<%=icon%>" 
-                style="left:0.1rem; top:0.2rem; width: 2.5rem;height:2.5rem;" />
-            <div class="mb-2 text-center text-<%=color%>"><b><%=caption%></b></div>
+        <a href="category/<%=i%>" class="list-group-item list-group-item-action px-sm-2" target="blank">
+            <img class="position-absolute
+                category-md-icon category-lg-icon category-icon category-sm-icon" 
+                src="<%=icon%>" />
+            <div class="mb-sm-2 text-center text-<%=color%>"><b><%=caption%></b></div>
             <div class="small text-muted d-none d-sm-block" style="max-height: 6em; overflow: hidden;">
                 <span class="small"><%=subs.map(v=>v.sub).join(' / ')%></span>
             </div>
