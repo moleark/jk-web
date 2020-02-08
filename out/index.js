@@ -62,7 +62,7 @@ const tools_1 = require("./tools");
         //设置模板视图的目录
         app.set("views", "./public/views");
         //设置是否启用视图编译缓存，启用将加快服务器执行效率
-        app.set("view cache", true);
+        app.set("view cache", false);
         // 2.注册html模板引擎：
         app.engine('html', ejs.renderFile);
         //设置模板引擎的格式即运用何种模板引擎

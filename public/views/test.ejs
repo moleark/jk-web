@@ -1,0 +1,112 @@
+<%- include('headers/home-header.ejs') -%>
+
+<%
+function product(p) {
+    let {no, caption, pack} = p;
+%>
+<div class="col-sm py-3  border-bottom border-muted">
+<a href="https://www.jkchemical.com/CH/products/A10991956.html" 
+style="color: tomato; font-weight:600"><%=no%></a><br>
+<span class="text-dark">品名：<%=caption%><br> 包装：<%=pack%></span>
+</div>
+<%
+}
+
+function products(arr) {
+    %> <div class="row mt-2 row-cols-1 row-cols-sm-2 row-cols-md-3"> <%
+    arr.forEach(element => {
+        product(element)
+    });
+    %> </div> <%
+}
+
+function subtitle(text) {
+    %>
+        <div class="mt-5 mb-2 text-info d-flex align-items-center h5">
+            <div class="mr-3 d-flex align-items-center" style="font-size: 60%;"><i class="text-success fa fa-circle"></i></div>
+            <div><b><%=text%></b></div>
+        </div> 
+    <%
+}
+
+let 有效氯游离碱的测定试剂及耗材 = [
+{no: '991956', caption: '乙酸, 用于分析', pack: '100ML, 500ML, 2.5L'},
+{no: '110350', caption: '硫代硫酸钠五水合物, 99%, ACS级试剂', pack: '250G, 1KG'},
+{no: '914263', caption: '淀粉, 用于分析', pack: '500G'},
+{no: '152721', caption: '酚酞, 指示剂', pack: '25G, 100G, 500G',},
+{no: '1477589', caption: '碘化钾淀粉试纸', pack: '100条/盒'}
+];
+
+let 铁重金属和砷的测定试剂 = [
+{no: '991956', caption: '乙酸, 用于分析', pack: '100ML, 500ML, 2.5L'},
+{no: '961379', caption: '乙酸钠三水合物, 99%, 用于分析', pack: '500G, 2.5KG'},
+{no: '984126', caption: '盐酸羟胺, 98.5%, 用于分析', pack: '100G, 500G'},
+{no: 'C19605', caption: '铁标准溶液', pack: '100ML, 500ML'},
+{no: '337793', caption: '1,10-菲啰啉, 99%', pack: '5G, 25G, 100G'},
+{no: '924972', caption: '硫化钠九水合物, 98%, 用于分析', pack: '500G'},
+{no: 'WM-NMS-29', caption: '铅标准溶液', pack: '50ML'},
+{no: '915480', caption: '碘化钾, 99%, 用于分析', pack: '25G, 100G'},
+{no: '969674', caption: '氯化亚锡(II), 97.5%, 无水', pack: '25G, 100G, 500G'},
+{no: 'C19582', caption: '砷标准溶液，1 mg/ml As 2％KOH', pack: '100ML'},
+{no: '947339', caption: '乙酸铅(II)三水合物, 99%, 用于分析', pack: '500G'},
+{no: 'C22261', caption: '锌粒', pack:'100G, 500G'},
+];
+
+let 其他配套耗材 = [
+{no: '987528', caption: '304不锈钢药刮, 220mm, 一平一弯', pack: '10支/袋'},
+{no: '2727287', caption: '100×100 mm 称量纸', pack: '500张/盒'},
+{no: '915664', caption: '1.5 mL 透明离心管', pack: '500管/袋'},
+{no: '2063717', caption: '透明玻璃螺口带白色书写签样品瓶, 2 mL, 8 mm', pack: '100个/盒'},
+{no: '940292', caption: '9 mm 蓝色螺口样品瓶瓶盖, PTFE/硅胶隔垫', pack: '100个/包'},
+{no: '958945', caption: '单道手动可调移液器，量程: 100-1000 μL, 最小刻度: 5.0 μL', pack: '1PAK'},
+{no: '672890', caption: '1000 μL 移液器吸头, 蓝色', pack: '1000个/包'},
+{no: '940621', caption: '数显不锈钢加热磁力搅拌器，套包装', pack: '1台'},
+{no: '1482821', caption: '椭圆型聚四氟乙烯磁力搅拌子, A100 (6*10 mm)', pack: '5支/盒'},
+{no: '944099', caption: '圆柱型聚四氟乙烯磁力搅拌子, 带轴环, B200 (8 mm x 20 mm)', pack: '5支/盒'},
+];
+
+let 污水水质监测实验所需耗材 = [
+{no: '945285', caption: 'C18 固相萃取小柱，填料1 g, 柱体积6 ml', pack: '30支/盒'},
+{no: '999155', caption: 'Silica 固相萃取小柱，填料1 g,柱体积6 ml', pack: '30支/盒'},
+{no: '2123704', caption: '亲水 PTFE 针头式过滤器, 13 mm, 0.45 µm', pack: '200个/盒'},
+{no: '110350', caption: '硫代硫酸钠五水合物, 99%, ACS级试剂', pack: '3250G, 1KG'},
+{no: '37094', caption: '细沙, 40-100目', pack: '250G'},
+{no: '915664', caption: '1.5 mL 透明离心管', pack: '500管/袋'},
+{no: '2063717', caption: '透明玻璃螺口带白色书写签样品瓶, 2 mL, 8 mm', pack: '100个/盒'},
+{no: '940292', caption: '9 mm 蓝色螺口样品瓶瓶盖, PTFE/硅胶隔垫', pack: '100个/包'},
+{no: '958945', caption: '单道手动可调移液器，量程: 100-1000 μL, 最小刻度: 5.0 μL', pack: '1PAK'},
+{no: '672890', caption: '1000 μL 移液器吸头, 蓝色', pack: '1000个/袋'},
+{no: '1122420', caption: '瓶口分液器，量程: 5.0-50.0 ml, 最小刻度: 1.0 ml', pack: '1PAK'},
+{no: '958945', caption: '', pack: ''},
+];
+
+%>
+
+
+<div class="container py-3">
+<h3 class="text-info text-center my-5 border-bottom pb-5 border-info"><b>抗“疫”行动|百灵威供应GBT19106-2013次氯酸钠测定试剂</b></h3>
+
+<p class="my-3 pt-3">
+  随着新型冠状病毒肺炎疫情发展，全国一心，致力于打赢这场没有硝烟的战役，消灭病毒传播途径成为关键。其中，室内外、物体表面的消毒将用到大量的84消毒液，生产原液中有效成分次氯酸钠的检测以及重金属残余的分析，是消毒液安全生产、使用的保障。
+</p>
+<p class="my-3 pt-3">
+  百灵威针对国标方法《GBT19106-2013次氯酸钠测定》，提供试剂耗材解决方案，供检测单位及相关部门选用。
+</p>
+<p class="my-3 pt-3">
+ 众志成城，百灵威愿为全国抗“疫”物资生产及安全使用，贡献力量。
+</p>
+
+<% subtitle('有效氯、游离碱的测定试剂及耗材') %>
+<% products(有效氯游离碱的测定试剂及耗材); %>
+
+<% subtitle('铁、重金属和砷的测定试剂') %>
+<% products(铁重金属和砷的测定试剂); %>
+
+<% subtitle('其他配套耗材') %>
+<% products(其他配套耗材); %>
+
+<% subtitle('污水水质监测实验所需耗材') %>
+<% products(污水水质监测实验所需耗材); %>
+
+ </div>
+<%- include('footers/home-footer.ejs') -%>

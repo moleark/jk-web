@@ -10,39 +10,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const ejs = require("ejs");
-const db_1 = require("../db");
-const sql_1 = require("../sql");
-function post(req, res) {
+function test(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let id = req.params.id;
-        const ret = yield db_1.tableFromSql(sql_1.sql.postFromId, [id]);
-        let template, title;
-        if (ret.length === 0) {
-            template = `post id=${id} is not defined`;
-        }
-        else {
-            let header = ejs.fileLoader('./public/views/headers/home-header.ejs').toString();
-            let footer = ejs.fileLoader('./public/views/footers/home-footer.ejs').toString();
-            template = header
-                + '<div class="container my-3">'
-                + ret[0].content
-                + footer;
-            title = ret[0].caption;
-        }
-        //let content = ejs.fileLoader('./ejs/a.ejs').toString();
         let data = {
-            title: title,
+            title: undefined,
         };
-        let html = ejs.render(template, data);
-        res.end(html);
+        let htmlText = yield ejs.renderFile('./public/views/test.ejs', data);
+        res.end(htmlText);
         /*
-        res.render('post.ejs', data, (err, html) => {
+        res.render(htmlText, data, (err, html) => {
             if (ejsError(err, res) === true) return;
             res.end(html);
         });
         */
     });
 }
-exports.post = post;
+exports.test = test;
 ;
-//# sourceMappingURL=post.js.map
+//# sourceMappingURL=test.js.map
