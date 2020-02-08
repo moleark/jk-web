@@ -16,7 +16,9 @@ export async function post(req: Request, res:Response) {
         let header = ejs.fileLoader('./public/views/headers/home-header.ejs').toString();
         let footer = ejs.fileLoader('./public/views/footers/home-footer.ejs').toString();
         template = header 
+            + '<div class="container my-3">'
             + ret[0].content
+            + '</div>'
             + footer;
         title = ret[0].caption;
     }

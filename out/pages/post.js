@@ -27,6 +27,7 @@ function post(req, res) {
             template = header
                 + '<div class="container my-3">'
                 + ret[0].content
+                + '</div>'
                 + footer;
             title = ret[0].caption;
         }
