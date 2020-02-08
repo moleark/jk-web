@@ -9,6 +9,7 @@ export async function test(req: Request, res:Response) {
         title: undefined,
     };
     let m = isWechat(req)? '-m' : '';
+    m = '-m';
 
     let header = ejs.fileLoader(viewPath + 'headers/home-header' + m + ejsSuffix).toString();
     let footer = ejs.fileLoader(viewPath + 'footers/home-footer' + m + ejsSuffix).toString();
