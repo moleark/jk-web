@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ejs = require("ejs");
 const db_1 = require("../db");
 const sql_1 = require("../sql");
+//import { ejsError } from "../tools";
 function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let id = req.params.id;

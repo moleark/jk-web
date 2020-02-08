@@ -1,13 +1,21 @@
-<%- include('headers/home-header.ejs') -%>
-
 <%
 function product(p) {
-    let {no, caption, pack} = p;
+    let {url, c, no, caption, pack} = p;
+    if (!url) {
+        url = 'https://www.jkchemical.com/CH/products/' + c + no + '.html';
+    }
 %>
 <div class="col-sm py-3  border-bottom border-muted">
-<a href="https://www.jkchemical.com/CH/products/A10991956.html" 
-style="color: tomato; font-weight:600"><%=no%></a><br>
-<span class="text-dark">品名：<%=caption%><br> 包装：<%=pack%></span>
+<a href="<%=url%>" class="text-decoration-none">
+<div style="line-height:2.0em; " class="text-dark">
+<div style="color: tomato; font-weight:600;"><%=no%></div>
+<div class="d-flex">
+    <div class="text-nowrap">品名：</div>
+    <div><b class="text-dark"><%=caption%></b></div>
+</div> 
+<div>包装：<%=pack%></div>
+</div>
+</a>
 </div>
 <%
 }
@@ -30,60 +38,59 @@ function subtitle(text) {
 }
 
 let 有效氯游离碱的测定试剂及耗材 = [
-{no: '991956', caption: '乙酸, 用于分析', pack: '100ML, 500ML, 2.5L'},
-{no: '110350', caption: '硫代硫酸钠五水合物, 99%, ACS级试剂', pack: '250G, 1KG'},
-{no: '914263', caption: '淀粉, 用于分析', pack: '500G'},
-{no: '152721', caption: '酚酞, 指示剂', pack: '25G, 100G, 500G',},
-{no: '1477589', caption: '碘化钾淀粉试纸', pack: '100条/盒'}
+{c:'A10', no: '991956', caption: '乙酸, 用于分析', pack: '100ML, 500ML, 2.5L'},
+{c:'A01', no: '110350', caption: '硫代硫酸钠五水合物, 99%, ACS级试剂', pack: '250G, 1KG'},
+{c:'A10', no: '914263', caption: '淀粉, 用于分析', pack: '500G'},
+{url:'https://www.jkchemical.com/CH/products/search/fulltextsearch/152721.html', no: '152721', caption: '酚酞, 指示剂', pack: '25G, 100G, 500G',},
+{c:'R35', no: '1477589', caption: '碘化钾淀粉试纸', pack: '100条/盒'}
 ];
 
 let 铁重金属和砷的测定试剂 = [
-{no: '991956', caption: '乙酸, 用于分析', pack: '100ML, 500ML, 2.5L'},
-{no: '961379', caption: '乙酸钠三水合物, 99%, 用于分析', pack: '500G, 2.5KG'},
-{no: '984126', caption: '盐酸羟胺, 98.5%, 用于分析', pack: '100G, 500G'},
-{no: 'C19605', caption: '铁标准溶液', pack: '100ML, 500ML'},
-{no: '337793', caption: '1,10-菲啰啉, 99%', pack: '5G, 25G, 100G'},
-{no: '924972', caption: '硫化钠九水合物, 98%, 用于分析', pack: '500G'},
-{no: 'WM-NMS-29', caption: '铅标准溶液', pack: '50ML'},
-{no: '915480', caption: '碘化钾, 99%, 用于分析', pack: '25G, 100G'},
-{no: '969674', caption: '氯化亚锡(II), 97.5%, 无水', pack: '25G, 100G, 500G'},
-{no: 'C19582', caption: '砷标准溶液，1 mg/ml As 2％KOH', pack: '100ML'},
-{no: '947339', caption: '乙酸铅(II)三水合物, 99%, 用于分析', pack: '500G'},
-{no: 'C22261', caption: '锌粒', pack:'100G, 500G'},
+{c: 'A10', no: '991956', caption: '乙酸, 用于分析', pack: '100ML, 500ML, 2.5L'},
+{c: 'A10', no: '961379', caption: '乙酸钠三水合物, 99%, 用于分析', pack: '500G, 2.5KG'},
+{c: 'A10', no: '984126', caption: '盐酸羟胺, 98.5%, 用于分析', pack: '100G, 500G'},
+{c: 'J01', no: 'C19605', caption: '铁标准溶液', pack: '100ML, 500ML'},
+{c: 'A01', no: '337793', caption: '1,10-菲啰啉, 99%', pack: '5G, 25G, 100G'},
+{c: 'A10', no: '924972', caption: '硫化钠九水合物, 98%, 用于分析', pack: '500G'},
+{url: 'https://www.jkchemical.com/CH/products/search/fulltextsearch/WM-NMS-29.html', no: 'WM-NMS-29', caption: '铅标准溶液', pack: '50ML'},
+{c: 'A10', no: '915480', caption: '碘化钾, 99%, 用于分析', pack: '25G, 100G'},
+{c: 'A01', no: '969674', caption: '氯化亚锡(II), 97.5%, 无水', pack: '25G, 100G, 500G'},
+{c: 'J01', no: 'C19582', caption: '砷标准溶液，1 mg/ml As 2％KOH', pack: '100ML'},
+{c: 'A10', no: '947339', caption: '乙酸铅(II)三水合物, 99%, 用于分析', pack: '500G'},
+{c: 'J01', no: 'C22261', caption: '锌粒', pack:'100G, 500G'},
 ];
 
 let 其他配套耗材 = [
-{no: '987528', caption: '304不锈钢药刮, 220mm, 一平一弯', pack: '10支/袋'},
-{no: '2727287', caption: '100×100 mm 称量纸', pack: '500张/盒'},
-{no: '915664', caption: '1.5 mL 透明离心管', pack: '500管/袋'},
-{no: '2063717', caption: '透明玻璃螺口带白色书写签样品瓶, 2 mL, 8 mm', pack: '100个/盒'},
-{no: '940292', caption: '9 mm 蓝色螺口样品瓶瓶盖, PTFE/硅胶隔垫', pack: '100个/包'},
-{no: '958945', caption: '单道手动可调移液器，量程: 100-1000 μL, 最小刻度: 5.0 μL', pack: '1PAK'},
-{no: '672890', caption: '1000 μL 移液器吸头, 蓝色', pack: '1000个/包'},
-{no: '940621', caption: '数显不锈钢加热磁力搅拌器，套包装', pack: '1台'},
-{no: '1482821', caption: '椭圆型聚四氟乙烯磁力搅拌子, A100 (6*10 mm)', pack: '5支/盒'},
-{no: '944099', caption: '圆柱型聚四氟乙烯磁力搅拌子, 带轴环, B200 (8 mm x 20 mm)', pack: '5支/盒'},
+{c: 'R35', no: '987528', caption: '304不锈钢药刮, 220mm, 一平一弯', pack: '10支/袋'},
+{c: 'R35', no: '2727287', caption: '100×100 mm 称量纸', pack: '500张/盒'},
+{c: 'R35', no: '915664', caption: '1.5 mL 透明离心管', pack: '500管/袋'},
+{c: 'R35', no: '2063717', caption: '透明玻璃螺口带白色书写签样品瓶, 2 mL, 8 mm', pack: '100个/盒'},
+{c: 'R35', no: '940292', caption: '9 mm 蓝色螺口样品瓶瓶盖, PTFE/硅胶隔垫', pack: '100个/包'},
+{c: 'A10', no: '958945', caption: '单道手动可调移液器，量程: 100-1000 μL, 最小刻度: 5.0 μL', pack: '1PAK'},
+{c: 'R35', no: '672890', caption: '1000 μL 移液器吸头, 蓝色', pack: '1000个/包'},
+{c: 'A01', no: '940621', caption: '数显不锈钢加热磁力搅拌器，套包装', pack: '1台'},
+{c: 'A01', no: '1482821', caption: '椭圆型聚四氟乙烯磁力搅拌子, A100 (6*10 mm)', pack: '5支/盒'},
+{c: 'R35', no: '944099', caption: '圆柱型聚四氟乙烯磁力搅拌子, 带轴环, B200 (8 mm x 20 mm)', pack: '5支/盒'},
 ];
 
 let 污水水质监测实验所需耗材 = [
-{no: '945285', caption: 'C18 固相萃取小柱，填料1 g, 柱体积6 ml', pack: '30支/盒'},
-{no: '999155', caption: 'Silica 固相萃取小柱，填料1 g,柱体积6 ml', pack: '30支/盒'},
-{no: '2123704', caption: '亲水 PTFE 针头式过滤器, 13 mm, 0.45 µm', pack: '200个/盒'},
-{no: '110350', caption: '硫代硫酸钠五水合物, 99%, ACS级试剂', pack: '3250G, 1KG'},
-{no: '37094', caption: '细沙, 40-100目', pack: '250G'},
-{no: '915664', caption: '1.5 mL 透明离心管', pack: '500管/袋'},
-{no: '2063717', caption: '透明玻璃螺口带白色书写签样品瓶, 2 mL, 8 mm', pack: '100个/盒'},
-{no: '940292', caption: '9 mm 蓝色螺口样品瓶瓶盖, PTFE/硅胶隔垫', pack: '100个/包'},
-{no: '958945', caption: '单道手动可调移液器，量程: 100-1000 μL, 最小刻度: 5.0 μL', pack: '1PAK'},
-{no: '672890', caption: '1000 μL 移液器吸头, 蓝色', pack: '1000个/袋'},
-{no: '1122420', caption: '瓶口分液器，量程: 5.0-50.0 ml, 最小刻度: 1.0 ml', pack: '1PAK'},
-{no: '958945', caption: '', pack: ''},
+{c: 'R35', no: '945285', caption: 'C18 固相萃取小柱，填料1 g, 柱体积6 ml', pack: '30支/盒'},
+{c: 'R35', no: '999155', caption: 'Silica 固相萃取小柱，填料1 g,柱体积6 ml', pack: '30支/盒'},
+{c: 'R35', no: '2123704', caption: '亲水 PTFE 针头式过滤器, 13 mm, 0.45 µm', pack: '200个/盒'},
+{url: 'https://www.jkchemical.com/CH/products/search/fulltextsearch/940292.html', no: '110350', caption: '硫代硫酸钠五水合物, 99%, ACS级试剂', pack: '3250G, 1KG'},
+{c: 'J01', no: '37094', caption: '细沙, 40-100目', pack: '250G'},
+{c: 'R35', no: '915664', caption: '1.5 mL 透明离心管', pack: '500管/袋'},
+{c: 'R35', no: '2063717', caption: '透明玻璃螺口带白色书写签样品瓶, 2 mL, 8 mm', pack: '100个/盒'},
+{url: 'https://www.jkchemical.com/CH/products/search/fulltextsearch/940292.html', no: '940292', caption: '9 mm 蓝色螺口样品瓶瓶盖, PTFE/硅胶隔垫', pack: '100个/包'},
+{c: 'R35', no: '958945', caption: '单道手动可调移液器，量程: 100-1000 μL, 最小刻度: 5.0 μL', pack: '1PAK'},
+{url: 'https://www.jkchemical.com/CH/products/search/fulltextsearch/672890.html', no: '672890', caption: '1000 μL 移液器吸头, 蓝色', pack: '1000个/袋'},
+{c: 'R35', no: '1122420', caption: '瓶口分液器，量程: 5.0-50.0 ml, 最小刻度: 1.0 ml', pack: '1PAK'},
+{url: '', no: '958945', caption: '', pack: ''},
 ];
 
 %>
 
 
-<div class="container py-3">
 <h3 class="text-info text-center my-5 border-bottom pb-5 border-info"><b>抗“疫”行动|百灵威供应GBT19106-2013次氯酸钠测定试剂</b></h3>
 
 <p class="my-3 pt-3">
@@ -107,6 +114,3 @@ let 污水水质监测实验所需耗材 = [
 
 <% subtitle('污水水质监测实验所需耗材') %>
 <% products(污水水质监测实验所需耗材); %>
-
- </div>
-<%- include('footers/home-footer.ejs') -%>

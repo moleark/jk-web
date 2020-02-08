@@ -15,8 +15,11 @@ function test(req, res) {
         let data = {
             title: undefined,
         };
-        let htmlText = yield ejs.renderFile('./public/views/test.ejs', data);
-        res.end(htmlText);
+        let header = ejs.fileLoader('./public/views/headers/home-header.ejs').toString();
+        let footer = ejs.fileLoader('./public/views/footers/home-footer.ejs').toString();
+        let body = ejs.fileLoader('./public/views/test.ejs').toString();
+        let html = ejs.render(header + body + footer, { title: undefined });
+        res.end(html);
         /*
         res.render(htmlText, data, (err, html) => {
             if (ejsError(err, res) === true) return;
