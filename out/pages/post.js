@@ -12,7 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ejs = require("ejs");
 const db_1 = require("../db");
 const sql_1 = require("../sql");
+const tools_1 = require("../tools");
 //import { ejsError } from "../tools";
+const viewPath = './public/views/headers/';
+const ejsSuffix = '.ejs';
 function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let id = req.params.id;
@@ -22,8 +25,9 @@ function post(req, res) {
             template = `post id=${id} is not defined`;
         }
         else {
-            let header = ejs.fileLoader('./public/views/headers/home-header.ejs').toString();
-            let footer = ejs.fileLoader('./public/views/footers/home-footer.ejs').toString();
+            let m = tools_1.isWechat(req) ? '-m' : '';
+            let header = ejs.fileLoader(viewPath + 'headers/home-header' + m + ejsSuffix).toString();
+            let footer = ejs.fileLoader(viewPath + 'footers/home-footer' + m + ejsSuffix).toString();
             template = header
                 + '<div class="container my-3">'
                 + ret[0].content

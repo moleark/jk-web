@@ -2,8 +2,11 @@ import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import { tableFromSql } from "../db";
 import { sql } from '../sql';
+import { isWechat } from "../tools";
 //import { ejsError } from "../tools";
 
+const viewPath = './public/views/headers/';
+const ejsSuffix = '.ejs';
 
 export async function post(req: Request, res:Response) {
     let id = req.params.id;
@@ -13,8 +16,11 @@ export async function post(req: Request, res:Response) {
         template =  `post id=${id} is not defined`;
     }
     else {
-        let header = ejs.fileLoader('./public/views/headers/home-header.ejs').toString();
-        let footer = ejs.fileLoader('./public/views/footers/home-footer.ejs').toString();
+        let m = isWechat(req)? '-m' : '';
+
+        let header = ejs.fileLoader(viewPath + 'headers/home-header' + m + ejsSuffix).toString();
+        let footer = ejs.fileLoader(viewPath + 'footers/home-footer' + m + ejsSuffix).toString();
+            
         template = header 
             + '<div class="container my-3">'
             + ret[0].content
