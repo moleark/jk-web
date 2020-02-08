@@ -2,11 +2,8 @@ import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import { tableFromSql } from "../db";
 import { sql } from '../sql';
-import { isWechat } from "../tools";
+import { isWechat, viewPath, ejsSuffix } from "../tools";
 //import { ejsError } from "../tools";
-
-const viewPath = './public/views/headers/';
-const ejsSuffix = '.ejs';
 
 export async function post(req: Request, res:Response) {
     let id = req.params.id;

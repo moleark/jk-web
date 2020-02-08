@@ -14,8 +14,6 @@ const db_1 = require("../db");
 const sql_1 = require("../sql");
 const tools_1 = require("../tools");
 //import { ejsError } from "../tools";
-const viewPath = './public/views/headers/';
-const ejsSuffix = '.ejs';
 function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let id = req.params.id;
@@ -26,8 +24,8 @@ function post(req, res) {
         }
         else {
             let m = tools_1.isWechat(req) ? '-m' : '';
-            let header = ejs.fileLoader(viewPath + 'headers/home-header' + m + ejsSuffix).toString();
-            let footer = ejs.fileLoader(viewPath + 'footers/home-footer' + m + ejsSuffix).toString();
+            let header = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + m + tools_1.ejsSuffix).toString();
+            let footer = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + m + tools_1.ejsSuffix).toString();
             template = header
                 + '<div class="container my-3">'
                 + ret[0].content
