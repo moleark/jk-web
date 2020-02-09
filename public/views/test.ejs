@@ -1,6 +1,17 @@
 <style>
     p {margin-bottom:0.5em;}
+    .title-top-line-right-angle {
+        border-top-width: 0.15em;
+        border-top-style: solid; 
+        padding-top: 0.1rem;
+    }
+    .title-top-line-right-angle>:first-child {
+        line-height: 1.4em; 
+        padding: 0.3em 3em 0.3em 0.8em; 
+        border-bottom-right-radius: 3em;
+    }
 </style>
+
 <%
 function product(p) {
     let url = p[0];
@@ -23,7 +34,7 @@ function product(p) {
 }
 
 function products(arr) {
-    %> <div class="row mt-2 row-cols-1 row-cols-sm-2 row-cols-md-3"> <%
+    %> <div class="row mt-2 row-cols-1 row-cols-sm-2 row-cols-md-3 mb-3"> <%
     arr.forEach(element => {
         product(element)
     });
@@ -32,12 +43,12 @@ function products(arr) {
 
 function subtitle(text) {
     %>
-        <div class="mt-4 mb-2 text-info d-flex h5">
-            <div class="d-flex align-items-center border-info pb-2" style="border-bottom: solid 0.2rem;">
-                <div class="mr-3 d-flex align-items-center" style="font-size: 60%;"><i class="text-success fa fa-circle"></i></div>
+        <div class="title-top-line-right-angle border-info text-white d-flex clearfix">
+            <div class="bg-info border-info py-2 pl-3 pr-5 h5 d-flex align-items-center">
+                <i class="mr-3 fa fa-circle" style="font-size: 60%;"></i>
                 <div><b><%=text%></b></div>
             </div>
-        </div> 
+        </div>
     <%
 }
 
@@ -94,12 +105,12 @@ let 污水水质监测实验所需耗材 = [
 
 %>
 
-
 <h3 class="text-info text-center px-5 my-3 pb-3 border-info" style="border-bottom: dotted 0.15rem;">
-    <b>抗“疫”行动|百灵威供应GBT19106-2013次氯酸钠测定试剂</b>
+    <b>「GB/T19106-2013 次氯酸钠」检测试剂</b>
 </h3>
 
-<img class="d-none d-sm-block float-right w-sm-50 w-md-25 ml-3 border" src="https://c.jkchemical.com/res/0-0286.png">
+<div class="clearfix mb-3">
+<img class="d-none d-sm-block float-right w-sm-50 w-lg-25 ml-3 border" src="https://c.jkchemical.com/res/0-0286.png">
 <img class="d-block d-sm-none w-75 mx-auto mb-3 border" src="https://c.jkchemical.com/res/0-0286.png">
 <p class="">    
   随着新型冠状病毒肺炎疫情发展，全国一心，致力于打赢这场没有硝烟的战役，消灭病毒传播途径成为关键。其中，室内外、物体表面的消毒将用到大量的84消毒液，生产原液中有效成分次氯酸钠的检测以及重金属残余的分析，是消毒液安全生产、使用的保障。
@@ -110,7 +121,7 @@ let 污水水质监测实验所需耗材 = [
 <p class="">
  众志成城，百灵威愿为全国抗“疫”物资生产及安全使用，贡献力量。
 </p>
-
+</div>
 <% subtitle('有效氯、游离碱的测定试剂及耗材') %>
 <% products(有效氯游离碱的测定试剂及耗材); %>
 

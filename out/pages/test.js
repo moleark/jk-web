@@ -18,7 +18,6 @@ function test(req, res) {
             title: undefined,
         };
         let m = tools_1.isWechat(req) ? '-m' : '';
-        m = '-m';
         let header = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + m + tools_2.ejsSuffix).toString();
         let footer = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + m + tools_2.ejsSuffix).toString();
         let body = ejs.fileLoader(tools_2.viewPath + 'test.ejs').toString();
