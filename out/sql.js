@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const db = 'webbuilder$test';
+const config = require("config");
+const isTest = config.get('test');
+const db = 'webbuilder' + ((isTest === true) ? '$test' : '');
 exports.sql = {
     homePostList: `
     SELECT a.id, a.caption, a.discription as disp, c.path as image, a.$update as date

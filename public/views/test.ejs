@@ -13,6 +13,12 @@
     .first-char-large::first-letter {
         font-size: 200%;
     }
+
+    .title-top-line {
+        border-top-width: 0.15em;
+        border-top-style: solid; 
+        padding-top: 0.1rem;
+    }
 </style>
 
 <%
@@ -47,12 +53,23 @@ function products(arr) {
     %> </div> <%
 }
 
-function subtitle(text) {
+function subtitle1(text) {
     %>
         <div class="title-top-line-right-angle border-info text-white d-flex clearfix">
-            <div class="bg-info border-info py-2 mb-0 pl-2 pr-4 d-flex align-items-center">
+            <div class="border-info bg-info py-2 mb-0 pl-2 pr-4 d-flex align-items-center">
                 <i class="mr-2 fa fa-circle" style="font-size: 60%;"></i>
-                <div><%-text%></div>
+                <div><b><%-text%></b></div>
+            </div>
+        </div>
+    <%
+}
+
+function subtitle2(text) {
+    %>
+        <div class="title-top-line border-info text-primary d-flex clearfix">
+            <div class="border-info py-2 mb-0 pl-2 pr-4 d-flex align-items-center">
+                <i class="mr-2 fa fa-circle" style="font-size: 60%;"></i>
+                <div><b><%-text%></b></div>
             </div>
         </div>
     <%
@@ -128,14 +145,31 @@ let 污水水质监测实验所需耗材 = [
  众志成城，百灵威愿为全国抗“疫”物资生产及安全使用，贡献力量。
 </p>
 </div>
-<% subtitle('有效氯、游离碱的测定试剂及耗材') %>
+
+<div class="clearfix mb-3">
+    <div class="d-block w-100 h-50 float-sm-right w-sm-50 w-lg-25 ml-sm-3 mb-3 mb-sm-0 
+        border border-danger rounded overflow-hidden">
+        <img class="w-100" style="margin: -4.5rem 0 -3rem 0;" src="https://c.jkchemical.com/res/0-0239.jpg" />
+    </div>
+        
+    <p class="first-char-large">
+        存在于样品和溶剂中的杂质不仅容易对色谱仪器装置（如液相泵、进样阀、色谱柱等）造成损坏或堵塞，而且会对分析结果造成干扰。因此，在样品上机检测前对样品及溶剂进行过滤显得尤为重要，并可以有效降低上述问题的发生，提高色谱检测的灵敏度和准确度。
+    </p>
+    <p class="">
+        百灵威提供多种滤膜材质的针式过滤器产品，满足实验室对亲水、疏水及生物类多种待检样品过滤的需求。
+    </p>
+</div>
+
+
+<% subtitle1('有效氯、游离碱的测定试剂及耗材') %>
 <% products(有效氯游离碱的测定试剂及耗材); %>
 
-<% subtitle('铁、重金属和砷的测定试剂　　　') %>
+<% subtitle2('铁、重金属和砷的测定试剂　　　') %>
 <% products(铁重金属和砷的测定试剂); %>
 
-<% subtitle('其他配套耗材　　　　　　　　　') %>
+<% subtitle1('其他配套耗材　　　　　　　　　') %>
 <% products(其他配套耗材); %>
 
-<% subtitle('污水水质监测实验所需耗材　　　') %>
+<% subtitle2('污水水质监测实验所需耗材　　　') %>
 <% products(污水水质监测实验所需耗材); %>
+

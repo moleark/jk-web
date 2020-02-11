@@ -1,4 +1,8 @@
-const db = 'webbuilder$test';
+import * as config from 'config';
+
+const isTest = config.get<boolean>('test');
+
+const db = 'webbuilder' + ((isTest===true)? '$test' : '');
 
 export const sql = {
     homePostList: `
