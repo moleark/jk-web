@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const config = require("config");
-const isTest = config.get('test');
+const isTest = config.has('test') === true ? config.get('test') : false;
 const db = 'webbuilder' + ((isTest === true) ? '$test' : '');
 exports.sql = {
     homePostList: `
