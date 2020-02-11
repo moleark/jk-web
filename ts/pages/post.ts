@@ -15,14 +15,15 @@ export async function post(req: Request, res:Response) {
     else {
         let m = isWechat(req)? '-m' : '';
 
-        let header = ejs.fileLoader(viewPath + 'headers/home-header' + m + ejsSuffix).toString();
-        let footer = ejs.fileLoader(viewPath + 'footers/home-footer' + m + ejsSuffix).toString();
+        let header = ejs.fileLoader(viewPath + 'headers/header' + m + ejsSuffix).toString();
+        let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + m + ejsSuffix).toString();
+        let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + m + ejsSuffix).toString();
             
-        template = header 
+        template = header + homeHeader 
             + '<div class="container my-3">'
             + ret[0].content
             + '</div>'
-            + footer;
+            + homeFooter;
         title = ret[0].caption;
     }
     //let content = ejs.fileLoader('./ejs/a.ejs').toString();

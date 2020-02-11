@@ -1,6 +1,6 @@
 import * as config from 'config';
 
-const isTest = config.get<boolean>('test');
+const isTest = config.has('test') === true? config.get<boolean>('test') : false;
 
 const db = 'webbuilder' + ((isTest===true)? '$test' : '');
 

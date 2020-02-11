@@ -24,13 +24,14 @@ function post(req, res) {
         }
         else {
             let m = tools_1.isWechat(req) ? '-m' : '';
-            let header = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + m + tools_1.ejsSuffix).toString();
-            let footer = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + m + tools_1.ejsSuffix).toString();
-            template = header
+            let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + m + tools_1.ejsSuffix).toString();
+            let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + m + tools_1.ejsSuffix).toString();
+            let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + m + tools_1.ejsSuffix).toString();
+            template = header + homeHeader
                 + '<div class="container my-3">'
                 + ret[0].content
                 + '</div>'
-                + footer;
+                + homeFooter;
             title = ret[0].caption;
         }
         //let content = ejs.fileLoader('./ejs/a.ejs').toString();
