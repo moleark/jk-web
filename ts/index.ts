@@ -68,7 +68,7 @@ import { easyTime } from './tools';
         next();
     });
 
-    app.get('/', (req, res) => res.send('Hello World!'));
+    app.get('/hello', (req, res) => res.send('Hello World!'));
     app.get('/jk-web/hello', (req, res) => res.send('Hello World!'));
     app.use((req: Request, res: Response, next: NextFunction) => {
         next();

@@ -73,7 +73,7 @@ const tools_1 = require("./tools");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
             next();
         });
-        app.get('/', (req, res) => res.send('Hello World!'));
+        app.get('/hello', (req, res) => res.send('Hello World!'));
         app.get('/jk-web/hello', (req, res) => res.send('Hello World!'));
         app.use((req, res, next) => {
             next();
