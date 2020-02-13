@@ -7,4 +7,5 @@ __export(require("./easyTime"));
 __export(require("./ejsError"));
 __export(require("./userAgent"));
 __export(require("./consts"));
+__export(require("./ipHit"));
 //# sourceMappingURL=index.js.map

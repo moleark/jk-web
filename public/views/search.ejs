@@ -1,0 +1,56 @@
+<style>
+    a:hover {color:#00c}
+    a {color: black}
+</style>
+<% 
+    const imagePath = 'https://www.jkchemical.com/static/Structure/';
+    const altimagePath = "https://www.jkchemical.com/static/Structure/999.png";
+    function renderProp(prop) {
+        let {l, v} = prop;
+        if (v) {
+%>
+    <div class="col d-flex align-items-center">
+        <small class="text-muted w-min-3c mr-2"><%=l%></small> <span><%=v%></span>
+    </div>
+<%
+        }
+    }
+%> 
+
+<div class="" style="line-height: 1.8em;">
+<% products.forEach(p => {
+    let {$id, brand, chemical, description, descriptionC, id, imageUrl, 
+        molecularFomula, molecularWeight, CAS,
+        no, origin, purity, seq} = p;
+    // if (imageUrl) imageUrl = '266897';
+    let imageSrc = imageUrl? 
+        imagePath + imageUrl.substr(0,3) + '/' + imageUrl + '.png'
+        : 
+        altimagePath;
+    let props = [
+        {l:'产品编号', v: no},
+        {l:'CAS', v: CAS},
+        {l:'纯度', v: purity},
+        {l:'分子式', v: molecularFomula},
+        {l: '分子量', v: molecularWeight},
+        {l: '品牌', v: brand&&brand.name},
+    ];
+%>
+    <a href="<%='../product/'+id%>"  class="text-decoration-none">
+    <div class="py-3 border-bottom row">
+        <div class="col-sm-3 text-center" >
+            <img class="w-sm-100 w-50" src="<%=imageSrc%>">
+        </div>
+        <div class="col-sm-9">
+            <b><%=description%></b> <br>
+            <%=descriptionC%>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+<%
+                props.forEach(prop => renderProp(prop))
+%>
+            </div>
+        </div>
+    </div>
+    </a>
+<% }) %>
+</div>

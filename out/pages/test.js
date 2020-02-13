@@ -14,19 +14,27 @@ const tools_1 = require("../tools");
 const tools_2 = require("../tools");
 function test(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let data = {
-            title: undefined,
-        };
-        let m = tools_1.isWechat(req) ? '-m' : '';
-        let header = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + m + tools_2.ejsSuffix).toString();
-        let footer = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + m + tools_2.ejsSuffix).toString();
-        let body = ejs.fileLoader(tools_2.viewPath + 'test.ejs').toString();
-        let html = ejs.render(header
-            + '<div class="container my-3">'
-            + body
-            + '</div>'
-            + footer, data);
-        res.end(html);
+        try {
+            let data = {
+                title: undefined,
+            };
+            let m = tools_1.isWechat(req) ? '-m' : '';
+            let header = ejs.fileLoader(tools_2.viewPath + 'headers/header' + m + tools_2.ejsSuffix).toString();
+            let homeHeader = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + m + tools_2.ejsSuffix).toString();
+            let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + m + tools_2.ejsSuffix).toString();
+            let body = ejs.fileLoader(tools_2.viewPath + 'test1.ejs').toString();
+            let html = ejs.render(header
+                + homeHeader
+                + '<div class="container my-3">'
+                + body
+                + '</div>'
+                + homeFooter, data);
+            res.end(html);
+        }
+        catch (err) {
+            console.error(err);
+            res.end('error in parsing: ' + err.message);
+        }
         /*
         res.render(htmlText, data, (err, html) => {
             if (ejsError(err, res) === true) return;

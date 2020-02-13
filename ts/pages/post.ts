@@ -1,13 +1,11 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
-import { tableFromSql } from "../db";
-import { sql } from '../sql';
-import { isWechat, viewPath, ejsSuffix } from "../tools";
-//import { ejsError } from "../tools";
+import { Db } from "../db";
+import { isWechat, viewPath, ejsSuffix, ipHit } from "../tools";
 
 export async function post(req: Request, res:Response) {
     let id = req.params.id;
-    const ret = await tableFromSql(sql.postFromId, [id]);
+    const ret = await Db.content.postFromId(id);
     let template: string, title: string;
     if (ret.length === 0) {
         template =  `post id=${id} is not defined`;
@@ -35,6 +33,8 @@ export async function post(req: Request, res:Response) {
 
     let html = ejs.render(template, data);
     res.end(html);
+
+    ipHit(req, id);
 
     /*
     res.render('post.ejs', data, (err, html) => {

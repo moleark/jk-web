@@ -11,13 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const ejs = require("ejs");
 const db_1 = require("../db");
-const sql_1 = require("../sql");
 const tools_1 = require("../tools");
-//import { ejsError } from "../tools";
 function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let id = req.params.id;
-        const ret = yield db_1.tableFromSql(sql_1.sql.postFromId, [id]);
+        const ret = yield db_1.Db.content.postFromId(id);
         let template, title;
         if (ret.length === 0) {
             template = `post id=${id} is not defined`;
@@ -40,6 +38,7 @@ function post(req, res) {
         };
         let html = ejs.render(template, data);
         res.end(html);
+        tools_1.ipHit(req, id);
         /*
         res.render('post.ejs', data, (err, html) => {
             if (ejsError(err, res) === true) return;

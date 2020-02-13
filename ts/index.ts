@@ -7,8 +7,10 @@ import { Request, Response, NextFunction, Application } from 'express';
 import * as express from 'express';
 import { homeRouter } from './pages';
 import { easyTime } from './tools';
+import { Db } from './db';
 
 (async function () {
+    Db.init();
 
     // 创建express服务
     let app = express();

@@ -1,13 +1,13 @@
+
 import * as config from 'config';
-
-const isTest = config.has('test') === true? config.get<boolean>('test') : false;
-
+/*
 const db = 'webbuilder' + ((isTest===true)? '$test' : '');
 
 export const sql = {
     homePostList: `
     SELECT a.id, a.caption, a.discription as disp, c.path as image, a.$update as date
-        FROM ${db}.tv_post a 
+        FROM -- ${db}.tv_customerpost cp join ${db}.tv_post a on cp.post=a.id
+            ${db}.tv_post a 
             left join ${db}.tv_template b on a.template=b.id 
             left join ${db}.tv_image c on a.image=c.id
         ORDER BY a.id desc
@@ -21,3 +21,4 @@ export const sql = {
     `,
 };
 //c=测试
+*/

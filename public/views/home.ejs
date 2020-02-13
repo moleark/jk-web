@@ -20,17 +20,21 @@
         showCart();
     }
     window.onblur = cartClick;
+    function search(e) {
+        document.location.href = 'search?key=' + encodeURIComponent(searchForm.keyInput.value);
+        return false;
+    }
 </script>
 <div class="container">
 
-<form class="my-3" onsubmit="return (function(e){alert('搜索正在实现中！'); countInCart++; return false;})()">
+<form class="my-3" name="searchForm" onsubmit="return search()">
     <div class="form-row align-items-center justify-content-center">
-      <div class="col-8 col-sm-8 col-md-6">
+      <div class="col-12 col-md-8 col-lg-6">
         <div class="input-group border border-primary rounded">
             <div class="input-group-prepend">
                 <div class="input-group-text bg-primary text-white"><i class="fa fa-search"></i></div>
             </div>
-            <input type="text" class="form-control border-0" 
+            <input type="text" name="keyInput" class="form-control border-0" 
                 placeholder="品名、货号、CAS号、MDL号或关键词"/>
             <div class="input-group-append">
                 <button type="submit" class="btn btn-primary">搜索</button>
@@ -38,11 +42,11 @@
         </div>
       </div>
       <div class="col-auto">
-        <button type="button" class="btn btn-outline-primary position-relative" onclick="cartClick()">
+        <!-- button type="button" class="btn btn-outline-primary position-relative" onclick="cartClick()">
             <i class="fa fa-shopping-cart"></i> <small>购物车</small>
             <span class="badge badge-pill badge-danger position-absolute" id='cart' 
                 style="right:-0.3rem;top:-0.3rem"></span>
-        </button>
+        </button-->
       </div>
     </div>
 </form>
@@ -104,7 +108,7 @@
     </div>
     <div class="col-sm-4">
         <div class="h-100" style="background-color: #f7f7ff;">
-            <div class="border-danger border-top border-bottom text-danger small px-4 py-2 font-weight-bold">近期热文</div>
+            <div class="border-danger border-top border-bottom text-danger small px-4 py-2 font-weight-bold">近期热点</div>
             <ul class="list-group mt-1">
                 <% for (let pn of latestProducts) {
                     let {caption} = pn;
