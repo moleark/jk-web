@@ -17,7 +17,9 @@ function ipHit(req, post) {
     return __awaiter(this, void 0, void 0, function* () {
         let ip = getNetIp(req);
         let now = Math.floor(Date.now() / 1000);
-        hits.push(now + '\t' + ip + '\t' + post);
+        let hit = now + '\t' + ip + '\t' + post;
+        hits.push(hit);
+        console.log('hit: ' + hit);
         if (now - lastTick > saveGap || hits.length > 1000) {
             let data = '\n' + hits.join('\n') + '\n\n';
             db_1.Db.content.execProc('tv_hit', [db_1.Db.unit, 0, data]);

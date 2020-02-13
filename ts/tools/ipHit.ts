@@ -9,7 +9,9 @@ export async function ipHit(req: Request, post:number|string) {
     let ip = getNetIp(req);
     let now = Math.floor(Date.now() / 1000);
 
-    hits.push(now + '\t' + ip + '\t' + post);
+    let hit = now + '\t' + ip + '\t' + post;
+    hits.push(hit);
+    console.log('hit: ' + hit);
     if (now - lastTick > saveGap || hits.length > 1000) {
         let data = '\n' + hits.join('\n') + '\n\n';
         Db.content.execProc('tv_hit', [Db.unit, 0, data]);
