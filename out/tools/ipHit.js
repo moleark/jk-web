@@ -30,6 +30,7 @@ function ipHit(req, post) {
 }
 exports.ipHit = ipHit;
 function getNetIp(_http) {
+    console.log(_http);
     var ipStr = _http.headers['X-Real-IP'] || _http.headers['x-forwarded-for'];
     if (ipStr) {
         console.log('ip: ' + ipStr);

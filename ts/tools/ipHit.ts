@@ -21,6 +21,7 @@ export async function ipHit(req: Request, post:number|string) {
 }
 
 export function getNetIp(_http: Request) {
+    console.log(_http);
     var ipStr = _http.headers['X-Real-IP'] || _http.headers['x-forwarded-for'];
     if (ipStr) {
         console.log('ip: ' + ipStr);
