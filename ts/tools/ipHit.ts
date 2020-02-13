@@ -23,6 +23,7 @@ export async function ipHit(req: Request, post:number|string) {
 export function getNetIp(_http: Request) {
     var ipStr = _http.headers['X-Real-IP'] || _http.headers['x-forwarded-for'];
     if (ipStr) {
+        console.log('ip: ' + ipStr);
         var ipArray = (ipStr as string).split(",");
         if (ipArray.length > 1) {
             //如果获取到的为ip数组

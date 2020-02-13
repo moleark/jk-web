@@ -32,6 +32,7 @@ exports.ipHit = ipHit;
 function getNetIp(_http) {
     var ipStr = _http.headers['X-Real-IP'] || _http.headers['x-forwarded-for'];
     if (ipStr) {
+        console.log('ip: ' + ipStr);
         var ipArray = ipStr.split(",");
         if (ipArray.length > 1) {
             //如果获取到的为ip数组
