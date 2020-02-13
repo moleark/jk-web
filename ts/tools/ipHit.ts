@@ -41,6 +41,7 @@ export function getNetIp(_http: Request) {
         return ipArray[0];	
     } 
     else {
+        console.log('ip: ' + _http.ip);
         //获取不到时
         return _http.ip.substring(_http.ip.lastIndexOf(":") + 1);
     }
