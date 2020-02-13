@@ -11,7 +11,6 @@ export async function ipHit(req: Request, post:number|string) {
 
     let hit = now + '\t' + ip + '\t' + post;
     hits.push(hit);
-    console.log('hit: ' + hit);
     if (now - lastTick > saveGap || hits.length > 1000) {
         let data = '\n' + hits.join('\n') + '\n\n';
         Db.content.execProc('tv_hit', [Db.unit, 0, data]);
@@ -21,10 +20,8 @@ export async function ipHit(req: Request, post:number|string) {
 }
 
 export function getNetIp(_http: Request) {
-    console.log(_http);
     var ipStr = _http.headers['X-Real-IP'] || _http.headers['x-forwarded-for'];
     if (ipStr) {
-        console.log('ip: ' + ipStr);
         var ipArray = (ipStr as string).split(",");
         if (ipArray.length > 1) {
             //如果获取到的为ip数组
@@ -42,7 +39,6 @@ export function getNetIp(_http: Request) {
         return ipArray[0];	
     } 
     else {
-        console.log('ip: ' + _http.ip);
         //获取不到时
         return _http.ip.substring(_http.ip.lastIndexOf(":") + 1);
     }
