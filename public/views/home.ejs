@@ -110,11 +110,29 @@
         <div class="h-100" style="background-color: #f7f7ff;">
             <div class="border-danger border-top border-bottom text-danger small px-4 py-2 font-weight-bold">近期热点</div>
             <ul class="list-group mt-1">
-                <% for (let pn of latestProducts) {
-                    let {caption} = pn;
+                <%
+                    let hpn = 0;
+                    for (let pn of hotPosts) {
+                        hpn++;
+                        if (hpn > 10) break;
+                        let {caption, imagePath, hits, create} = pn;
                 %>
-                    <a href="<%=path+52%>" class="list-group-item-action py-2 px-2 border-bottom d-flex align-items-center">
-                        <small><i class="text-info fa fa-hand-o-right mr-3"></i></small><%=caption%>
+                    <a href="<%=path+52%>" class="list-group-item-action py-2 px-1 border-bottom d-flex align-items-center">
+                        <div class="d-flex w-100">
+                            <% if (imagePath) { %>
+                                <div class="w-4c h-4c">
+                                    <div class="h-100" style="max-height:4rem;background-size:cover;background-image: url('<%=imagePath%>');border-style:none;border-width:0;background-position: center;">
+                                    </div>
+                                </div>
+                            <% } %>
+                            <div class="flex-grow-1 d-flex flex-column mx-2">
+                                <div class="flex-grow-1"><%=caption%></div>
+                                <div class="d-flex small text-muted mt-2">
+                                    <div class="flex-grow-1"><%=easyTime(create, false)%>发表</div>
+                                    <div><%=hits%>次阅读</div>
+                                </div>
+                            </div>
+                        </div>
                     </a>
                 <% } %>
             </ul>

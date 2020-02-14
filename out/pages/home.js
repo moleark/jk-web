@@ -12,20 +12,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../db");
 const data_1 = require("../data");
 const tools_1 = require("../tools");
-let lastTime = new Date();
+let lastHomeTick = Date.now();
 let cacheHtml;
+let cacheHotPosts;
+let lastHotTick = 0;
 //测试
 function home(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        tools_1.ipHit(req, -1);
+        let now = Date.now();
         if (false && cacheHtml !== undefined) {
-            if (Date.now() - lastTime.getTime() < 3600 * 1000) {
+            let ht = lastHomeTick;
+            lastHomeTick = now;
+            if (lastHomeTick - ht < 3600 * 1000) {
                 res.end(cacheHtml);
                 return;
             }
             ;
         }
         const ret = yield db_1.Db.content.homePostList();
-        //let content = ejs.fileLoader('./ejs/a.ejs').toString();
+        if (cacheHotPosts === undefined || now - lastHotTick > 10 * 60 * 1000) {
+            lastHotTick = now;
+            let ret = yield db_1.Db.content.execProc('tv_hotPosts', [db_1.Db.unit, 0]);
+            cacheHotPosts = ret[0];
+        }
         let data = {
             title: undefined,
             path: 'post/',
@@ -34,6 +44,7 @@ function home(req, res) {
             productNews: data_1.productNews,
             newsletter: data_1.newsletter,
             latestProducts: data_1.latestProducts,
+            hotPosts: cacheHotPosts,
         };
         res.render('home.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
