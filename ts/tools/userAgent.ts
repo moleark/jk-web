@@ -1,6 +1,6 @@
 import { Request } from "express";
 
-export function isWechat(req: Request) {
+export function device(req: Request):string {
     let userAgent = req.headers['user-agent'];
-    return userAgent.toLowerCase().indexOf('micromessenger')>=0;
+    if (userAgent.toLowerCase().indexOf('micromessenger')>=0) return 'wechat';
 }

@@ -11,15 +11,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const data_1 = require("../data");
 const tools_1 = require("../tools");
+const tools_2 = require("../tools");
 function category(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let current = req.params.current;
-        let data = {
-            root: tools_1.getRootPath(req),
+        let data = tools_2.buildData(req, {
             title: data_1.categories[current].caption,
             current: current,
             categories: data_1.categories,
-        };
+        });
         res.render('category.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
                 return;

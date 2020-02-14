@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function isWechat(req) {
+function device(req) {
     let userAgent = req.headers['user-agent'];
-    return userAgent.toLowerCase().indexOf('micromessenger') >= 0;
+    if (userAgent.toLowerCase().indexOf('micromessenger') >= 0)
+        return 'wechat';
 }
-exports.isWechat = isWechat;
+exports.device = device;
 //# sourceMappingURL=userAgent.js.map

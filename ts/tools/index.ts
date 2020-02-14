@@ -4,3 +4,4 @@ export * from './userAgent';
 export * from './consts';
 export * from './ipHit';
 export * from './getRootPath';
+export * from './buildData';

@@ -31,24 +31,21 @@ function product(req, res) {
             _.merge(product, chemical);
         }
         yield loadAllPropIds(product);
-        let template, title;
-        let m = tools_1.isWechat(req) ? '-m' : '';
-        let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + m + tools_1.ejsSuffix).toString();
-        let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + m + tools_1.ejsSuffix).toString();
-        let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + m + tools_1.ejsSuffix).toString();
+        //let template: string, title: string;
+        //let m = device(req)? '-m' : '';
+        let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
+        let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
+        let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
         let body = ejs.fileLoader(tools_1.viewPath + 'product.ejs').toString();
-        template = header + homeHeader
+        let template = header + homeHeader
             + '<div class="container my-3">'
             + body
             + '</div>'
             + homeFooter;
-        //let content = ejs.fileLoader('./ejs/a.ejs').toString();
-        let data = {
-            root: tools_1.getRootPath(req),
-            title: undefined,
+        let data = tools_1.buildData(req, {
             product: product,
             packs: packs
-        };
+        });
         let html = ejs.render(template, data);
         res.end(html);
     });

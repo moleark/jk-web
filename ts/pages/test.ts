@@ -1,20 +1,16 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
-import { ejsError, getRootPath } from "../tools";
-import { isWechat } from "../tools";
+import { ejsError, getRootPath, buildData } from "../tools";
+import { device } from "../tools";
 import { viewPath, ejsSuffix } from "../tools";
 
 export async function test(req: Request, res:Response) {
     try {
-        let data = {
-            root: getRootPath(req),
-            title: undefined,
-        };
-        let m = isWechat(req)? '-m' : '';
+        let data = buildData(req, undefined);
 
-        let header = ejs.fileLoader(viewPath + 'headers/header' + m + ejsSuffix).toString();
-        let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + m + ejsSuffix).toString();
-        let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + m + ejsSuffix).toString();
+        let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
+        let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
+        let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
         let body = ejs.fileLoader(viewPath + 'test1.ejs').toString();
         let html = ejs.render(
             header

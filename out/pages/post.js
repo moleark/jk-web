@@ -14,30 +14,26 @@ const db_1 = require("../db");
 const tools_1 = require("../tools");
 function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let id = req.params.id;
-        const ret = yield db_1.Db.content.postFromId(id);
-        let template, title;
-        if (ret.length === 0) {
-            template = `post id=${id} is not defined`;
-        }
-        else {
-            let m = tools_1.isWechat(req) ? '-m' : '';
-            let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + m + tools_1.ejsSuffix).toString();
-            let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + m + tools_1.ejsSuffix).toString();
-            let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + m + tools_1.ejsSuffix).toString();
-            template = header + homeHeader
-                + '<div class="container my-3">'
-                + ret[0].content
-                + '</div>'
-                + homeFooter;
-            title = ret[0].caption;
-        }
-        //let content = ejs.fileLoader('./ejs/a.ejs').toString();
-        let data = {
-            root: tools_1.getRootPath(req),
-            title: title,
-        };
         try {
+            let id = req.params.id;
+            const ret = yield db_1.Db.content.postFromId(id);
+            let template, title;
+            if (ret.length === 0) {
+                template = `post id=${id} is not defined`;
+            }
+            else {
+                //let m = device(req)? '-m' : '';
+                let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
+                let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
+                let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
+                template = header + homeHeader
+                    + '<div class="container my-3">'
+                    + ret[0].content
+                    + '</div>'
+                    + homeFooter;
+                title = ret[0].caption;
+            }
+            let data = tools_1.buildData(req, undefined);
             let html = ejs.render(template, data);
             res.end(html);
             tools_1.ipHit(req, id);

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Db } from "../db";
 import { categories, productNews, newsletter, latestProducts } from "../data";
-import { ejsError, ipHit, getRootPath } from "../tools";
+import { ejsError, ipHit, getRootPath, buildData } from "../tools";
 
 let lastHomeTick = Date.now();
 let cacheHtml:string;
@@ -28,17 +28,12 @@ export async function home(req: Request, res:Response) {
         cacheHotPosts = ret[0];
     }
 
-    let data = {
-        root: rootPath,
-        title: undefined,
+    let data = buildData(req, {
         path: rootPath + 'post/', 
         news: ret,
         categories: categories,
-        productNews: productNews,
-        newsletter: newsletter,
-        latestProducts: latestProducts,
         hotPosts: cacheHotPosts,
-    };
+    });
     res.render('home.ejs', data, (err, html) => {
         if (ejsError(err, res) === true) return;
         res.end(cacheHtml = html);

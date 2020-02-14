@@ -9,4 +9,5 @@ __export(require("./userAgent"));
 __export(require("./consts"));
 __export(require("./ipHit"));
 __export(require("./getRootPath"));
+__export(require("./buildData"));
 //# sourceMappingURL=index.js.map

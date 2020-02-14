@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import * as _ from 'lodash';
 import { Db } from "../db";
-import { isWechat, viewPath, ejsSuffix, getRootPath } from "../tools";
+import { device, viewPath, ejsSuffix, getRootPath, buildData } from "../tools";
 
 export async function search(req: Request, res:Response) {
     let key = req.params.key;
@@ -13,11 +13,9 @@ export async function search(req: Request, res:Response) {
 
     let template: string, title: string;
 
-    let m = isWechat(req)? '-m' : '';
-
-    let header = ejs.fileLoader(viewPath + 'headers/header' + m + ejsSuffix).toString();
-    let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + m + ejsSuffix).toString();
-    let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + m + ejsSuffix).toString();
+    let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
+    let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
+    let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
     let body = ejs.fileLoader(viewPath + 'search.ejs').toString();
         
     template = header + homeHeader 
@@ -27,13 +25,9 @@ export async function search(req: Request, res:Response) {
         + homeFooter;
 
     //let content = ejs.fileLoader('./ejs/a.ejs').toString();
-    let data = {
-        root: getRootPath(req),
-        title: undefined,
+    let data = buildData(req, {
         products: products,
-        //path: 'post/'  'https://c.jkchemical.com/webBuilder/post/',
-        //content: content,
-    };
+    });
 
     let html = ejs.render(template, data);
     res.end(html);

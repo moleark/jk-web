@@ -12,10 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tools_1 = require("../tools");
 function shop(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        res.render('shop.ejs', {
-            root: tools_1.getRootPath(req),
-            title: undefined
-        }, (err, html) => {
+        let data = tools_1.buildData(req, undefined);
+        res.render('shop.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
                 return;
             res.end(html);

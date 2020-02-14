@@ -1,11 +1,9 @@
 import { Request, Response } from "express";
-import { ejsError, getRootPath } from "../tools";
+import { ejsError, getRootPath, buildData } from "../tools";
 
 export async function shop(req: Request, res:Response) {
-    res.render('shop.ejs', {
-        root: getRootPath(req),
-        title:undefined
-    }, (err, html) => {
+    let data = buildData(req, undefined);
+    res.render('shop.ejs', data, (err, html) => {
         if (ejsError(err, res) === true) return;
         res.end(html);
     });

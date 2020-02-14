@@ -37,17 +37,12 @@ function home(req, res) {
             let ret = yield db_1.Db.content.execProc('tv_hotPosts', [db_1.Db.unit, 0]);
             cacheHotPosts = ret[0];
         }
-        let data = {
-            root: rootPath,
-            title: undefined,
+        let data = tools_1.buildData(req, {
             path: rootPath + 'post/',
             news: ret,
             categories: data_1.categories,
-            productNews: data_1.productNews,
-            newsletter: data_1.newsletter,
-            latestProducts: data_1.latestProducts,
             hotPosts: cacheHotPosts,
-        };
+        });
         res.render('home.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
                 return;

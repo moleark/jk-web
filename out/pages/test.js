@@ -12,19 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ejs = require("ejs");
 const tools_1 = require("../tools");
 const tools_2 = require("../tools");
-const tools_3 = require("../tools");
 function test(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let data = {
-                root: tools_1.getRootPath(req),
-                title: undefined,
-            };
-            let m = tools_2.isWechat(req) ? '-m' : '';
-            let header = ejs.fileLoader(tools_3.viewPath + 'headers/header' + m + tools_3.ejsSuffix).toString();
-            let homeHeader = ejs.fileLoader(tools_3.viewPath + 'headers/home-header' + m + tools_3.ejsSuffix).toString();
-            let homeFooter = ejs.fileLoader(tools_3.viewPath + 'footers/home-footer' + m + tools_3.ejsSuffix).toString();
-            let body = ejs.fileLoader(tools_3.viewPath + 'test1.ejs').toString();
+            let data = tools_1.buildData(req, undefined);
+            let header = ejs.fileLoader(tools_2.viewPath + 'headers/header' + tools_2.ejsSuffix).toString();
+            let homeHeader = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + tools_2.ejsSuffix).toString();
+            let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
+            let body = ejs.fileLoader(tools_2.viewPath + 'test1.ejs').toString();
             let html = ejs.render(header
                 + homeHeader
                 + '<div class="container my-3">'
