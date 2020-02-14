@@ -37,9 +37,14 @@ function post(req, res) {
             root: tools_1.getRootPath(req),
             title: title,
         };
-        let html = ejs.render(template, data);
-        res.end(html);
-        tools_1.ipHit(req, id);
+        try {
+            let html = ejs.render(template, data);
+            res.end(html);
+            tools_1.ipHit(req, id);
+        }
+        catch (e) {
+            tools_1.ejsError(e, res);
+        }
         /*
         res.render('post.ejs', data, (err, html) => {
             if (ejsError(err, res) === true) return;

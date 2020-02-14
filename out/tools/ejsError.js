@@ -4,7 +4,7 @@ function ejsError(err, res) {
     if (err === null)
         return false;
     let ret = '';
-    let keys = Object.keys(err);
+    let keys = Object.getOwnPropertyNames(err);
     for (let i of keys) {
         ret += i + ': ' + err[i] + '\n\n';
     }

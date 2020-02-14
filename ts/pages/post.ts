@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import { Db } from "../db";
-import { isWechat, viewPath, ejsSuffix, ipHit, getRootPath } from "../tools";
+import { isWechat, viewPath, ejsSuffix, ipHit, getRootPath, ejsError } from "../tools";
 
 export async function post(req: Request, res:Response) {
     let id = req.params.id;
@@ -32,10 +32,15 @@ export async function post(req: Request, res:Response) {
         //content: content,
     };
 
-    let html = ejs.render(template, data);
-    res.end(html);
+    try {
+        let html = ejs.render(template, data);
+        res.end(html);
 
-    ipHit(req, id);
+        ipHit(req, id);
+    }
+    catch (e) {
+        ejsError(e, res);
+    }
 
     /*
     res.render('post.ejs', data, (err, html) => {
