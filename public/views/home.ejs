@@ -114,9 +114,10 @@
     </div>
     <div class="col-lg-4">
         <div class="h-100" style="background-color: #f7f7ff;">
-            <div class="border-danger border-top border-bottom small pl-4 pr-2 py-2 d-flex">
-                <div class="text-danger font-weight-bold flex-grow-1">近期热点</div>
-                <div class="text-muted text-right">一周内</div>
+            <div class="pl-4 pr-3 py-2 d-flex border-bottom align-items-end"
+                style="border-top: red 0.2rem solid;">
+                <div class="text-dark font-weight-bold flex-grow-1">近期热点</div>
+                <div class="small text-muted text-right">一周内</div>
             </div>
             <ul class="list-group mt-1">
                 <%
@@ -126,17 +127,20 @@
                         if (hpn > 10) break;
                         let {caption, imagePath, hits, create} = pn;
                 %>
-                    <a href="<%=path+52%>" class="list-group-item-action py-2 px-2 border-bottom d-flex align-items-center">
+                    <a href="<%=path+52%>" class="list-group-item-action py-2 pl-4 pr-3 border-bottom d-flex align-items-center">
                         <div class="d-flex w-100">
-                            <% if (imagePath) { %>
+                            <% if (false && imagePath) { %>
                                 <div class="w-3-5c h-3-5c">
                                     <div class="h-100" style="max-height:3.5rem;background-size:cover;background-image: url('<%=imagePath%>');border-style:none;border-width:0;background-position: center;">
                                     </div>
                                 </div>
                             <% } %>
-                            <div class="flex-grow-1 d-flex flex-column ml-3">
-                                <div class="flex-grow-1"><%=caption%></div>
-                                <div class="d-flex small text-muted mt-2">
+                            <div class="flex-grow-1 d-flex flex-column">
+                                <div class="flex-grow-1 position-relative">
+                                    <span class="text-muted position-absolute" style="left:-1em">◎</span>
+                                    <%=caption%>
+                                </div>
+                                <div class="d-flex small text-gray mt-2">
                                     <div class="flex-grow-1"><%=easyTime(create, false)%>发表</div>
                                     <div><%=hits%>次阅读</div>
                                 </div>
