@@ -125,9 +125,9 @@
                     for (let pn of hotPosts) {
                         hpn++;
                         if (hpn > 10) break;
-                        let {caption, imagePath, hits, create} = pn;
+                        let {post, caption, imagePath, hits, create} = pn;
                 %>
-                    <a href="<%=path+52%>" class="list-group-item-action py-2 pl-4 pr-3 border-bottom d-flex align-items-center">
+                    <a href="<%=path+post%>" class="list-group-item-action py-2 pl-4 pr-3 border-bottom d-flex align-items-center">
                         <div class="d-flex w-100">
                             <% if (false && imagePath) { %>
                                 <div class="w-3-5c h-3-5c">
