@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Db } from "../db";
 import { categories, productNews, newsletter, latestProducts } from "../data";
-import { ejsError, ipHit } from "../tools";
+import { ejsError, ipHit, getRootPath } from "../tools";
 
 let lastHomeTick = Date.now();
 let cacheHtml:string;
@@ -9,6 +9,7 @@ let cacheHotPosts: any[];
 let lastHotTick = 0;
 //测试
 export async function home(req: Request, res:Response) {
+    let rootPath = getRootPath(req);
     ipHit(req, -1);
     let now = Date.now();
     if (false && cacheHtml !== undefined) {
@@ -28,8 +29,9 @@ export async function home(req: Request, res:Response) {
     }
 
     let data = {
+        root: rootPath,
         title: undefined,
-        path: 'post/', // 'https://c.jkchemical.com/webBuilder/post/',
+        path: rootPath + 'post/', 
         news: ret,
         categories: categories,
         productNews: productNews,

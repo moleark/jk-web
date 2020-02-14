@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import { Db } from "../db";
-import { isWechat, viewPath, ejsSuffix, ipHit } from "../tools";
+import { isWechat, viewPath, ejsSuffix, ipHit, getRootPath } from "../tools";
 
 export async function post(req: Request, res:Response) {
     let id = req.params.id;
@@ -26,6 +26,7 @@ export async function post(req: Request, res:Response) {
     }
     //let content = ejs.fileLoader('./ejs/a.ejs').toString();
     let data = {
+        root: getRootPath(req),
         title: title,
         //path: 'post/'  'https://c.jkchemical.com/webBuilder/post/',
         //content: content,

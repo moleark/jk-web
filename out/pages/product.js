@@ -44,6 +44,7 @@ function product(req, res) {
             + homeFooter;
         //let content = ejs.fileLoader('./ejs/a.ejs').toString();
         let data = {
+            root: tools_1.getRootPath(req),
             title: undefined,
             product: product,
             packs: packs

@@ -34,6 +34,7 @@ function post(req, res) {
         }
         //let content = ejs.fileLoader('./ejs/a.ejs').toString();
         let data = {
+            root: tools_1.getRootPath(req),
             title: title,
         };
         let html = ejs.render(template, data);

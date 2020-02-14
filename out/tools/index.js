@@ -8,4 +8,5 @@ __export(require("./ejsError"));
 __export(require("./userAgent"));
 __export(require("./consts"));
 __export(require("./ipHit"));
+__export(require("./getRootPath"));
 //# sourceMappingURL=index.js.map

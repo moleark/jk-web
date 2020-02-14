@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { categories } from "../data";
-import { ejsError } from "../tools";
+import { ejsError, getRootPath } from "../tools";
 
 export async function category(req: Request, res:Response) {
     let current = req.params.current;
     let data = {
+        root: getRootPath(req),
         title: categories[current].caption,
         current: current,
         categories: categories,

@@ -71,7 +71,7 @@
 <div style="margin-top: 0.1rem; height:0.1rem;background-color:darkgray;"></div>
 
 <div class="row my-3">
-    <div class="col-sm-8">
+    <div class="col-lg-8">
         <div class="bg-primary px-4 py-2 rounded font-weight-bold text-white mb-1">
             科技动态
         </div>
@@ -79,7 +79,7 @@
             <% for(var i=0;i<news.length;i++){ 
                 let {id, caption, disp, date, by, image} = news[i];
             %>
-                <a href="<%=path+id%>" class="list-group-item-action py-1 border-bottom">
+                <a href="<%=path+id%>" class="list-group-item-action py-2 px-1 border-bottom">
                     <div class="row">
                     <% if (image) {%>
                         <div class="col-3 d-flex align-items-center">
@@ -106,7 +106,7 @@
             <% } %>
         </ul>        
     </div>
-    <div class="col-sm-4">
+    <div class="col-lg-4">
         <div class="h-100" style="background-color: #f7f7ff;">
             <div class="border-danger border-top border-bottom text-danger small px-4 py-2 font-weight-bold">近期热点</div>
             <ul class="list-group mt-1">
@@ -117,15 +117,15 @@
                         if (hpn > 10) break;
                         let {caption, imagePath, hits, create} = pn;
                 %>
-                    <a href="<%=path+52%>" class="list-group-item-action py-2 px-1 border-bottom d-flex align-items-center">
+                    <a href="<%=path+52%>" class="list-group-item-action py-2 px-2 border-bottom d-flex align-items-center">
                         <div class="d-flex w-100">
                             <% if (imagePath) { %>
-                                <div class="w-4c h-4c">
-                                    <div class="h-100" style="max-height:4rem;background-size:cover;background-image: url('<%=imagePath%>');border-style:none;border-width:0;background-position: center;">
+                                <div class="w-3-5c h-3-5c">
+                                    <div class="h-100" style="max-height:3.5rem;background-size:cover;background-image: url('<%=imagePath%>');border-style:none;border-width:0;background-position: center;">
                                     </div>
                                 </div>
                             <% } %>
-                            <div class="flex-grow-1 d-flex flex-column mx-2">
+                            <div class="flex-grow-1 d-flex flex-column ml-3">
                                 <div class="flex-grow-1"><%=caption%></div>
                                 <div class="d-flex small text-muted mt-2">
                                     <div class="flex-grow-1"><%=easyTime(create, false)%>发表</div>

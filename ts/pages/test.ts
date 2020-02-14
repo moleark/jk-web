@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
-import { ejsError } from "../tools";
+import { ejsError, getRootPath } from "../tools";
 import { isWechat } from "../tools";
 import { viewPath, ejsSuffix } from "../tools";
 
 export async function test(req: Request, res:Response) {
     try {
         let data = {
+            root: getRootPath(req),
             title: undefined,
         };
         let m = isWechat(req)? '-m' : '';

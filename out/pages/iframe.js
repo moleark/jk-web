@@ -12,7 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tools_1 = require("../tools");
 function iframe(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        res.render('iframe.ejs', { title: undefined }, (err, html) => {
+        res.render('iframe.ejs', {
+            root: tools_1.getRootPath(req),
+            title: undefined
+        }, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
                 return;
             res.end(html);

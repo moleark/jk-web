@@ -15,6 +15,7 @@ function category(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let current = req.params.current;
         let data = {
+            root: tools_1.getRootPath(req),
             title: data_1.categories[current].caption,
             current: current,
             categories: data_1.categories,

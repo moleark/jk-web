@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import * as _ from 'lodash';
 import { Db } from "../db";
-import { isWechat, viewPath, ejsSuffix } from "../tools";
+import { isWechat, viewPath, ejsSuffix, getRootPath } from "../tools";
 
 export async function product(req: Request, res:Response) {
     let id = req.params.id;
@@ -40,6 +40,7 @@ export async function product(req: Request, res:Response) {
 
     //let content = ejs.fileLoader('./ejs/a.ejs').toString();
     let data = {
+        root: getRootPath(req),
         title: undefined,
         product: product,
         packs: packs

@@ -19,6 +19,7 @@ let lastHotTick = 0;
 //测试
 function home(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let rootPath = tools_1.getRootPath(req);
         tools_1.ipHit(req, -1);
         let now = Date.now();
         if (false && cacheHtml !== undefined) {
@@ -37,8 +38,9 @@ function home(req, res) {
             cacheHotPosts = ret[0];
         }
         let data = {
+            root: rootPath,
             title: undefined,
-            path: 'post/',
+            path: rootPath + 'post/',
             news: ret,
             categories: data_1.categories,
             productNews: data_1.productNews,
