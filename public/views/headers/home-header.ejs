@@ -6,9 +6,12 @@
     .header-top a:hover {
         color: white;
     }
+    .v-middle {
+        vertical-align: middle;
+    }
 </style>
 <header class="" style="border-bottom: 0.2rem red solid;">
-    <div class="bg-dark small">
+    <!-- div class="bg-dark small">
         <div class="header-top container">
             <div class="row">
                 <div class="col-sm-8 d-flex align-items-center"><a href="<%=root%>">首页</a></div>
@@ -19,21 +22,32 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container py-2">
+    </div -->
+    <div class="container py-b">
         <div class="row">
             <div class="col-sm-6 col-md-8  position-relative" style="min-height:5rem;overflow:hidden;">
-            <img class="position-absolute" src="https://www.jkchemical.com/index_img/JK_name.gif" style="z-index:-1;bottom:0;">       
-            </div>            
-            <div class="col-sm-6 col-md-4 d-flex align-items-end justify-content-end bg-white">
-            <div class="d-flex align-items-end">
-                <div class="mr-2">
-                    <span class="fa-stack fa-lg text-primary">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
-                    </span>
+            <img class="position-absolute" src="https://www.jkchemical.com/index_img/JK_name.gif" 
+                style="z-index:-1;bottom:0.3rem;">
+            </div>
+            <div class="col-sm-6 col-md-4 bg-white">
+                <div class="d-flex d-sm-block flex-sm-column">
+                <div class="flex-grow-1">
+                    <div class="text-right pb-2 py-sm-2">
+                        <small class="v-middle">
+                            <span class="fa-stack text-primary">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </small>
+                        <span class="text-muted small v-middle">订购/客服: </span>
+                        <b class="v-middle">400-666-7788</b>
+                    </div>
                 </div>
-                <div><span class="text-muted small">订购/客服: </span><br><b>400-666-7788</b></div>
+                <div class="d-flex justify-content-end">
+                    <iframe src="<%=root%>iframe" width="" 
+                        frameborder="0" scrolling="no" 
+                        style="border:none; width:10em; height: 1.8em;"></iframe>
+                </div>
             </div>
             </div>
         </div>
