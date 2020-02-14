@@ -2,6 +2,7 @@ import { Request } from "express";
 import { Db } from "../db";
 
 let lastTick: number = 0;
+let lastHotCalcTick: number = Date.now() / 1000;
 const hits:string[] = [];
 const saveGap = 30; // 正式上线，应该是10*60，十分钟
 
@@ -17,6 +18,10 @@ export async function ipHit(req: Request, post:number|string) {
         hits.splice(0);
     }
     lastTick = now;
+
+    if (now - lastHotCalcTick > 10) {
+        Db.content.execProc('tv_calchot', [Db.unit, 0, '\n']);
+    }
 }
 
 export function getNetIp(_http: Request) {

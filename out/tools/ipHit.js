@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../db");
 let lastTick = 0;
+let lastHotCalcTick = Date.now() / 1000;
 const hits = [];
 const saveGap = 30; // 正式上线，应该是10*60，十分钟
 function ipHit(req, post) {
@@ -25,6 +26,9 @@ function ipHit(req, post) {
             hits.splice(0);
         }
         lastTick = now;
+        if (now - lastHotCalcTick > 10) {
+            db_1.Db.content.execProc('tv_calchot', [db_1.Db.unit, 0, '\n']);
+        }
     });
 }
 exports.ipHit = ipHit;
