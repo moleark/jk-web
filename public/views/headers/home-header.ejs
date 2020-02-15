@@ -1,21 +1,14 @@
 <style>
-    .header-top a {
-        color: lightgray;
-        text-decoration: none;
-    }
-    .header-top a:hover {
-        color: white;
-    }
     .v-middle {
         vertical-align: middle;
     }
 </style>
-<header class="d-none d-sm-block" style="border-bottom: 0.2rem red solid;">
-    <div class="container py-b">
+<header class="d-none d-sm-block" style="box-shadow: 0.1em 0.2em 0.3em lightgray;">
+    <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-8  position-relative" style="min-height:5rem;overflow:hidden;">
-            <img class="position-absolute" src="https://www.jkchemical.com/index_img/JK_name.gif" 
-                style="z-index:-1;bottom:0.3rem;">
+            <div class="col-sm-6 col-md-8 d-flex align-items-center">
+                <img class="w-3c mr-2" src="<%=$root%>/img/jklogo130x130.png">
+                <span class="h4 mb-0 font-weight-bold">百灵威科技</span>
             </div>
             <div class="col-sm-6 col-md-4 bg-white">
                 <div class="d-flex d-sm-block flex-sm-column">
@@ -44,7 +37,7 @@
 
 <header class="d-sm-none py-2" style="border-bottom: 0.1rem red solid;">
     <div class="container text-danger h5 pb-0 mb-0">
-        <img src="https://c.jkchemical.com/content-test/images/icons/icon-72x72.png" class="w-3c" /> 百灵威科技
+        <img src="<%=$root%>/img/jklogo130x130.png" class="w-3c" /> 百灵威科技
     </div>
 </header>
 
