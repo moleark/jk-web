@@ -19,8 +19,9 @@ export async function ipHit(req: Request, post:number|string) {
     }
     lastTick = now;
 
-    if (now - lastHotCalcTick > 10) {
+    if (now - lastHotCalcTick > 60) {
         Db.content.execProc('tv_calchot', [Db.unit, 0, '\n']);
+        lastHotCalcTick = now;
     }
 }
 

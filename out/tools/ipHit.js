@@ -26,8 +26,9 @@ function ipHit(req, post) {
             hits.splice(0);
         }
         lastTick = now;
-        if (now - lastHotCalcTick > 10) {
+        if (now - lastHotCalcTick > 60) {
             db_1.Db.content.execProc('tv_calchot', [db_1.Db.unit, 0, '\n']);
+            lastHotCalcTick = now;
         }
     });
 }
