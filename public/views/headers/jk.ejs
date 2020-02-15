@@ -1,0 +1,240 @@
+<%
+const themeT0 = {
+	$: {
+		size: 3,
+		color: 'info',
+		align: 'center',
+		bold: 'font-weight-bold',
+	},
+	"b": {
+		size: 3,
+		color: 'success',
+		align: 'center',
+		bold: '',
+	},
+	"c": {
+		size: 3,
+		color: 'danger',
+		align: 'center',
+		bold: 'font-weight-bold'
+	},
+};
+function t0(style, data) {
+	if (!data) return;
+	let s = themeT0[style] || themeT0.$;
+	let {size, color, align, bold} = s;
+%>
+	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
+		border-bottom border-muted
+		<%=bold%>">
+    	<%=typeof data==='string'?data:data[0]%>
+	</h3>
+<%
+}
+
+const themeT1 = {
+	$: {
+		size: 4,
+		color: 'info',
+		align: 'left',
+		bold: 'font-weight-bold',
+	},
+	"b": {
+		size: 4,
+		color: 'success',
+		align: 'left',
+		bold: '',
+	},
+	"c": {
+		size: 4,
+		color: 'danger',
+		align: 'left',
+		bold: 'font-weight-bold'
+	},
+};
+function t1(style, data) {
+	if (!data) return;
+	let s = themeT1[style] || themeT1.$;
+	let {size, color, align, bold} = s;
+%>
+	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
+		border-bottom border-muted
+		<%=bold%>">
+    	<%=typeof data==='string'?data:data[0]%>
+	</h3>
+<%
+}
+
+const themeT2 = {
+	$: {
+		size: 5,
+		color: 'info',
+		align: 'left',
+		bold: 'font-weight-bold',
+	},
+	"b": {
+		size: 5,
+		color: 'success',
+		align: 'left',
+		bold: '',
+	},
+	"c": {
+		size: 5,
+		color: 'danger',
+		align: 'left',
+		bold: 'font-weight-bold'
+	},
+};
+function t2(style, data) {
+	if (!data) return;
+	let s = themeT2[style] || themeT2.$;
+	let {size, color, align, bold} = s;
+%>
+	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
+		border-bottom border-muted
+		<%=bold%>">
+    	<%=typeof data==='string'?data:data[0]%>
+	</h3>
+<%
+}
+
+const themeT3 = {
+	$: {
+		size: 6,
+		color: 'info',
+		align: 'left',
+		bold: 'font-weight-bold',
+	},
+	"b": {
+		size: 6,
+		color: 'success',
+		align: 'left',
+		bold: '',
+	},
+	"c": {
+		size: 6,
+		color: 'danger',
+		align: 'left',
+		bold: 'font-weight-bold'
+	},
+};
+function t3(style, data) {
+	let s = themeT3[style] || themeT3.$;
+	let {size, color, align, bold} = s;
+%>
+	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
+		border-bottom border-muted
+		<%=bold%>">
+    	<%=typeof data==='string'?data:data[0]%>
+	</h3>
+<%
+}
+
+function grid(style, cell, data) {
+
+}
+
+function xl(ou, style, data, type) {
+	if (!data || data.length === 0) return;
+%>
+	<<%=ou%> type="<%=type%>">
+<%
+		data.forEach(v => {
+%>
+			<li><%-v%></li>
+<%			
+		})
+%>
+	</<%=ou%>>
+<%
+}
+function ul(style, data) {
+	xl('ul', style, data);
+}
+
+function ol(style, data) {
+	xl('ol', style, data);
+}
+
+function ouou(l1, l2, style, data, type1, type2) {
+	if (!data || data.length === 0) return;
+%>
+	<<%=l1%> type="<%=type1%>">
+<%
+		data.forEach(v => {
+%>
+			<li>
+				<%- v[0] %>
+				<% xl(l2, style, v[1], type2) %>
+			</li>
+<%			
+		})
+%>
+	</<%=l1%>>
+<%
+}
+
+function ulul(style, data) {
+	ouou('ul', 'ul', style, data, 'square', 'circle');
+}
+
+function ulol(style, data) {
+	ouou('ul', 'ol', style, data);
+}
+
+function olul(style, data) {
+	ouou('ol', 'ul', style, data);
+}
+
+function olol(style, data) {
+	ouou('ol', 'ol', style, data, '', 'a');
+}
+
+function hr(style) {
+%>
+	<hr>
+<%
+}
+
+const themeP = {
+	$: {
+		first: 'first-char-large first-line-height-small',
+		other: ''
+	},
+	b: {
+		first: 'first-char-large first-line-height-small',
+		other: 'first-char-large first-line-height-small'
+	},
+	c: {
+		first: '',
+		other: ''
+	}
+}
+function p(style, data) {
+	let {first, other} = themeP[style] || themeP.$;
+	let line0 = true;
+	let t = csv(data);
+	t.forEach(v => {
+		%><p class="<%=line0===true?first:other%>"><%-v%></p><%
+		line0 = false;
+	})
+}
+
+function text(style, data) {
+	if (!data) return;
+%><p><%
+	let t = csv(data);
+	t.forEach(v => {
+	%>
+		<%-v%>
+	<%
+	})
+%></p><%
+}
+
+function image(style, data) {
+
+}
+
+
+%>

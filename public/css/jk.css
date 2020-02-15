@@ -1,0 +1,43 @@
+.font-song {font-family: 宋体, simsun, 'Times New Roman', Times, serif;}
+.bold {font-weight: bold;}
+.w-3c {width: 3rem;min-width: 3rem;}
+.w-3-5c {width: 3.5rem;min-width: 3.5rem;}
+.w-4c {width: 4rem;min-width: 4rem;}
+.w-5c {width: 5rem;min-width: 5rem;}
+.w-6c {width: 6rem;min-width: 6rem;}
+.w-8c {width: 8rem;min-width: 8rem;}
+.w-min-3c {min-width: 3rem;}
+.w-min-4c {min-width: 4rem;}
+.w-min-5c {min-width: 5rem;}
+.w-min-6c {min-width: 6rem;}
+.w-min-8c {min-width: 8rem;}
+.h-3c {height: 3rem;min-height: 3rem;}
+.h-3-5c {height: 3.5rem;min-height: 3.5rem;}
+.h-4c {height: 4rem;min-height: 4rem;}
+.h-5c {height: 5rem;min-height: 5rem;}
+.h-6c {height: 6rem;min-height: 6rem;}
+.h-8c {height: 8rem;min-height: 8rem;}
+.text-dark-blue {color: darkblue;}
+.text-gray {color: #b0c0e0;}
+.category-icon {display: block; left:1rem; top:0.2rem; width: 2.5rem;height:2.5rem;}
+@media (min-width: 576px) {
+	.category-sm-icon {display: none;}
+	.w-sm-100 {width: 100% !important;}
+	.w-sm-75 {width: 75% !important;}
+	.w-sm-50 {width: 50% !important;}
+	.w-sm-25 {width: 25% !important;}
+}
+@media (min-width: 768px) {
+	.category-md-icon {display: block; left:0.1rem; top:0.4rem; width: 1.8rem;height:1.8rem;}
+	.w-md-100 {width: 100% !important;}
+	.w-md-75 {width: 75% !important;}
+	.w-md-50 {width: 50% !important;}
+	.w-md-25 {width: 25% !important;}
+}
+@media (min-width: 992px) {
+	.category-lg-icon {display: block; left:0.1rem; top:0.2rem; width: 2.5rem;height:2.5rem;}
+	.w-lg-100 {width: 100% !important;}
+	.w-lg-75 {width: 75% !important;}
+	.w-lg-50 {width: 50% !important;}
+	.w-lg-25 {width: 25% !important;}
+}
