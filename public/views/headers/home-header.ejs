@@ -2,13 +2,22 @@
     .v-middle {
         vertical-align: middle;
     }
+    a.jk-logo {
+        text-decoration: none;
+        color: black;
+    }
+    a.jk-logo:hover {
+        color: darkred;
+    }
 </style>
 <header class="d-none d-sm-block" style="box-shadow: 0.1em 0.2em 0.3em lightgray;">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-md-8 d-flex align-items-center">
-                <img class="w-3c mr-2" src="<%=$root%>/img/jklogo130x130.png">
-                <span class="h4 mb-0 font-weight-bold">百灵威科技</span>
+                <a class="jk-logo d-flex align-items-center" href="<%=$root%>">
+                    <img class="w-3c mr-2" src="<%=$root%>/img/jklogo130x130.png">
+                    <span class="h4 mb-0 font-weight-bold">百灵威科技</span>
+                </a>
             </div>
             <div class="col-sm-6 col-md-4 bg-white">
                 <div class="d-flex d-sm-block flex-sm-column">
