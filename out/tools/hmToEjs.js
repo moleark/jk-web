@@ -35,7 +35,7 @@ function hmToEjs(hm) {
                 sec = hm.substring(p, pEnd + 2);
                 p = pEnd + 2;
             }
-            defs += 'function ' + func + '(theme, data){%>' + sec + '<%};\n';
+            defs += 'function ' + func + '(pattern, data){ data=data||[]; %>' + sec + '<%};\n';
             lastP = p;
         }
         else {

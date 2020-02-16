@@ -22,18 +22,33 @@ function post(req, res) {
                 template = `post id=${id} is not defined`;
             }
             else {
-                //let m = device(req)? '-m' : '';
                 let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
+                let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
+                let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
                 let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
                 let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
-                template = header + homeHeader
+                let body = ret[0].content;
+                if (body.charAt(0) === '#') {
+                    body = tools_1.hmToEjs(body);
+                }
+                template = header
+                    + jk
+                    + hmInclude
+                    + homeHeader
+                    + '<div class="container my-3">'
+                    + body
+                    + '</div>'
+                    + homeFooter;
+                /*
+                header + homeHeader
                     + '<div class="container my-3">'
                     + ret[0].content
                     + '</div>'
                     + homeFooter;
+                */
                 title = ret[0].caption;
             }
-            let data = tools_1.buildData(req, undefined);
+            let data = tools_1.buildData(req, { $title: title });
             let html = ejs.render(template, data);
             res.end(html);
             tools_1.ipHit(req, id);
