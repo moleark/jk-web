@@ -1,5 +1,5 @@
 <%
-const themeT0 = {
+const patternT0 = {
 	$: {
 		size: 3,
 		color: 'info',
@@ -19,20 +19,19 @@ const themeT0 = {
 		bold: 'font-weight-bold'
 	},
 };
-function t0(style, data) {
+function t0(pattern, data) {
 	if (!data) return;
-	let s = themeT0[style] || themeT0.$;
+	let s = patternT0[pattern] || patternT0.$;
 	let {size, color, align, bold} = s;
 %>
-	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
-		border-bottom border-muted
-		<%=bold%>">
+	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mb-3 pt-3 pb-3 
+		border-bottom border-muted <%=bold%>">
     	<%=typeof data==='string'?data:data[0]%>
 	</h3>
 <%
 }
 
-const themeT1 = {
+const patternT1 = {
 	$: {
 		size: 4,
 		color: 'info',
@@ -52,9 +51,9 @@ const themeT1 = {
 		bold: 'font-weight-bold'
 	},
 };
-function t1(style, data) {
+function t1(pattern, data) {
 	if (!data) return;
-	let s = themeT1[style] || themeT1.$;
+	let s = patternT1[pattern] || patternT1.$;
 	let {size, color, align, bold} = s;
 %>
 	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
@@ -65,7 +64,7 @@ function t1(style, data) {
 <%
 }
 
-const themeT2 = {
+const patternT2 = {
 	$: {
 		size: 5,
 		color: 'info',
@@ -85,9 +84,9 @@ const themeT2 = {
 		bold: 'font-weight-bold'
 	},
 };
-function t2(style, data) {
+function t2(pattern, data) {
 	if (!data) return;
-	let s = themeT2[style] || themeT2.$;
+	let s = patternT2[pattern] || patternT2.$;
 	let {size, color, align, bold} = s;
 %>
 	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
@@ -98,7 +97,7 @@ function t2(style, data) {
 <%
 }
 
-const themeT3 = {
+const patternT3 = {
 	$: {
 		size: 6,
 		color: 'info',
@@ -118,8 +117,8 @@ const themeT3 = {
 		bold: 'font-weight-bold'
 	},
 };
-function t3(style, data) {
-	let s = themeT3[style] || themeT3.$;
+function t3(pattern, data) {
+	let s = patternT3[pattern] || patternT3.$;
 	let {size, color, align, bold} = s;
 %>
 	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
@@ -130,11 +129,51 @@ function t3(style, data) {
 <%
 }
 
-function grid(style, cell, data) {
-
+const patternGrid = {
+	$: {
+		gridClass: 'row row-cols-1 row-cols-sm-1 row-cols-md-3',
+	},
+	b: {
+		gridClass: 'row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4',
+	}
+}
+function cell(pattern, data, arr) {
+%>
+	<div>cell <%-data%></div>
+<%
+}
+function grid(pattern, data, cellFunc) {
+	let s = patternGrid[pattern] || patternGrid.$;
+	let {gridClass} = s;
+	let tf = eval('typeof ' + cellFunc);
+	if (tf === 'function') {
+%> <div class="container">
+	<div class="<%=gridClass%>">
+<%
+	let func = eval(cellFunc);
+	data.forEach(v => {
+		let main, arr;
+		let v0 = v[0];
+		if (Array.isArray(v0)) {
+			main = v0;
+			arr = v[1];
+		}
+		else {
+			main = v;
+		}
+		if (arr === undefined) arr = [];
+		func(pattern, main, arr)
+	});
+%> </div></div> <%
+	}
+	else {
+%>
+		<div class="text-danger"><b>Error: </b>#grid '<%=cellFunc%>' is <%=tf%>, is not function</div>
+<%
+	}
 }
 
-function xl(ou, style, data, type) {
+function xl(ou, pattern, data, type) {
 	if (!data || data.length === 0) return;
 %>
 	<<%=ou%> type="<%=type%>">
@@ -148,15 +187,15 @@ function xl(ou, style, data, type) {
 	</<%=ou%>>
 <%
 }
-function ul(style, data) {
-	xl('ul', style, data);
+function ul(pattern, data) {
+	xl('ul', pattern, data);
 }
 
-function ol(style, data) {
-	xl('ol', style, data);
+function ol(pattern, data) {
+	xl('ol', pattern, data);
 }
 
-function ouou(l1, l2, style, data, type1, type2) {
+function ouou(l1, l2, pattern, data, type1, type2) {
 	if (!data || data.length === 0) return;
 %>
 	<<%=l1%> type="<%=type1%>">
@@ -165,7 +204,7 @@ function ouou(l1, l2, style, data, type1, type2) {
 %>
 			<li>
 				<%- v[0] %>
-				<% xl(l2, style, v[1], type2) %>
+				<% xl(l2, pattern, v[1], type2) %>
 			</li>
 <%			
 		})
@@ -174,29 +213,29 @@ function ouou(l1, l2, style, data, type1, type2) {
 <%
 }
 
-function ulul(style, data) {
-	ouou('ul', 'ul', style, data, 'square', 'circle');
+function ulul(pattern, data) {
+	ouou('ul', 'ul', pattern, data, 'square', 'circle');
 }
 
-function ulol(style, data) {
-	ouou('ul', 'ol', style, data);
+function ulol(pattern, data) {
+	ouou('ul', 'ol', pattern, data);
 }
 
-function olul(style, data) {
-	ouou('ol', 'ul', style, data);
+function olul(pattern, data) {
+	ouou('ol', 'ul', pattern, data);
 }
 
-function olol(style, data) {
-	ouou('ol', 'ol', style, data, '', 'a');
+function olol(pattern, data) {
+	ouou('ol', 'ol', pattern, data, '', 'a');
 }
 
-function hr(style) {
+function hr(pattern) {
 %>
 	<hr>
 <%
 }
 
-const themeP = {
+const patternP = {
 	$: {
 		first: 'first-char-large first-line-height-small',
 		other: ''
@@ -210,8 +249,8 @@ const themeP = {
 		other: ''
 	}
 }
-function p(style, data) {
-	let {first, other} = themeP[style] || themeP.$;
+function p(pattern, data) {
+	let {first, other} = patternP[pattern] || patternP.$;
 	let line0 = true;
 	let t = csv(data);
 	t.forEach(v => {
@@ -220,20 +259,52 @@ function p(style, data) {
 	})
 }
 
-function text(style, data) {
+function raw(pattern, data) {
 	if (!data) return;
-%><p><%
 	let t = csv(data);
 	t.forEach(v => {
 	%>
 		<%-v%>
 	<%
 	})
-%></p><%
 }
 
-function image(style, data) {
 
+const patternImage = {
+	$: {
+		divClass: 'w-75 my-3 text-center mx-auto',
+		imgClass: 'border border-muted w-100 p-3 mb-2',
+		textClass: 'small text-muted',
+	},
+	"float-right": {
+		divClass: 'w-50 my-3 ml-3 text-center float-right',
+		imgClass: 'border border-muted w-100 p-3 mb-2',
+		textClass: 'small text-muted',
+	},
+	"float-left": {
+		divClass: 'w-50 my-3 mr-3 text-center float-left',
+		imgClass: 'border border-muted w-100 p-3 mb-2',
+		textClass: 'small text-muted',
+	}
+}
+function image(pattern, data) {
+	let {divClass, textClass, imgClass} = patternImage[pattern] || patternImage.$;
+	let [l0, l1, l2] = data;
+	let v0 = Array.isArray(l0)===true? l0[0] : l0;
+	let v1 = Array.isArray(l1)===true? l1[0] : l1;
+	let v2 = Array.isArray(l2)===true? l2[0] : l2;
+%>
+	<div class="<%=divClass%>">
+	<% if (v2) { %>
+		<a href="<%=v2%>">
+	<% } %>
+		<img class="<%=imgClass%>" src="<%=v0%>" alt="">
+		<div class="<%=textClass%>"><%=v1%></div>
+	<% if (v2) { %>
+		</a>
+	<% } %>
+	</div>
+<%
 }
 
 

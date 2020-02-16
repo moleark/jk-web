@@ -12,4 +12,5 @@ __export(require("./getRootPath"));
 __export(require("./buildData"));
 __export(require("./csv"));
 __export(require("./hm"));
+__export(require("./hmToEjs"));
 //# sourceMappingURL=index.js.map

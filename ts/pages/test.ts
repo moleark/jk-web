@@ -1,12 +1,18 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
-import { ejsError, getRootPath, buildData, hm } from "../tools";
+import { ejsError, getRootPath, buildData, hm, hmToEjs } from "../tools";
 import { device } from "../tools";
 import { viewPath, ejsSuffix } from "../tools";
 
 export async function test(req: Request, res:Response) {
     try {
 		hm(`
+#grid a cell
+a	b	c
+d	e	f
+e	f	g
+
+
 #ul	a
 l1
 	l1-1
@@ -67,6 +73,10 @@ afas fsaf saf
 #p	a
 ', 内容);
 
+#
+<i class="fa fa-plus"></i>
+<div class="text-danger">注意了，这是这是直接写的代码</div>
+
 #-	a
 
 #p	b
@@ -84,25 +94,25 @@ afas fsaf saf
 		let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
         let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
         let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-        let body = ejs.fileLoader(viewPath + 'test1.ejs').toString();
-        let html = ejs.render(
-            header + jk + hmInclude
-            + homeHeader 
+		let body = ejs.fileLoader(viewPath + 'testhm.ejs').toString();
+		if (body.charAt(0) === '#') {
+			body = hmToEjs(body);
+		}
+
+		let html = ejs.render(
+			header
+			 + jk
+			 + hmInclude
+            + homeHeader
             + '<div class="container my-3">'
             + body 
             + '</div>'
-            + homeFooter,
-            data);
+            + homeFooter
+            , data);
         res.end(html);
     }
     catch (err) {
         console.error(err);
         res.end('error in parsing: ' + err.message);
     }
-    /*
-    res.render(htmlText, data, (err, html) => {
-        if (ejsError(err, res) === true) return;
-        res.end(html);
-    });
-    */
 };

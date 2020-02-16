@@ -7,3 +7,4 @@ export * from './getRootPath';
 export * from './buildData';
 export * from './csv';
 export * from './hm';
+export * from './hmToEjs';

@@ -2,51 +2,59 @@ const _hm_funcs = {
 	__append: function(err:any, cmd:any, style?:any, cell?:any, data?:any) {
 		console.log(cmd, style, cell, data);
 	},
+	"-": "hr"
 };
 
 export function hm(text:string):void {
 	let textLen = text.length;
 	let p = 0; 
 	let line = 1, pos = 1;
-	let data:any, cmd:any, style:any, cell:any;
+	let data:any, cmd:any, templet:any, cell:any;
 	for (;p<textLen;) {
 		let c = text.charAt(p);
 		if (c === '#') {
 			++p;
 			parseElement();
-			if (!cmd) cmd = 'text';
+			if (!cmd) cmd = 'raw';
+			else if (cmd === '-') cmd = 'hr';
 			data = parseData();
 		}
 		else {
 			data = parseData();
 			if (data === undefined) continue;
-			cmd = 'text';
+			cmd = 'raw';
 		}
 
 		let func = _hm_funcs[cmd];
-		if (func === undefined) {
-			_hm_funcs.__append(`<div class="text-danger">错误：${line}行${pos}位，${cmd}指令不存在</div>`, cmd, style, cell, data);
-			continue;
-		}
-		func(style, data, cell);
+        if (func === undefined) {
+			let tf = eval('typeof ' + cmd);
+			if (tf !== 'function') {
+				_hm_funcs.__append(`<div class="text-danger">错误：${line}行${pos}位，${cmd}指令不存在</div>`, cmd, templet, cell, data);
+				continue;
+			}
+			else {
+				func = eval(cmd);
+			}
+        }
+        func(templet, data, cell);
 	}
 	return;
 
 	function parseElement():any {
 		let pLn = text.indexOf('\n', p);
 		if (pLn < 0) pLn = textLen;
-		let parts = text.substring(p, pLn).split(/( )+|\t/);
+		let parts = text.substring(p, pLn).split(/[\s|\t]+/);
 		let partsLen = parts.length;
 		let i = 0;
 		while (i<partsLen) {
 			cmd = parts[i++];
 			if (cmd) break;
 		}
-		style = undefined;
+		templet = undefined;
 		while (i<partsLen) {
-			style = parts[i++];
-			if (style) {
-				style = style.trim();
+			templet = parts[i++];
+			if (templet) {
+				templet = templet.trim();
 				break;
 			}
 		}

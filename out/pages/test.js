@@ -16,6 +16,12 @@ function test(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             tools_1.hm(`
+#grid a cell
+a	b	c
+d	e	f
+e	f	g
+
+
 #ul	a
 l1
 	l1-1
@@ -76,6 +82,10 @@ afas fsaf saf
 #p	a
 ', 内容);
 
+#
+<i class="fa fa-plus"></i>
+<div class="text-danger">注意了，这是这是直接写的代码</div>
+
 #-	a
 
 #p	b
@@ -90,8 +100,13 @@ afas fsaf saf
             let hmInclude = ejs.fileLoader(tools_2.viewPath + '/headers/hm' + tools_2.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + tools_2.ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
-            let body = ejs.fileLoader(tools_2.viewPath + 'test1.ejs').toString();
-            let html = ejs.render(header + jk + hmInclude
+            let body = ejs.fileLoader(tools_2.viewPath + 'testhm.ejs').toString();
+            if (body.charAt(0) === '#') {
+                body = tools_1.hmToEjs(body);
+            }
+            let html = ejs.render(header
+                + jk
+                + hmInclude
                 + homeHeader
                 + '<div class="container my-3">'
                 + body
@@ -103,12 +118,6 @@ afas fsaf saf
             console.error(err);
             res.end('error in parsing: ' + err.message);
         }
-        /*
-        res.render(htmlText, data, (err, html) => {
-            if (ejsError(err, res) === true) return;
-            res.end(html);
-        });
-        */
     });
 }
 exports.test = test;
