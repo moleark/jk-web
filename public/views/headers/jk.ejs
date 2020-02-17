@@ -139,18 +139,30 @@ const patternGrid = {
 }
 function cell(pattern, data, arr) {
 %>
-	<div>cell <%-esc(data)%></div>
+	<div class="border p-3">
+<%
+	data.forEach (v => {
+%>
+		<div><%-esc(v)%></div>
+<%
+	})
+	if (arr) {
+%>
+		<div><%-esc(arr)%></div>
+<%		
+	}
+%>	
+	</div>
 <%
 }
 function grid(pattern, data, cellFunc) {
 	let s = patternGrid[pattern] || patternGrid.$;
 	let {gridClass} = s;
-	let tf = eval('typeof ' + cellFunc);
-	if (tf === 'function') {
 %> <div class="container">
 	<div class="<%=gridClass%>">
 <%
-	let func = eval(cellFunc);
+	let tf = eval('typeof ' + cellFunc);
+	let func = (tf === 'function')? eval(cellFunc) : cell;
 	data.forEach(v => {
 		let main, arr;
 		let v0 = v[0];
@@ -165,12 +177,6 @@ function grid(pattern, data, cellFunc) {
 		func(pattern, main, arr)
 	});
 %> </div></div> <%
-	}
-	else {
-%>
-		<div class="text-danger"><b>Error: </b>#grid '<%=cellFunc%>' is <%=tf%>, is not function</div>
-<%
-	}
 }
 
 const patternTable = {
