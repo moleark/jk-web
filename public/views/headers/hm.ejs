@@ -41,10 +41,10 @@ function hm(text) {
             data = parseData();
         }
         else {
+            cmd = 'raw';
             data = parseData();
             if (data === undefined)
                 continue;
-            cmd = 'raw';
         }
         let func = _hm_funcs[cmd];
         if (func === undefined) {
@@ -113,6 +113,8 @@ function hm(text) {
         }
         if (ret.length === 0)
             return;
+        if (['grid', 'ol', 'ul', 'olol', 'ulul', 'olul', 'ulol'].indexOf(cmd) < 0)
+            return ret;
         let rLen = ret.length;
         // 判断next行是不是item的直接子行
         function isChild(item, level) {
@@ -155,4 +157,42 @@ function hm(text) {
     }
 }
 
+function trans(text) {
+	let p = text.indexOf('|');
+	let len = text.length;
+	if (p>0) {
+		return `<a href="${text.substring(p+1,len-1)}">${text.substring(1,p)}</a>`;
+	}
+	switch (text.charAt(1)) {
+		default:
+			return `<b class="text-danger">${text.substring(1, len-1)}</b>`;
+		case '_':
+			return `<u>${text.substring(2, len-1)}</u>`
+		case '-':
+			return `<del>${text.substring(2, len-1)}</del>`
+		case '*':
+			return `<strong>${text.substring(2, len-1)}</strong>`;
+	}
+}
+
+function escString(text) {
+	return text.replace(/\[[^\]]+\]/g, trans);
+}
+
+function esc(text) {
+	switch (typeof text) {
+		default:
+			return text;
+		case 'object':
+			return text.map(v => {
+				switch (typeof v) {
+					case 'string': return escString(v);
+					case 'undefined': return '';
+					default: return esc(v);
+				}
+			}).join(' ');
+		case 'string':
+			return escString(text);
+	}
+}
 %>

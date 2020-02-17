@@ -23,10 +23,10 @@ function hm(text) {
             data = parseData();
         }
         else {
+            cmd = 'raw';
             data = parseData();
             if (data === undefined)
                 continue;
-            cmd = 'raw';
         }
         let func = _hm_funcs[cmd];
         if (func === undefined) {
@@ -95,6 +95,8 @@ function hm(text) {
         }
         if (ret.length === 0)
             return;
+        if (['grid', 'ol', 'ul', 'olol', 'ulul', 'olul', 'ulol'].indexOf(cmd) < 0)
+            return ret;
         let rLen = ret.length;
         // 判断next行是不是item的直接子行
         function isChild(item, level) {

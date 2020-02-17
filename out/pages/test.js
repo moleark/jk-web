@@ -94,6 +94,10 @@ afas fsaf saf
 #p	c
 ', 内容);
 `);
+            let textStr = '<div class="text-danger"><i class="text-primary fa fa-plus"></i> 注意了，[这是这是直接写的代码]</div>';
+            let r = textStr.replace(/\[[^\]]+\]/g, (str) => {
+                return '*' + str + '*';
+            });
             let data = tools_1.buildData(req, undefined);
             let header = ejs.fileLoader(tools_2.viewPath + 'headers/header' + tools_2.ejsSuffix).toString();
             let jk = ejs.fileLoader(tools_2.viewPath + '/headers/jk' + tools_2.ejsSuffix).toString();

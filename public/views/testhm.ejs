@@ -1,14 +1,21 @@
 #:cell2
 <div>cell2<b>
-	<%-data%> <%-data[0]%></b>
+	<%-data%> <%-esc(data[0])%></b>
 </div>
 
 #:cell3
 <div class="border p-3">
 	<div>cell3</div>
 	<div><%-data%></div>
-	<div><b class="text-danger"><%-data[0]%></b> == <%=data[1]%> ** <%=data[2]%></div>
+	<div><b class="text-danger"><%-esc(data[0])%></b> == <%=esc(data[1])%> ** <%=esc(data[2])%></div>
 </div>
+
+/#[id]link
+a
+http://a.com
+
+/#[id1]img
+http://a.png
 
 #t0	a
 文章主标题标题
@@ -78,9 +85,12 @@ a	b	c
 d	e	f
 e	f	g
 
-#
+#table
+	|aaa	bbb|	<span class="text-primary">cccc</span>
+	d	e	这[百灵威|https://www.jkchemical.com]不错
+e	f	g	cccddd ddd
 
-<div class="text-danger"><i class="text-primary fa fa-plus"></i> 注意了，这是这是直接写的代码</div>
+<div class="text-danger"><i class="text-primary fa fa-plus"></i> 注意了，[这是这是直接写的代码]</div>
 
 #-	a
 
@@ -96,7 +106,7 @@ l33---33
 	b
 
 #p	b
-存在于样品和溶剂中的杂质不仅容易对色谱仪器装置（如液相泵、进样阀、色谱柱等）造成损坏或堵塞，而且会对分析结果造成干扰。因此，在样品上机检测前对样品进行过滤显得尤为重要，并可以有效降低上述问题的发生，提高色谱检测的灵敏度和准确度。
+存在于样品和溶剂中的杂质不[-仅容易]对[*色谱仪]器[_装置]（如液相泵、进样阀、色谱柱等）造成损坏或堵塞，而且会对分析结果造成干扰。因此，在样品上机检测前对样品进行过滤显得尤为重要，并可以有效降低上述问题的发生，提高色谱检测的灵敏度和准确度。
 产品用其它仪器分析没有问题，但是核磁谱图太粗糙，无法解析，无法投稿？
 知道不能用简单的经济型核磁管，但是特殊核磁管那么多，又都那么贵，怎么选？
 

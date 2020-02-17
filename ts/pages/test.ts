@@ -86,6 +86,10 @@ afas fsaf saf
 ', 内容);
 `);
 
+		let textStr = '<div class="text-danger"><i class="text-primary fa fa-plus"></i> 注意了，[这是这是直接写的代码]</div>';
+		let r = textStr.replace(/\[[^\]]+\]/g, (str) => {
+			return '*' + str + '*';
+		});
 
         let data = buildData(req, undefined);
 
