@@ -10,16 +10,23 @@ export function hmToEjs(hm:string):string {
 	let len = hm.length;
 	let lastP = 0;
 
+	function appendCode(start:number, end?:number) {
+		text += hm.substring(start, end);
+		text += ';secId++; \n';
+	}
+
 	for (let p=0; p<len;) {
 		let sec:string;
 		let pCur = hm.indexOf('#:', p);
 		if (pCur < 0) {
-			text += hm.substring(lastP);
+			//text += hm.substring(lastP);
+			appendCode(lastP);
 			break;
 		}
 		if (pCur==0 || pCur>lnln.length && hm.substr(pCur-lnlnLen, lnlnLen)===lnln) {
 			if (pCur > 0) {
-				text += hm.substring(lastP, pCur);
+				//text += hm.substring(lastP, pCur);
+				appendCode(lastP, pCur);
 			}
 
 			let lEnd = hm.indexOf(ln, pCur + 2);

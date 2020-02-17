@@ -2,8 +2,65 @@ const _hm_funcs = {
 	__append: function(err:any, cmd:any, style?:any, cell?:any, data?:any) {
 		console.log(cmd, style, cell, data);
 	},
-	"-": "hr"
+	"-": "hr",
+	//"state": state,
+	"esc": esc,
+	collapse: collapse,
 };
+
+let state = {
+	secId: 1,
+	cont: 0,	
+}
+
+function next() {
+	++state.secId;
+	if (state.cont > 0) state.cont--;
+}
+
+function collapse() {
+	if (state.cont <= 0) return '';
+	return 'collapse';
+}
+
+function trans(text:string) {
+	let p = text.indexOf('|');
+	let len = text.length;
+	if (p>0) {
+		return `<a href="${text.substring(p+1,len-1)}">${text.substring(1,p)}</a>`;
+	}
+	switch (text.charAt(1)) {
+		default:
+			return `<b class="text-danger">${text.substring(1, len-1)}</b>`;
+		case '_':
+			return `<u>${text.substring(2, len-1)}</u>`
+		case '-':
+			return `<del>${text.substring(2, len-1)}</del>`
+		case '*':
+			return `<strong>${text.substring(2, len-1)}</strong>`;
+	}
+}
+
+function escString(text:string) {
+	return text.replace(/\[[^\]]+\]/g, trans);
+}
+
+function esc(text:string|any[]) {
+	switch (typeof text) {
+		default:
+			return text;
+		case 'object':
+			return text.map(v => {
+				switch (typeof v) {
+					case 'string': return escString(v);
+					case 'undefined': return '';
+					default: return esc(v);
+				}
+			}).join(' ');
+		case 'string':
+			return escString(text);
+	}
+}
 
 export function hm(text:string):void {
 	let textLen = text.length;
@@ -35,8 +92,9 @@ export function hm(text:string):void {
 			else {
 				func = eval(cmd);
 			}
-        }
-        func(templet, data, cell);
+		}
+		func(templet, data, cell);
+		next();
 	}
 	return;
 

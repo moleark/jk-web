@@ -4,8 +4,61 @@ const _hm_funcs = {
     __append: function (err, cmd, style, cell, data) {
         console.log(cmd, style, cell, data);
     },
-    "-": "hr"
+    "-": "hr",
+    //"state": state,
+    "esc": esc,
+    collapse: collapse,
 };
+let state = {
+    secId: 1,
+    cont: 0,
+};
+function next() {
+    ++state.secId;
+    if (state.cont > 0)
+        state.cont--;
+}
+function collapse() {
+    if (state.cont <= 0)
+        return '';
+    return 'collapse';
+}
+function trans(text) {
+    let p = text.indexOf('|');
+    let len = text.length;
+    if (p > 0) {
+        return `<a href="${text.substring(p + 1, len - 1)}">${text.substring(1, p)}</a>`;
+    }
+    switch (text.charAt(1)) {
+        default:
+            return `<b class="text-danger">${text.substring(1, len - 1)}</b>`;
+        case '_':
+            return `<u>${text.substring(2, len - 1)}</u>`;
+        case '-':
+            return `<del>${text.substring(2, len - 1)}</del>`;
+        case '*':
+            return `<strong>${text.substring(2, len - 1)}</strong>`;
+    }
+}
+function escString(text) {
+    return text.replace(/\[[^\]]+\]/g, trans);
+}
+function esc(text) {
+    switch (typeof text) {
+        default:
+            return text;
+        case 'object':
+            return text.map(v => {
+                switch (typeof v) {
+                    case 'string': return escString(v);
+                    case 'undefined': return '';
+                    default: return esc(v);
+                }
+            }).join(' ');
+        case 'string':
+            return escString(text);
+    }
+}
 function hm(text) {
     let textLen = text.length;
     let p = 0;
@@ -40,6 +93,7 @@ function hm(text) {
             }
         }
         func(templet, data, cell);
+        next();
     }
     return;
     function parseElement() {

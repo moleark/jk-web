@@ -129,6 +129,18 @@ function t3(pattern, data) {
 <%
 }
 
+const patternV = {
+}
+function v(pattern, data) {
+	state.cont=2;
+%>
+	<div class="my-3 "><a class="btn btn-<%=pattern%>" data-toggle="collapse" 
+		href="#sec-<%=state.secId+1%>" role="button" aria-expanded="false" aria-controls="jk">
+    	<%-esc(data)%>
+	</a></div>
+<%
+}
+
 const patternGrid = {
 	$: {
 		gridClass: 'row row-cols-1 row-cols-sm-1 row-cols-md-3',
@@ -158,7 +170,7 @@ function cell(pattern, data, arr) {
 function grid(pattern, data, cellFunc) {
 	let s = patternGrid[pattern] || patternGrid.$;
 	let {gridClass} = s;
-%> <div class="container">
+%> <div class="container <%=collapse()%> my-3" id="sec-<%=state.secId%>">
 	<div class="<%=gridClass%>">
 <%
 	let tf = eval('typeof ' + cellFunc);
