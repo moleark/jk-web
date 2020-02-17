@@ -98,7 +98,7 @@ afas fsaf saf
 		let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
         let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
         let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-		let body = ejs.fileLoader(viewPath + 'testhm.ejs').toString();
+		let body = ejs.fileLoader(viewPath + 'testLY.ejs').toString();
 		if (body.charAt(0) === '#') {
 			body = hmToEjs(body);
 		}

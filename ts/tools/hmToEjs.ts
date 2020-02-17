@@ -12,7 +12,6 @@ export function hmToEjs(hm:string):string {
 
 	function appendCode(start:number, end?:number) {
 		text += hm.substring(start, end);
-		text += ';secId++; \n';
 	}
 
 	for (let p=0; p<len;) {

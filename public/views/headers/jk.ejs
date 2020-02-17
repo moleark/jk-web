@@ -202,7 +202,7 @@ function table(pattern, data) {
 	if (len===0) return;
 	let align = [];
 %>
-	<table class="<%=tableClass%>">
+	<table class="<%=tableClass%> <%=collapse()%> ">
 	<thead><tr>
 <%
 	let r0 = data[0];
@@ -244,7 +244,7 @@ function table(pattern, data) {
 function xl(ou, pattern, data, type) {
 	if (!data || data.length === 0) return;
 %>
-	<<%=ou%> type="<%=type%>">
+	<<%=ou%> type="<%=type%>" class="<%=collapse()%> ">
 <%
 		data.forEach(v => {
 %>
@@ -321,7 +321,7 @@ function p(pattern, data) {
 	let {first, other} = patternP[pattern] || patternP.$;
 	let line0 = true;
 	data.forEach(v => {
-		%><p class="<%=line0===true?first:other%>"><%-esc(v)%></p><%
+		%><p class="<%=line0===true?first:other%> <%=collapse()%> "><%-esc(v)%></p><%
 		line0 = false;
 	})
 }
@@ -360,7 +360,7 @@ function image(pattern, data) {
 	let v1 = Array.isArray(l1)===true? l1[0] : l1;
 	let v2 = Array.isArray(l2)===true? l2[0] : l2;
 %>
-	<div class="<%=divClass%>">
+	<div class="<%=divClass%> <%=collapse()%> ">
 	<% if (v2) { %>
 		<a href="<%=v2%>">
 	<% } %>

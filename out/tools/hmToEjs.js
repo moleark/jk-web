@@ -12,7 +12,6 @@ function hmToEjs(hm) {
     let lastP = 0;
     function appendCode(start, end) {
         text += hm.substring(start, end);
-        text += ';secId++; \n';
     }
     for (let p = 0; p < len;) {
         let sec;
