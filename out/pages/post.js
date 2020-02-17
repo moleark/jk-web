@@ -26,6 +26,8 @@ function post(req, res) {
                 let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
                 let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
                 let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
+                let postHeader = ejs.fileLoader(tools_1.viewPath + 'headers/post' + tools_1.ejsSuffix).toString();
+                let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
                 let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
                 let body = ret[0].content;
                 if (body.charAt(0) === '#') {
@@ -35,17 +37,10 @@ function post(req, res) {
                     + jk
                     + hmInclude
                     + homeHeader
-                    + '<div class="container my-3">'
+                    + postHeader
                     + body
-                    + '</div>'
+                    + postFooter
                     + homeFooter;
-                /*
-                header + homeHeader
-                    + '<div class="container my-3">'
-                    + ret[0].content
-                    + '</div>'
-                    + homeFooter;
-                */
                 title = ret[0].caption;
             }
             let data = tools_1.buildData(req, { $title: title });

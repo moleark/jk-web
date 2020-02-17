@@ -16,8 +16,10 @@ export async function post(req: Request, res:Response) {
 			let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
 			let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
 			let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
+			let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();	
+			let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
 			let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-			let body = ret[0].content;
+				let body = ret[0].content;
 			if (body.charAt(0) === '#') {
 				body = hmToEjs(body);
 			}
@@ -26,17 +28,10 @@ export async function post(req: Request, res:Response) {
 				+ jk
 				+ hmInclude
 				+ homeHeader
-				+ '<div class="container my-3">'
+				+ postHeader
 				+ body 
-				+ '</div>'
+				+ postFooter
 				+ homeFooter;
-			/*
-			header + homeHeader 
-                + '<div class="container my-3">'
-                + ret[0].content
-                + '</div>'
-				+ homeFooter;
-			*/
 			title = ret[0].caption;
         }
         let data = buildData(req, {$title:title});

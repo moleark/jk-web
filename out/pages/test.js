@@ -94,15 +94,13 @@ afas fsaf saf
 #p	c
 ', 内容);
 `);
-            let textStr = '<div class="text-danger"><i class="text-primary fa fa-plus"></i> 注意了，[这是这是直接写的代码]</div>';
-            let r = textStr.replace(/\[[^\]]+\]/g, (str) => {
-                return '*' + str + '*';
-            });
             let data = tools_1.buildData(req, undefined);
             let header = ejs.fileLoader(tools_2.viewPath + 'headers/header' + tools_2.ejsSuffix).toString();
             let jk = ejs.fileLoader(tools_2.viewPath + '/headers/jk' + tools_2.ejsSuffix).toString();
             let hmInclude = ejs.fileLoader(tools_2.viewPath + '/headers/hm' + tools_2.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + tools_2.ejsSuffix).toString();
+            let postHeader = ejs.fileLoader(tools_2.viewPath + 'headers/post' + tools_2.ejsSuffix).toString();
+            let postFooter = ejs.fileLoader(tools_2.viewPath + 'footers/post' + tools_2.ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
             let body = ejs.fileLoader(tools_2.viewPath + 'testLY.ejs').toString();
             if (body.charAt(0) === '#') {
@@ -112,9 +110,9 @@ afas fsaf saf
                 + jk
                 + hmInclude
                 + homeHeader
-                + '<div class="container my-3">'
+                + postHeader
                 + body
-                + '</div>'
+                + postFooter
                 + homeFooter, data);
             res.end(html);
         }
