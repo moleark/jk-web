@@ -66,14 +66,20 @@ export function hm(text:string):void {
 	let textLen = text.length;
 	let p = 0; 
 	let line = 1, pos = 1;
-	let data:any, cmd:any, templet:any, cell:any;
+	let data:any, cmd:any, params:string[];
 	for (;p<textLen;) {
 		let c = text.charAt(p);
 		if (c === '#') {
 			++p;
 			parseElement();
-			if (!cmd) cmd = 'raw';
-			else if (cmd === '-') cmd = 'hr';
+			switch (cmd) {
+				default:
+					if (!cmd) cmd = 'raw';
+					break;
+				case '-': cmd = 'hr'; break;
+				case '{': cmd = 'box'; break;
+				case '}': cmd = 'box'; break;
+			}
 			data = parseData();
 		}
 		else {
@@ -86,14 +92,14 @@ export function hm(text:string):void {
         if (func === undefined) {
 			let tf = eval('typeof ' + cmd);
 			if (tf !== 'function') {
-				_hm_funcs.__append(`<div class="text-danger">错误：${line}行${pos}位，${cmd}指令不存在</div>`, cmd, templet, cell, data);
+				_hm_funcs.__append(`<div class="text-danger">错误：${line}行${pos}位，${cmd}指令不存在</div>`, cmd, params, data);
 				continue;
 			}
 			else {
 				func = eval(cmd);
 			}
 		}
-		func(templet, data, cell);
+		func(params, data);
 		next();
 	}
 	return;
@@ -108,21 +114,11 @@ export function hm(text:string):void {
 			cmd = parts[i++];
 			if (cmd) break;
 		}
-		templet = undefined;
-		while (i<partsLen) {
-			templet = parts[i++];
-			if (templet) {
-				templet = templet.trim();
-				break;
-			}
-		}
-		cell = undefined;
-		while (i<partsLen) {
-			cell = parts[i++];
-			if (cell) {
-				cell = cell.trim();
-				break;
-			}
+		params = [];
+		for (;i<partsLen; i++) {
+			let v = parts[i].trim();
+			if (!v) continue;
+			params.push(v);
 		}
 		++line;
 		pos = 2;
