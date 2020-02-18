@@ -96,7 +96,7 @@ afas fsaf saf
 
 		let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
         let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-		let body = ejs.fileLoader(viewPath + 'testhm.ejs').toString();
+		let body = ejs.fileLoader(viewPath + 'testLY.ejs').toString();
 		if (body.charAt(0) === '#') {
 			body = hmToEjs(body);
 		}
