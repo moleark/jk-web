@@ -8,7 +8,6 @@ __export(require("./ejsError"));
 __export(require("./userAgent"));
 __export(require("./consts"));
 __export(require("./ipHit"));
-__export(require("./getRootPath"));
 __export(require("./buildData"));
 __export(require("./csv"));
 __export(require("./hm"));

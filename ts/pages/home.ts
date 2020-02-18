@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Db } from "../db";
-import { categories, productNews, newsletter, latestProducts } from "../data";
-import { ejsError, ipHit, getRootPath, buildData } from "../tools";
+import { categories } from "../data";
+import { ejsError, ipHit, buildData, getRootPath } from "../tools";
 
 let lastHomeTick = Date.now();
 let cacheHtml:string;

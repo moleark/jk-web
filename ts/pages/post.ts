@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import { Db } from "../db";
-import { device, viewPath, ejsSuffix, ipHit, getRootPath, ejsError, buildData, hmToEjs } from "../tools";
+import { device, viewPath, ejsSuffix, ipHit, ejsError, buildData, hmToEjs } from "../tools";
 
 export async function post(req: Request, res:Response) {
     try {

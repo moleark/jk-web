@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import * as _ from 'lodash';
 import { Db } from "../db";
-import { device, viewPath, ejsSuffix, getRootPath, buildData } from "../tools";
+import { device, viewPath, ejsSuffix, buildData } from "../tools";
 
 export async function product(req: Request, res:Response) {
     let id = req.params.id;

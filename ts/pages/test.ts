@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
-import { ejsError, getRootPath, buildData, hm, hmToEjs } from "../tools";
+import { buildData, hm, hmToEjs } from "../tools";
 import { device } from "../tools";
 import { viewPath, ejsSuffix } from "../tools";
 
@@ -38,7 +38,7 @@ afas fsaf saf
 文章主标题标题
 
 #t0	b
-文章绿标题
+文章[[绿]标[题]
 
 #t0	c
 文章红标题

@@ -3,7 +3,9 @@ const _hm_funcs = {
 		console.log(cmd, style, cell, data);
 	},
 	"-": "hr",
-	//"state": state,
+	"t0": function(params:any, data:any[]) {
+		esc(data);
+	},
 	"esc": esc,
 	collapse: collapse,
 };
@@ -24,13 +26,13 @@ function collapse() {
 }
 
 function trans(text:string) {
-	let p = text.indexOf('|');
 	let len = text.length;
-	if (p>0) {
-		return `<a href="${text.substring(p+1,len-1)}">${text.substring(1,p)}</a>`;
-	}
 	switch (text.charAt(1)) {
 		default:
+			let p = text.indexOf('|');
+			if (p>0) {
+				return `<a href="${text.substring(p+1,len-1)}">${text.substring(1,p)}</a>`;
+			}
 			return `<b class="text-danger">${text.substring(1, len-1)}</b>`;
 		case '_':
 			return `<u>${text.substring(2, len-1)}</u>`
@@ -38,6 +40,8 @@ function trans(text:string) {
 			return `<del>${text.substring(2, len-1)}</del>`
 		case '*':
 			return `<strong>${text.substring(2, len-1)}</strong>`;
+		case '[':
+			return text.substring(1);
 	}
 }
 

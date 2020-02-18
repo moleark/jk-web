@@ -1,12 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const getRootPath_1 = require("./getRootPath");
+const root = '/jk-web';
+const rootEndSlash = root + '/';
+function getRootPath(req) {
+    let low = req.baseUrl.toLowerCase();
+    if (low === root || low.indexOf(rootEndSlash) >= 0)
+        return rootEndSlash;
+    return '/';
+}
+exports.getRootPath = getRootPath;
 function buildData(req, data) {
     if (!data)
         data = {};
     if (!data.$title)
         data.$title = '';
-    data.$root = getRootPath_1.getRootPath(req);
+    data.$root = getRootPath(req);
     return data;
 }
 exports.buildData = buildData;

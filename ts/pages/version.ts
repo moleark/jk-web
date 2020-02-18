@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import * as fs from "fs";
 import * as ejs from 'ejs';
-import { ejsError, getRootPath, buildData, hm, hmToEjs } from "../tools";
-import { device } from "../tools";
+import { buildData, hm, hmToEjs } from "../tools";
 import { viewPath, ejsSuffix } from "../tools";
 
 export async function version(req: Request, res:Response) {
