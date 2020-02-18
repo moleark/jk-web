@@ -1,31 +1,20 @@
 <%
 const patternT0 = {
 	$: {
-		size: 3,
-		color: 'info',
-		align: 'center',
-		bold: 'font-weight-bold',
+		className: 'text-info text-center px-5 mb-3 pt-3 pb-3 font-weight-bold',
 	},
 	"b": {
-		size: 3,
-		color: 'success',
-		align: 'center',
-		bold: '',
+		className: 'text-success text-center px-5 mb-3 pt-3 pb-3 font-weight-bold border-bottom border-muted',
 	},
 	"c": {
-		size: 3,
-		color: 'danger',
-		align: 'center',
-		bold: 'font-weight-bold'
+		className: 'text-danger text-center px-5 mb-3 pt-3 pb-3 font-weight-bold border-bottom border-muted',
 	},
 };
 function t0(params, data) {
 	if (!data) return;
-	let s = patternT0[params[0]] || patternT0.$;
-	let {size, color, align, bold} = s;
+	let {className} = patternT0[params[0]] || patternT0.$;
 %>
-	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mb-3 pt-3 pb-3 
-		border-bottom border-muted <%=bold%>">
+	<h3 class="<%=className%>">
     	<%-esc(data)%>
 	</h3>
 <%
@@ -33,99 +22,64 @@ function t0(params, data) {
 
 const patternT1 = {
 	$: {
-		size: 4,
-		color: 'info',
-		align: 'left',
-		bold: 'font-weight-bold',
+		className: 'text-info text-left mt-3 mb-4 pt-3 pb-2 font-weight-bold',
 	},
 	"b": {
-		size: 4,
-		color: 'success',
-		align: 'left',
-		bold: '',
+		className: 'text-success text-left mt-3 mb-4 pt-3 pb-2',
 	},
 	"c": {
-		size: 4,
-		color: 'danger',
-		align: 'left',
-		bold: 'font-weight-bold'
+		className: 'text-danger text-left mt-3 mb-4 pt-3 pb-2 font-weight-bold',
 	},
 };
 function t1(params, data) {
 	if (!data) return;
-	let s = patternT1[params[0]] || patternT1.$;
-	let {size, color, align, bold} = s;
+	let {className} = patternT1[params[0]] || patternT1.$;
 %>
-	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
-		border-bottom border-muted
-		<%=bold%>">
+	<h4 class="<%=className%>">
     	<%-esc(data)%>
-	</h3>
+	</h4>
 <%
 }
 
 const patternT2 = {
 	$: {
-		size: 5,
-		color: 'info',
-		align: 'left',
-		bold: 'font-weight-bold',
+		className: 'text-info text-left mt-3 mb-4 pt-3 pb-2 font-weight-bold'
 	},
 	"b": {
-		size: 5,
-		color: 'success',
-		align: 'left',
-		bold: '',
+		className: 'text-success text-left mt-3 mb-4 pt-3 pb-2 font-weight-bold'
 	},
 	"c": {
-		size: 5,
-		color: 'danger',
-		align: 'left',
-		bold: 'font-weight-bold'
+		className: 'text-danger text-left mt-3 mb-4 pt-3 pb-2 font-weight-bold'
 	},
 };
 function t2(params, data) {
 	if (!data) return;
-	let s = patternT2[params] || patternT2.$;
-	let {size, color, align, bold} = s;
+	let {className} = patternT2[params] || patternT2.$;
 %>
-	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
-		border-bottom border-muted
-		<%=bold%>">
-    	<%-esc(data)%>
-	</h3>
+	<h5 class="<%=className%>"  style="vertical-align: middle;">
+		<small><small class="text-dark "><i class="fa fa-square-o"></i></small></small>&ensp;
+		<span style="vertical-align: middle;"><%-esc(data)%></span>
+	</h5>
 <%
 }
 
 const patternT3 = {
 	$: {
-		size: 6,
-		color: 'info',
-		align: 'left',
-		bold: 'font-weight-bold',
+		className: 'text-info text-left mt-3 mb-4 pt-3 pb-2 font-weight-bold'
 	},
 	"b": {
-		size: 6,
-		color: 'success',
-		align: 'left',
-		bold: '',
+		className: 'text-success text-left mt-3 mb-4 pt-3 pb-2 font-weight-bold'
 	},
 	"c": {
-		size: 6,
-		color: 'danger',
-		align: 'left',
-		bold: 'font-weight-bold'
+		className: 'text-danger text-left mt-3 mb-4 pt-3 pb-2 font-weight-bold'
 	},
 };
 function t3(params, data) {
-	let s = patternT3[params[0]] || patternT3.$;
-	let {size, color, align, bold} = s;
+	let {className} = patternT3[params[0]] || patternT3.$;
 %>
-	<h<%=size%> class="text-<%=color%> text-<%=align%> px-5 mt-3 mb-4 pt-3 pb-2 
-		border-bottom border-muted
-		<%=bold%>">
+	<6 class="<%=className%>
     	<%-esc(data)%>
-	</h3>
+	</h6>
 <%
 }
 
@@ -147,6 +101,9 @@ const patternGrid = {
 	},
 	b: {
 		gridClass: 'row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4',
+	},
+	c: {
+		gridClass: 'row row-cols-1 row-cols-sm-2',
 	}
 }
 function cell(params, data, arr) {
@@ -169,8 +126,7 @@ function cell(params, data, arr) {
 }
 function grid(params, data) {
 	let cellFunc = params[0];
-	let s = patternGrid[params[1]] || patternGrid.$;
-	let {gridClass} = s;
+	let {gridClass} = patternGrid[params[1]] || patternGrid.$;
 %> <div class="container <%=collapse()%> my-3" id="sec-<%=state.secId%>">
 	<div class="<%=gridClass%>">
 <%
@@ -246,10 +202,11 @@ function table(params, data) {
 }
 
 
-function xl(ou, params, data, type) {
+function xl(ou, pattern, params, data, type) {
 	if (!data || data.length === 0) return;
+	let {className} = pattern[params] || pattern.$;
 %>
-	<<%=ou%> type="<%=type%>" class="<%=collapse()%> ">
+	<<%=ou%> type="<%=type%>" class="<%=className%> <%=collapse()%> ">
 <%
 		data.forEach(v => {
 %>
@@ -260,12 +217,25 @@ function xl(ou, params, data, type) {
 	</<%=ou%>>
 <%
 }
+const patternUl = {
+	$: {
+		className: ""
+	}
+}
 function ul(params, data) {
-	xl('ul', params, data);
+	xl('ul', patternUl, params, data);
 }
 
+const patternOl = {
+	$: {
+		className: ""
+	},
+	b: {
+		className: "text-muted small font-italic"
+	}
+}
 function ol(params, data) {
-	xl('ol', params, data);
+	xl('ol', patternOl, params, data);
 }
 
 function ouou(l1, l2, params, data, type1, type2) {
@@ -277,7 +247,7 @@ function ouou(l1, l2, params, data, type1, type2) {
 %>
 			<li>
 				<%- esc(v[0]) %>
-				<% xl(l2, params, v[1], type2) %>
+				<% xl(l2, type1==='ol'?patternOl:patternUl, params, v[1], type2) %>
 			</li>
 <%			
 		})
