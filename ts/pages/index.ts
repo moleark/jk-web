@@ -8,6 +8,7 @@ import { iframe } from './iframe';
 
 import { test } from './test';
 import { shop } from './shop';
+import { version } from './version';
 
 export const homeRouter = Router({mergeParams: true});
 homeRouter.get('/', home);
@@ -18,5 +19,6 @@ homeRouter.get('/search', search);
 homeRouter.get('/product/:id', product);
 homeRouter.get('/iframe', iframe);
 homeRouter.get('/shop', shop);
+homeRouter.get('/version', version);
 
 homeRouter.get('/test', test);

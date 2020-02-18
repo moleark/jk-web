@@ -9,6 +9,7 @@ const product_1 = require("./product");
 const iframe_1 = require("./iframe");
 const test_1 = require("./test");
 const shop_1 = require("./shop");
+const version_1 = require("./version");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -18,5 +19,6 @@ exports.homeRouter.get('/search', search_1.search);
 exports.homeRouter.get('/product/:id', product_1.product);
 exports.homeRouter.get('/iframe', iframe_1.iframe);
 exports.homeRouter.get('/shop', shop_1.shop);
+exports.homeRouter.get('/version', version_1.version);
 exports.homeRouter.get('/test', test_1.test);
 //# sourceMappingURL=index.js.map
