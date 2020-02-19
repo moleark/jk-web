@@ -10,20 +10,35 @@
         color: darkred;
 		opacity: 0.8;
     }
+	.header-bottom {
+		box-shadow: 0.1em 0.2em 0.3em lightgray;
+	}
+	.w-2c {
+		width: 2rem!important;
+	}
+	@media (min-width: 576px) {
+		.w-sm-3c {
+			width: 3rem!important;
+		}
+		.h4-sm {
+			font-size: 1.5rem;
+		}
+	}
 </style>
-<header class="d-none d-sm-block" style="box-shadow: 0.1em 0.2em 0.3em lightgray;">
+<header class="header-bottom">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-md-8 d-flex align-items-center">
                 <a class="jk-logo d-flex align-items-center" href="<%=$root%>">
-                    <img class="w-3c mr-2" src="<%=$root%>img/jklogo130x130.png">
-                    <span class="h4 mb-0 font-weight-bold position-relative font-hei">
-						<span class="text-gray">百灵威科技</span>
-						<span class="position-absolute text-dark" style="right:-1px;bottom:-1px;">百灵威科技</span>
+                    <img class="w-2c w-sm-3c mr-2 my-1" src="<%=$root%>img/jklogo130x130.png">
+                    <span class="h5 h4-sm mb-0 font-weight-bold position-relative font-hei">
+						<span class="text-dark">百灵威科技</span>
+						<span class="d-none d-sm-inline text-gray position-absolute" 
+							style="right:-1px;bottom:-1px;z-index: -1;">百灵威科技</span>
 					</span>
                 </a>
             </div>
-            <div class="col-sm-6 col-md-4 bg-white">
+            <div class="d-none d-sm-block col-sm-6 col-md-4 bg-white">
                 <div class="d-flex d-sm-block flex-sm-column">
                 <div class="flex-grow-1">
                     <div class="text-right pb-2 py-sm-2">
@@ -47,11 +62,3 @@
         </div>
     </div>
 </header>
-
-<header class="d-sm-none py-2" style="border-bottom: 0.1rem red solid;">
-    <div class="container text-danger h5 pb-0 mb-0">
-        <img src="<%=$root%>/img/jklogo130x130.png" class="w-3c" /> 百灵威科技
-    </div>
-</header>
-
-
