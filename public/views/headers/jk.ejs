@@ -71,7 +71,7 @@ function t2(params, data) {
 	let {className} = patternT2[params] || patternT2.$;
 %>
 	<h5 class="<%=className%>"  style="vertical-align: middle;">
-		<small><small class="text-dark "><i class="fa fa-square-o"></i></small></small>&ensp;
+		<small><small class="text-dark "><i class="fa fa-square"></i></small></small>&ensp;
 		<span style="vertical-align: middle;"><%-esc(data)%></span>
 	</h5>
 <%
@@ -91,7 +91,7 @@ const patternT3 = {
 function t3(params, data) {
 	let {className} = patternT3[params[0]] || patternT3.$;
 %>
-	<6 class="<%=className%>
+	<h6 class="<%=className%>
     	<%-esc(data)%>
 	</h6>
 <%
@@ -117,7 +117,7 @@ const patternGrid = {
 		gridClass: 'row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4',
 	},
 	c: {
-		gridClass: 'row row-cols-1 row-cols-sm-2',
+		gridClass: 'row row-cols-1 row-cols-md-2',
 	}
 }
 function cell(params, data, arr) {
@@ -287,9 +287,22 @@ function olol(params, data) {
 }
 
 function hr(params) {
+	switch (params[0]) {
+	default:
 %>
 	<hr class="">
 <%
+		break;
+	case 'down':
+%>
+	<div class="d-flex mx-auto justify-content-center align-items-center my-5">
+	<div class="w-25 border-bottom border-info" style="height:0.1rem; border-style: dotted;"></div>
+	<img class="w-3c mx-3" src="<%=params[1] || $root + 'img/double-down.png'%>" style="opacity: 0.7;">
+	<div class="w-25 border-bottom border-info" style="height:0.1rem; border-style: dotted">
+	</div></div>
+<%
+		break;
+	}
 }
 
 const patternP = {
@@ -338,22 +351,32 @@ function raw(params, data) {
 const patternImage = {
 	$: {
 		divClass: 'w-75 my-3 text-center mx-auto',
-		imgClass: 'border border-muted w-100 p-3 mb-2',
+		imgClass: 'w-100 p-3 mb-2',
 		textClass: 'small text-muted',
 	},
 	"float-right": {
-		divClass: 'w-50 my-3 ml-3 text-center float-right',
-		imgClass: 'border border-muted w-100 p-3 mb-2',
+		divClass: 'w-100 w-sm-50 w-md-25 my-3 ml-3 text-center float-right',
+		imgClass: 'w-100 p-3 mb-2',
 		textClass: 'small text-muted',
 	},
 	"float-left": {
-		divClass: 'w-50 my-3 mr-3 text-center float-left',
-		imgClass: 'border border-muted w-100 p-3 mb-2',
+		divClass: 'w-100 w-sm-50 my-3 mr-3 text-center float-left',
+		imgClass: 'w-100 p-3 mb-2',
 		textClass: 'small text-muted',
 	}
 }
 function image(params, data) {
 	let {divClass, textClass, imgClass} = patternImage[params[0]] || patternImage.$;
+	for (let i=0; i<params.length; i++) {
+		let c = params[i];
+		switch (c) {
+			default:
+				if (c.startsWith('border') === true) {
+					imgClass += ' ' + c;
+				}
+				break;
+		}
+	}
 	let [l0, l1, l2] = data;
 	let v0 = Array.isArray(l0)===true? l0[0] : l0;
 	let v1 = Array.isArray(l1)===true? l1[0] : l1;
@@ -364,7 +387,7 @@ function image(params, data) {
 		<a href="<%=v2%>">
 	<% } %>
 		<img class="<%=imgClass%>" src="<%=v0%>" alt="">
-		<div class="<%=textClass%>"><%=v1%></div>
+		<div class="<%=textClass%>"><%-esc(v1)%></div>
 	<% if (v2) { %>
 		</a>
 	<% } %>
@@ -372,15 +395,15 @@ function image(params, data) {
 <%
 }
 
-function box(params) {
+function box(params, data) {
 %>
 	<div class="<%=params.join(' ')%>">
 <%
 }
 
-function boxEnd() {
+function boxEnd(params, data) {
 %>
-	</div>
+	</div><%-esc(data)%>
 <%
 }
 %>
