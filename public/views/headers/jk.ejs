@@ -296,7 +296,7 @@ function hr(params) {
 	case 'down':
 %>
 	<div class="d-flex mx-auto justify-content-center align-items-center my-5">
-	<div class="w-25 border-bottom border-info" style="height:0.1rem; border-style: dotted;"></div>
+	<div class="w-25 border-bottom border-info" style="border-style: 0.2rem dotted;"></div>
 	<img class="w-3c mx-3" src="<%=params[1] || $root + 'img/double-down.png'%>" style="opacity: 0.7;">
 	<div class="w-25 border-bottom border-info" style="height:0.1rem; border-style: dotted">
 	</div></div>
@@ -350,31 +350,42 @@ function raw(params, data) {
 
 const patternImage = {
 	$: {
-		divClass: 'w-75 my-3 text-center mx-auto',
+		w_def: 'w-75',
+		divClass: 'my-3 text-center mx-auto',
 		imgClass: 'w-100 p-3 mb-2',
 		textClass: 'small text-muted',
 	},
 	"float-right": {
-		divClass: 'w-100 w-sm-50 w-md-25 my-3 ml-3 text-center float-right',
+		w_def: 'w-100 w-sm-50',
+		divClass: 'my-3 ml-3 text-center float-right',
 		imgClass: 'w-100 p-3 mb-2',
 		textClass: 'small text-muted',
 	},
 	"float-left": {
-		divClass: 'w-100 w-sm-50 my-3 mr-3 text-center float-left',
+		w_def: 'w-100 w-sm-50',
+		divClass: 'my-3 mr-3 text-center float-left',
 		imgClass: 'w-100 p-3 mb-2',
 		textClass: 'small text-muted',
 	}
 }
 function image(params, data) {
-	let {divClass, textClass, imgClass} = patternImage[params[0]] || patternImage.$;
+	let {divClass, textClass, imgClass, w_def} = patternImage[params[0]] || patternImage.$;
 	for (let i=0; i<params.length; i++) {
 		let c = params[i];
+		let w = false;
 		switch (c) {
 			default:
 				if (c.startsWith('border') === true) {
 					imgClass += ' ' + c;
 				}
+				if (c.startsWith('w-') === true) {
+					divClass += ' ' + c;
+					w = true;
+				}
 				break;
+		}
+		if (w === false) {
+			divClass += ' ' + w_def;
 		}
 	}
 	let [l0, l1, l2] = data;
