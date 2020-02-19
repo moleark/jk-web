@@ -351,28 +351,34 @@ function raw(params, data) {
 const patternImage = {
 	$: {
 		w_def: 'w-75',
-		divClass: 'my-3 text-center mx-auto',
-		imgClass: 'w-100 p-3 mb-2',
+		p_def: 'p-3',
+		m_def: 'my-3',
+		divClass: 'text-center mx-auto',
+		imgClass: 'w-100 mb-2',
 		textClass: 'small text-muted',
 	},
 	"float-right": {
 		w_def: 'w-100 w-sm-50',
-		divClass: 'my-3 ml-3 text-center float-right',
-		imgClass: 'w-100 p-3 mb-2',
+		p_def: 'p-3',
+		m_def: 'my-3 ml-3',
+		divClass: 'text-center float-right',
+		imgClass: 'w-100 mb-2',
 		textClass: 'small text-muted',
 	},
 	"float-left": {
 		w_def: 'w-100 w-sm-50',
-		divClass: 'my-3 mr-3 text-center float-left',
-		imgClass: 'w-100 p-3 mb-2',
+		p_def: 'p-3',
+		m_def: 'my-3 mr-3',
+		divClass: 'text-center float-left',
+		imgClass: 'w-100 mb-2',
 		textClass: 'small text-muted',
 	}
 }
 function image(params, data) {
-	let {divClass, textClass, imgClass, w_def} = patternImage[params[0]] || patternImage.$;
+	let {divClass, textClass, imgClass, w_def, p_def, m_def} = patternImage[params[0]] || patternImage.$;
+	let w = false, p = false, m = false;
 	for (let i=0; i<params.length; i++) {
 		let c = params[i];
-		let w = false;
 		switch (c) {
 			default:
 				if (c.startsWith('border') === true) {
@@ -382,12 +388,25 @@ function image(params, data) {
 					divClass += ' ' + c;
 					w = true;
 				}
+				if (c.charAt(0) === 'p') {
+					if (c.charAt(1) === '-' || c.charAt(2) === '-') {
+						imgClass += ' ' + c;
+						p = true;
+					}
+				}
+				if (c.charAt(0) === 'm') {
+					if (c.charAt(1) === '-' || c.charAt(2) === '-') {
+						divClass += ' ' + c;
+						m = true;
+					}
+				}
 				break;
 		}
-		if (w === false) {
-			divClass += ' ' + w_def;
-		}
 	}
+	if (w === false) divClass += ' ' + w_def;
+	if (p === false) imgClass += ' ' + p_def;
+	if (m === false) divClass += ' ' + m_def;
+
 	let [l0, l1, l2] = data;
 	let v0 = Array.isArray(l0)===true? l0[0] : l0;
 	let v1 = Array.isArray(l1)===true? l1[0] : l1;
