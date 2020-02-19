@@ -17,7 +17,13 @@ p {margin-bottom:0.7em;}
 	border-top-style: solid; 
 	padding-top: 0.1rem;
 }
-
+.bg-center-img {
+	border-style:none;
+	border-width:0;
+	background-size:contain;
+	background-position: center; 
+	background-repeat: no-repeat;
+}
 .font-song {font-family: 宋体, simsun, 'Times New Roman', Times, serif;}
 .font-hei {font-family: 微软雅黑, simhei, Arial;}
 .bold {font-weight: bold;}
@@ -38,6 +44,12 @@ p {margin-bottom:0.7em;}
 .h-5c {height: 5rem;min-height: 5rem;}
 .h-6c {height: 6rem;min-height: 6rem;}
 .h-8c {height: 8rem;min-height: 8rem;}
+.h-max-3c {max-height: 3rem;}
+.h-max-3-5c {max-height: 3.5rem;}
+.h-max-4c {max-height: 4rem;}
+.h-max-5c {max-height: 5rem;}
+.h-max-6c {max-height: 6rem;}
+.h-max-8c {max-height: 8rem;}
 .text-dark-blue {color: darkblue;}
 .text-gray {color: #b0c0e0;}
 .category-icon {display: block; left:1rem; top:0.2rem; width: 2.5rem;height:2.5rem;}
