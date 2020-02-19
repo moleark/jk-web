@@ -1,20 +1,41 @@
 export function hmToEjs(hm:string):string {
 	let ln: string, lnln: string;
-	let lnPos = hm.indexOf('\r\n');
-	ln = (lnPos < 0)? '\n' : '\r\n';
+	let lnPos = hm.indexOf('\n');
+	if (lnPos <= 0) {
+		ln = '\n';
+	}
+	else {
+		if (hm.charAt(lnPos-1) === '\r') {
+			ln = '\r\n';
+		}
+		else {
+			ln = '\n';
+		}
+	}	
 	lnln = ln + ln;
-	let lnlnLen = lnln.length;
+	let lnLen = ln.length, lnlnLen = lnln.length;
 
 	let defs = '';
 	let text = '';
 	let len = hm.length;
 	let lastP = 0;
 
+	if (hm.substr(1, 2) == 'hm') {
+		let p = hm.indexOf(lnln, 3);
+		if (p<0) return '';
+		p += lnlnLen;
+		while (hm.substr(p, lnLen) === ln) p += lnLen;
+		if (hm.charAt(p) !== '#') {
+			return hm.substr(p);
+		}
+		lastP = p;
+	}
+
 	function appendCode(start:number, end?:number) {
 		text += hm.substring(start, end);
 	}
 
-	for (let p=0; p<len;) {
+	for (let p=lastP; p<len;) {
 		let sec:string;
 		let pCur = hm.indexOf('#:', p);
 		if (pCur < 0) {
