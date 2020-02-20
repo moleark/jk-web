@@ -71,7 +71,7 @@ function t2(params, data) {
 	let {className} = patternT2[params] || patternT2.$;
 %>
 	<h5 class="<%=className%>"  style="vertical-align: middle;">
-		<small><small class="text-dark "><i class="fa fa-square"></i></small></small>&ensp;
+		<small class="mx-2"><small><small class="text-dark "><i class="fa fa-square"></i></small></small></small>		
 		<span style="vertical-align: middle;"><%-esc(data)%></span>
 	</h5>
 <%
@@ -237,7 +237,7 @@ const patternUl = {
 	}
 }
 function ul(params, data) {
-	xl('ul', patternUl, params, data);
+	xl('ul', patternUl, params, data, '');
 }
 
 const patternOl = {
@@ -271,15 +271,15 @@ function ouou(l1, l2, params, data, type1, type2) {
 }
 
 function ulul(params, data) {
-	ouou('ul', 'ul', params, data, 'square', 'circle');
+	ouou('ul', 'ul', params, data, '', 'circle');
 }
 
 function ulol(params, data) {
-	ouou('ul', 'ol', params, data);
+	ouou('ul', 'ol', params, data, '');
 }
 
 function olul(params, data) {
-	ouou('ol', 'ul', params, data);
+	ouou('ol', 'ul', params, data, '', 'circle');
 }
 
 function olol(params, data) {
