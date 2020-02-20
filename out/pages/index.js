@@ -10,6 +10,8 @@ const iframe_1 = require("./iframe");
 const test_1 = require("./test");
 const shop_1 = require("./shop");
 const version_1 = require("./version");
+const law_1 = require("./law");
+const contact_1 = require("./contact");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -20,5 +22,7 @@ exports.homeRouter.get('/product/:id', product_1.product);
 exports.homeRouter.get('/iframe', iframe_1.iframe);
 exports.homeRouter.get('/shop', shop_1.shop);
 exports.homeRouter.get('/version', version_1.version);
+exports.homeRouter.get('/law', law_1.law);
+exports.homeRouter.get('/contact', contact_1.contact);
 exports.homeRouter.get('/test', test_1.test);
 //# sourceMappingURL=index.js.map
