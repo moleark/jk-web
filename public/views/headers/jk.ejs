@@ -117,7 +117,7 @@ const patternGrid = {
 		gridClass: 'row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4',
 	},
 	c: {
-		gridClass: 'row row-cols-1 row-cols-md-2',
+		gridClass: 'row row-cols-1 row-cols-sm-2',
 	}
 }
 function cell(params, data, arr) {
@@ -220,7 +220,7 @@ function xl(ou, pattern, params, data, type) {
 	if (!data || data.length === 0) return;
 	let {className} = pattern[params] || pattern.$;
 %>
-	<<%=ou%> type="<%=type%>" class="<%=className%> <%=collapse()%> ">
+	<<%=ou%> type="<%=type%>" class="pl-4 <%=className%> <%=collapse()%> ">
 <%
 		data.forEach(v => {
 %>
@@ -255,7 +255,7 @@ function ol(params, data) {
 function ouou(l1, l2, params, data, type1, type2) {
 	if (!data || data.length === 0) return;
 %>
-	<<%=l1%> type="<%=type1%>">
+	<<%=l1%> type="<%=type1%>" class="pl-4">
 <%
 		data.forEach(v => {
 %>
@@ -295,7 +295,7 @@ function hr(params) {
 		break;
 	case 'down':
 %>
-	<div class="d-flex mx-auto justify-content-center align-items-center my-5">
+	<div class="d-flex mx-auto justify-content-center align-items-center my-4">
 	<div class="w-25 border-bottom border-info"></div>
 	<img class="w-3c mx-3" src="<%=params[1] || $root + 'img/double-down.png'%>" style="opacity: 0.7;">
 	<div class="w-25 border-bottom border-info"">
