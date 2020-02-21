@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ejs = require("ejs");
 const db_1 = require("../db");
 const tools_1 = require("../tools");
 function morepost(req, res) {
@@ -21,29 +20,41 @@ function morepost(req, res) {
         try {
             pageCount = req.query.pageCount ? req.query.pageCount : 0;
             postpage = yield db_1.Dbs.content.morePostPage(pageCount * pageSize, pageSize);
-            let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
-            let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
-            let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
-            let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
-            let postHeader = ejs.fileLoader(tools_1.viewPath + 'headers/post' + tools_1.ejsSuffix).toString();
-            let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
-            let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
-            let body = ejs.fileLoader(tools_1.viewPath + 'morepost.ejs').toString();
+            /*
+            let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
+            let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
+            let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
+            let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
+            let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
+    
+            let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
+            let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
+            let body = ejs.fileLoader(viewPath + 'morepost.ejs').toString();
+            */
             let data = tools_1.buildData(req, {
                 nextpage: rootPath + 'morepost/?pageCount=' + (pageCount + 1),
                 prepage: rootPath + 'morepost/?pageCount=' + (pageCount - 1),
                 path: rootPath + 'post/',
                 post: postpage,
             });
-            let html = ejs.render(header
+            /*
+            let html = ejs.render(
+                header
                 + jk
                 + hmInclude
                 + homeHeader
                 + postHeader
                 + body
                 + postFooter
-                + homeFooter, data);
+                + homeFooter
+                , data);
             res.end(html);
+            */
+            res.render('morepost.ejs', data, (err, html) => {
+                if (tools_1.ejsError(err, res) === true)
+                    return;
+                res.end(html);
+            });
         }
         catch (err) {
             console.error(err);

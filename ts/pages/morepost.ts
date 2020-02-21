@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import { Dbs } from "../db";
-import { viewPath, ejsSuffix, buildData, getRootPath } from "../tools";
+import { viewPath, ejsSuffix, buildData, getRootPath, ejsError } from "../tools";
 
 export async function morepost(req: Request, res: Response) {
     let rootPath = getRootPath(req);
@@ -12,6 +12,7 @@ export async function morepost(req: Request, res: Response) {
         pageCount = req.query.pageCount ? req.query.pageCount : 0;
         postpage = await Dbs.content.morePostPage(pageCount * pageSize, pageSize)
 
+		/*
         let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
         let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
         let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
@@ -20,14 +21,15 @@ export async function morepost(req: Request, res: Response) {
 
         let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
         let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-        let body = ejs.fileLoader(viewPath + 'morepost.ejs').toString();
+		let body = ejs.fileLoader(viewPath + 'morepost.ejs').toString();
+		*/
         let data = buildData(req, {
             nextpage: rootPath + 'morepost/?pageCount=' + (pageCount + 1),
             prepage: rootPath + 'morepost/?pageCount=' + (pageCount - 1),
             path: rootPath + 'post/',
             post: postpage,
         });
-
+		/*
         let html = ejs.render(
             header
             + jk
@@ -38,8 +40,13 @@ export async function morepost(req: Request, res: Response) {
             + postFooter
             + homeFooter
             , data);
-        res.end(html);
-
+		res.end(html);
+		*/
+		res.render('morepost.ejs', data, (err, html) => {
+			if (ejsError(err, res) === true) return;
+			res.end(html);
+		});
+	
     }
     catch (err) {
         console.error(err);
