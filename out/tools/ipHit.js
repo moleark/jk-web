@@ -22,12 +22,12 @@ function ipHit(req, post) {
         hits.push(hit);
         if (now - lastTick > saveGap || hits.length > 1000) {
             let data = '\n' + hits.join('\n') + '\n\n';
-            db_1.Db.content.execProc('tv_hit', [db_1.Db.unit, 0, data]);
+            db_1.Dbs.content.execProc('tv_hit', [db_1.Dbs.unit, 0, data]);
             hits.splice(0);
         }
         lastTick = now;
         if (now - lastHotCalcTick > 60) {
-            db_1.Db.content.execProc('tv_calchot', [db_1.Db.unit, 0, '\n']);
+            db_1.Dbs.content.execProc('tv_calchot', [db_1.Dbs.unit, 0, '\n']);
             lastHotCalcTick = now;
         }
     });

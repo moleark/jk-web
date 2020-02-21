@@ -1,6 +1,6 @@
-import { DbBase } from "./dbBase";
+import { Db } from "./db";
 
-export class DbContent extends DbBase {
+export class DbContent extends Db {
     private sqlHomePostList: string;
     private sqlPostFromId: string;
 

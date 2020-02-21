@@ -16,7 +16,7 @@ function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let id = req.params.id;
-            const ret = yield db_1.Db.content.postFromId(id);
+            const ret = yield db_1.Dbs.content.postFromId(id);
             let template, title;
             if (ret.length === 0) {
                 template = `post id=${id} is not defined`;

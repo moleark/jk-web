@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import * as _ from 'lodash';
-import { Db } from "../db";
+import { Dbs } from "../db";
 import { device, viewPath, ejsSuffix, buildData } from "../tools";
 
 export async function product(req: Request, res:Response) {
     let id = req.params.id;
     const [retProduct, retChemical] = await Promise.all([
-        Db.product.execProc('tv_productx', [Db.unit, 0, id]),
-        Db.product.tableFromProc('tv_productchemical$query$', [Db.unit, 0, id, null]),
+        Dbs.product.execProc('tv_productx', [Dbs.unit, 0, id]),
+        Dbs.product.tableFromProc('tv_productchemical$query$', [Dbs.unit, 0, id, null]),
     ]);
     let product = retProduct[0][0];    
     if (!product) {
@@ -73,7 +73,7 @@ async function loadPropIds(product: any, propDef: {name:string, proc:string}) {
     }
 
     coll.push(product);
-    let ret = await Db.product.tableFromProc(proc, [Db.unit, 0, ids.join(',')]);
+    let ret = await Dbs.product.tableFromProc(proc, [Dbs.unit, 0, ids.join(',')]);
     for (let b of ret) {
         let {id} = b;
         let coll = propColl[id];

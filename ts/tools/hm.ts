@@ -66,7 +66,22 @@ function esc(text:string|any[]) {
 	}
 }
 
+function dumpHex(text:string) {
+	let len = text.length;
+	let ret = '';
+	for (let i=0; i<8; i++) {
+		for (let j=0; j<16; j++) {
+			ret += text.charCodeAt(i*16+j).toString(16);
+			ret += j===7? '-' : ' ';
+		}
+		ret += '\r\n';
+	}
+	return ret;
+}
+
 export function hm(text:string):void {
+	// /[\n|\r|\n\r|\r\n]/g.e
+	let lines = text.match(/[\n|\r|\n\r|\r\n]/g);
 	let textLen = text.length;
 	let p = 0; 
 	let line = 1, pos = 1;

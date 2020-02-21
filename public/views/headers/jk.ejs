@@ -139,6 +139,7 @@ function cell(params, data, arr) {
 <%
 }
 function grid(params, data) {
+	if (!data) return;
 	let cellFunc = params[0];
 	let {gridClass} = patternGrid[params[1]] || patternGrid.$;
 %> <div class="container <%=collapse()%> my-3" id="sec-<%=state.secId%>">
@@ -428,6 +429,8 @@ function image(params, data) {
 function box(params, data) {
 %>
 	<div class="<%=params.join(' ')%>">
+		<%-params.join(' ')%>
+	<%- data %>
 <%
 }
 

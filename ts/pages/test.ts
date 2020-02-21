@@ -6,6 +6,20 @@ import { viewPath, ejsSuffix } from "../tools";
 
 export async function test(req: Request, res:Response) {
     try {
+		hm(`#t0	a
+一个实验小白，轻松掌控3个搅拌实验的奥秘
+		
+#[ border bg-light p-5 rounded mx-5
+
+#p	c
+您有过这种经历吗？
+
+#p	c
+实验无进展，论文未发表，导师催得紧，着急……<img src="https://c.jkchemical.com/res/0-0802.png"/>
+
+#]
+				`);
+
 		let data = buildData(req, undefined);
 
 		let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();

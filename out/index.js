@@ -20,7 +20,7 @@ const tools_1 = require("./tools");
 const db_1 = require("./db");
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
-        db_1.Db.init();
+        db_1.Dbs.init();
         // 创建express服务
         let app = express();
         //app.use(useLog());

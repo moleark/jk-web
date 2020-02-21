@@ -17,7 +17,7 @@ function search(req, res) {
         let key = req.params.key;
         if (!key)
             key = req.query.key;
-        const ret = yield db_1.Db.product.execProc('tv_searchproduct', [db_1.Db.unit, 0, null, 30, key, 4]);
+        const ret = yield db_1.Dbs.product.execProc('tv_searchproduct', [db_1.Dbs.unit, 0, null, 30, key, 4]);
         let products = ret[0];
         yield loadAllPropIds(products);
         let template, title;
@@ -41,7 +41,7 @@ function search(req, res) {
 exports.search = search;
 ;
 const propDefs = [
-    { name: 'brand', proc: 'tv_brand$ids' }
+    { name: 'brand', proc: 'tv_brand$ids', db: db_1.Dbs.product }
 ];
 function loadAllPropIds(products) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -54,7 +54,7 @@ function loadAllPropIds(products) {
 }
 function loadPropIds(products, propDef) {
     return __awaiter(this, void 0, void 0, function* () {
-        let { name: propName, proc } = propDef;
+        let { name: propName, proc, db } = propDef;
         let ids = [];
         let propColl = {};
         for (let product of products) {
@@ -72,7 +72,7 @@ function loadPropIds(products, propDef) {
         if (ids.length === 0)
             return;
         let text = ids.join(',');
-        let ret = yield db_1.Db.product.tableFromProc(proc, [db_1.Db.unit, 0, text]);
+        let ret = yield db.tableFromProc(proc, [db_1.Dbs.unit, 0, text]);
         for (let b of ret) {
             let { id } = b;
             let coll = propColl[id];
