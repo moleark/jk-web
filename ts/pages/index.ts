@@ -5,12 +5,13 @@ import { category } from './category';
 import { search } from './search';
 import { product } from './product';
 import { iframe } from './iframe';
-
+import { language } from './language'
 import { test } from './test';
 import { shop } from './shop';
 import { version } from './version';
 import { law } from './law';
 import { contact } from './contact';
+import { webMap } from './webMap'
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -25,3 +26,5 @@ homeRouter.get('/version', version);
 homeRouter.get('/law', law);
 homeRouter.get('/contact', contact);
 homeRouter.get('/test', test);
+homeRouter.get('/language', language);
+homeRouter.get('/webMap', webMap);

@@ -4,7 +4,7 @@ import * as ejs from 'ejs';
 import { buildData, hm, hmToEjs } from "../tools";
 import { viewPath, ejsSuffix } from "../tools";
 
-export async function law(req: Request, res: Response) {
+export async function webMap(req: Request, res: Response) {
     try {
         let cbDataPackage = getPackageJson()
         function getPackageJson() {
@@ -21,10 +21,9 @@ export async function law(req: Request, res: Response) {
         let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
         let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
         let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
-
         let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
         let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-        let body = ejs.fileLoader(viewPath + 'law.ejs').toString();
+        let body = ejs.fileLoader(viewPath + 'webMap.ejs').toString();
 
         let html = ejs.render(
             header
