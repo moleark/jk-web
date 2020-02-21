@@ -437,4 +437,18 @@ function boxEnd(params, data) {
 	</div><%-esc(data)%>
 <%
 }
+
+function audio(params, data) {
+	let src = data[0];
+	if (typeof src === 'object') src = src[0];
+	if (src.startsWith('https://') === false && src.startsWith('http://') === false) {
+		src = $root + src;
+	}
+%>
+	<audio controls height="100" width="100">
+		<source src="<%=src%>" type="audio/mp3">
+		<embed height="50" width="100" src="<%=src%>">
+	</audio>
+<%
+}
 %>

@@ -242,7 +242,12 @@ p('c', 内容);
     <b>这里是标题</b>
 </h3>
 
-
+<audio src="<%=$root%>audio/a1.mp3">ddd</audio>
+<audio controls height="100" width="100">
+	<source src="<%=$root%>audio/a1.m4a" type="audio/mp3">
+	<embed height="50" width="100" src="<%=$root%>audio/a1.mp3">
+</audio>
+  
 
 <p class="first-char-large first-line-height-small">
     存在于样品和溶剂中的杂质不仅容易对色谱仪器装置（如液相泵、进样阀、色谱柱等）造成损坏或堵塞，而且会对分析结果造成干扰。因此，在样品上机检测前对样品进行过滤显得尤为重要，并可以有效降低上述问题的发生，提高色谱检测的灵敏度和准确度。
