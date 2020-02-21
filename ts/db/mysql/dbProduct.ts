@@ -1,6 +1,6 @@
-import { DbBase } from "./dbBase";
+import { Db } from "./db";
 
-export class DbProduct extends DbBase {
+export class DbProduct extends Db {
     constructor() {
         super('product');
     }

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const dbBase_1 = require("./dbBase");
-class DbProduct extends dbBase_1.DbBase {
+const db_1 = require("./db");
+class DbProduct extends db_1.Db {
     constructor() {
         super('product');
     }

@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const dbBase_1 = require("./dbBase");
-class DbContent extends dbBase_1.DbBase {
+const db_1 = require("./db");
+class DbContent extends db_1.Db {
     constructor() {
         super('content');
         let db = this.databaseName;

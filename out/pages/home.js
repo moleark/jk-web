@@ -31,10 +31,10 @@ function home(req, res) {
             }
             ;
         }
-        const ret = yield db_1.Db.content.homePostList();
+        const ret = yield db_1.Dbs.content.homePostList();
         if (cacheHotPosts === undefined || now - lastHotTick > 10 * 60 * 1000) {
             lastHotTick = now;
-            let ret = yield db_1.Db.content.execProc('tv_hotPosts', [db_1.Db.unit, 0]);
+            let ret = yield db_1.Dbs.content.execProc('tv_hotPosts', [db_1.Dbs.unit, 0]);
             cacheHotPosts = ret[0];
         }
         let data = tools_1.buildData(req, {

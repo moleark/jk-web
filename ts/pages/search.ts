@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import * as _ from 'lodash';
-import { Db } from "../db";
+import { Dbs, Db } from "../db";
 import { device, viewPath, ejsSuffix, buildData } from "../tools";
 
 export async function search(req: Request, res:Response) {
     let key = req.params.key;
     if (!key) key = req.query.key;
-    const ret = await Db.product.execProc('tv_searchproduct', [Db.unit, 0, null, 30, key, 4]);
+    const ret = await Dbs.product.execProc('tv_searchproduct', [Dbs.unit, 0, null, 30, key, 4]);
     let products:any[] = ret[0];
     await loadAllPropIds(products);
 
@@ -34,7 +34,7 @@ export async function search(req: Request, res:Response) {
 };
 
 const propDefs = [
-    {name: 'brand', proc: 'tv_brand$ids'}
+    {name: 'brand', proc: 'tv_brand$ids', db: Dbs.product}
 ];
 
 async function loadAllPropIds(products: any[]) {
@@ -45,8 +45,8 @@ async function loadAllPropIds(products: any[]) {
     await Promise.all(promises);
 }
 
-async function loadPropIds(products: any[], propDef: {name:string, proc:string}) {
-    let {name: propName, proc} = propDef;
+async function loadPropIds(products: any[], propDef: {name:string, proc:string, db:Db}) {
+    let {name: propName, proc, db} = propDef;
     let ids:any[] = []
     let propColl = {};
     for (let product of products) {
@@ -62,7 +62,7 @@ async function loadPropIds(products: any[], propDef: {name:string, proc:string})
     }
     if (ids.length === 0) return;
     let text = ids.join(',');
-    let ret = await Db.product.tableFromProc(proc, [Db.unit, 0, text]);
+    let ret = await db.tableFromProc(proc, [Dbs.unit, 0, text]);
     for (let b of ret) {
         let {id} = b;
         let coll = propColl[id];

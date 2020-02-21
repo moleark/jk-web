@@ -1,1 +1,1 @@
-export * from './mysql/db';
+export * from './mysql/dbs';

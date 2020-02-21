@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Db } from "../db";
+import { Dbs } from "../db";
 import { categories } from "../data";
 import { ejsError, ipHit, buildData, getRootPath } from "../tools";
 
@@ -20,11 +20,11 @@ export async function home(req: Request, res:Response) {
             return;
         };
     }
-    const ret = await Db.content.homePostList();
+    const ret = await Dbs.content.homePostList();
     
     if (cacheHotPosts === undefined || now - lastHotTick > 10*60*1000) {
         lastHotTick = now;
-        let ret = await Db.content.execProc('tv_hotPosts', [Db.unit, 0]);
+        let ret = await Dbs.content.execProc('tv_hotPosts', [Dbs.unit, 0]);
         cacheHotPosts = ret[0];
     }
 

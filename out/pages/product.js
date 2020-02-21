@@ -17,8 +17,8 @@ function product(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let id = req.params.id;
         const [retProduct, retChemical] = yield Promise.all([
-            db_1.Db.product.execProc('tv_productx', [db_1.Db.unit, 0, id]),
-            db_1.Db.product.tableFromProc('tv_productchemical$query$', [db_1.Db.unit, 0, id, null]),
+            db_1.Dbs.product.execProc('tv_productx', [db_1.Dbs.unit, 0, id]),
+            db_1.Dbs.product.tableFromProc('tv_productchemical$query$', [db_1.Dbs.unit, 0, id, null]),
         ]);
         let product = retProduct[0][0];
         if (!product) {
@@ -77,7 +77,7 @@ function loadPropIds(product, propDef) {
             ids.push(prop);
         }
         coll.push(product);
-        let ret = yield db_1.Db.product.tableFromProc(proc, [db_1.Db.unit, 0, ids.join(',')]);
+        let ret = yield db_1.Dbs.product.tableFromProc(proc, [db_1.Dbs.unit, 0, ids.join(',')]);
         for (let b of ret) {
             let { id } = b;
             let coll = propColl[id];

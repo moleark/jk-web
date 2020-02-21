@@ -7,10 +7,10 @@ import { Request, Response, NextFunction, Application } from 'express';
 import * as express from 'express';
 import { homeRouter } from './pages';
 import { easyTime, csv } from './tools';
-import { Db } from './db';
+import { Dbs } from './db';
 
 (async function () {
-    Db.init();
+    Dbs.init();
 
     // 创建express服务
     let app = express();

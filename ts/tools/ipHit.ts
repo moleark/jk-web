@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { Db } from "../db";
+import { Dbs } from "../db";
 
 let lastTick: number = 0;
 let lastHotCalcTick: number = Date.now() / 1000;
@@ -14,13 +14,13 @@ export async function ipHit(req: Request, post:number|string) {
     hits.push(hit);
     if (now - lastTick > saveGap || hits.length > 1000) {
         let data = '\n' + hits.join('\n') + '\n\n';
-        Db.content.execProc('tv_hit', [Db.unit, 0, data]);
+        Dbs.content.execProc('tv_hit', [Dbs.unit, 0, data]);
         hits.splice(0);
     }
     lastTick = now;
 
     if (now - lastHotCalcTick > 60) {
-        Db.content.execProc('tv_calchot', [Db.unit, 0, '\n']);
+        Dbs.content.execProc('tv_calchot', [Dbs.unit, 0, '\n']);
         lastHotCalcTick = now;
     }
 }
