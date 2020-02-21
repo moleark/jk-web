@@ -71,5 +71,5 @@ export function hmToEjs(hm:string):string {
 		}
 	}
 
-	return '<% ' + defs + 'hm(\n`' + text + '\n`); %>';
+	return '<% ' + defs + 'hmParse(\n`' + text + '\n`); %>';
 }

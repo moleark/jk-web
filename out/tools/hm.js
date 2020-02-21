@@ -75,18 +75,17 @@ function dumpHex(text) {
     }
     return ret;
 }
-function hm(text) {
-    // /[\n|\r|\n\r|\r\n]/g.e
-    let lines = text.match(/[\n|\r|\n\r|\r\n]/g);
-    let textLen = text.length;
-    let p = 0;
-    let line = 1, pos = 1;
+const lineSeperator = /\r\n|\n|\n\r/g;
+function hmParse(text) {
+    let lines = text.split(lineSeperator);
+    let linesLen = lines.length;
     let data, cmd, params;
-    for (; p < textLen;) {
-        let c = text.charAt(p);
+    let p = 0;
+    for (; p < linesLen;) {
+        let line = lines[p];
+        let c = line.charAt(0);
         if (c === '#') {
-            ++p;
-            parseElement();
+            parseElement(line);
             switch (cmd) {
                 default:
                     if (!cmd)
@@ -95,13 +94,14 @@ function hm(text) {
                 case '-':
                     cmd = 'hr';
                     break;
-                case '{':
+                case '[':
                     cmd = 'box';
                     break;
-                case '}':
-                    cmd = 'box';
+                case ']':
+                    cmd = 'boxEnd';
                     break;
             }
+            p++;
             data = parseData();
         }
         else {
@@ -112,30 +112,35 @@ function hm(text) {
         }
         let func = _hm_funcs[cmd];
         if (func === undefined) {
-            let tf = eval('typeof ' + cmd);
-            if (tf !== 'function') {
-                _hm_funcs.__append(`<div class="text-danger">错误：${line}行${pos}位，${cmd}指令不存在</div>`, cmd, params, data);
-                continue;
+            if (cmd.charAt(0) === ':') {
+                _hm_funcs.__append(`<div class="text-danger">错误：${p}行，${cmd}函数定义</div>`, cmd, params, data);
             }
             else {
-                func = eval(cmd);
+                let tf = eval('typeof ' + cmd);
+                if (tf !== 'function') {
+                    _hm_funcs.__append(`<div class="text-danger">错误：${p}行，${cmd}指令不存在</div>`, cmd, params, data);
+                    continue;
+                }
+                else {
+                    func = eval(cmd);
+                }
             }
         }
-        func(params, data);
+        if (func !== undefined)
+            func(params, data);
         next();
     }
     return;
-    function parseElement() {
-        let pLn = text.indexOf('\n', p);
-        if (pLn < 0)
-            pLn = textLen;
-        let parts = text.substring(p, pLn).split(/[\s|\t]+/);
+    function parseElement(line) {
+        let parts = line.split(/[ |\t]+/);
         let partsLen = parts.length;
         let i = 0;
         while (i < partsLen) {
             cmd = parts[i++];
-            if (cmd)
+            if (cmd) {
+                cmd = cmd.substr(1);
                 break;
+            }
         }
         params = [];
         for (; i < partsLen; i++) {
@@ -144,28 +149,20 @@ function hm(text) {
                 continue;
             params.push(v);
         }
-        ++line;
-        pos = 2;
-        p = pLn + 1;
     }
     function parseData() {
         let ret = [];
         for (;;) {
-            let pLn = text.indexOf('\n', p);
-            if (pLn < 0) {
-                ret.push([text.substr(p)]);
-                ++p;
+            let line = lines[p++];
+            if (line.trim().length === 0) {
+                for (; p < linesLen; p++) {
+                    line = lines[p];
+                    if (line.trim().length !== 0)
+                        break;
+                }
                 break;
             }
-            if (pLn === p) {
-                ++line;
-                pos = 1;
-                ++p;
-                break;
-            }
-            ret.push(text.substring(p, pLn).split('\t'));
-            ++line;
-            p = pLn + 1;
+            ret.push(line.split('\t'));
         }
         if (ret.length === 0)
             return;
@@ -212,5 +209,5 @@ function hm(text) {
         return tr;
     }
 }
-exports.hm = hm;
+exports.hmParse = hmParse;
 //# sourceMappingURL=hm.js.map

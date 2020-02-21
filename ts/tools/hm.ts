@@ -79,26 +79,26 @@ function dumpHex(text:string) {
 	return ret;
 }
 
-export function hm(text:string):void {
-	// /[\n|\r|\n\r|\r\n]/g.e
-	let lines = text.match(/[\n|\r|\n\r|\r\n]/g);
-	let textLen = text.length;
-	let p = 0; 
-	let line = 1, pos = 1;
-	let data:any, cmd:any, params:string[];
-	for (;p<textLen;) {
-		let c = text.charAt(p);
+const lineSeperator = /\r\n|\n|\n\r/g;
+export function hmParse(text:string):void {
+	let lines = text.split(lineSeperator);
+	let linesLen = lines.length;
+	let data:any, cmd:string, params:string[];
+	let p = 0;
+	for (; p<linesLen;) {
+		let line = lines[p];
+		let c = line.charAt(0);
 		if (c === '#') {
-			++p;
-			parseElement();
+			parseElement(line);
 			switch (cmd) {
 				default:
 					if (!cmd) cmd = 'raw';
 					break;
 				case '-': cmd = 'hr'; break;
-				case '{': cmd = 'box'; break;
-				case '}': cmd = 'box'; break;
+				case '[': cmd = 'box'; break;
+				case ']': cmd = 'boxEnd'; break;
 			}
+			p++;
 			data = parseData();
 		}
 		else {
@@ -109,29 +109,34 @@ export function hm(text:string):void {
 
 		let func = _hm_funcs[cmd];
         if (func === undefined) {
-			let tf = eval('typeof ' + cmd);
-			if (tf !== 'function') {
-				_hm_funcs.__append(`<div class="text-danger">错误：${line}行${pos}位，${cmd}指令不存在</div>`, cmd, params, data);
-				continue;
-			}
+			if (cmd.charAt(0) === ':') {
+				_hm_funcs.__append(`<div class="text-danger">错误：${p}行，${cmd}函数定义</div>`, cmd, params, data);}
 			else {
-				func = eval(cmd);
+				let tf = eval('typeof ' + cmd);
+				if (tf !== 'function') {
+					_hm_funcs.__append(`<div class="text-danger">错误：${p}行，${cmd}指令不存在</div>`, cmd, params, data);
+					continue;
+				}
+				else {
+					func = eval(cmd);
+				}
 			}
 		}
-		func(params, data);
+		if (func !== undefined) func(params, data);
 		next();
 	}
 	return;
 
-	function parseElement():any {
-		let pLn = text.indexOf('\n', p);
-		if (pLn < 0) pLn = textLen;
-		let parts = text.substring(p, pLn).split(/[\s|\t]+/);
+	function parseElement(line: string):any {
+		let parts = line.split(/[ |\t]+/);
 		let partsLen = parts.length;
 		let i = 0;
 		while (i<partsLen) {
 			cmd = parts[i++];
-			if (cmd) break;
+			if (cmd) {
+				cmd = cmd.substr(1);
+				break;
+			}
 		}
 		params = [];
 		for (;i<partsLen; i++) {
@@ -139,29 +144,20 @@ export function hm(text:string):void {
 			if (!v) continue;
 			params.push(v);
 		}
-		++line;
-		pos = 2;
-		p = pLn + 1;
 	}
 
 	function parseData():any {
 		let ret:any[][] = [];
 		for (;;) {
-			let pLn = text.indexOf('\n', p);
-			if (pLn < 0) {
-				ret.push([text.substr(p)]);
-				++p;
+			let line = lines[p++];
+			if (line.trim().length === 0) {
+				for (;p<linesLen;p++) {
+					line = lines[p];
+					if (line.trim().length !== 0) break;
+				}
 				break;
 			}
-			if (pLn === p) {
-				++line;
-				pos = 1;
-				++p;
-				break;
-			}
-			ret.push(text.substring(p, pLn).split('\t',));
-			++line;
-			p = pLn + 1;
+			ret.push(line.split('\t',));
 		}
 		if (ret.length === 0) return;
 
