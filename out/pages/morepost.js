@@ -18,7 +18,7 @@ function morepost(req, res) {
         let pageCount;
         let pageSize = 30;
         try {
-            pageCount = req.query.pageCount ? req.query.pageCount : 0;
+            pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
             postpage = yield db_1.Dbs.content.morePostPage(pageCount * pageSize, pageSize);
             /*
             let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
@@ -31,11 +31,14 @@ function morepost(req, res) {
             let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
             let body = ejs.fileLoader(viewPath + 'morepost.ejs').toString();
             */
+            let nextpage = pageCount + 1;
+            let prepage = pageCount - 1;
             let data = tools_1.buildData(req, {
-                nextpage: rootPath + 'morepost/?pageCount=' + (pageCount + 1),
-                prepage: rootPath + 'morepost/?pageCount=' + (pageCount - 1),
+                nextpage: rootPath + 'morepost/?pageCount=' + nextpage,
+                prepage: rootPath + 'morepost/?pageCount=' + prepage,
                 path: rootPath + 'post/',
                 post: postpage,
+                pageCount: pageCount
             });
             /*
             let html = ejs.render(

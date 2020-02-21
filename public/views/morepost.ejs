@@ -40,11 +40,17 @@
         <% } %>
     </ul>
 </div>
-<a href="<%=post%>" class="py-2 px-1 border-bottom">
-    <div>上一页</div>
-</a>
-<a href="<%=nextpage%>" class="py-2 px-1 border-bottom">
-    <div>下一页</div>
-</a>
+<% if (pageCount==0) { %>
+<span>上一页</span>
+<% } else { %>
+<a href="<%=nextpage%>" class="py-2 px-1 border-bottom">上一页</a>
+<% } %>
+
+<% if (post.length<30) { %>
+<span>下一页</span>
+<% } else { %>
+<a href="<%=nextpage%>" class="py-2 px-1 border-bottom">下一页</a>
+<% } %>
+
 
 <%- include('footers/home-footer.ejs') -%>
