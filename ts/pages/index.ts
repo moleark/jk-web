@@ -10,6 +10,7 @@ import { test } from './test';
 import { shop } from './shop';
 import { version } from './version';
 import { morepost } from './morepost';
+import { allPosts } from './allPosts';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -22,5 +23,6 @@ homeRouter.get('/iframe', iframe);
 homeRouter.get('/shop', shop);
 homeRouter.get('/version', version);
 homeRouter.get('/morepost', morepost);
+homeRouter.get('/all-posts', allPosts);
 
-homeRouter.get('/test', test);
+homeRouter.get('/test/*', test);

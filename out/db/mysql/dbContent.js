@@ -17,8 +17,8 @@ class DbContent extends db_1.Db {
         this.sqlHomePostList = `
             SELECT a.id, a.caption, a.discription as disp, c.path as image,
                 a.$update as date, d.hits, d.sumHits
-            FROM -- ${db}.tv_customerpost cp join ${db}.tv_post a on cp.post=a.id
-                ${db}.tv_post a 
+            FROM ${db}.tv_customerpost cp join ${db}.tv_post a on cp.post=a.id
+                -- ${db}.tv_post a 
                 left join ${db}.tv_template b on a.template=b.id 
                 left join ${db}.tv_image c on a.image=c.id
                 left join ${db}.tv_hot d on a.id=d.post
@@ -33,13 +33,24 @@ class DbContent extends db_1.Db {
         this.sqlMorePostPage = `
             SELECT a.id, a.caption, a.discription as disp, c.path as image,
                 a.$update as date, d.hits, d.sumHits
-            FROM -- ${db}.tv_customerpost cp join ${db}.tv_post a on cp.post=a.id
-                ${db}.tv_post a 
+            FROM ${db}.tv_customerpost cp join ${db}.tv_post a on cp.post=a.id
+                -- ${db}.tv_post a 
                 left join ${db}.tv_template b on a.template=b.id 
                 left join ${db}.tv_image c on a.image=c.id
                 left join ${db}.tv_hot d on a.id=d.post
             ORDER BY a.id desc
             LIMIT ?,?;
+        `;
+        this.sqlAllPosts = `
+            SELECT a.id, a.caption, a.discription as disp, c.path as image,
+                a.$update as date, d.hits, d.sumHits
+            FROM -- ${db}.tv_customerpost cp join ${db}.tv_post a on cp.post=a.id
+                ${db}.tv_post a 
+                left join ${db}.tv_template b on a.template=b.id 
+                left join ${db}.tv_image c on a.image=c.id
+                left join ${db}.tv_hot d on a.id=d.post
+            ORDER BY a.id desc;
+            -- LIMIT 10;
         `;
     }
     homePostList() {
@@ -57,6 +68,12 @@ class DbContent extends db_1.Db {
     morePostPage(pageStart, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlMorePostPage, [pageStart, pageSize]);
+            return ret;
+        });
+    }
+    allPosts() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlAllPosts);
             return ret;
         });
     }

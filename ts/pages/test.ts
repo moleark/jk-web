@@ -15,8 +15,17 @@ export async function test(req: Request, res:Response) {
 		let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
 
 		let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
-        let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-		let body = ejs.fileLoader(viewPath + 'testLY.ejs').toString();
+		let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
+		
+		let reqPath = req.path.toLowerCase();
+		if (reqPath.endsWith('/') === true) {
+			reqPath += 'index';
+		}
+		else if (reqPath === '/test') {
+			reqPath += '/index';
+		}
+
+		let body = ejs.fileLoader(viewPath + reqPath + '.ejs').toString();
 		if (body.charAt(0) === '#') {
 			hmParse(body);
 			body = hmToEjs(body);

@@ -11,6 +11,7 @@ const test_1 = require("./test");
 const shop_1 = require("./shop");
 const version_1 = require("./version");
 const morepost_1 = require("./morepost");
+const allPosts_1 = require("./allPosts");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -22,5 +23,6 @@ exports.homeRouter.get('/iframe', iframe_1.iframe);
 exports.homeRouter.get('/shop', shop_1.shop);
 exports.homeRouter.get('/version', version_1.version);
 exports.homeRouter.get('/morepost', morepost_1.morepost);
-exports.homeRouter.get('/test', test_1.test);
+exports.homeRouter.get('/all-posts', allPosts_1.allPosts);
+exports.homeRouter.get('/test/*', test_1.test);
 //# sourceMappingURL=index.js.map
