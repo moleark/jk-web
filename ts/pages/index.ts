@@ -13,6 +13,7 @@ import { law } from './law';
 import { contact } from './contact';
 import { webMap } from './webMap'
 import { morepost } from './morepost';
+import { allPosts } from './allPosts';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -27,7 +28,8 @@ homeRouter.get('/version', version);
 homeRouter.get('/law', law);
 homeRouter.get('/contact', contact);
 homeRouter.get('/morepost', morepost);
+homeRouter.get('/all-posts', allPosts);
 
-homeRouter.get('/test', test);
 homeRouter.get('/language', language);
 homeRouter.get('/webMap', webMap);
+homeRouter.get('/test/*', test);

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as fs from "fs";
 import * as ejs from 'ejs';
-import { buildData, hm, hmToEjs } from "../tools";
+import { buildData } from "../tools";
 import { viewPath, ejsSuffix } from "../tools";
 
 export async function webMap(req: Request, res: Response) {

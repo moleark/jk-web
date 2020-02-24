@@ -23,7 +23,14 @@ function test(req, res) {
             let postHeader = ejs.fileLoader(tools_2.viewPath + 'headers/post' + tools_2.ejsSuffix).toString();
             let postFooter = ejs.fileLoader(tools_2.viewPath + 'footers/post' + tools_2.ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
-            let body = ejs.fileLoader(tools_2.viewPath + 'testLY.ejs').toString();
+            let reqPath = req.path.toLowerCase();
+            if (reqPath.endsWith('/') === true) {
+                reqPath += 'index';
+            }
+            else if (reqPath === '/test') {
+                reqPath += '/index';
+            }
+            let body = ejs.fileLoader(tools_2.viewPath + reqPath + '.ejs').toString();
             if (body.charAt(0) === '#') {
                 tools_1.hmParse(body);
                 body = tools_1.hmToEjs(body);

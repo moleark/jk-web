@@ -1,0 +1,47 @@
+<%- include('headers/header.ejs') -%>
+<%- include('headers/home-header.ejs') -%>
+
+<div class="container">
+<div class="row">
+	<div class="col-sm-1"></div>
+	<div class="col-sm-10">
+<ul class="list-group">
+	<% for(var i=0;i<news.length;i++){ 
+		let {id, caption, disp, date, by, image, sumHits} = news[i];
+	%>
+		<a href="<%=path+id%>" class="list-group-item-action py-2 px-1 border-bottom">
+			<div class="row">
+			<% if (image) {%>
+				<div class="col-3 d-flex align-items-center">
+					<div class="w-100 h-100 bg-center-img h-max-6c" style="background-image: url('<%=image%>');">
+					</div>
+				</div>
+				<div class="col-9 d-flex align-items-center">
+			<% } else { %>
+				<div class="col d-flex align-items-center">
+			<% } 
+				// <small class="text-muted text-right" style="min-width: 3rem;">< %=easyTime(date, true)% ></small>
+			%>
+					<div class="w-100">
+					<div class="d-flex w-100 justify-content-between">
+						<div class="bold mb-1 text-dark-blue"><%=caption%></div>
+					</div>
+					<p class="mb-1 font-song"><%=disp%></p>
+					<div class="d-flex small text-gray mt-2">
+						<div class="flex-grow-1">发表于<%=easyTime(date, true)%></div>
+						<% if (by) { %>
+							<small class="font-song">信息来源：<%=by%></small>
+						<% } %>
+						<% if (sumHits) { %>
+							<div><%=sumHits%>次阅读</div>
+						<% } %>
+					</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	<% } %>
+</ul>        
+</div>
+</div>
+</div>
