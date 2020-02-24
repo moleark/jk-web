@@ -8,7 +8,7 @@
             %>
         <a href="<%=path+id%>" class="list-group-item-action py-2 px-1 border-bottom">
             <div class="row">
-                <div class="col-9 d-flex align-items-center">
+                <div class="col-10 d-flex align-items-center">
                     <div class="col d-flex align-items-center">
                         <div class="w-100">
                             <div class="d-flex w-100 justify-content-between">
@@ -16,7 +16,14 @@
                             </div>
                             <p class="mb-1 font-song mt-1"><%=disp%></p>
                             <div class="d-flex small text-gray mt-2">
-                                <div class="flex-grow-1">发表于</div>
+                                <div class="col-2 p-0">
+                                    <% if (sumHits) { %>
+                                        <div class="mr-4"><%=sumHits%>次阅读</div>
+                                    <% } else { %>
+                                        <div class="mr-4">0次阅读</div>
+                                        <% } %>
+                                </div>
+                                <div class="flex-grow-1">发表于<%=easyTime(date, true)%></div>
                                 <% if (by) { %>
                                 <small class="font-song">信息来源：<%=by%></small>
                                 <% } %>
@@ -30,11 +37,7 @@
                             </div>
                         <% } %>
                 </div>
-                <div class="col-1 small text-gray" >
-                    <% if (sumHits) { %>
-                        <div class="mt-4"><%=sumHits%>次阅读</div>
-                        <% } %>
-                </div>
+              
                 </div>
         </a>
         <% } %>
