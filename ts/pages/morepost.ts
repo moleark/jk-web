@@ -9,7 +9,7 @@ export async function morepost(req: Request, res: Response) {
     let pageCount: number;
     let pageSize: number = 30;
     try {
-        pageCount = req.query.pageCount ? req.query.pageCount : 0;
+        pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
         postpage = await Dbs.content.morePostPage(pageCount * pageSize, pageSize)
 
 		/*
@@ -22,12 +22,15 @@ export async function morepost(req: Request, res: Response) {
         let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
         let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
 		let body = ejs.fileLoader(viewPath + 'morepost.ejs').toString();
-		*/
+        */
+        let nextpage: number = pageCount + 1;
+        let prepage: number = pageCount - 1
         let data = buildData(req, {
-            nextpage: rootPath + 'morepost/?pageCount=' + (pageCount + 1),
-            prepage: rootPath + 'morepost/?pageCount=' + (pageCount - 1),
+            nextpage: rootPath + 'morepost/?pageCount=' + nextpage,
+            prepage: rootPath + 'morepost/?pageCount=' + prepage,
             path: rootPath + 'post/',
             post: postpage,
+            pageCount: pageCount
         });
 		/*
         let html = ejs.render(
@@ -42,11 +45,11 @@ export async function morepost(req: Request, res: Response) {
             , data);
 		res.end(html);
 		*/
-		res.render('morepost.ejs', data, (err, html) => {
-			if (ejsError(err, res) === true) return;
-			res.end(html);
-		});
-	
+        res.render('morepost.ejs', data, (err, html) => {
+            if (ejsError(err, res) === true) return;
+            res.end(html);
+        });
+
     }
     catch (err) {
         console.error(err);
