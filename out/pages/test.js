@@ -15,19 +15,6 @@ const tools_2 = require("../tools");
 function test(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            tools_1.hm(`#t0	a
-一个实验小白，轻松掌控3个搅拌实验的奥秘
-		
-#[ border bg-light p-5 rounded mx-5
-
-#p	c
-您有过这种经历吗？
-
-#p	c
-实验无进展，论文未发表，导师催得紧，着急……<img src="https://c.jkchemical.com/res/0-0802.png"/>
-
-#]
-				`);
             let data = tools_1.buildData(req, undefined);
             let header = ejs.fileLoader(tools_2.viewPath + 'headers/header' + tools_2.ejsSuffix).toString();
             let jk = ejs.fileLoader(tools_2.viewPath + '/headers/jk' + tools_2.ejsSuffix).toString();
@@ -38,6 +25,7 @@ function test(req, res) {
             let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
             let body = ejs.fileLoader(tools_2.viewPath + 'testLY.ejs').toString();
             if (body.charAt(0) === '#') {
+                tools_1.hmParse(body);
                 body = tools_1.hmToEjs(body);
             }
             let html = ejs.render(header

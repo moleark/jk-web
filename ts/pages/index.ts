@@ -12,6 +12,7 @@ import { version } from './version';
 import { law } from './law';
 import { contact } from './contact';
 import { webMap } from './webMap'
+import { morepost } from './morepost';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -25,6 +26,8 @@ homeRouter.get('/shop', shop);
 homeRouter.get('/version', version);
 homeRouter.get('/law', law);
 homeRouter.get('/contact', contact);
+homeRouter.get('/morepost', morepost);
+
 homeRouter.get('/test', test);
 homeRouter.get('/language', language);
 homeRouter.get('/webMap', webMap);

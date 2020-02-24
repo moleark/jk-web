@@ -22,8 +22,8 @@ export async function contact(req: Request, res: Response) {
         let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
         let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
 
-        // let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
-        // let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
+        let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
+        let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
         let body = ejs.fileLoader(viewPath + 'contact.ejs').toString();
 
         let html = ejs.render(
@@ -33,6 +33,8 @@ export async function contact(req: Request, res: Response) {
             + homeHeader
             + postHeader
             + body
+            + postFooter
+            + homeFooter
             , data);
         res.end(html);
     }

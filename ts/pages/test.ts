@@ -1,25 +1,11 @@
 import { Request, Response } from "express";
 import * as ejs from 'ejs';
-import { buildData, hm, hmToEjs } from "../tools";
+import { buildData, hmParse, hmToEjs } from "../tools";
 import { device } from "../tools";
 import { viewPath, ejsSuffix } from "../tools";
 
 export async function test(req: Request, res:Response) {
     try {
-		hm(`#t0	a
-一个实验小白，轻松掌控3个搅拌实验的奥秘
-		
-#[ border bg-light p-5 rounded mx-5
-
-#p	c
-您有过这种经历吗？
-
-#p	c
-实验无进展，论文未发表，导师催得紧，着急……<img src="https://c.jkchemical.com/res/0-0802.png"/>
-
-#]
-				`);
-
 		let data = buildData(req, undefined);
 
 		let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
@@ -32,6 +18,7 @@ export async function test(req: Request, res:Response) {
         let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
 		let body = ejs.fileLoader(viewPath + 'testLY.ejs').toString();
 		if (body.charAt(0) === '#') {
+			hmParse(body);
 			body = hmToEjs(body);
 		}
 

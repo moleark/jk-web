@@ -69,7 +69,7 @@ function hmToEjs(hm) {
             p += 2;
         }
     }
-    return '<% ' + defs + 'hm(\n`' + text + '\n`); %>';
+    return '<% ' + defs + 'hmParse(\n`' + text + '\n`); %>';
 }
 exports.hmToEjs = hmToEjs;
 //# sourceMappingURL=hmToEjs.js.map

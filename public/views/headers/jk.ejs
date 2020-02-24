@@ -429,14 +429,39 @@ function image(params, data) {
 function box(params, data) {
 %>
 	<div class="<%=params.join(' ')%>">
-		<%-params.join(' ')%>
-	<%- data %>
 <%
 }
 
 function boxEnd(params, data) {
 %>
 	</div><%-esc(data)%>
+<%
+}
+
+const patternAudio = {
+	$: {
+		w_def: 'w-75',
+		m_def: 'my-3',
+		divClass: 'text-center mx-auto',
+		imgClass: 'w-100 mb-2',
+		textClass: 'small text-muted',
+	},
+}
+function audio(params, data) {
+	let src = data[0];
+	if (typeof src === 'object') src = src[0];
+	if (src.startsWith('https://') === false && src.startsWith('http://') === false) {
+		src = $root + src;
+	}
+	let c = params.join(' ').trim();
+	if (c.length === 0) c = 'text-center w-75 my-3 mx-auto';
+%>
+	<div class="<%=c%>">
+		<audio controls class="w-100">
+			<source src="<%=src%>" type="audio/mp3">
+			<embed height="50" width="100" src="<%=src%>">
+		</audio>
+	</div>
 <%
 }
 %>

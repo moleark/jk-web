@@ -29,15 +29,17 @@ function contact(req, res) {
             let hmInclude = ejs.fileLoader(tools_2.viewPath + '/headers/hm' + tools_2.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + tools_2.ejsSuffix).toString();
             let postHeader = ejs.fileLoader(tools_2.viewPath + 'headers/post' + tools_2.ejsSuffix).toString();
-            // let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
-            // let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
+            let postFooter = ejs.fileLoader(tools_2.viewPath + 'footers/post' + tools_2.ejsSuffix).toString();
+            let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
             let body = ejs.fileLoader(tools_2.viewPath + 'contact.ejs').toString();
             let html = ejs.render(header
                 + jk
                 + hmInclude
                 + homeHeader
                 + postHeader
-                + body, data);
+                + body
+                + postFooter
+                + homeFooter, data);
             res.end(html);
         }
         catch (err) {

@@ -13,7 +13,7 @@ const fs = require("fs");
 const ejs = require("ejs");
 const tools_1 = require("../tools");
 const tools_2 = require("../tools");
-function law(req, res) {
+function wyc(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let cbDataPackage = getPackageJson();
@@ -31,7 +31,7 @@ function law(req, res) {
             let postHeader = ejs.fileLoader(tools_2.viewPath + 'headers/post' + tools_2.ejsSuffix).toString();
             let postFooter = ejs.fileLoader(tools_2.viewPath + 'footers/post' + tools_2.ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
-            let body = ejs.fileLoader(tools_2.viewPath + 'law.ejs').toString();
+            let body = ejs.fileLoader(tools_2.viewPath + 'wyc.ejs').toString();
             let html = ejs.render(header
                 + jk
                 + hmInclude
@@ -48,6 +48,6 @@ function law(req, res) {
         }
     });
 }
-exports.law = law;
+exports.wyc = wyc;
 ;
-//# sourceMappingURL=law.js.map
+//# sourceMappingURL=wyc.js.map

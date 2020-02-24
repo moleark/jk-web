@@ -61,4 +61,11 @@ function post(req, res) {
 }
 exports.post = post;
 ;
+function loadPage(list) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let promises;
+        for (let model of list) {
+        }
+    });
+}
 //# sourceMappingURL=post.js.map

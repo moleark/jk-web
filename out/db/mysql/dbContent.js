@@ -30,6 +30,17 @@ class DbContent extends db_1.Db {
                 FROM ${db}.tv_post a
                 WHERE a.id= ? ;
         `;
+        this.sqlMorePostPage = `
+            SELECT a.id, a.caption, a.discription as disp, c.path as image,
+                a.$update as date, d.hits, d.sumHits
+            FROM -- ${db}.tv_customerpost cp join ${db}.tv_post a on cp.post=a.id
+                ${db}.tv_post a 
+                left join ${db}.tv_template b on a.template=b.id 
+                left join ${db}.tv_image c on a.image=c.id
+                left join ${db}.tv_hot d on a.id=d.post
+            ORDER BY a.id desc
+            LIMIT ?,?;
+        `;
     }
     homePostList() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -40,6 +51,12 @@ class DbContent extends db_1.Db {
     postFromId(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlPostFromId, [id]);
+            return ret;
+        });
+    }
+    morePostPage(pageStart, pageSize) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlMorePostPage, [pageStart, pageSize]);
             return ret;
         });
     }
