@@ -3,7 +3,7 @@ import { DbContent } from "./dbContent";
 import { DbProduct } from "./dbProduct";
 
 export class Dbs {
-    static unit = 24;
+	static unit = 24;
     static content: DbContent;
     static product: DbProduct;
     

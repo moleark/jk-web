@@ -17,7 +17,8 @@ function search(req, res) {
         let key = req.params.key;
         if (!key)
             key = req.query.key;
-        const ret = yield db_1.Dbs.product.execProc('tv_searchproduct', [db_1.Dbs.unit, 0, null, 30, key, 4]);
+        let dbs = db_1.Dbs;
+        const ret = yield dbs.product.execProc('tv_searchproduct', [db_1.Dbs.unit, 0, null, 30, key, 4]);
         let products = ret[0];
         yield loadAllPropIds(products);
         let template, title;
@@ -40,11 +41,11 @@ function search(req, res) {
 }
 exports.search = search;
 ;
-const propDefs = [
-    { name: 'brand', proc: 'tv_brand$ids', db: db_1.Dbs.product }
-];
 function loadAllPropIds(products) {
     return __awaiter(this, void 0, void 0, function* () {
+        const propDefs = [
+            { name: 'brand', proc: 'tv_brand$ids', db: db_1.Dbs.product }
+        ];
         let promises = [];
         for (let propDef of propDefs) {
             promises.push(loadPropIds(products, propDef));

@@ -6,8 +6,9 @@ import { device, viewPath, ejsSuffix, buildData } from "../tools";
 
 export async function search(req: Request, res:Response) {
     let key = req.params.key;
-    if (!key) key = req.query.key;
-    const ret = await Dbs.product.execProc('tv_searchproduct', [Dbs.unit, 0, null, 30, key, 4]);
+	if (!key) key = req.query.key;
+	let dbs = Dbs;
+    const ret = await dbs.product.execProc('tv_searchproduct', [Dbs.unit, 0, null, 30, key, 4]);
     let products:any[] = ret[0];
     await loadAllPropIds(products);
 
@@ -33,12 +34,12 @@ export async function search(req: Request, res:Response) {
     res.end(html);
 };
 
-const propDefs = [
-    {name: 'brand', proc: 'tv_brand$ids', db: Dbs.product}
-];
-
 async function loadAllPropIds(products: any[]) {
-    let promises:Promise<void>[] = [];
+	const propDefs = [
+		{name: 'brand', proc: 'tv_brand$ids', db: Dbs.product}
+	];
+	
+	let promises:Promise<void>[] = [];
     for (let propDef of propDefs) {
         promises.push(loadPropIds(products, propDef));
     }
