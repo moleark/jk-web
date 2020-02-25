@@ -63,7 +63,7 @@ async function loadPropIds(products: any[], propDef: {name:string, proc:string, 
     }
     if (ids.length === 0) return;
     let text = ids.join(',');
-    let ret = await db.tableFromProc(proc, [Dbs.unit, 0, text]);
+    let ret = await Dbs.product.tableFromProc(proc, [Dbs.unit, 0, text]);
     for (let b of ret) {
         let {id} = b;
         let coll = propColl[id];

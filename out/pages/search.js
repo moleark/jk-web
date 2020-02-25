@@ -73,7 +73,7 @@ function loadPropIds(products, propDef) {
         if (ids.length === 0)
             return;
         let text = ids.join(',');
-        let ret = yield db.tableFromProc(proc, [db_1.Dbs.unit, 0, text]);
+        let ret = yield db_1.Dbs.product.tableFromProc(proc, [db_1.Dbs.unit, 0, text]);
         for (let b of ret) {
             let { id } = b;
             let coll = propColl[id];

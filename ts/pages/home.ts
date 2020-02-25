@@ -10,6 +10,7 @@ let lastHotTick = 0;
 //测试
 export async function home(req: Request, res:Response) {
     let rootPath = getRootPath(req);
+    console.log(rootPath,'rootPath')
     ipHit(req, -1);
     let now = Date.now();
     if (false && cacheHtml !== undefined) {

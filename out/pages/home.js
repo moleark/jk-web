@@ -20,6 +20,7 @@ let lastHotTick = 0;
 function home(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
+        console.log(rootPath, 'rootPath');
         tools_1.ipHit(req, -1);
         let now = Date.now();
         if (false && cacheHtml !== undefined) {

@@ -62,7 +62,7 @@
                 src="<%=icon%>" />
             <div class="mb-sm-2 text-center text-<%=color%>"><b><%=caption%></b></div>
             <div class="small text-muted d-none d-sm-block" style="max-height: 6em; overflow: hidden;">
-                <span class="small"><%=subs.map(v=>v.sub).join(' / ')%></span>
+                <span class="small"><%=subs.map(v=>v.sub[0].title).join(' / ')%></span>
             </div>
         </a>
     <% } %>
@@ -72,8 +72,8 @@
 
 <div class="row my-3">
     <div class="col-lg-8">
-        <div class="bg-primary px-4 py-2 rounded font-weight-bold text-white mb-1">
-            科技动态
+        <div class="d-flex bg-primary px-4 py-2 rounded font-weight-bold text-white mb-1">
+            <h5 class="mt-1" style="flex: 1;">科技动态</h5> <a href="morepost" class="text-white mt-1" style="font-weight: none;" target="blank"><span>更多</span></a>
         </div>
         <ul class="list-group">
             <% for(var i=0;i<news.length;i++){ 
@@ -81,37 +81,56 @@
             %>
                 <a href="<%=path+id%>" class="list-group-item-action py-2 px-1 border-bottom">
                     <div class="row">
-                    <% if (image) {%>
+                    <!-- <% if (image) {%>
                         <div class="col-3 d-flex align-items-center">
 							<div class="w-100 h-100 bg-center-img h-max-6c" style="background-image: url('<%=image%>');">
                             </div>
-                        </div>
-                        <div class="col-9 d-flex align-items-center">
-                    <% } else { %>
+                        </div> -->
+                        <div class="col-10 d-flex align-items-center">
+                    <!-- <% } else { %> -->
                         <div class="col d-flex align-items-center">
-                    <% } 
+                    <!-- <% } 
 						// <small class="text-muted text-right" style="min-width: 3rem;">< %=easyTime(date, true)% ></small>
-					%>
+					%> -->
                             <div class="w-100">
                             <div class="d-flex w-100 justify-content-between">
                                 <div class="bold mb-1 text-dark-blue"><%=caption%></div>
                             </div>
                             <p class="mb-1 font-song"><%=disp%></p>
                             <div class="d-flex small text-gray mt-2">
-                                <div class="flex-grow-1">发表于<%=easyTime(date, true)%></div>
+                                <div class="col-2 p-0">
+                                    <% if (sumHits) { %>
+                                        <div class="mr-6"><%=sumHits%>次阅读</div>
+                                    <% } else { %>
+                                        <div class="mr-6">0次阅读</div>
+                                        <% } %>
+                                </div>
+                                
+                                <div class="">发表于<%=easyTime(date, true)%></div>
                                 <% if (by) { %>
                                     <small class="font-song">信息来源：<%=by%></small>
                                 <% } %>
-                                <% if (sumHits) { %>
-                                    <div><%=sumHits%>次阅读</div>
-                                <% } %>
+                                
                             </div>
                             </div>
                         </div>
+                        <div class="col-2 d-flex align-items-center">
+                            <% if (image) {%>
+                                    <div class="w-100 h-100 bg-center-img h-max-6c" style="background-image: url('<%=image%>');">
+                                    </div>
+                                <% } %>
+                        </div>
+                        <!-- <div class="col-2 small text-gray" >
+                            <% if (sumHits) { %>
+                                <div class="mt-4"><%=sumHits%>次阅读</div>
+                                <% } %>
+                        </div> -->
+                    
                     </div>
                 </a>
             <% } %>
-        </ul>        
+        </ul>   
+        <div class="text-center mt-2"><a href="morepost" target="blank"><span>更多...</span></a></div>     
     </div>
     <div class="col-lg-4">
         <div class="h-100" style="background-color: #f7f7ff;">
