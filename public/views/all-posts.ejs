@@ -12,13 +12,13 @@
 		<a href="<%=path+id%>" class="list-group-item-action py-2 px-1 border-bottom">
 			<div class="row">
 			<% if (image) {%>
-				<div class="col-3 d-flex align-items-center">
-					<div class="w-100 h-100 bg-center-img border h-6c h-max-6c" style="background-image: url('<%=image%>');">
+				<div class="col-3 d-flex">
+					<div class="w-100 h-100 bg-center-img bg-light rounded border h-6c h-max-6c" style="background-image: url('<%=image%>');">
 					</div>
 				</div>
-				<div class="col-9 d-flex align-items-center">
+				<div class="col-9 d-flex">
 			<% } else { %>
-				<div class="col d-flex align-items-center">
+				<div class="col d-flex">
 			<% } 
 				// <small class="text-muted text-right" style="min-width: 3rem;">< %=easyTime(date, true)% ></small>
 			%>
