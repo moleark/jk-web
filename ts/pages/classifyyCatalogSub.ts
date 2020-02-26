@@ -3,13 +3,16 @@ import { ejsError } from "../tools";
 import { buildData } from "../tools";
 import { Dbs } from "../db";
 
-export async function classifyy(req: Request, res: Response) {
+export async function classifyyCatalogSub(req: Request, res: Response) {
     let index = req.params.index;
     let current = req.params.current;
+    let idx = req.params.idx;
+    let indexes = req.params.indexes;
     const categories = await Dbs.product.getRootCategories();
     let categorieschildr: any[];
     let subdirectory: any[];
-    let alldirectory: any[];
+    let catalogSub: any[];
+    let catalog: any[];
     for (let i = 0; i < categories.length; i++) {
         let category = categories[i];
         let { id } = category;
@@ -23,18 +26,30 @@ export async function classifyy(req: Request, res: Response) {
         id = categorieschildr[index].id;
         subdirectory = await Dbs.product.getChildrenCategories(id);
     }
-
+    for (let i = 0; i < subdirectory.length; i++) {
+        let { id } = subdirectory[i];
+        subdirectory[i].children = await Dbs.product.getChildrenCategories(id);
+        id = subdirectory[idx].id;
+        catalog = await Dbs.product.getChildrenCategories(id);
+    }
+    for (let i = 0; i < catalog.length; i++) {
+        let { id } = catalog[i];
+        catalog[i].children = await Dbs.product.getChildrenCategories(id);
+        id = catalog[indexes].id;
+        catalogSub = await Dbs.product.getChildrenCategories(id);
+    }
+    
     let data = buildData(req, {
-        title: categorieschildr[index].name,
-        index: index,
-        categorieschildr: categorieschildr,
-        subdirectory: subdirectory,
-        alldirectory: alldirectory,
+        title: catalog[indexes].name,
+        indexes: indexes,
+        // 右边标题目录
+        catalog: catalog,
+        // 左边一条所有子集
+        catalogSub: catalogSub,
 
     });
-    res.render('classifyy.ejs', data, (err, html) => {
+    res.render('classifyyCatalogSub.ejs', data, (err, html) => {
         if (ejsError(err, res) === true) return;
         res.end(html);
     });
 };
-

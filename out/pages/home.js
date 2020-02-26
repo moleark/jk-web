@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../db");
-// import { categories } from "../data";
+const data_1 = require("../data");
 const tools_1 = require("../tools");
 let lastHomeTick = Date.now();
 let cacheHtml;
@@ -49,6 +49,7 @@ function home(req, res) {
             news: ret,
             categories: categories,
             hotPosts: cacheHotPosts,
+            icon: data_1.icon,
         });
         res.render('home.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)

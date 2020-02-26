@@ -1,7 +1,5 @@
 <%- include('headers/header.ejs') -%>
 <%- include('headers/home-header.ejs') -%>
-
-
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
@@ -9,18 +7,18 @@
                 style="border-bottom-width: 0.2rem;border-bottom-style: solid;">
                 <b><%=title%></b>
             </div>
-            <% for (let i=0; i < subdirectory.length; i++) {
-                let { name } = subdirectory[i];
+            <% for (let i=0; i < catalogSub.length; i++) {
+                let { name } = catalogSub[i];
                 %>
-                <div class="border-muted border-bottom p-3 my-2"><a href="<%=index%>/classifyyCatalog/<%=i%>"><%=name%></a></div>
+                <div class="border-muted border-bottom p-3 my-2"><a href=""><%=name%></a></div>
                 <% } %>
         </div>
         <div class="col-sm-4">
             <ul>
-                <% for (let k=0; k<categorieschildr.length; k++) { 
-                    let {name,children} = categorieschildr[k];
+                <% for (let k=0; k<catalog.length; k++) { 
+                    let {name,children} = catalog[k];
                     %>
-                        <a href="<%=k%>" class="list-group-item list-group-item-action <%=k==index &&'list-group-item-primary'%> px-2 mb-2" target="blank">
+                        <a href="<%=k%>" class="list-group-item list-group-item-action <%=k==indexes &&'list-group-item-primary'%> px-2 mb-2" target="blank">
                             <div class="mb-1 text-center text-info"><b class="h6"><%=name%></b></div>
                             <div class="small text-muted">
                                 <span class="small"><%=children.map(v=>v.name).join(' / ')%></span>

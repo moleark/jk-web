@@ -17,6 +17,8 @@ const webMap_1 = require("./webMap");
 const morepost_1 = require("./morepost");
 const allPosts_1 = require("./allPosts");
 const classifyy_1 = require("./classifyy");
+const classifyyCatalog_1 = require("./classifyyCatalog");
+const classifyyCatalogSub_1 = require("./classifyyCatalogSub");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -35,4 +37,6 @@ exports.homeRouter.get('/language', language_1.language);
 exports.homeRouter.get('/webMap', webMap_1.webMap);
 exports.homeRouter.get('/test/*', test_1.test);
 exports.homeRouter.get('/category/:current/classifyy/:index', classifyy_1.classifyy);
+exports.homeRouter.get('/category/:current/classifyy/:index/classifyyCatalog/:idx', classifyyCatalog_1.classifyyCatalog);
+exports.homeRouter.get('/category/:current/classifyy/:index/classifyyCatalog/:idx/classifyyCatalogSub/:indexes', classifyyCatalogSub_1.classifyyCatalogSub);
 //# sourceMappingURL=index.js.map

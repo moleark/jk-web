@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { Dbs } from "../db";
-// import { categories } from "../data";
 import { ejsError, ipHit, buildData, getRootPath } from "../tools";
 
 let lastHomeTick = Date.now();

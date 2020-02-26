@@ -12,14 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tools_1 = require("../tools");
 const tools_2 = require("../tools");
 const db_1 = require("../db");
-function classifyy(req, res) {
+function classifyyCatalog(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let index = req.params.index;
         let current = req.params.current;
+        let idx = req.params.idx;
         const categories = yield db_1.Dbs.product.getRootCategories();
         let categorieschildr;
         let subdirectory;
-        let alldirectory;
+        let catalog;
         for (let i = 0; i < categories.length; i++) {
             let category = categories[i];
             let { id } = category;
@@ -33,20 +34,27 @@ function classifyy(req, res) {
             id = categorieschildr[index].id;
             subdirectory = yield db_1.Dbs.product.getChildrenCategories(id);
         }
+        for (let i = 0; i < subdirectory.length; i++) {
+            let { id } = subdirectory[i];
+            subdirectory[i].children = yield db_1.Dbs.product.getChildrenCategories(id);
+            id = subdirectory[idx].id;
+            catalog = yield db_1.Dbs.product.getChildrenCategories(id);
+        }
         let data = tools_2.buildData(req, {
-            title: categorieschildr[index].name,
-            index: index,
-            categorieschildr: categorieschildr,
+            title: subdirectory[idx].name,
+            idx: idx,
+            // 右边标题目录
             subdirectory: subdirectory,
-            alldirectory: alldirectory,
+            // 左边一条所有子集
+            catalog: catalog,
         });
-        res.render('classifyy.ejs', data, (err, html) => {
+        res.render('classifyyCatalog.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
                 return;
             res.end(html);
         });
     });
 }
-exports.classifyy = classifyy;
+exports.classifyyCatalog = classifyyCatalog;
 ;
-//# sourceMappingURL=classifyy.js.map
+//# sourceMappingURL=classifyyCatalog.js.map
