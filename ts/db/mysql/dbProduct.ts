@@ -42,7 +42,9 @@ export class DbProduct extends Db {
      */
     async getCategoryById(id: number): Promise<any> {
         const ret = await this.tableFromSql(this.sqlGetCategoryById, [SALESREGION, id, CHINESE]);
-        return ret;
+        if (ret && ret.length > 0)
+            return ret[0];
+        return undefined;
     }
 
     /**

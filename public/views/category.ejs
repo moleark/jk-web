@@ -7,32 +7,22 @@
     <div class="row">
         <div class="col-sm-9">
             <%
-            let {name} = categories[current];
-            console.log(name,'children')
+            let {name, children} = category;
         %>
             <div class="h5 text-info> text-center border-info> py-3"
                 style="border-bottom-width: 0.2rem;border-bottom-style: solid;">
                 <b><%=name%></b>
             </div>
-            <% for (let i=0; i<categorieschildr.length; i++) {
-                %>
-                <div class="border-muted border-bottom p-3 my-2"><a href="<%=current%>/classifyy/<%=i%>"><%=categorieschildr[i].name%></a></div>
-                <% } %>
+            <% for (let i=0; i < children.length; i++) {
+                let { id: childrenId, name: childrenName, isLeaf } = children[i];
+            %>
+            <div class="border-muted border-bottom p-3 my-2">
+                <a href="/category/<%=childrenId%>"><%=childrenName%></a>
+            </div>
+            <% } %>
         </div>
         <div class="col-sm-3">
-            <ul>
-                <% for (let k=0; k<categories.length; k++) { 
-                    let {id, name, icon, children, color} = categories[k];
-                    %>
-                        <a href="<%=k%>" class="list-group-item list-group-item-action <%=k==current &&'list-group-item-primary'%> px-2 mb-2" target="blank">
-                            <!-- <img class="float-left" src="<%=icon%>" style="width: 2.5rem;height:2.5rem; margin: -0.3rem 0.5rem -0.3rem 0;" /> -->
-                            <div class="mb-1 text-center text-info"><b class="h6"><%=name%></b></div>
-                            <div class="small text-muted">
-                                <span class="small"><%=children.map(v=>v.name).join(' / ')%></span>
-                            </div>
-                        </a>
-                    <% } %>
-             </ul>
+
         </div>
     </div>
 </div>

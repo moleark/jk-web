@@ -45,7 +45,9 @@ class DbProduct extends db_1.Db {
     getCategoryById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetCategoryById, [SALESREGION, id, CHINESE]);
-            return ret;
+            if (ret && ret.length > 0)
+                return ret[0];
+            return undefined;
         });
     }
     /**

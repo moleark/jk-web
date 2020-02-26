@@ -15,19 +15,13 @@ const db_1 = require("../db");
 function category(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let current = req.params.current;
-        const categories = yield db_1.Dbs.product.getRootCategories();
-        let categorieschildr;
-        for (let i = 0; i < categories.length; i++) {
-            let category = categories[i];
-            let { id } = category;
-            categories[i].children = yield db_1.Dbs.product.getChildrenCategories(id);
-            id = categories[current].id;
-            categorieschildr = yield db_1.Dbs.product.getChildrenCategories(id);
-        }
+        let currentId = Number(current);
+        let category = yield db_1.Dbs.product.getCategoryById(currentId);
+        let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
+        category.children = children;
         let data = tools_2.buildData(req, {
             current: current,
-            categorieschildr: categorieschildr,
-            categories: categories,
+            category: category,
         });
         res.render('category.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
