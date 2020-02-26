@@ -18,9 +18,9 @@ class DbProduct extends db_1.Db {
         let db = this.databaseName;
         this.sqlGetCategoryById = `
             SELECT  pc.id, pc.no, pc.parent, pc.isLeaf, pc.orderWithinParent, pcl.name
-            FROM    ${db}.tv_ProductCategory pc
-                    inner join ${db}.tv_ProductCategory_ProductCategoryLanguage pcl on pcl.owner = pc.id
-                    inner join ${db}.tv_ProductCategoryInclusion as ppi on ppi.category = pc.id and ppi.salesregion = ? and ppi.total > 0
+            FROM    ${db}.tv_productcategory pc
+                    inner join ${db}.tv_productcategory_productcategorylanguage pcl on pcl.owner = pc.id
+                    inner join ${db}.tv_productcategoryinclusion as ppi on ppi.category = pc.id and ppi.salesregion = ? and ppi.total > 0
             where   pc.$unit = 24 and pc.id = ? and pcl.language = ?;
         `;
         this.sqlGetChildrenCategories = `
@@ -38,21 +38,44 @@ class DbProduct extends db_1.Db {
             where   pc.$unit = 24 and pc.parent is null and pcl.language = ?;
         `;
     }
+    /**
+     *
+     * @param id
+     */
     getCategoryById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetCategoryById, [SALESREGION, id, CHINESE]);
             return ret;
         });
     }
+    /**
+     * 获取目录节点的所有子节点
+     * @param parentId
+     */
     getChildrenCategories(parentId) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetChildrenCategories, [SALESREGION, parentId, CHINESE]);
             return ret;
         });
     }
+    /**
+     * 获取根目录节点
+     */
     getRootCategories() {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetRootCategories, [SALESREGION, CHINESE]);
+            return ret;
+        });
+    }
+    /**
+     * 查询目录节点中包含的产品
+     * @param categoryId 目录节点id
+     * @param pageStart 起始页
+     * @param pageSize 每页产品个数
+     */
+    searchProductByCategory(categoryId, pageStart, pageSize) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromProc(`${this.databaseName}.tv_searchproductbycategory`, [24, 5, pageStart, pageSize, categoryId, SALESREGION, CHINESE]);
             return ret;
         });
     }
