@@ -23,7 +23,8 @@ export async function category(req: Request, res: Response) {
     let data = buildData(req, {
         current: current,
         category: category,
-        path: rootPath + 'category/'
+        path: rootPath + 'category/',
+        productPath: rootPath + 'productCategory/'
     });
 
     res.render('category.ejs', data, (err, html) => {

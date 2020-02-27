@@ -29,7 +29,8 @@ function category(req, res) {
         let data = tools_2.buildData(req, {
             current: current,
             category: category,
-            path: rootPath + 'category/'
+            path: rootPath + 'category/',
+            productPath: rootPath + 'productCategory/'
         });
         res.render('category.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
