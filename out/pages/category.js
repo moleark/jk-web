@@ -19,6 +19,10 @@ function category(req, res) {
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
         let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
         category.children = children;
+        let productpage;
+        let pageCount = 0;
+        let pageSize = 30;
+        productpage = yield db_1.Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize);
         let data = tools_2.buildData(req, {
             current: current,
             category: category,

@@ -5,10 +5,18 @@ import { Dbs } from "../db";
 
 export async function category(req: Request, res: Response) {
     let current = req.params.current;
-    let currentId = Number(current); 
+    let currentId = Number(current);
     let category = await Dbs.product.getCategoryById(currentId);
     let children = await Dbs.product.getChildrenCategories(currentId);
     category.children = children;
+
+
+    let productpage: any[];
+    let pageCount: number = 0;
+    let pageSize: number = 30;
+
+    productpage = await Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize)
+
     let data = buildData(req, {
         current: current,
         category: category,

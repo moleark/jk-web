@@ -8,6 +8,7 @@ export class DbProduct extends Db {
     private sqlGetCategoryById: string;
     private sqlGetChildrenCategories: string;
     private sqlGetRootCategories: string;
+    private sqlSearchProductByCategory: string;
 
     constructor() {
         super('product');
@@ -34,6 +35,16 @@ export class DbProduct extends Db {
                     inner join ${db}.tv_productcategoryinclusion as ppi on ppi.category = pc.id and ppi.salesregion = ? and ppi.total > 0
             where   pc.$unit = 24 and pc.parent is null and pcl.language = ?;
         `;
+        this.sqlSearchProductByCategory = `
+        SELECT   p.id, p.NO, p.brand, p.origin, p.description, p.descriptionc, p.imageurl, pc.chemical
+                , pc.cas, pc.purity, pc.molecularfomula, pc.molecularweight
+        FROM     ${db}.tv_productproductcategorycache as pp
+                inner join ${db}.tv_productx as p on p.id = pp.product
+                left join ${db}.tv_brand as b on p.$unit = b.$unit and p.brand = b.id
+                LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
+        WHERE 	pp.$unit =? AND pp.salesRegion=? AND pp.category=? 			
+        LIMIT  ?,?;
+    `;
     }
 
     /**
@@ -65,13 +76,13 @@ export class DbProduct extends Db {
     }
 
     /**
-     * 查询目录节点中包含的产品
-     * @param categoryId 目录节点id
-     * @param pageStart 起始页
-     * @param pageSize 每页产品个数
-     */
+   * 查询目录节点中包含的产品
+   * @param categoryId 目录节点id
+   * @param pageStart 起始页
+   * @param pageSize 每页产品个数
+   */
     async searchProductByCategory(categoryId: number, pageStart: number, pageSize: number) {
-        const ret = await this.tableFromProc(`${this.databaseName}.tv_searchproductbycategory`, [24, 5, pageStart, pageSize, categoryId, SALESREGION, CHINESE]);
+        const ret = await this.tableFromSql(this.sqlSearchProductByCategory, [24, 5, categoryId, pageStart, pageSize]);
         return ret;
     }
 }
