@@ -14,6 +14,8 @@ const tools_2 = require("../tools");
 const db_1 = require("../db");
 function category(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let rootPath = tools_1.getRootPath(req);
+        console.log(rootPath, 'rootPath');
         let current = req.params.current;
         let currentId = Number(current);
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
@@ -27,6 +29,7 @@ function category(req, res) {
         let data = tools_2.buildData(req, {
             current: current,
             category: category,
+            path: rootPath + 'category/'
         });
         res.render('category.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)

@@ -21,7 +21,7 @@
                 <% if (isLeaf) { %>
                     <a href="/productCategory/<%=childrenId%>" target="blank"><%=childrenName%></a>
                 <% } else { %>
-                    <a href="/category/<%=childrenId%>"><%=childrenName%></a>
+                    <a href="<%=path + childrenId%>"><%=childrenName%></a>
                  <% } %>
             </div>
             <% } %>
