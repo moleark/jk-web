@@ -19,7 +19,8 @@ export async function productCategory(req: Request, res: Response) {
         prepage: rootPath + 'productCategory/'+ currentId +'/?pageCount=' + prepage,
         current: current,
         productpage: productpage,
-        pageCount: pageCount
+        pageCount: pageCount,
+        path: rootPath + 'product/'
     });
 
     res.render('productCategory.ejs', data, (err, html) => {

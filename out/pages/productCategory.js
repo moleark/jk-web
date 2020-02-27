@@ -29,7 +29,8 @@ function productCategory(req, res) {
             prepage: rootPath + 'productCategory/' + currentId + '/?pageCount=' + prepage,
             current: current,
             productpage: productpage,
-            pageCount: pageCount
+            pageCount: pageCount,
+            path: rootPath + 'product/'
         });
         res.render('productCategory.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
