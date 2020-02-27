@@ -40,6 +40,7 @@ function morepost(req, res) {
                 post: postpage,
                 pageCount: pageCount
             });
+            console.log(nextpage, 'nextpage');
             /*
             let html = ejs.render(
                 header

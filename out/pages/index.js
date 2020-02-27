@@ -16,6 +16,7 @@ const contact_1 = require("./contact");
 const webMap_1 = require("./webMap");
 const morepost_1 = require("./morepost");
 const allPosts_1 = require("./allPosts");
+const productCategory_1 = require("./productCategory");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -33,4 +34,5 @@ exports.homeRouter.get('/all-posts', allPosts_1.allPosts);
 exports.homeRouter.get('/language', language_1.language);
 exports.homeRouter.get('/webMap', webMap_1.webMap);
 exports.homeRouter.get('/test/*', test_1.test);
+exports.homeRouter.get('/productCategory/:current', productCategory_1.productCategory);
 //# sourceMappingURL=index.js.map

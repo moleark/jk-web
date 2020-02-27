@@ -12,29 +12,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tools_1 = require("../tools");
 const tools_2 = require("../tools");
 const db_1 = require("../db");
-function category(req, res) {
+function productCategory(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let rootPath = tools_1.getRootPath(req);
         let current = req.params.current;
         let currentId = Number(current);
-        let category = yield db_1.Dbs.product.getCategoryById(currentId);
-        let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
-        category.children = children;
         let productpage;
         let pageCount = 0;
-        let pageSize = 30;
+        let pageSize = 5;
+        pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
         productpage = yield db_1.Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize);
-        console.log(productpage);
+        let nextpage = pageCount + 1;
+        let prepage = pageCount - 1;
+        console.log(productpage, 'productpage98');
         let data = tools_2.buildData(req, {
+            nextpage: rootPath + 'productCategory/' + currentId + '/?pageCount=' + nextpage,
+            prepage: rootPath + 'productCategory/' + currentId + '/?pageCount=' + prepage,
             current: current,
-            category: category,
+            productpage: productpage,
+            pageCount: pageCount
         });
-        res.render('category.ejs', data, (err, html) => {
+        res.render('productCategory.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
                 return;
             res.end(html);
         });
     });
 }
-exports.category = category;
+exports.productCategory = productCategory;
 ;
-//# sourceMappingURL=category.js.map
+//# sourceMappingURL=productCategory.js.map

@@ -16,6 +16,7 @@ export async function category(req: Request, res: Response) {
     let pageSize: number = 30;
 
     productpage = await Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize)
+    console.log(productpage)
 
     let data = buildData(req, {
         current: current,

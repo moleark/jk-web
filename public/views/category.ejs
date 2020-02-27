@@ -15,9 +15,14 @@
             </div>
             <% for (let i=0; i < children.length; i++) {
                 let { id: childrenId, name: childrenName, isLeaf } = children[i];
+                
             %>
             <div class="border-muted border-bottom p-3 my-2">
-                <a href="/category/<%=childrenId%>"><%=childrenName%></a>
+                <% if (isLeaf) { %>
+                    <a href="/productCategory/<%=childrenId%>" target="blank"><%=childrenName%></a>
+                <% } else { %>
+                    <a href="/category/<%=childrenId%>"><%=childrenName%></a>
+                 <% } %>
             </div>
             <% } %>
         </div>
