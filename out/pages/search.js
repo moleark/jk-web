@@ -18,8 +18,8 @@ function search(req, res) {
         if (!key)
             key = req.query.key;
         let dbs = db_1.Dbs;
-        const ret = yield dbs.product.execProc('tv_searchproduct', [db_1.Dbs.unit, 0, null, 30, key, 4]);
-        let products = ret[0];
+        const ret = yield dbs.product.searchProductByKey(key, 0, 10);
+        let products = ret;
         yield loadAllPropIds(products);
         let template, title;
         let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();

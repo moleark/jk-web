@@ -46,7 +46,20 @@ class DbProduct extends db_1.Db {
                 LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
         WHERE 	pp.$unit =? AND pp.salesRegion=? AND pp.category=? 			
         LIMIT  ?,?;
-    `;
+        `;
+        this.sqlSearchProductByKey = `
+        SELECT   p.id, p.NO, p.brand, p.origin, p.description, p.descriptionc, p.imageurl, pc.chemical
+                , pc.cas, pc.purity, pc.molecularfomula, pc.molecularweight
+        FROM     ${db}.tv_productproductcategorycache as pp
+                inner join ${db}.tv_productx as p on p.id = pp.product
+                left join ${db}.tv_brand as b on p.$unit = b.$unit and p.brand = b.id
+                LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
+        WHERE 	pp.$unit =? AND pp.salesRegion=? AND (
+                    p.origin like ? or p.description like ? o
+                    r p.descriptionc like ? or pc.cas ?
+                )
+        LIMIT  ?,?;
+        `;
     }
     /**
      *
@@ -80,14 +93,27 @@ class DbProduct extends db_1.Db {
         });
     }
     /**
-   * 查询目录节点中包含的产品
-   * @param categoryId 目录节点id
-   * @param pageStart 起始页
-   * @param pageSize 每页产品个数
-   */
+     * 查询目录节点中包含的产品
+     * @param categoryId 目录节点id
+     * @param pageStart 起始页
+     * @param pageSize 每页产品个数
+     */
     searchProductByCategory(categoryId, pageStart, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlSearchProductByCategory, [24, 5, categoryId, pageStart, pageSize]);
+            return ret;
+        });
+    }
+    /**
+    * 查询目录节点中包含的产品
+    * @param key 关键字
+    * @param pageStart 起始页
+    * @param pageSize 每页产品个数
+    */
+    searchProductByKey(key, pageStart, pageSize) {
+        return __awaiter(this, void 0, void 0, function* () {
+            key = '%' + key + '%';
+            const ret = yield this.tableFromSql(this.sqlSearchProductByKey, [24, 5, key, key, key, key, pageStart, pageSize]);
             return ret;
         });
     }
