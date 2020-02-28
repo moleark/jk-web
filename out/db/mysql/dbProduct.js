@@ -55,8 +55,8 @@ class DbProduct extends db_1.Db {
                 left join ${db}.tv_brand as b on p.$unit = b.$unit and p.brand = b.id
                 LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
         WHERE 	pp.$unit =? AND pp.salesRegion=? AND (
-                    p.origin like ? or p.description like ? o
-                    r p.descriptionc like ? or pc.cas ?
+                    p.origin like ? or p.description like ? 
+                    or p.descriptionc like ? or pc.cas like ?
                 )
         LIMIT  ?,?;
         `;
