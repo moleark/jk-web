@@ -2,13 +2,20 @@ import { Request, Response } from "express";
 import * as ejs from 'ejs';
 import * as _ from 'lodash';
 import { Dbs, Db } from "../db";
-import { device, viewPath, ejsSuffix, buildData } from "../tools";
+import { device, viewPath, ejsSuffix, buildData, getRootPath } from "../tools";
 
 export async function search(req: Request, res: Response) {
+    let rootPath = getRootPath(req);
     let key = req.params.key;
-    if (!key) key = req.query.key;
+    
+    // if (key) key = req.query.key;
+    
     let dbs = Dbs;
-    const ret = await dbs.product.searchProductByKey(key, 0, 10);
+    let pageCount: number = 0;
+    let pageSize: number = 5;
+    pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
+
+    const ret = await dbs.product.searchProductByKey(key, pageCount * pageSize, pageSize);
     let products: any[] = ret;
     await loadAllPropIds(products);
 
@@ -24,10 +31,13 @@ export async function search(req: Request, res: Response) {
         + body
         + '</div>'
         + homeFooter;
-
-    //let content = ejs.fileLoader('./ejs/a.ejs').toString();
+    let nextpage: number = pageCount + 1;
+    let prepage: number = pageCount - 1;
     let data = buildData(req, {
+        nextpage: rootPath + 'search/'+ key +'/?pageCount=' + nextpage,
+        prepage: rootPath + 'search/'+ key +'/?pageCount=' + prepage,
         products: products,
+        pageCount: pageCount,
     });
 
     let html = ejs.render(template, data);

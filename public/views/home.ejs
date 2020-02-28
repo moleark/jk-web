@@ -21,7 +21,7 @@
     }
     window.onblur = cartClick;
     function search(e) {
-        document.location.href = 'search?key=' + encodeURIComponent(searchForm.keyInput.value);
+        document.location.href = 'search/' + encodeURIComponent(searchForm.keyInput.value);
         return false;
     }
 </script>
