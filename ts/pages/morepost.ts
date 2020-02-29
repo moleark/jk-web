@@ -32,6 +32,7 @@ export async function morepost(req: Request, res: Response) {
             post: postpage,
             pageCount: pageCount
         });
+        console.log(nextpage,'nextpage')
 		/*
         let html = ejs.render(
             header

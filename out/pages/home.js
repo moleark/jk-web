@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../db");
-const data_1 = require("../data");
 const tools_1 = require("../tools");
 let lastHomeTick = Date.now();
 let cacheHtml;
@@ -20,7 +19,6 @@ let lastHotTick = 0;
 function home(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
-        console.log(rootPath, 'rootPath');
         tools_1.ipHit(req, -1);
         let now = Date.now();
         if (false && cacheHtml !== undefined) {
@@ -33,15 +31,22 @@ function home(req, res) {
             ;
         }
         const ret = yield db_1.Dbs.content.homePostList();
+        const categories = yield db_1.Dbs.product.getRootCategories();
+        for (let i = 0; i < categories.length; i++) {
+            let category = categories[i];
+            let { id } = category;
+            categories[i].children = yield db_1.Dbs.product.getChildrenCategories(id);
+        }
         if (cacheHotPosts === undefined || now - lastHotTick > 10 * 60 * 1000) {
             lastHotTick = now;
             let ret = yield db_1.Dbs.content.execProc('tv_hotPosts', [db_1.Dbs.unit, 0]);
             cacheHotPosts = ret[0];
         }
+        console.log(rootPath, 'rootPath');
         let data = tools_1.buildData(req, {
             path: rootPath + 'post/',
             news: ret,
-            categories: data_1.categories,
+            categories: categories,
             hotPosts: cacheHotPosts,
         });
         res.render('home.ejs', data, (err, html) => {

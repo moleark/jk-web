@@ -53,4 +53,18 @@
     </div>
     </a>
 <% }) %>
+
+<div class="text-center mt-2">
+    <% if (pageCount==0) { %>
+    <span>上一页</span>
+    <% } else { %>
+    <a href="<%=prepage%>" class="py-2 px-1 border-bottom">上一页</a>
+    <% } %>
+
+    <% if (products.length<5) { %>
+    <span>下一页</span>
+    <% } else { %>
+    <a href="<%=nextpage%>" class="py-2 px-1 border-bottom">下一页</a>
+    <% } %>
+</div>
 </div>

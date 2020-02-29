@@ -14,12 +14,15 @@ const db_1 = require("../db");
 const tools_1 = require("../tools");
 function search(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let rootPath = tools_1.getRootPath(req);
         let key = req.params.key;
-        if (!key)
-            key = req.query.key;
+        // if (key) key = req.query.key;
         let dbs = db_1.Dbs;
-        const ret = yield dbs.product.execProc('tv_searchproduct', [db_1.Dbs.unit, 0, null, 30, key, 4]);
-        let products = ret[0];
+        let pageCount = 0;
+        let pageSize = 5;
+        pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
+        const ret = yield dbs.product.searchProductByKey(key, pageCount * pageSize, pageSize);
+        let products = ret;
         yield loadAllPropIds(products);
         let template, title;
         let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
@@ -31,9 +34,15 @@ function search(req, res) {
             + body
             + '</div>'
             + homeFooter;
+        console.log(key, 'key');
         //let content = ejs.fileLoader('./ejs/a.ejs').toString();
+        let nextpage = pageCount + 1;
+        let prepage = pageCount - 1;
         let data = tools_1.buildData(req, {
+            nextpage: rootPath + 'search/' + key + '/?pageCount=' + nextpage,
+            prepage: rootPath + 'search/' + key + '/?pageCount=' + prepage,
             products: products,
+            pageCount: pageCount,
         });
         let html = ejs.render(template, data);
         res.end(html);
