@@ -34,8 +34,6 @@ function search(req, res) {
             + body
             + '</div>'
             + homeFooter;
-        console.log(key, 'key');
-        //let content = ejs.fileLoader('./ejs/a.ejs').toString();
         let nextpage = pageCount + 1;
         let prepage = pageCount - 1;
         let data = tools_1.buildData(req, {

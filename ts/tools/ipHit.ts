@@ -19,7 +19,9 @@ export async function ipHit(req: Request, post:number|string) {
     }
     lastTick = now;
 
+	console.log(`ip:${ip} now:${now} lastHostCalcTick:${lastHotCalcTick} post:${post} hits:${hits.length}`);
     if (now - lastHotCalcTick > 60) {
+		console.log('Dbs.content.execProc(tv_calchot, [Dbs.unit, 0, ]);');
         Dbs.content.execProc('tv_calchot', [Dbs.unit, 0, '\n']);
         lastHotCalcTick = now;
     }

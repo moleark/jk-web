@@ -26,7 +26,9 @@ function ipHit(req, post) {
             hits.splice(0);
         }
         lastTick = now;
+        console.log(`ip:${ip} now:${now} lastHostCalcTick:${lastHotCalcTick} post:${post} hits:${hits.length}`);
         if (now - lastHotCalcTick > 60) {
+            console.log('Dbs.content.execProc(tv_calchot, [Dbs.unit, 0, ]);');
             db_1.Dbs.content.execProc('tv_calchot', [db_1.Dbs.unit, 0, '\n']);
             lastHotCalcTick = now;
         }
