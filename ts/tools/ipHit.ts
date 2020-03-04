@@ -11,7 +11,8 @@ export async function ipHit(req: Request, post:number|string) {
     let now = Math.floor(Date.now() / 1000);
 
     let hit = now + '\t' + ip + '\t' + post;
-    hits.push(hit);
+	hits.push(hit);
+	console.log('ipHit', ip, now, hit, lastTick, hits.length);
     if (now - lastTick > saveGap || hits.length > 1000) {
         let data = '\n' + hits.join('\n') + '\n\n';
         Dbs.content.execProc('tv_hit', [Dbs.unit, 0, data]);
