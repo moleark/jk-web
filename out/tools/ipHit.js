@@ -16,23 +16,26 @@ const hits = [];
 const saveGap = 30; // 正式上线，应该是10*60，十分钟
 function ipHit(req, post) {
     return __awaiter(this, void 0, void 0, function* () {
-        let ip = getNetIp(req);
-        let now = Math.floor(Date.now() / 1000);
-        let hit = now + '\t' + ip + '\t' + post;
-        hits.push(hit);
-        console.log('ipHit', ip, now, lastTick, hits.length);
-        if (now - lastTick > saveGap || hits.length > 1000) {
-            let data = '\n' + hits.join('\n') + '\n\n';
-            db_1.Dbs.content.execProc('tv_hit', [db_1.Dbs.unit, 0, data]);
-            console.log('call tv_hit', data);
-            hits.splice(0);
+        try {
+            let ip = getNetIp(req);
+            let now = Math.floor(Date.now() / 1000);
+            let hit = now + '\t' + ip + '\t' + post;
+            hits.push(hit);
+            console.log('ipHit', ip, now, lastTick, hits.length);
+            if (now - lastTick > saveGap || hits.length > 1000) {
+                let data = '\n' + hits.join('\n') + '\n\n';
+                db_1.Dbs.content.execProc('tv_hit', [db_1.Dbs.unit, 0, data]);
+                console.log('call tv_hit', data);
+                hits.splice(0);
+                lastTick = now;
+            }
+            if (now - lastHotCalcTick > 60) {
+                db_1.Dbs.content.execProc('tv_calchot', [db_1.Dbs.unit, 0, '\n']);
+                lastHotCalcTick = now;
+            }
         }
-        lastTick = now;
-        console.log(`ip:${ip} now:${now} lastHostCalcTick:${lastHotCalcTick} post:${post} hits:${hits.length}`);
-        if (now - lastHotCalcTick > 60) {
-            console.log('Dbs.content.execProc(tv_calchot, [Dbs.unit, 0, ]);');
-            db_1.Dbs.content.execProc('tv_calchot', [db_1.Dbs.unit, 0, '\n']);
-            lastHotCalcTick = now;
+        catch (err) {
+            console.error(err);
         }
     });
 }
