@@ -27,7 +27,7 @@ export async function home(req: Request, res: Response) {
         categories[i].children = await Dbs.product.getChildrenCategories(id);
     }
 
-    if (cacheHotPosts === undefined || now - lastHotTick > 10 * 60 * 1000) {
+    if (cacheHotPosts === undefined || now - lastHotTick > 60 * 1000) {
         lastHotTick = now;
         let ret = await Dbs.content.execProc('tv_hotPosts', [Dbs.unit, 0]);
         cacheHotPosts = ret[0];

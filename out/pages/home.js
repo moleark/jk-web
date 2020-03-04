@@ -37,7 +37,7 @@ function home(req, res) {
             let { id } = category;
             categories[i].children = yield db_1.Dbs.product.getChildrenCategories(id);
         }
-        if (cacheHotPosts === undefined || now - lastHotTick > 10 * 60 * 1000) {
+        if (cacheHotPosts === undefined || now - lastHotTick > 60 * 1000) {
             lastHotTick = now;
             let ret = yield db_1.Dbs.content.execProc('tv_hotPosts', [db_1.Dbs.unit, 0]);
             cacheHotPosts = ret[0];
