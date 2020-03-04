@@ -15,6 +15,7 @@ export async function ipHit(req: Request, post:number|string) {
     if (now - lastTick > saveGap || hits.length > 1000) {
         let data = '\n' + hits.join('\n') + '\n\n';
         Dbs.content.execProc('tv_hit', [Dbs.unit, 0, data]);
+		console.log('hit', data);
         hits.splice(0);
     }
     lastTick = now;
