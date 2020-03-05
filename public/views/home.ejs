@@ -59,8 +59,8 @@
         console.log(icon)
     %>
         <a href="category/<%=id%>" class="list-group-item list-group-item-action px-sm-2" target="blank">
-            <!-- <img class="position-absolute
-                category-md-icon category-lg-icon category-icon category-sm-icon" src="<%=icon%>" /> -->
+            <img class="position-absolute
+                category-md-icon category-lg-icon category-icon category-sm-icon" src="<%=icon%>" />
             <div class="mb-sm-2 text-center text-<%=color%>"><b><%=name%></b></div>
             <div class="small text-muted d-none d-sm-block" style="max-height: 6em; overflow: hidden;">
                 <span class="small"><%=children.map(v=>v.name).join(' / ')%></span>

@@ -1,7 +1,7 @@
 import { Db } from "./db";
 
 const SALESREGION = 1;
-const CHINESE = 196;
+const CHINESE = 197;
 
 export class DbProduct extends Db {
 
