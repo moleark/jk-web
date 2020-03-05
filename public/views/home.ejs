@@ -37,7 +37,7 @@
                     <input type="text" name="keyInput" class="form-control border-0"
                         placeholder="品名、货号、CAS号、MDL号或关键词" />
                     <div class="input-group-append">
-                        
+
                         <button type="submit" class="btn btn-primary">搜索</button>
                     </div>
                 </div>
@@ -73,9 +73,9 @@
 
     <div class="row my-3">
         <div class="col-lg-8">
-            <div class="d-flex bg-primary px-4 py-2 rounded font-weight-bold text-white mb-1">
-                <h5 class="mt-1" style="flex: 1;">科技动态</h5> <a href="morepost" class="text-white mt-1"
-                    style="font-weight: none;" target="blank"><span>更多</span></a>
+            <div class="d-flex bg-primary px-4 rounded font-weight-bold text-white mb-1">
+                <h5 class="mt-1" style="flex: 1;">科技动态</h5>
+                <a href="morepost" class="text-white mt-1" target="blank"><span class="h6">更多</span></a>
             </div>
             <ul class="list-group">
                 <% for(var i=0;i<news.length;i++){
@@ -133,7 +133,11 @@
                 </a>
                 <% } %>
             </ul>
-            <div class="text-center mt-2"><a href="morepost" target="blank"><span>更多...</span></a></div>
+            <div class="text-center mt-2">
+                <a href="morepost" target="blank">
+                    <i class="fa fa-hand-o-right px-2" aria-hidden="true"></i> <span>更多动态</span>
+                </a>
+            </div>
         </div>
         <div class="col-lg-4">
             <div class="h-100" style="background-color: #f7f7ff;">

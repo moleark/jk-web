@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("./db");
 const SALESREGION = 1;
-const CHINESE = 197;
+const CHINESE = 196;
 class DbProduct extends db_1.Db {
     constructor() {
         super('product');
