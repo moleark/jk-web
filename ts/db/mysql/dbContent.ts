@@ -31,7 +31,7 @@ export class DbContent extends Db {
 
         this.sqlMorePostPage = `
             SELECT a.id, a.caption, a.discription as disp, c.path as image,
-                a.$update as date, d.hits, d.sumHits
+                    cp.update as date, d.hits, d.sumHits
             FROM ${db}.tv_postpublish cp 
                 join ${db}.tv_post a on cp.post=a.id
                 -- ${db}.tv_post a 
