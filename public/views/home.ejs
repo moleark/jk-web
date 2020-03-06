@@ -25,6 +25,26 @@
         return false;
     }
 </script>
+<%
+let arr = [
+        {       
+            icon: 'https://shop.jkchemical.com/static/media/OrganicChemistry.6d56971c.png',
+            color: 'info',
+        },
+        {
+            icon: 'https://shop.jkchemical.com/static/media/AnalyticalChemistry.f85ff3e0.png',
+            color: 'success',
+        },
+        {
+            icon: 'https://shop.jkchemical.com/static/media/LifeScience.5c2e6ff5.png',
+            color: 'danger',
+        },
+        {
+            icon: 'https://shop.jkchemical.com/static/media/MaterialScience.f2439aa0.png',
+            color: 'warning',
+        }
+    ]
+%>
 <div class="container">
 
     <form class="my-3" name="searchForm" onsubmit="return search()">
@@ -54,9 +74,10 @@
 
     <div style="margin-bottom: 0.1rem; height:0.1rem;background-color:darkgray;"></div>
     <ul class="list-group list-group-horizontal-sm">
+
         <% for (let i=0; i< categories.length; i++) {
-        let {id, name, icon, children, color} = categories[i];
-        console.log(icon)
+        let {id, name, children } = categories[i];
+        let { icon,color } = arr[i];
     %>
         <a href="category/<%=id%>" class="list-group-item list-group-item-action px-sm-2" target="blank">
             <img class="position-absolute
@@ -181,7 +202,7 @@
         </div>
     </div>
 
-    <div class="my-1">
+    <!-- <div class="my-1">
         <div class="btn-group w-100">
             <div class="btn-group flex-fill">
                 <button type="button" class="px-3 btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown"
@@ -221,7 +242,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 
