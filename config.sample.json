@@ -23,6 +23,10 @@
         "product": {
             "database": "product",
             "connection": "connection-ligsh-test"
+        },
+        "productIndex": {
+            "database": "productIndex",
+            "connection": "connection-ligsh-test"
         }
     },
     "ex": "null"
