@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("./db");
+const tools_1 = require("../../tools");
 class DbProductIndex extends db_1.Db {
     constructor() {
         super('productIndex');
@@ -17,12 +18,14 @@ class DbProductIndex extends db_1.Db {
         this.sqlCASInterval = `
             SELECT id, start, end 
             FROM ${db}.tv_casinterval
-            ORDER BY id
+            WHERE salesregion = ${tools_1.SALESREGION}
+            ORDER BY id;
         `;
         this.sqlGetCASByInterval = `
-            SELECT a.content, a.caption
-            FROM ${db}.tv_allcas
-            WHERE casinterval = ?;
+            SELECT  cas 
+            FROM ${db}.tv_casinsalesregion
+            WHERE salesregion = ${tools_1.SALESREGION} and casinterval = ?
+            ORDER BY cas;
         `;
     }
     CASInterval() {

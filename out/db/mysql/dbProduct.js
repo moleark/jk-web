@@ -10,8 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("./db");
-const SALESREGION = 1;
-const CHINESE = 196;
+const tools_1 = require("../../tools");
 class DbProduct extends db_1.Db {
     constructor() {
         super('product');
@@ -67,7 +66,7 @@ class DbProduct extends db_1.Db {
      */
     getCategoryById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlGetCategoryById, [SALESREGION, id, CHINESE]);
+            const ret = yield this.tableFromSql(this.sqlGetCategoryById, [tools_1.SALESREGION, id, tools_1.CHINESE]);
             if (ret && ret.length > 0)
                 return ret[0];
             return undefined;
@@ -79,7 +78,7 @@ class DbProduct extends db_1.Db {
      */
     getChildrenCategories(parentId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlGetChildrenCategories, [SALESREGION, parentId, CHINESE]);
+            const ret = yield this.tableFromSql(this.sqlGetChildrenCategories, [tools_1.SALESREGION, parentId, tools_1.CHINESE]);
             return ret;
         });
     }
@@ -88,7 +87,7 @@ class DbProduct extends db_1.Db {
      */
     getRootCategories() {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlGetRootCategories, [SALESREGION, CHINESE]);
+            const ret = yield this.tableFromSql(this.sqlGetRootCategories, [tools_1.SALESREGION, tools_1.CHINESE]);
             return ret;
         });
     }

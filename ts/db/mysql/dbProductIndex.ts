@@ -1,4 +1,5 @@
 import { Db } from "./db";
+import { SALESREGION } from "../../tools";
 
 export class DbProductIndex extends Db {
     private sqlCASInterval: string;
@@ -10,13 +11,15 @@ export class DbProductIndex extends Db {
         this.sqlCASInterval = `
             SELECT id, start, end 
             FROM ${db}.tv_casinterval
-            ORDER BY id
+            WHERE salesregion = ${SALESREGION}
+            ORDER BY id;
         `;
 
         this.sqlGetCASByInterval = `
-            SELECT a.content, a.caption
-            FROM ${db}.tv_allcas
-            WHERE casinterval = ?;
+            SELECT  cas 
+            FROM ${db}.tv_casinsalesregion
+            WHERE salesregion = ${SALESREGION} and casinterval = ?
+            ORDER BY cas;
         `;
     }
 

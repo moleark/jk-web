@@ -1,7 +1,5 @@
 import { Db } from "./db";
-
-const SALESREGION = 1;
-const CHINESE = 196;
+import { SALESREGION, CHINESE } from "../../tools";
 
 export class DbProduct extends Db {
 
