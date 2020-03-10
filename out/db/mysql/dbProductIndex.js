@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("./db");
-const tools_1 = require("../../tools");
 class DbProductIndex extends db_1.Db {
     constructor() {
         super('productIndex');
@@ -18,25 +17,75 @@ class DbProductIndex extends db_1.Db {
         this.sqlCASInterval = `
             SELECT id, start, end 
             FROM ${db}.tv_casinterval
-            WHERE salesregion = ${tools_1.SALESREGION}
+            WHERE salesregion = ? 
             ORDER BY id;
         `;
         this.sqlGetCASByInterval = `
             SELECT  cas 
             FROM ${db}.tv_casinsalesregion
-            WHERE salesregion = ${tools_1.SALESREGION} and casinterval = ?
+            WHERE salesregion = ? and casinterval = ?
             ORDER BY cas;
         `;
+        this.sqlGetSortNameIntervalGroup = `
+            SELECT  b.name
+            FROM    ${db}.tv_sortnameintervalgroupsalesregion a
+                    inner join ${db}.tv_sortnameinterval b on a.group = b.id
+            WHERE   a.salesregion = ?;
+        `;
+        this.sqlSortNameInterval = `
+            SELECT  id, start, end 
+            FROM ${db}.tv_sortnameinterval
+            WHERE salesregion = ? and group = ?
+            ORDER BY id;
+        `;
+        /*
+        this.sqlGetProductBySortNameInterval = `
+            SELECT  b.*
+            FROM ${db}.tv_sortnameinsalesregion a
+                    inner join ${db}.tv_productx b on a.product = b.id
+            WHERE a.salesregion = ? and a.sortnameinterval = ?
+            ORDER BY a.product;
+        `;
+        */
     }
-    CASInterval() {
+    /**
+     * 获取某销售区域的CAS区间设置
+     * @param salesRegionId
+     */
+    CASInterval(salesRegionId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlCASInterval);
+            const ret = yield this.tableFromSql(this.sqlCASInterval, [salesRegionId]);
             return ret;
         });
     }
-    getCASByInterval(id) {
+    /**
+     * 获取某销售区域的某CAS区间中包含的CAS列表
+     * @param salesRegionId
+     * @param casInervalId
+     */
+    getCASByInterval(salesRegionId, casInervalId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlGetCASByInterval, [id]);
+            const ret = yield this.tableFromSql(this.sqlGetCASByInterval, [salesRegionId, casInervalId]);
+            return ret;
+        });
+    }
+    /**
+     * 获取某销售区域的SortName区间分组
+     * @param salesRegionId
+     */
+    getSortNameIntervalGroup(salesRegionId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlGetSortNameIntervalGroup, [salesRegionId]);
+            return ret;
+        });
+    }
+    /**
+     * 获取某销售区域的SortName区间设置
+     * @param salesRegionId
+     */
+    SortNameInterval(salesRegionId, groupId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlSortNameInterval, [salesRegionId, groupId]);
             return ret;
         });
     }

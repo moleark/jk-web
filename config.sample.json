@@ -25,7 +25,7 @@
             "connection": "connection-ligsh-test"
         },
         "productIndex": {
-            "database": "productIndex",
+            "database": "productindex",
             "connection": "connection-ligsh-test"
         }
     },
