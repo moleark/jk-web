@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Dbs } from "../db";
-import { ejsError, ipHit, buildData, getRootPath } from "../tools";
+import { ejsError, ipHit, buildData, getRootPath, SALESREGION } from "../tools";
 
 let lastHomeTick = Date.now();
 let cacheHtml: string;
@@ -21,6 +21,9 @@ export async function home(req: Request, res: Response) {
     }
     const ret = await Dbs.content.homePostList();
     const categories = await Dbs.product.getRootCategories();
+    const casList = await Dbs.productIndex.CASInterval(SALESREGION);
+    console.log(casList,'CASInterval')
+
     for (let i = 0; i < categories.length; i++) {
         let category = categories[i];
         let { id } = category;

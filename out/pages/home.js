@@ -32,6 +32,8 @@ function home(req, res) {
         }
         const ret = yield db_1.Dbs.content.homePostList();
         const categories = yield db_1.Dbs.product.getRootCategories();
+        const casList = yield db_1.Dbs.productIndex.CASInterval(tools_1.SALESREGION);
+        console.log(casList, 'CASInterval');
         for (let i = 0; i < categories.length; i++) {
             let category = categories[i];
             let { id } = category;
