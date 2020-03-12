@@ -1,0 +1,20 @@
+<%- include('headers/header.ejs') -%>
+<%- include('headers/home-header.ejs') -%>
+<style>
+    a{
+        color: white;
+    }
+</style>
+<div class="container py-3">
+    <h5 class="border-info> pb-2 mb-0" style="border-bottom-width: 0.2rem;border-bottom-style: solid;">产品名称索引</h5>
+    <div class="d-flex py-1 bg-info" style="flex-wrap: wrap; ">
+        <% for (let i=0; i < 26; i++) {
+            %>
+        <a href="">
+            <div class="px-3">[ <%=i%> ]</div>
+        </a>
+        <% } %>
+    </div>
+
+</div>
+<%- include('footers/home-footer.ejs') -%>

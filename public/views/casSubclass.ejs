@@ -1,0 +1,25 @@
+
+
+<%- include('headers/header.ejs') -%>
+<%- include('headers/home-header.ejs') -%>
+
+<style>
+    a{
+        color: black;
+    }
+</style>
+<div class="container my-3">
+    <h3 class="border-info> text-info pb-2" style="border-bottom-width: 0.2rem;border-bottom-style: solid;">CAS索引区间</h3>
+
+    <% for (let i=0; i < casList.length; i++) {
+        let {cas} = casList[i];
+        %>
+        <a href="">
+            <div class="d-flex" style="flex-wrap: wrap;">
+                <div class="px-3">[ <%=cas%> ]</div>
+            </div>  
+        </a>
+        
+        <% } %>
+</div>
+<%- include('footers/home-footer.ejs') -%>

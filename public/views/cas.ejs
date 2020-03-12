@@ -1,0 +1,30 @@
+<%- include('headers/header.ejs') -%>
+<%- include('headers/home-header.ejs') -%>
+<style>
+    a{
+        color: black;
+    }
+</style>
+<div class="container py-3">
+    <h3 class="border-info> text-info pb-2" style="border-bottom-width: 0.2rem;border-bottom-style: solid;">CAS索引</h3>
+    <div class="d-flex" style=" flex-wrap: wrap;">
+        <% for (let i=0; i < casList.length; i++) {
+            let {start,end, id } = casList[i];
+            console.log(start,end,'12')
+
+            %>
+            <a href="<%= path + id %>">
+                <dl class="d-flex px-4">
+                    <dt class="" style="font-weight: 500;">
+                       [ <%=start%>
+                    </dt>
+                    <dd class="pl-5">
+                        至  <%=end%> ]
+                    </dd>
+                </dl>
+            </a>
+            
+            <% } %>
+    </div>
+</div>
+<%- include('footers/home-footer.ejs') -%>

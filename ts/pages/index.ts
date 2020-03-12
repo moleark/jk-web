@@ -15,6 +15,9 @@ import { webMap } from './webMap'
 import { morepost } from './morepost';
 import { allPosts } from './allPosts';
 import { productCategory } from './productCategory';
+import { cas } from './cas';
+import { productName } from './productName';
+import { casSubclass } from './casSubclass';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -33,4 +36,7 @@ homeRouter.get('/all-posts', allPosts);
 homeRouter.get('/language', language);
 homeRouter.get('/webMap', webMap);
 homeRouter.get('/test/*', test);
-homeRouter.get('/productCategory/:current', productCategory);
+homeRouter.get('/productCategory', productCategory);
+homeRouter.get('/cas', cas);
+homeRouter.get('/productName', productName);
+homeRouter.get('/casSubclass/:current', casSubclass);
