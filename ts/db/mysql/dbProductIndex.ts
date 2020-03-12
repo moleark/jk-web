@@ -26,7 +26,7 @@ export class DbProductIndex extends Db {
         `;
 
         this.sqlGetSortNameIntervalGroup = `
-            SELECT  b.name
+            SELECT  b.id, b.name
             FROM    ${db}.tv_sortnameintervalgroupsalesregion a
                     inner join ${db}.tv_sortnameintervalgroup b on a.group = b.id
             WHERE   a.salesregion = ?;
