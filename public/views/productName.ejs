@@ -1,21 +1,87 @@
 <%- include('headers/header.ejs') -%>
 <%- include('headers/home-header.ejs') -%>
 <style>
-    a{
+    /* a {
         color: white;
+    } */
+
+    .sub a {
+        color: black;
+    }
+
+    button.active {
+        background: #03ccbb;
+    }
+
+    .dis div {
+        width: 100%;
+        height: 100%;
+        background-color: #f7f7ff;
+        border: solid 1px #000;
+        display: none;
+        padding: 10px 20px;
+    }
+
+    .btns div {
+        padding: 0 20px;
+    }
+    .btns {
+        padding: 10px 0;
+    }
+    .dis div.active {
+        display: block;
     }
 </style>
-<div class="container py-3">
-    <h5 class="border-info> pb-2 mb-0" style="border-bottom-width: 0.2rem;border-bottom-style: solid;">产品名称索引</h5>
-    <div class="d-flex py-1 bg-info" style="flex-wrap: wrap; ">
-        <% for (let i=0; i < SortName.length; i++) {
-            let { name } = SortName[i]
-            %>
-        <a href="">
-            <div class="px-3">[ <%=name%> ]</div>
-        </a>
-        <% } %>
-    </div>
 
+<div class="container py-3">
+    <h5 class="border-info> pb-2 mb-0 text-info"
+        style="border-bottom-width: 0.2rem;border-bottom-style: solid; font-weight: 600;">产品名称索引</h5>
+    <div class="tab">
+        <div class="btns d-flex bg-info">
+            <% for (let i=0; i< sortName.length; i++) {
+                let {id, name } = sortName[i];
+                console.log(sortName[i])
+            %>
+            <div>[ <%=name%> ]</div>
+            <% } %>
+
+        </div>
+        <div class="dis">
+            <% for (let i=0; i< list.length; i++) {
+            %>
+            <div class="<%=i==0?'active':''%>">
+
+                <% if (list[i].length == 0) { %>
+                    <span>[ 无 ] </span>
+                <% } %>
+
+                <% for (let k=0; k< list[i].length; k++) {
+                    let {start, end, id} = list[i][k];
+
+                    %>
+                    <a href="<%=productPath + id%>" class="px-3">
+                        [ <%=start ? start + '  至  ' + end:'[无]'%> ]             
+                    </a>
+                 <% } %>
+            </div>
+            <% } %>
+        </div>
+
+    </div>
 </div>
 <%- include('footers/home-footer.ejs') -%>
+<script>
+    var btns = document.querySelectorAll('.btns div');
+    var divs = document.querySelectorAll('.dis div');
+
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].onclick = function () {
+            for (let i = 0; i < btns.length; i++) {
+                btns[i].className = "";
+                divs[i].className = "";
+            }
+            this.className = "active";
+            divs[i].className = "active";
+        }
+    }
+</script>

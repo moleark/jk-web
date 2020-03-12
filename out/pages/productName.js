@@ -16,12 +16,18 @@ let cacheHtml;
 function productName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
-        const SortName = yield db_1.Dbs.productIndex.getSortNameIntervalGroup(tools_1.SALESREGION);
-        const subSortName = yield db_1.Dbs.productIndex.SortNameInterval(tools_1.SALESREGION, SortName[0].id);
-        console.log(subSortName, 'SortName');
+        const sortName = yield db_1.Dbs.productIndex.getSortNameIntervalGroup(tools_1.SALESREGION);
+        let subSortName = yield db_1.Dbs.productIndex.SortNameInterval(tools_1.SALESREGION, sortName[0].id);
+        let list = [];
+        for (var i = 0; i < sortName.length; i++) {
+            let subSortName = yield db_1.Dbs.productIndex.SortNameInterval(tools_1.SALESREGION, sortName[i].id);
+            list.push(subSortName);
+        }
         let data = tools_1.buildData(req, {
-            path: rootPath,
-            SortName: SortName,
+            productPath: rootPath + 'search/',
+            sortName: sortName,
+            subSortName: subSortName,
+            list: list
         });
         res.render('productName.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)

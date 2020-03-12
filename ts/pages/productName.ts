@@ -7,12 +7,19 @@ let cacheHtml: string;
 //测试
 export async function productName(req: Request, res: Response) {
     let rootPath = getRootPath(req);
-    const SortName = await Dbs.productIndex.getSortNameIntervalGroup(SALESREGION);
-    const subSortName = await Dbs.productIndex.SortNameInterval(SALESREGION,SortName[0].id);
-    console.log(subSortName,'SortName')
+    const sortName = await Dbs.productIndex.getSortNameIntervalGroup(SALESREGION);
+    let subSortName = await Dbs.productIndex.SortNameInterval(SALESREGION, sortName[0].id);
+
+    let list = [];
+    for(var i = 0; i < sortName.length; i++ ) {
+        let subSortName = await Dbs.productIndex.SortNameInterval(SALESREGION, sortName[i].id);
+        list.push(subSortName)
+    }
     let data = buildData(req, {
-        path: rootPath,
-        SortName: SortName,
+        productPath: rootPath + 'search/',
+        sortName: sortName,
+        subSortName: subSortName,
+        list: list
     });
     res.render('productName.ejs', data, (err, html) => {
         if (ejsError(err, res) === true) return;
