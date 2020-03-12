@@ -22,6 +22,11 @@
         padding: 10px 20px;
     }
 
+    p {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     .btns div {
         padding: 0 20px;
     }
@@ -50,19 +55,20 @@
             <% for (let i=0; i< list.length; i++) {
             %>
             <div class="<%=i==0?'active':''%>">
-
-                <% if (list[i].length == 0) { %>
-                    <span>[ 无 ] </span>
-                <% } %>
-
-                <% for (let k=0; k< list[i].length; k++) {
-                    let {start, end, id} = list[i][k];
-
-                    %>
-                    <a href="<%=productPath + id%>" class="px-3">
-                        [ <%=start ? start + '  至  ' + end:'[无]'%> ]             
-                    </a>
-                 <% } %>
+                <p>
+                    <% if (list[i].length == 0) { %>
+                        <span>[ 无 ] </span>
+                    <% } %>
+    
+                    <% for (let k=0; k< list[i].length; k++) {
+                        let {start, end, id} = list[i][k];
+    
+                        %>
+                        <a href="<%=productPath + id%>" class="px-3">
+                            [ <%=start ? start + '  至  ' + end:'[无]'%> ]             
+                        </a>
+                     <% } %>
+                </p>        
             </div>
             <% } %>
         </div>
