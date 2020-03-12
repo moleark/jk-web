@@ -8,12 +8,11 @@ let cacheHtml: string;
 export async function productName(req: Request, res: Response) {
     let rootPath = getRootPath(req);
     const SortName = await Dbs.productIndex.getSortNameIntervalGroup(SALESREGION);
-    console.log(SortName,'SortName')
+    const subSortName = await Dbs.productIndex.SortNameInterval(SALESREGION,SortName[0].id);
+    console.log(subSortName,'SortName')
     let data = buildData(req, {
         path: rootPath,
-        news: '',
-        categories: '',
-        hotPosts: '',
+        SortName: SortName,
     });
     res.render('productName.ejs', data, (err, html) => {
         if (ejsError(err, res) === true) return;

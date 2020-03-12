@@ -17,12 +17,11 @@ function productName(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
         const SortName = yield db_1.Dbs.productIndex.getSortNameIntervalGroup(tools_1.SALESREGION);
-        console.log(SortName, 'SortName');
+        const SortNa = yield db_1.Dbs.productIndex.SortNameInterval(tools_1.SALESREGION, SortName[0].id);
+        console.log(SortNa, 'SortName');
         let data = tools_1.buildData(req, {
             path: rootPath,
-            news: '',
-            categories: '',
-            hotPosts: '',
+            SortName: SortName,
         });
         res.render('productName.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
