@@ -32,18 +32,17 @@ class DbProductIndex extends db_1.Db {
                     inner join ${db}.tv_sortnameintervalgroup b on a.group = b.id
             WHERE   a.salesregion = ?;
         `;
-        this.sqlSortNameInterval = `
-            SELECT  id, start, end 
-            FROM ${db}.tv_sortnameinterval
-            WHERE salesregion = ? and group = ?
-            ORDER BY id;
-        `;
+        this.sqlSortNameInterval =
+            " SELECT  id, start, end " +
+                " FROM " + db + ".tv_sortnameinterval " +
+                " WHERE salesregion = ? and `group` = ? " +
+                "    ORDER BY id;";
         /*
         this.sqlGetProductBySortNameInterval = `
-            SELECT  b.*
-            FROM ${db}.tv_sortnameinsalesregion a
-                    inner join ${db}.tv_productx b on a.product = b.id
-            WHERE a.salesregion = ? and a.sortnameinterval = ?
+        SELECT  b.*
+            FROM ${ db }.tv_sortnameinsalesregion a
+        inner join ${ db }.tv_productx b on a.product = b.id
+        WHERE a.salesregion = ? and a.sortnameinterval = ?
             ORDER BY a.product;
         `;
         */
