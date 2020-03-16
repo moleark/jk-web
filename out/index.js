@@ -61,6 +61,9 @@ const db_1 = require("./db");
         let p = path.join(__dirname, '../public');
         app.use(express.static(p, { maxAge: 36000 }));
         app.use('/jk-web', express.static(p, { maxAge: 36000 }));
+        app.get('/unit.json', function (req, res) {
+            res.sendfile('./public/unit.json');
+        });
         //设置模板视图的目录
         app.set("views", "./public/views");
         //设置是否启用视图编译缓存，启用将加快服务器执行效率
