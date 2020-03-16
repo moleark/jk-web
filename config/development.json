@@ -1,0 +1,7 @@
+{
+    "shopJsPath": {
+        "runtime": "http://localhost:7798/static/js/bundle.js",
+        "module": "http://localhost:7798/static/js/0.chunk.js",
+        "main": "http://localhost:7798/static/js/main.chunk.js"
+    }
+}

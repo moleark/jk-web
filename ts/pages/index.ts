@@ -27,7 +27,7 @@ homeRouter.get('/search/:key', search);
 homeRouter.get('/search', search);
 homeRouter.get('/product/:id', product);
 homeRouter.get('/iframe', iframe);
-homeRouter.get('/shop', shop);
+// homeRouter.get('/shop', shop);   -- 转移到nginx中实现，免去在web中维护shop的麻烦
 homeRouter.get('/version', version);
 homeRouter.get('/law', law);
 homeRouter.get('/contact', contact);

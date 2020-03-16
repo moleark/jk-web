@@ -2,28 +2,34 @@
     .v-middle {
         vertical-align: middle;
     }
+
     a.jk-logo {
         text-decoration: none;
         color: black;
     }
+
     a.jk-logo:hover {
         color: darkred;
-		opacity: 0.8;
+        opacity: 0.8;
     }
-	.header-bottom {
-		box-shadow: 0.1em 0.2em 0.3em lightgray;
-	}
-	.w-2c {
-		width: 2rem!important;
-	}
-	@media (min-width: 576px) {
-		.w-sm-3c {
-			width: 3rem!important;
-		}
-		.h4-sm {
-			font-size: 1.5rem;
-		}
-	}
+
+    .header-bottom {
+        box-shadow: 0.1em 0.2em 0.3em lightgray;
+    }
+
+    .w-2c {
+        width: 2rem !important;
+    }
+
+    @media (min-width: 576px) {
+        .w-sm-3c {
+            width: 3rem !important;
+        }
+
+        .h4-sm {
+            font-size: 1.5rem;
+        }
+    }
 </style>
 <header class="header-bottom">
     <div class="container">
@@ -32,32 +38,31 @@
                 <a class="jk-logo d-flex align-items-center" href="<%=$root%>">
                     <img class="w-2c w-sm-3c mr-2 my-1" src="<%=$root%>img/jklogo130x130.png">
                     <span class="h5 h4-sm mb-0 mt-1 font-weight-bold position-relative font-hei">
-						<span class="text-dark">百灵威科技</span>
-						<span class="d-none d-sm-inline text-gray position-absolute" 
-							style="right:-1px;bottom:-1px;z-index: -1;">百灵威科技</span>
-					</span>
+                        <span class="text-dark">百灵威科技</span>
+                        <span class="d-none d-sm-inline text-gray position-absolute"
+                            style="right:-1px;bottom:-1px;z-index: -1;">百灵威科技</span>
+                    </span>
                 </a>
             </div>
             <div class="d-none d-sm-block col-sm-6 col-md-4 bg-white">
                 <div class="d-flex d-sm-block flex-sm-column">
-                <div class="flex-grow-1">
-                    <div class="text-right pb-2 py-sm-2">
-                        <small class="v-middle">
-                            <span class="fa-stack text-primary">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </small>
-                        <span class="d-none d-sm-inline text-muted small v-middle">订购/客服: </span>
-                        <b class="v-middle">400-666-7788</b>
+                    <div class="flex-grow-1">
+                        <div class="text-right pt-sm-2">
+                            <small class="v-middle">
+                                <span class="fa-stack text-primary">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </small>
+                            <span class="d-none d-sm-inline text-muted small v-middle">订购/客服: </span>
+                            <b class="v-middle">400-666-7788</b>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div id="login" class="py-sm-2">
+                        </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end">
-                    <iframe src="<%=$root%>iframe" width="" 
-                        frameborder="0" scrolling="no" 
-                        style="border:none; width:10em; height: 1.8em;"></iframe>
-                </div>
-            </div>
             </div>
         </div>
     </div>
