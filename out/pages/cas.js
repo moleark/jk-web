@@ -16,7 +16,6 @@ let cacheHtml;
 function cas(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
-        // let current = req.params.current;
         const casList = yield db_1.Dbs.productIndex.CASInterval(tools_1.SALESREGION);
         let data = tools_1.buildData(req, {
             path: rootPath + 'casSubclass/',

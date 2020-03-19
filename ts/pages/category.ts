@@ -5,7 +5,6 @@ import { Dbs } from "../db";
 
 export async function category(req: Request, res: Response) {
     let rootPath = getRootPath(req);
-    console.log(rootPath,'rootPath')
     let current = req.params.current;
     let currentId = Number(current);
     let category = await Dbs.product.getCategoryById(currentId);
@@ -17,8 +16,7 @@ export async function category(req: Request, res: Response) {
     let pageCount: number = 0;
     let pageSize: number = 30;
 
-    productpage = await Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize)
-    console.log(productpage)
+    productpage = await Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize);
 
     let data = buildData(req, {
         current: current,

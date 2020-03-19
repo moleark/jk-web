@@ -18,6 +18,7 @@ import { productCategory } from './productCategory';
 import { cas } from './cas';
 import { productName } from './productName';
 import { casSubclass } from './casSubclass';
+import { technicalSupport } from './technicalSupport'
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -40,3 +41,4 @@ homeRouter.get('/productCategory', productCategory);
 homeRouter.get('/cas', cas);
 homeRouter.get('/productName', productName);
 homeRouter.get('/casSubclass/:current', casSubclass);
+homeRouter.get('/technicalSupport', technicalSupport);

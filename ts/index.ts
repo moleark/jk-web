@@ -34,9 +34,9 @@ import { Dbs } from './db';
         return value;
     });
 
-    app.use(async (req:express.Request, res:express.Response, next:express.NextFunction) => {
+    app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         //let json = res.json;
-        let s= req.socket;
+        let s = req.socket;
         let p = '';
         if (req.method !== 'GET') p = JSON.stringify(req.body);
         console.log('\n=== %s:%s - %s %s %s', s.remoteAddress, s.remotePort, req.method, req.originalUrl, p);
@@ -47,14 +47,14 @@ import { Dbs } from './db';
             console.error(e);
         }
     });
-    
+
     //挂载静态资源处理中间件,设置css或者js引用文件的静态路径
     //app.use(express.static(__dirname + "/public"));
 
     // 或者以下这个也可以
     let p = path.join(__dirname, '../public');
-    app.use((express.static as any)(p, {maxAge: 36000}));
-    app.use('/jk-web', (express.static as any)(p, {maxAge: 36000}));
+    app.use((express.static as any)(p, { maxAge: 36000 }));
+    app.use('/jk-web', (express.static as any)(p, { maxAge: 36000 }));
     //设置模板视图的目录
     app.set("views", "./public/views");
     //设置是否启用视图编译缓存，启用将加快服务器执行效率
