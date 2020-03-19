@@ -15,7 +15,6 @@ const db_1 = require("../db");
 function category(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
-        console.log(rootPath, 'rootPath');
         let current = req.params.current;
         let currentId = Number(current);
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
@@ -25,7 +24,6 @@ function category(req, res) {
         let pageCount = 0;
         let pageSize = 30;
         productpage = yield db_1.Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize);
-        console.log(productpage);
         let data = tools_2.buildData(req, {
             current: current,
             category: category,
