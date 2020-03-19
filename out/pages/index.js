@@ -9,7 +9,6 @@ const product_1 = require("./product");
 const iframe_1 = require("./iframe");
 const language_1 = require("./language");
 const test_1 = require("./test");
-const shop_1 = require("./shop");
 const version_1 = require("./version");
 const law_1 = require("./law");
 const contact_1 = require("./contact");
@@ -29,7 +28,7 @@ exports.homeRouter.get('/search/:key', search_1.search);
 exports.homeRouter.get('/search', search_1.search);
 exports.homeRouter.get('/product/:id', product_1.product);
 exports.homeRouter.get('/iframe', iframe_1.iframe);
-exports.homeRouter.get('/shop', shop_1.shop);
+// homeRouter.get('/shop', shop);   -- 转移到nginx中实现，免去在web中维护shop的麻烦
 exports.homeRouter.get('/version', version_1.version);
 exports.homeRouter.get('/law', law_1.law);
 exports.homeRouter.get('/contact', contact_1.contact);

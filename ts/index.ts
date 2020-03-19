@@ -55,6 +55,13 @@ import { Dbs } from './db';
     let p = path.join(__dirname, '../public');
     app.use((express.static as any)(p, { maxAge: 36000 }));
     app.use('/jk-web', (express.static as any)(p, { maxAge: 36000 }));
+    // 下面是结合cart运行需要的unit.json文件
+    app.get('/unit.json', function (req, res) {
+        res.sendfile('./public/unit.json');
+    });
+    // 设置所引用的shop的脚本
+    app.locals.shopJsPath = config.get('shopJsPath');
+
     //设置模板视图的目录
     app.set("views", "./public/views");
     //设置是否启用视图编译缓存，启用将加快服务器执行效率
@@ -63,6 +70,7 @@ import { Dbs } from './db';
     app.engine('html', ejs.renderFile);
     //设置模板引擎的格式即运用何种模板引擎
     app.set("view engine", "html");
+
     app.all('*', function (req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
