@@ -15,6 +15,7 @@ function buildData(req, data) {
     if (!data.$title)
         data.$title = '';
     data.$root = getRootPath(req);
+    data.shopJsPath = req.app.locals.shopJsPath;
     return data;
 }
 exports.buildData = buildData;
