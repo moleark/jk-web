@@ -20,17 +20,21 @@ function category(req, res) {
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
         let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
         category.children = children;
-        let explain = "";
+        let explain = "", postID;
         let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
         let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
-        const ret = yield db_1.Dbs.content.postFromId(216);
-        if (ret.length > 0) {
-            let content = ret[0].content;
-            if (content.charAt(0) === '#') {
-                content = tools_1.hmToEjs(content);
-                explain = jk + hmInclude + content;
-                let datas = tools_1.buildData(req, {});
-                explain = ejs.render(explain, datas);
+        const rets = yield db_1.Dbs.content.categoryPost(currentId);
+        if (rets.length > 0) {
+            postID = rets[0].post;
+            const ret = yield db_1.Dbs.content.postFromId(postID);
+            if (ret.length > 0) {
+                let content = ret[0].content;
+                if (content.charAt(0) === '#') {
+                    content = tools_1.hmToEjs(content);
+                    explain = jk + hmInclude + content;
+                    let datas = tools_1.buildData(req, {});
+                    explain = ejs.render(explain, datas);
+                }
             }
         }
         let productpage;

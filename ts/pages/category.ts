@@ -11,17 +11,22 @@ export async function category(req: Request, res: Response) {
     let children = await Dbs.product.getChildrenCategories(currentId);
     category.children = children;
 
-    let explain: string = "";
+    let explain: string = "", postID: string;
     let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
     let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
-    const ret = await Dbs.content.postFromId(216);
-    if (ret.length > 0) {
-        let content = ret[0].content;
-        if (content.charAt(0) === '#') {
-            content = hmToEjs(content);
-            explain = jk + hmInclude + content;
-            let datas = buildData(req, {});
-            explain = ejs.render(explain, datas);
+
+    const rets = await Dbs.content.categoryPost(currentId);
+    if (rets.length > 0) {
+        postID = rets[0].post;
+        const ret = await Dbs.content.postFromId(postID);
+        if (ret.length > 0) {
+            let content = ret[0].content;
+            if (content.charAt(0) === '#') {
+                content = hmToEjs(content);
+                explain = jk + hmInclude + content;
+                let datas = buildData(req, {});
+                explain = ejs.render(explain, datas);
+            }
         }
     }
 

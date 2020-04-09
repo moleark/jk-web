@@ -56,6 +56,11 @@ class DbContent extends db_1.Db {
             ORDER BY a.id desc;
             -- LIMIT 10;
         `;
+        this.sqlCategoryPost = `
+            SELECT a.post, a.productcategory
+            FROM ${db}.tv_postproductcatalogexplain a 
+            WHERE  a.productcategory=?; 
+    `;
     }
     homePostList() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -78,6 +83,12 @@ class DbContent extends db_1.Db {
     allPosts() {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlAllPosts);
+            return ret;
+        });
+    }
+    categoryPost(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlCategoryPost, [id]);
             return ret;
         });
     }
