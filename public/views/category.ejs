@@ -18,7 +18,7 @@
                 
             %>
             <div class="border-muted border-bottom p-3 my-2">
-                <% if (isLeaf) { %>
+                <% if (isLeaf==1) { %>
                 <a href="<%=productPath + childrenId%>" target="blank"><%=childrenName%></a>
                 <% } else { %>
                 <a href="<%=path + childrenId%>"><%=childrenName%></a>
