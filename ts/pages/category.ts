@@ -11,16 +11,18 @@ export async function category(req: Request, res: Response) {
     let children = await Dbs.product.getChildrenCategories(currentId);
     category.children = children;
 
-    let explain: string, html: string;
+    let explain: string, html: string = "";
     let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
     let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
     const ret = await Dbs.content.postFromId(216);
-    let content = ret[0].content;
-    if (content.charAt(0) === '#') {
-        content = hmToEjs(content);
-        explain = jk + hmInclude + content;
-        let datas = buildData(req, {});
-        html = ejs.render(explain, datas);
+    if (ret.lenght > 0) {
+        let content = ret[0].content;
+        if (content.charAt(0) === '#') {
+            content = hmToEjs(content);
+            explain = jk + hmInclude + content;
+            let datas = buildData(req, {});
+            html = ejs.render(explain, datas);
+        }
     }
 
     let productpage: any[];

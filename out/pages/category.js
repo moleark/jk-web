@@ -20,16 +20,18 @@ function category(req, res) {
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
         let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
         category.children = children;
-        let explain, html;
+        let explain, html = "";
         let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
         let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
         const ret = yield db_1.Dbs.content.postFromId(216);
-        let content = ret[0].content;
-        if (content.charAt(0) === '#') {
-            content = tools_1.hmToEjs(content);
-            explain = jk + hmInclude + content;
-            let datas = tools_1.buildData(req, {});
-            html = ejs.render(explain, datas);
+        if (ret.lenght > 0) {
+            let content = ret[0].content;
+            if (content.charAt(0) === '#') {
+                content = tools_1.hmToEjs(content);
+                explain = jk + hmInclude + content;
+                let datas = tools_1.buildData(req, {});
+                html = ejs.render(explain, datas);
+            }
         }
         let productpage;
         let pageCount = 0;
