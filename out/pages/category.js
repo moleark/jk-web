@@ -23,8 +23,8 @@ function category(req, res) {
         let explain = "";
         let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
         let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
-        const ret = yield db_1.Dbs.content.postFromId(118);
-        if (ret.lengthd > 0) {
+        const ret = yield db_1.Dbs.content.postFromId(216);
+        if (ret.length > 0) {
             let content = ret[0].content;
             if (content.charAt(0) === '#') {
                 content = tools_1.hmToEjs(content);
