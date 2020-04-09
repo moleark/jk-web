@@ -11,17 +11,17 @@ export async function category(req: Request, res: Response) {
     let children = await Dbs.product.getChildrenCategories(currentId);
     category.children = children;
 
-    let explain: string, html: string = "";
+    let explain: string = "";
     let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
     let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
-    const ret = await Dbs.content.postFromId(216);
-    if (ret.lenght > 0) {
+    const ret = await Dbs.content.postFromId(118);
+    if (ret.lengthd > 0) {
         let content = ret[0].content;
         if (content.charAt(0) === '#') {
             content = hmToEjs(content);
             explain = jk + hmInclude + content;
             let datas = buildData(req, {});
-            html = ejs.render(explain, datas);
+            explain = ejs.render(explain, datas);
         }
     }
 
@@ -36,7 +36,7 @@ export async function category(req: Request, res: Response) {
         category: category,
         path: rootPath + 'category/',
         productPath: rootPath + 'productCategory/',
-        html: html
+        explain: explain
     });
 
     res.render('category.ejs', data, (err, html) => {
