@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { ejsError, getRootPath } from "../tools";
-import { buildData } from "../tools";
+import { ejsError, getRootPath, buildData, hmToEjs, viewPath, ejsSuffix } from "../tools";
 import { Dbs } from "../db";
+import * as ejs from 'ejs';
 
 export async function category(req: Request, res: Response) {
     let rootPath = getRootPath(req);
@@ -11,6 +11,18 @@ export async function category(req: Request, res: Response) {
     let children = await Dbs.product.getChildrenCategories(currentId);
     category.children = children;
 
+    let explain: string;
+    let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
+    let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
+    const ret = await Dbs.content.postFromId(118);
+    let content = ret[0].content;
+    if (content.charAt(0) === '#') {
+        content = hmToEjs(content);
+    }
+
+    explain = jk + hmInclude + content;
+    let datas = buildData(req, {});
+    let html = ejs.render(explain, datas);
 
     let productpage: any[];
     let pageCount: number = 0;
@@ -22,7 +34,8 @@ export async function category(req: Request, res: Response) {
         current: current,
         category: category,
         path: rootPath + 'category/',
-        productPath: rootPath + 'productCategory/'
+        productPath: rootPath + 'productCategory/',
+        html: html
     });
 
     res.render('category.ejs', data, (err, html) => {

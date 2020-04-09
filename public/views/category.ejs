@@ -2,11 +2,13 @@
 <%- include('headers/home-header.ejs') -%>
 
 <div class="container my-3">
+    <%- html -%>
     <div class="row">
         <div class="col-sm-9">
             <%
             let {name, children} = category;
-        %>
+            %>
+
             <div class="h5 text-info> text-center border-info> py-3"
                 style="border-bottom-width: 0.2rem;border-bottom-style: solid;">
                 <b><%=name%></b>
@@ -17,10 +19,10 @@
             %>
             <div class="border-muted border-bottom p-3 my-2">
                 <% if (isLeaf) { %>
-                    <a href="<%=productPath + childrenId%>" target="blank"><%=childrenName%></a>
+                <a href="<%=productPath + childrenId%>" target="blank"><%=childrenName%></a>
                 <% } else { %>
-                    <a href="<%=path + childrenId%>"><%=childrenName%></a>
-                 <% } %>
+                <a href="<%=path + childrenId%>"><%=childrenName%></a>
+                <% } %>
             </div>
             <% } %>
         </div>
