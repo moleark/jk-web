@@ -23,6 +23,8 @@ function category(req, res) {
         let explain = "", postID;
         let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
         let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
+        let postHeader = ejs.fileLoader(tools_1.viewPath + 'headers/post' + tools_1.ejsSuffix).toString();
+        let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
         const rets = yield db_1.Dbs.content.categoryPost(currentId);
         if (rets.length > 0) {
             postID = rets[0].post;
@@ -31,7 +33,7 @@ function category(req, res) {
                 let content = ret[0].content;
                 if (content.charAt(0) === '#') {
                     content = tools_1.hmToEjs(content);
-                    explain = jk + hmInclude + content;
+                    explain = jk + hmInclude + postHeader + content + postFooter;
                     let datas = tools_1.buildData(req, {});
                     explain = ejs.render(explain, datas);
                 }

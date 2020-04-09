@@ -58,7 +58,8 @@ export class DbContent extends Db {
 
         this.sqlCategoryPost = `
             SELECT a.post, a.productcategory
-            FROM ${db}.tv_postproductcatalogexplain a 
+            FROM    ${db}.tv_postproductcatalogexplain a 
+                    join ${db}.tv_postpublish cp on a.post = cp.post
             WHERE  a.productcategory=?; 
     `;
 
