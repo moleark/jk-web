@@ -5,6 +5,7 @@ export class DbContent extends Db {
     private sqlPostFromId: string;
     private sqlMorePostPage: string;
     private sqlAllPosts: string;
+    private sqlCategoryPost: string;
 
     constructor() {
         super('content');
@@ -55,6 +56,13 @@ export class DbContent extends Db {
             -- LIMIT 10;
         `;
 
+        this.sqlCategoryPost = `
+            SELECT a.post, a.productcategory
+            FROM    ${db}.tv_postproductcatalogexplain a 
+                    join ${db}.tv_postpublish cp on a.post = cp.post
+            WHERE  a.productcategory=?; 
+    `;
+
     }
 
     async homePostList(): Promise<any> {
@@ -74,6 +82,11 @@ export class DbContent extends Db {
 
     async allPosts(): Promise<any> {
         const ret = await this.tableFromSql(this.sqlAllPosts);
+        return ret;
+    }
+
+    async categoryPost(id: any): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlCategoryPost, [id]);
         return ret;
     }
 

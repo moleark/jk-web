@@ -48,6 +48,8 @@ import { Dbs } from './db';
         }
     });
 
+    // 设置所引用的shop的脚本
+    app.locals.shopJsPath = config.get('shopJsPath');
     //挂载静态资源处理中间件,设置css或者js引用文件的静态路径
     //app.use(express.static(__dirname + "/public"));
 
@@ -59,8 +61,6 @@ import { Dbs } from './db';
     app.get('/unit.json', function (req, res) {
         res.sendfile('./public/unit.json');
     });
-    // 设置所引用的shop的脚本
-    app.locals.shopJsPath = config.get('shopJsPath');
 
     //设置模板视图的目录
     app.set("views", "./public/views");
