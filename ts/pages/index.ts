@@ -17,6 +17,7 @@ import { allPosts } from './allPosts';
 import { productCategory } from './productCategory';
 import { cas } from './cas';
 import { productName } from './productName';
+import { ProductResources } from './ProductResources';
 import { casSubclass } from './casSubclass';
 import { technicalSupport } from './technicalSupport'
 
@@ -40,5 +41,6 @@ homeRouter.get('/test/*', test);
 homeRouter.get('/productCategory', productCategory);
 homeRouter.get('/cas', cas);
 homeRouter.get('/productName', productName);
+homeRouter.get('/ProductResources', ProductResources);
 homeRouter.get('/casSubclass/:current', casSubclass);
 homeRouter.get('/technicalSupport', technicalSupport);

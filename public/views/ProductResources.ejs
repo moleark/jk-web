@@ -1,0 +1,74 @@
+<%- include('headers/header.ejs') -%>
+<%- include('headers/home-header.ejs') -%>
+<script>
+    function searchMSDS_old() {
+        alert(searchMSDSForm.keyInputs.value);
+
+        // var params = {};
+        // params.language = "English";
+        // params.originalID = searchMSDSForm.keyInputs.value;
+        //261673
+
+        //var url=https://portal.jk-scientific.com/Other/WebServices/MSDS.asmx/GetPath?language=english&originalID=261673
+
+        // var $j = jQuery.noConflict();
+        // $j.get(url, function (data) {
+        //     alert(111);
+        //     alert(data);
+        //     var ca =data.match(/&string=(\S*?)&skey=/)[1]
+        // });
+
+        //document.location.href = 'http://static.jk-scientific.com/MSDS/LoadMsds.ashx?msdsPath=EN/261673_EN.PDF';
+        //return false;
+    }
+
+    function searchMSDS() {
+        document.location.href = 'http://static.jk-scientific.com/MSDS/LoadMsds.ashx?msdsPath=EN/' + encodeURIComponent(searchMSDSForm.keyInputs.value) + '_EN.PDF';
+        return false;
+    }
+    function searchSPEC() {
+        document.location.href = 'http://static.jk-scientific.com/MSDS/LoadSP.ashx?spPath=Specification/' + encodeURIComponent(searchSPECForm.keyInputs.value) + '_EN.PDF';
+        return false;
+    }
+</script>
+
+<div>
+    <div class="row my-3">
+    </div>
+
+    <table>
+        <tr>
+            <td>MSDS</td>
+            <td>
+                <form class="my-3" name="searchMSDSForm" onsubmit="return searchMSDS()">
+                    <input type="text" id="keyInputs" placeholder="产品编号" />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">下载</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>SPEC</td>
+            <td>
+                <form class="my-3" name="searchSPECForm" onsubmit="return searchSPEC()">
+                    <input type="text" name="keyInputs" placeholder="产品编号" />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">下载</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+<%- include('footers/home-footer.ejs') -%>
