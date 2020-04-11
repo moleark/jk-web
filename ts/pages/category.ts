@@ -17,9 +17,11 @@ export async function category(req: Request, res: Response) {
     let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
     let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
 
-    const rets = await Dbs.content.categoryPost(currentId);
-    if (rets.length > 0) {
-        postID = rets[0].post;
+    const categoryPost = await Dbs.content.categoryPost(currentId);
+
+    const explainlist = await Dbs.content.categoryPostExplain(currentId);
+    if (explainlist.length > 0) {
+        postID = explainlist[0].post;
         const ret = await Dbs.content.postFromId(postID);
         if (ret.length > 0) {
             let content = ret[0].content;
@@ -43,7 +45,8 @@ export async function category(req: Request, res: Response) {
         category: category,
         path: rootPath + 'category/',
         productPath: rootPath + 'productCategory/',
-        explain: explain
+        explain: explain,
+        categoryPost: categoryPost
     });
 
     res.render('category.ejs', data, (err, html) => {

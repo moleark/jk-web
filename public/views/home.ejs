@@ -50,7 +50,6 @@ let arr = [
     ]
 %>
 <div class="container">
-
     <form class="my-3" name="searchForm" onsubmit="return search()">
         <div class="form-row align-items-center justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
@@ -177,7 +176,7 @@ let arr = [
                         hpn++;
                         if (hpn > 10) break;
                         let {post, caption, imagePath, hits, create} = pn;
-                %>
+                    %>
                     <a href="<%=path+post%>"
                         class="list-group-item-action py-2 pl-4 pr-3 border-bottom d-flex align-items-center">
                         <div class="d-flex w-100">

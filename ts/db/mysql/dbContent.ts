@@ -6,6 +6,8 @@ export class DbContent extends Db {
     private sqlMorePostPage: string;
     private sqlAllPosts: string;
     private sqlCategoryPost: string;
+    private sqlCategoryPostExplain: string;
+    private sqlSubject: string;
 
     constructor() {
         super('content');
@@ -56,13 +58,29 @@ export class DbContent extends Db {
             -- LIMIT 10;
         `;
 
-        this.sqlCategoryPost = `
+        this.sqlCategoryPostExplain = `
             SELECT a.post, a.productcategory
             FROM    ${db}.tv_postproductcatalogexplain a 
                     join ${db}.tv_postpublish cp on a.post = cp.post
             WHERE  a.productcategory=?; 
-    `;
+        `;
 
+        this.sqlCategoryPost = `
+            SELECT p.id, p.caption, p.discription as disp, c.path as image,
+                    p.$update as date, d.hits, d.sumHits
+            FROM    ${db}.tv_postproductcatalog a 
+                    join ${db}.tv_post p on a.post = p.id   
+                    join ${db}.tv_postpublish cp on p.id = cp.post
+                    left join ${db}.tv_image c on p.image=c.id
+                    left join ${db}.tv_hot d on p.id=d.post
+            WHERE  a.productcategory=?; 
+        `;
+
+        this.sqlSubject = `
+            SELECT a.id, a.name, a.parent  
+            FROM    ${db}.tv_subject a 
+            WHERE  a.parent=?; 
+        `;
     }
 
     async homePostList(): Promise<any> {
@@ -89,5 +107,16 @@ export class DbContent extends Db {
         const ret = await this.tableFromSql(this.sqlCategoryPost, [id]);
         return ret;
     }
+
+    async categoryPostExplain(id: any): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlCategoryPostExplain, [id]);
+        return ret;
+    }
+
+    async subject(id: any): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlSubject, [id]);
+        return ret;
+    }
+
 
 }

@@ -22,7 +22,8 @@ export async function home(req: Request, res: Response) {
     const ret = await Dbs.content.homePostList();
     const categories = await Dbs.product.getRootCategories();
     const casList = await Dbs.productIndex.CASInterval(SALESREGION);
-    console.log(casList,'CASInterval')
+    const subject = await Dbs.content.subject(0);
+    console.log(casList, 'CASInterval')
 
     for (let i = 0; i < categories.length; i++) {
         let category = categories[i];
@@ -35,12 +36,13 @@ export async function home(req: Request, res: Response) {
         let ret = await Dbs.content.execProc('tv_hotPosts', [Dbs.unit, 0]);
         cacheHotPosts = ret[0];
     }
-    console.log(rootPath,'rootPath')
+    console.log(rootPath, 'rootPath')
     let data = buildData(req, {
         path: rootPath + 'post/',
         news: ret,
         categories: categories,
         hotPosts: cacheHotPosts,
+        subject: subject,
     });
     res.render('home.ejs', data, (err, html) => {
         if (ejsError(err, res) === true) return;

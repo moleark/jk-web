@@ -56,12 +56,27 @@ class DbContent extends db_1.Db {
             ORDER BY a.id desc;
             -- LIMIT 10;
         `;
-        this.sqlCategoryPost = `
+        this.sqlCategoryPostExplain = `
             SELECT a.post, a.productcategory
             FROM    ${db}.tv_postproductcatalogexplain a 
                     join ${db}.tv_postpublish cp on a.post = cp.post
             WHERE  a.productcategory=?; 
-    `;
+        `;
+        this.sqlCategoryPost = `
+            SELECT p.id, p.caption, p.discription as disp, c.path as image,
+                    p.$update as date, d.hits, d.sumHits
+            FROM    ${db}.tv_postproductcatalog a 
+                    join ${db}.tv_post p on a.post = p.id   
+                    join ${db}.tv_postpublish cp on p.id = cp.post
+                    left join ${db}.tv_image c on p.image=c.id
+                    left join ${db}.tv_hot d on p.id=d.post
+            WHERE  a.productcategory=?; 
+        `;
+        this.sqlSubject = `
+            SELECT a.id, a.name, a.parent  
+            FROM    ${db}.tv_subject a 
+            WHERE  a.parent=?; 
+        `;
     }
     homePostList() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -90,6 +105,18 @@ class DbContent extends db_1.Db {
     categoryPost(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlCategoryPost, [id]);
+            return ret;
+        });
+    }
+    categoryPostExplain(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlCategoryPostExplain, [id]);
+            return ret;
+        });
+    }
+    subject(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlSubject, [id]);
             return ret;
         });
     }

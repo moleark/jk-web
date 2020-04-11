@@ -25,9 +25,10 @@ function category(req, res) {
         let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
         let postHeader = ejs.fileLoader(tools_1.viewPath + 'headers/post' + tools_1.ejsSuffix).toString();
         let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
-        const rets = yield db_1.Dbs.content.categoryPost(currentId);
-        if (rets.length > 0) {
-            postID = rets[0].post;
+        const categoryPost = yield db_1.Dbs.content.categoryPost(currentId);
+        const explainlist = yield db_1.Dbs.content.categoryPostExplain(currentId);
+        if (explainlist.length > 0) {
+            postID = explainlist[0].post;
             const ret = yield db_1.Dbs.content.postFromId(postID);
             if (ret.length > 0) {
                 let content = ret[0].content;
@@ -48,7 +49,8 @@ function category(req, res) {
             category: category,
             path: rootPath + 'category/',
             productPath: rootPath + 'productCategory/',
-            explain: explain
+            explain: explain,
+            categoryPost: categoryPost
         });
         res.render('category.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)

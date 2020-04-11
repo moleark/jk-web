@@ -74,3 +74,11 @@ p {margin-bottom:0.7em;}
 	.w-lg-50 {width: 50% !important;}
 	.w-lg-25 {width: 25% !important;}
 }
+
+div.caidan div ul.erji {
+    display: none;
+}
+
+div.caidan div:hover ul.erji {
+    display: block;
+}

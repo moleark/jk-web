@@ -33,6 +33,7 @@ function home(req, res) {
         const ret = yield db_1.Dbs.content.homePostList();
         const categories = yield db_1.Dbs.product.getRootCategories();
         const casList = yield db_1.Dbs.productIndex.CASInterval(tools_1.SALESREGION);
+        const subject = yield db_1.Dbs.content.subject(0);
         console.log(casList, 'CASInterval');
         for (let i = 0; i < categories.length; i++) {
             let category = categories[i];
@@ -50,6 +51,7 @@ function home(req, res) {
             news: ret,
             categories: categories,
             hotPosts: cacheHotPosts,
+            subject: subject,
         });
         res.render('home.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
