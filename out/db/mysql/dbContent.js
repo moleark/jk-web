@@ -60,7 +60,7 @@ class DbContent extends db_1.Db {
             SELECT a.post, a.productcategory
             FROM    ${db}.tv_postproductcatalogexplain a 
                     join ${db}.tv_postpublish cp on a.post = cp.post
-            WHERE  a.productcategory=?; 
+            WHERE  a.productcategory=? and cp.openweb = 1;
         `;
         this.sqlCategoryPost = `
             SELECT p.id, p.caption, p.discription as disp, c.path as image,
@@ -70,7 +70,7 @@ class DbContent extends db_1.Db {
                     join ${db}.tv_postpublish cp on p.id = cp.post
                     left join ${db}.tv_image c on p.image=c.id
                     left join ${db}.tv_hot d on p.id=d.post
-            WHERE  a.productcategory=?; 
+            WHERE  a.productcategory=? and cp.openweb = 1; 
         `;
         this.sqlSubjectById = `
             SELECT a.id, a.name, a.parent  

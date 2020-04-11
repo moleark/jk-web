@@ -63,7 +63,7 @@ export class DbContent extends Db {
             SELECT a.post, a.productcategory
             FROM    ${db}.tv_postproductcatalogexplain a 
                     join ${db}.tv_postpublish cp on a.post = cp.post
-            WHERE  a.productcategory=?; 
+            WHERE  a.productcategory=? and cp.openweb = 1;
         `;
 
         this.sqlCategoryPost = `
@@ -74,7 +74,7 @@ export class DbContent extends Db {
                     join ${db}.tv_postpublish cp on p.id = cp.post
                     left join ${db}.tv_image c on p.image=c.id
                     left join ${db}.tv_hot d on p.id=d.post
-            WHERE  a.productcategory=?; 
+            WHERE  a.productcategory=? and cp.openweb = 1; 
         `;
 
         this.sqlSubjectById = `
