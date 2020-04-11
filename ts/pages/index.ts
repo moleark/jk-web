@@ -20,6 +20,7 @@ import { productName } from './productName';
 import { ProductResources } from './ProductResources';
 import { casSubclass } from './casSubclass';
 import { technicalSupport } from './technicalSupport'
+import { subjectpost } from './subjectpost';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -45,3 +46,4 @@ homeRouter.get('/productName', productName);
 homeRouter.get('/ProductResources', ProductResources);
 homeRouter.get('/casSubclass/:current', casSubclass);
 homeRouter.get('/technicalSupport', technicalSupport);
+homeRouter.get('/subjectpost/:current', subjectpost);

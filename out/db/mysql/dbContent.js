@@ -72,10 +72,22 @@ class DbContent extends db_1.Db {
                     left join ${db}.tv_hot d on p.id=d.post
             WHERE  a.productcategory=?; 
         `;
-        this.sqlSubject = `
+        this.sqlSubjectById = `
             SELECT a.id, a.name, a.parent  
             FROM    ${db}.tv_subject a 
-            WHERE  a.parent=?; 
+            WHERE  a.id=?; 
+        `;
+        this.sqlSubjectPost = `
+            SELECT c.id, c.caption, c.discription as disp, d.path as image,
+                    b.update as date, e.hits, e.sumHits
+            FROM    ${db}.tv_postsubject a 
+                    join ${db}.tv_postpublish b on a.post = b.post        
+                    join ${db}.tv_post c on c.id = a.post
+                    left join ${db}.tv_image d on c.image=d.id
+                    left join ${db}.tv_hot e on a.post=e.post
+            WHERE  a.subject = ? and b.openweb = 1
+            ORDER BY b.update desc
+            LIMIT ?,?;
         `;
     }
     homePostList() {
@@ -114,9 +126,17 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
-    subject(id) {
+    subjectByid(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlSubject, [id]);
+            const ret = yield this.tableFromSql(this.sqlSubjectById, [id]);
+            if (ret && ret.length > 0)
+                return ret[0];
+            return { name: "" };
+        });
+    }
+    subjectPost(id, pageStart, pageSize) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlSubjectPost, [id, pageStart, pageSize]);
             return ret;
         });
     }

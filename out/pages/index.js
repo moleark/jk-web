@@ -21,6 +21,7 @@ const productName_1 = require("./productName");
 const ProductResources_1 = require("./ProductResources");
 const casSubclass_1 = require("./casSubclass");
 const technicalSupport_1 = require("./technicalSupport");
+const subjectpost_1 = require("./subjectpost");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -45,4 +46,5 @@ exports.homeRouter.get('/productName', productName_1.productName);
 exports.homeRouter.get('/ProductResources', ProductResources_1.ProductResources);
 exports.homeRouter.get('/casSubclass/:current', casSubclass_1.casSubclass);
 exports.homeRouter.get('/technicalSupport', technicalSupport_1.technicalSupport);
+exports.homeRouter.get('/subjectpost/:current', subjectpost_1.subjectpost);
 //# sourceMappingURL=index.js.map
