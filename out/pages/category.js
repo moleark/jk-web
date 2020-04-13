@@ -49,6 +49,7 @@ function category(req, res) {
             category: category,
             path: rootPath + 'category/',
             productPath: rootPath + 'productCategory/',
+            postpath: rootPath + 'post/',
             explain: explain,
             categoryPost: categoryPost
         });

@@ -45,6 +45,7 @@ export async function category(req: Request, res: Response) {
         category: category,
         path: rootPath + 'category/',
         productPath: rootPath + 'productCategory/',
+        postpath: rootPath + 'post/',
         explain: explain,
         categoryPost: categoryPost
     });

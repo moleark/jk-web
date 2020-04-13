@@ -37,9 +37,9 @@
                     for (let pn of categoryPost) {
                         hpn++;
                         if (hpn > 10) break;
-                        let {post, caption, imagePath, hits, create} = pn;
+                        let {id, caption, imagePath, hits, create} = pn;
                     %>
-                    <a href="<%=path+post%>"
+                    <a href="<%=postpath+id%>"
                         class="list-group-item-action py-2 pl-4 pr-3 border-bottom d-flex align-items-center">
                         <div class="d-flex w-100">
                             <% if (false && imagePath) { %>
