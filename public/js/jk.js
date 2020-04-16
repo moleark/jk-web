@@ -1,6 +1,5 @@
 window.onload = function () {
     let ismobel = browserRedirect();
-    alert(ismobel);
     if (!ismobel) {
         $("li a").each(function (index, element) {
             $(element).attr("target", "_blank");
