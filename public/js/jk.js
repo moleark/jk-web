@@ -1,9 +1,7 @@
 window.onload = function () {
     let ismobel = browserRedirect();
     if (!ismobel) {
-        $("div a").each(function (index, element) {
-            $(element).attr("target", "_blank");
-        });
+
         $("li a").each(function (index, element) {
             $(element).attr("target", "_blank");
         });
