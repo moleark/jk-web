@@ -21,7 +21,7 @@ function ipHit(req, post) {
             let now = Math.floor(Date.now() / 1000);
             let sales = req.query.sales ? req.query.sales : 0;
             let from = req.query.from ? req.query.from : "other";
-            let hit = now + '\t' + ip + '\t' + post + '\t' + sales + '\t' + from;
+            let hit = now + '\t' + ip + '\t' + post + '\t' + sales;
             hits.push(hit);
             console.log('ipHit', ip, hits.length, now, lastTick, lastHotCalcTick);
             if (now - lastTick > saveGap || hits.length > 1000) {
