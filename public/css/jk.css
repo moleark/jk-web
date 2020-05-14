@@ -1,4 +1,100 @@
-p {margin-bottom:0.7em;}
+body {
+    font-family: 'STHeiti', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+}
+.container h3 {
+    color: #494949;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.3em;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+ 
+.container p{
+    margin-bottom:0.7em;
+}
+
+.container p, .container ul li {
+    letter-spacing: 1.2px;
+    text-align: justify;
+    color: #2d2d2d;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.8em;
+}
+
+
+ol.refer, .refer a {
+    color: #3288e6;
+    font-size: 14px;
+    line-height: 1.8em;
+}
+
+
+.container .pic-wrap {
+    margin: 10px 0;
+}
+.container .pic-wrap .pic {
+    border: 1px solid #c5c5c5;
+}
+.container .pic-wrap span {
+    line-height: 1.8em;
+    margin-bottom: 0.7em;
+    font-size: 13px;
+    display: block;
+    padding-top: 10px;
+    color: #555d66;
+    text-align: center;
+}
+
+.accordion .btn:focus{
+    box-shadow: unset;
+}
+.accordion {
+    border-bottom: 1px solid #E58543;
+    position: relative;
+}
+.accordion i {  
+    right: 10px;
+    position: absolute;
+    top: 10px;
+}
+.accordion img{
+  text-align: center;
+}
+.accordion:hover, .accordion a:hover,  .accordion i:hover{
+  color: #d26a23;
+  border-radius: 0;
+}
+.accordion a {
+  font-size: 20px;
+  color: #E58543;
+}
+.accordion-content h3 {
+  font-weight: bold;
+    margin-top: 20px;
+    line-height: 1.5em;
+    font-size: 14px;
+}
+.accordion-content h3 a {
+    font-size: 16px;
+    color: #3287e6;
+    font-weight: bold;
+}
+.accordion-content h5 {
+    color: #727272;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.accordion-content p {
+    letter-spacing: 0;
+    font-size: 14px;
+    line-height: 1.6em;
+    margin-bottom: 0;
+}
+
+
 .title-top-line-right-angle {
 	border-top-width: 0.15em;
 	border-top-style: solid; 

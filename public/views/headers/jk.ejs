@@ -15,7 +15,7 @@ const patternT0 = {
 	},
 
 	$: {
-		className: 'text-info text-center px-5 mb-3 pt-3 pb-3 font-weight-bold',
+		className: 'title text-left  mb-3 pt-3 pb-3',
 	},
 	"b": {
 		className: 'text-success text-center px-5 mb-3 pt-3 pb-3 font-weight-bold border-bottom border-muted',
@@ -24,19 +24,20 @@ const patternT0 = {
 		className: 'text-danger text-center px-5 mb-3 pt-3 pb-3 font-weight-bold border-bottom border-muted',
 	},
 };
+
 function t0(params, data) {
 	if (!data) return;
 	let {className} = patternT0[params[0]] || patternT0.$;
 %>
-	<h3 class="<%=className%>">
-    	<%-esc(data)%>
-	</h3>
+<h3 class="<%=className%>">
+    <%-esc(data)%>
+</h3>
 <%
 }
 
 const patternT1 = {
 	$: {
-		className: 'text-info text-left mt-3 mb-2 pt-3 pb-2 font-weight-bold',
+		className: 'text-left mb-2 pb-2 referh4 mt-20',
 	},
 	"b": {
 		className: 'text-success text-left mt-3 mb-2 pt-3 pb-2',
@@ -49,9 +50,9 @@ function t1(params, data) {
 	if (!data) return;
 	let {className} = patternT1[params[0]] || patternT1.$;
 %>
-	<h4 class="<%=className%>">
-    	<%-esc(data)%>
-	</h4>
+<h4 class="<%=className%>">
+    <%-esc(data)%>
+</h4>
 <%
 }
 
@@ -70,10 +71,10 @@ function t2(params, data) {
 	if (!data) return;
 	let {className} = patternT2[params] || patternT2.$;
 %>
-	<h5 class="<%=className%>"  style="vertical-align: middle;">
-		<small class="mx-2"><small><small class="text-dark "><i class="fa fa-square"></i></small></small></small>		
-		<span style="vertical-align: middle;"><%-esc(data)%></span>
-	</h5>
+<h5 class="<%=className%>" style="vertical-align: middle;">
+    <small class="mx-2"><small><small class="text-dark "><i class="fa fa-square"></i></small></small></small>
+    <span style="vertical-align: middle;"><%-esc(data)%></span>
+</h5>
 <%
 }
 
@@ -91,9 +92,7 @@ const patternT3 = {
 function t3(params, data) {
 	let {className} = patternT3[params[0]] || patternT3.$;
 %>
-	<h6 class="<%=className%>
-    	<%-esc(data)%>
-	</h6>
+<h6 class="<%=className%>"> <%-esc(data)%> </h6>
 <%
 }
 
@@ -102,40 +101,43 @@ const patternV = {
 function v(params, data) {
 	state.cont=2;
 %>
-	<div class="my-3 "><a class="btn btn-<%=params.join(' ')%>" data-toggle="collapse" 
-		href="#sec-<%=state.secId+1%>" role="button" aria-expanded="false" aria-controls="jk">
-    	<%-esc(data)%>&emsp;<i class="fa fa-chevron-down"></i>
-	</a></div>
+<div class="accordion mb-4">
+    <a class="w-100 btn text-left collapsed" data-toggle="collapse" href="#sec-<%=state.secId+1%>" role="button"
+        aria-expanded="false" aria-controls="jk">
+        <%-esc(data)%>&emsp;<i class="fa fa-chevron-down"></i>
+    </a></div>
 <%
 }
 
+ 
+
 const patternGrid = {
-	$: {
-		gridClass: 'row row-cols-1 row-cols-sm-2 row-cols-md-3',
-	},
-	b: {
-		gridClass: 'row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4',
-	},
-	c: {
-		gridClass: 'row row-cols-1 row-cols-sm-2',
-	}
+$: {
+gridClass: 'row row-cols-1 row-cols-sm-2 row-cols-md-3',
+},
+b: {
+gridClass: 'row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4',
+},
+c: {
+gridClass: 'row row-cols-1 row-cols-sm-2',
+}
 }
 function cell(params, data, arr) {
 %>
-	<div class="border p-3">
-<%
+<div class="border p-3">
+    <%
 	data.forEach (v => {
 %>
-		<div><%-esc(v)%></div>
-<%
+    <div><%-esc(v)%></div>
+    <%
 	})
 	if (arr) {
 %>
-		<div><%-esc(arr)%></div>
-<%		
+    <div><%-esc(arr)%></div>
+    <%		
 	}
-%>	
-	</div>
+%>
+</div>
 <%
 }
 function grid(params, data) {
@@ -143,8 +145,8 @@ function grid(params, data) {
 	let cellFunc = params[0];
 	let {gridClass} = patternGrid[params[1]] || patternGrid.$;
 %> <div class="container <%=collapse()%> my-3" id="sec-<%=state.secId%>">
-	<div class="<%=gridClass%>">
-<%
+    <div class="<%=gridClass%>">
+        <%
 	let tf = eval('typeof ' + cellFunc);
 	let func = (tf === 'function')? eval(cellFunc) : cell;
 	data.forEach(v => {
@@ -160,7 +162,8 @@ function grid(params, data) {
 		if (arr === undefined) arr = [];
 		func(params, main, arr)
 	});
-%> </div></div> <%
+%> </div>
+</div> <%
 }
 
 const patternTable = {
@@ -178,9 +181,10 @@ function table(params, data) {
 	if (len===0) return;
 	let align = [];
 %>
-	<table class="<%=tableClass%> <%=collapse()%> ">
-	<thead><tr>
-<%
+<table class="<%=tableClass%> <%=collapse()%> ">
+    <thead>
+        <tr>
+            <%
 	let r0 = data[0];
 	for (let j=0; j<r0.length; j++) {
 		let c = r0[j];
@@ -207,12 +211,13 @@ function table(params, data) {
 		%> <tr> <%
 		for (let j=0; j<r.length; j++) {
 			let c = r[j];
-			%> <td class="<%=align[j]%>"><%-esc(c)%></td> <%
+			%> <td class=" <%=align[j]%>"><%-esc(c)%></td> <%
 		}
 		%> </tr> <%
 	}
 %>
-	</tbody></table>
+        </tbody>
+</table>
 <%
 }
 
@@ -221,15 +226,15 @@ function xl(ou, pattern, params, data, type) {
 	if (!data || data.length === 0) return;
 	let {className} = pattern[params] || pattern.$;
 %>
-	<<%=ou%> type="<%=type%>" class="pl-4 <%=className%> <%=collapse()%> ">
-<%
+<<%=ou%> type="<%=type%>" class="pl-4 <%=className%> <%=collapse()%> ">
+    <%
 		data.forEach(v => {
 %>
-			<li><%-esc(v)%></li>
-<%			
+    <li><%-esc(v)%></li>
+    <%			
 		})
 %>
-	</<%=ou%>>
+</<%=ou%>>
 <%
 }
 const patternUl = {
@@ -246,7 +251,7 @@ const patternOl = {
 		className: ""
 	},
 	b: {
-		className: "text-muted small font-italic"
+		className: "pl-4 small refer"
 	}
 }
 function ol(params, data) {
@@ -256,18 +261,18 @@ function ol(params, data) {
 function ouou(l1, l2, params, data, type1, type2) {
 	if (!data || data.length === 0) return;
 %>
-	<<%=l1%> type="<%=type1%>" class="pl-4">
-<%
+<<%=l1%> type="<%=type1%>" class="pl-4">
+    <%
 		data.forEach(v => {
 %>
-			<li>
-				<%- esc(v[0]) %>
-				<% xl(l2, type1==='ol'?patternOl:patternUl, params, v[1], type2) %>
-			</li>
-<%			
+    <li>
+        <%- esc(v[0]) %>
+        <% xl(l2, type1==='ol'?patternOl:patternUl, params, v[1], type2) %>
+    </li>
+    <%			
 		})
 %>
-	</<%=l1%>>
+</<%=l1%>>
 <%
 }
 
@@ -291,15 +296,15 @@ function hr(params) {
 	switch (params[0]) {
 	default:
 %>
-	<hr class="">
+<hr class="">
 <%
 		break;
 	case 'down':
 %>
-	<div class="d-flex mx-auto justify-content-center align-items-center my-4">
-	<div class="w-25 border-bottom border-info"></div>
-	<img class="w-3c mx-3" src="<%=params[1] || $root + 'img/double-down.png'%>" style="opacity: 0.7;">
-	<div class="w-25 border-bottom border-info"">
+<div class="d-flex mx-auto justify-content-center align-items-center my-4">
+    <div class="w-25 border-bottom border-info"></div>
+    <img class="w-3c mx-3" src="<%=params[1] || $root + 'img/double-down.png'%>" style="opacity: 0.7;">
+    <div class="w-25 border-bottom border-info"">
 	</div></div>
 <%
 		break;
@@ -325,7 +330,7 @@ function p(params, data) {
 	switch (typeof data) {
 		case 'string':
 %>
-			<p class="<%=first%> <%=collapse()%> "><%-esc(v)%></p>
+			<p class=" <%=first%> <%=collapse()%> "><%-esc(v)%></p>
 <%
 			return;
 		case 'undefined':
@@ -334,7 +339,7 @@ function p(params, data) {
 			let line0 = true;
 			data.forEach(v => {
 %>
-				<p class="<%=line0===true?first:other%> <%=collapse()%> "><%-esc(v)%></p>
+				<p class=" <%=line0===true?first:other%> <%=collapse()%> "><%-esc(v)%></p>
 <%
 				line0 = false;
 			});
@@ -413,29 +418,29 @@ function image(params, data) {
 	let v1 = Array.isArray(l1)===true? l1[0] : l1;
 	let v2 = Array.isArray(l2)===true? l2[0] : l2;
 %>
-	<div class="<%=divClass%> <%=collapse()%> ">
+	<div class=" <%=divClass%> <%=collapse()%> ">
 	<% if (v2) { %>
-		<a href="<%=v2%>">
-	<% } %>
-		<img class="<%=imgClass%>" src="<%=v0%>" alt="">
-		<div class="<%=textClass%>"><%-esc(v1)%></div>
-	<% if (v2) { %>
-		</a>
-	<% } %>
-	</div>
-<%
+		<a href=" <%=v2%>">
+        <% } %>
+        <img class="<%=imgClass%>" src="<%=v0%>" alt="">
+        <div class="<%=textClass%>"><%-esc(v1)%></div>
+        <% if (v2) { %>
+        </a>
+        <% } %>
+    </div>
+    <%
 }
 
 function box(params, data) {
 %>
-	<div class="<%=params.join(' ')%>">
-<%
+    <div class="<%=params.join(' ')%>">
+        <%
 }
 
 function boxEnd(params, data) {
 %>
-	</div>
-<%
+    </div>
+    <%
 }
 
 const patternAudio = {
@@ -456,12 +461,12 @@ function audio(params, data) {
 	let c = params.join(' ').trim();
 	if (c.length === 0) c = 'text-center w-75 my-3 mx-auto';
 %>
-	<div class="<%=c%>">
-		<audio controls class="w-100">
-			<source src="<%=src%>" type="audio/mp3">
-			<embed height="50" width="100" src="<%=src%>">
-		</audio>
-	</div>
-<%
+    <div class="<%=c%>">
+        <audio controls class="w-100">
+            <source src="<%=src%>" type="audio/mp3">
+            <embed height="50" width="100" src="<%=src%>">
+        </audio>
+    </div>
+    <%
 }
 %>
