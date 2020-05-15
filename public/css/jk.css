@@ -34,7 +34,7 @@ ol.refer, .refer a {
 .container .pic-wrap {
     margin: 10px 0;
 }
-.container .pic-wrap .pic {
+.container .pic-wrap img {
     border: 1px solid #c5c5c5;
 }
 .container .pic-wrap span {
@@ -46,6 +46,8 @@ ol.refer, .refer a {
     color: #555d66;
     text-align: center;
 }
+
+
 
 .accordion .btn:focus{
     box-shadow: unset;
@@ -93,6 +95,7 @@ ol.refer, .refer a {
     line-height: 1.6em;
     margin-bottom: 0;
 }
+ 
 
 
 .title-top-line-right-angle {
