@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DbProductIndex = void 0;
 const db_1 = require("./db");
 class DbProductIndex extends db_1.Db {
     constructor() {

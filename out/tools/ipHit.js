@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getNetIp = exports.ipHit = void 0;
 const db_1 = require("../db");
 let lastTick = 0;
 let lastHotCalcTick = Date.now() / 1000;

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.icon = void 0;
 exports.icon = [
     {
         caption: '有机化学',

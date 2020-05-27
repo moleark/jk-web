@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.contact = void 0;
 const tools_1 = require("../tools");
 const tools_2 = require("../tools");
 function contact(req, res) {

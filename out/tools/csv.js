@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.csv = void 0;
 function csv(text) {
     if (typeof csv !== 'string')
         return text;

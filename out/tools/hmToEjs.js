@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.hmToEjs = void 0;
 function hmToEjs(hm) {
     let ln, lnln;
     let lnPos = hm.indexOf('\n');

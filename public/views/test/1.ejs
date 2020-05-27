@@ -1,8 +1,11 @@
 <style>
-    p {margin-bottom:0.7em;}
+    p {
+        margin-bottom: 0.7em;
+    }
+
     .title-top-line-right-angle {
         border-top-width: 0.15em;
-        border-top-style: solid; 
+        border-top-style: solid;
         padding-top: 0.1rem;
     }
 
@@ -10,12 +13,14 @@
         font-size: 1.5em;
         letter-spacing: 0.1em;
     }
+
     .first-line-height-small::first-line {
-        line-height: 1.5em; 
+        line-height: 1.5em;
     }
+
     .title-top-line {
         border-top-width: 0.15em;
-        border-top-style: solid; 
+        border-top-style: solid;
         padding-top: 0.1rem;
     }
 </style>
@@ -24,7 +29,7 @@
 
 function cell1(s, data) {
 %>
-	<div>cell1####</div>
+<div>cell1####</div>
 <%
 }
 /*
@@ -121,56 +126,57 @@ function product(p) {
         url = 'https://www.jkchemical.com/CH/products/search/' + url + no + '.html';
     }
 %>
-	<div class="col-sm py-1  py-sm-3  border-bottom border-muted">
-		<a href="<%=url%>" class="text-decoration-none">
-			<div style="line-height:1.5em;">
-				<div class="text-info mb-1" style="font-weight:600;"><%=no%></div>
-				<div class="text-dark"><%-caption%></div>
-			</div>
-		</a>
-	</div>
+<div class="col-sm py-1  py-sm-3  border-bottom border-muted">
+    <a href="<%=url%>" class="text-decoration-none">
+        <div style="line-height:1.5em;">
+            <div class="text-info mb-1" style="font-weight:600;"><%=no%></div>
+            <div class="text-dark"><%-caption%></div>
+        </div>
+    </a>
+</div>
 <%
 }
 
 function products(arr) {
 %> <div class="container">
-	<div class="row row-cols-1 row-cols-sm-1 row-cols-md-3"> 
-<%
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3">
+        <%
 	csv(arr).forEach(product);
-%> </div></div> <%
+%> </div>
+</div> <%
 }
 
 function subtitle1(text) {
 %>
-	<div class="h4 text-info d-flex clearfix">
-		<div class="py-2 mb-0 pr-4 d-flex align-items-center">
-			<div><b><%-text%></b></div>
-		</div>
-	</div>
+<div class="h4 text-info d-flex clearfix">
+    <div class="py-2 mb-0 pr-4 d-flex align-items-center">
+        <div><b><%-text%></b></div>
+    </div>
+</div>
 <%
 }
 
 function subtitle2(text) {
 %>
-	<div class="h5 text-dark d-flex clearfix">
-		<div class="py-2 mb-0 pl-2 pr-4 d-flex align-items-center">
-			<li style="list-style:square;"><b><%-text%></b></li>
-		</div>
-	</div>
+<div class="h5 text-dark d-flex clearfix">
+    <div class="py-2 mb-0 pl-2 pr-4 d-flex align-items-center">
+        <li style="list-style:square;"><b><%-text%></b></li>
+    </div>
+</div>
 <%
 }
 
 function subtitle3(text) {
 %>
-	<div class="border-bottom border-muted my-2" >
-			<div ><b><%=text%></b></div>
-	</div>
+<div class="border-bottom border-muted my-2">
+    <div><b><%=text%></b></div>
+</div>
 <%
 }
 
 function description(text) {
 %>
-	<li class="px-2 pb-3 ml-3" ><%-text%></li>
+<li class="px-2 pb-3 ml-3"><%-text%></li>
 <%
 }
 
@@ -244,10 +250,10 @@ p('c', 内容);
 
 <audio src="<%=$root%>audio/a1.mp3">ddd</audio>
 <audio controls height="100" width="100">
-	<source src="<%=$root%>audio/a1.m4a" type="audio/mp3">
-	<embed height="50" width="100" src="<%=$root%>audio/a1.mp3">
+    <source src="<%=$root%>audio/a1.m4a" type="audio/mp3">
+    <embed height="50" width="100" src="<%=$root%>audio/a1.mp3">
 </audio>
-  
+
 
 <p class="first-char-large first-line-height-small">
     存在于样品和溶剂中的杂质不仅容易对色谱仪器装置（如液相泵、进样阀、色谱柱等）造成损坏或堵塞，而且会对分析结果造成干扰。因此，在样品上机检测前对样品进行过滤显得尤为重要，并可以有效降低上述问题的发生，提高色谱检测的灵敏度和准确度。
@@ -261,32 +267,41 @@ p('c', 内容);
 </p>
 
 <div class="text-center m-3">
-    <img class="w-75" src="https://c.jkchemical.com/res/0-0309.jpg"/>
+    <img class="w-75" src="https://shop.jkchemical.com/res/0-0309.jpg" />
 </div>
 <ol class="small" style="color:dimgrey;font-style: italic;">
-	<li>Clarke S L, Mcglacken G P. Methyl fluorosulfonyldifluoroacetate (MFSDA): An Underutilised Reagent for Trifluoromethylation[J]. Chemistry - A European Journal, 2017, 23(6):1219-1230.</li>
-	<li>Zhao G, Wu H, Xiao Z, et al. Trifluoromethylation of haloarenes with a new trifluoro-methylating reagent Cu(O2CCF2SO2F)2[J]. Rsc Advances, 2016, 6(55):50250-50254.</li>
+    <li>Clarke S L, Mcglacken G P. Methyl fluorosulfonyldifluoroacetate (MFSDA): An Underutilised Reagent for
+        Trifluoromethylation[J]. Chemistry - A European Journal, 2017, 23(6):1219-1230.</li>
+    <li>Zhao G, Wu H, Xiao Z, et al. Trifluoromethylation of haloarenes with a new trifluoro-methylating reagent
+        Cu(O2CCF2SO2F)2[J]. Rsc Advances, 2016, 6(55):50250-50254.</li>
 </ol>
 
 <% subtitle3('  ') %>
 <% subtitle1('电子顺磁管                       ') %>
 <% description('种类齐全，包括低频（L,S,X波段）、高频（Q,W波段）顺磁管，天然石英、人工石英顺磁管，经济型和精密型顺磁管及天然石英毛细管。') %>
 <% products(电子顺磁管); %>
-<div class="text-dark pt-3" >
+<div class="text-dark pt-3">
     <h6>更多电子顺磁管请点击:
-    <a class="mx-3 text-danger" href="https://www.jkchemical.com/CH/products/search/fulltextsearch/EPR%20Sample%20Tube.html">电子顺磁管
-    </a></h6>
+        <a class="mx-3 text-danger"
+            href="https://www.jkchemical.com/CH/products/search/fulltextsearch/EPR%20Sample%20Tube.html">电子顺磁管
+        </a></h6>
 </div>
 <% subtitle1('指南1配套产品（魔术角固体核磁转子管）') %>
 <% description('旋转测试仅在指定的最高旋转速度下进行，确保性能而不使转子过度旋转；') %>
 <% description('MAS转子和瓶盖与大多数固态NMR光谱仪100%兼容。') %>
 <% products(指南1配套产品); %>
-<div class="text-dark pt-3" >
-<h6>更多固体核磁管请点击：
-<a class="mx-3 text-danger" href="https://www.jkchemical.com/CH/products/search/fulltextsearch/%E9%9D%9EGHX%E5%9E%8B.html">非GHX型瓦里安NanoProbe玻璃转子管 </a>
-<a class="mx-3 text-danger" href="https://www.jkchemical.com/CH/products/search/fulltextsearch/GHX%E5%9E%8B.html">GHX型瓦里安NanoProbe玻璃转子管 </a>
-<a class="mx-3 text-danger" href="https://www.jkchemical.com/CH/products/search/fulltextsearch/%E8%BD%AC%E5%AD%90%E5%A5%97%E7%AE%A1.html">Pyrex®玻璃MAS转子套管 </a>
-</h6 >
+<div class="text-dark pt-3">
+    <h6>更多固体核磁管请点击：
+        <a class="mx-3 text-danger"
+            href="https://www.jkchemical.com/CH/products/search/fulltextsearch/%E9%9D%9EGHX%E5%9E%8B.html">非GHX型瓦里安NanoProbe玻璃转子管
+        </a>
+        <a class="mx-3 text-danger"
+            href="https://www.jkchemical.com/CH/products/search/fulltextsearch/GHX%E5%9E%8B.html">GHX型瓦里安NanoProbe玻璃转子管
+        </a>
+        <a class="mx-3 text-danger"
+            href="https://www.jkchemical.com/CH/products/search/fulltextsearch/%E8%BD%AC%E5%AD%90%E5%A5%97%E7%AE%A1.html">Pyrex®玻璃MAS转子套管
+        </a>
+    </h6>
 </div>
 
 <% subtitle1('指南2配套产品（微量核磁管）         ') %>
@@ -306,56 +321,59 @@ p('c', 内容);
 
 <h6 class="my-3"><b>相关推荐</b></h6>
 <div class="row text-center h6 my-3 row-cols-1 row-cols-sm-2 row-cols-md-3">
-	<div class="col-sm p-3">
-		<a href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=1338" class="text-decoration-none text-dark" style="font-weight:600;">
-			样品瓶系列产品<br>
-			<img src="https://c.jkchemical.com/res/0-0238.png" /> <br>
-			样品瓶系列产品<br>
-		</a>
+    <div class="col-sm p-3">
+        <a href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=1338"
+            class="text-decoration-none text-dark" style="font-weight:600;">
+            样品瓶系列产品<br>
+            <img src="https://shop.jkchemical.com/res/0-0238.png" /> <br>
+            样品瓶系列产品<br>
+        </a>
     </div>
-	<div class="col-sm p-3 ">
-		<a href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=1356" class="text-decoration-none text-dark" style="font-weight:600;">
-			固相萃取产品<br>
-			<img src="https://c.jkchemical.com/res/0-0127.jpg"/><br>
-			固相萃取产品<br>
-		</a>
+    <div class="col-sm p-3 ">
+        <a href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=1356"
+            class="text-decoration-none text-dark" style="font-weight:600;">
+            固相萃取产品<br>
+            <img src="https://shop.jkchemical.com/res/0-0127.jpg" /><br>
+            固相萃取产品<br>
+        </a>
     </div>
-	<div class="col-sm p-3 ">
-		<a href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=895" class="text-decoration-none text-dark" style="font-weight:600;">
-			LC-MS色谱溶剂<br>
-			<img src="https://c.jkchemical.com/res/0-0240.jpg"/><br>
-			LC-MS色谱溶剂<br>
-		</a>
+    <div class="col-sm p-3 ">
+        <a href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=895"
+            class="text-decoration-none text-dark" style="font-weight:600;">
+            LC-MS色谱溶剂<br>
+            <img src="https://shop.jkchemical.com/res/0-0240.jpg" /><br>
+            LC-MS色谱溶剂<br>
+        </a>
     </div>
 </div>
 ddd
 <div class="row text-center h6 my-3 row-cols-1 row-cols-sm-2 row-cols-md-3">
-	<div class="col p-3 ">
-		<a href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=1373" class="text-decoration-none text-dark" style="font-weight:600;">
-			气相色谱柱<br>
-			<img src="https://c.jkchemical.com/res/0-0241.jpg"/><br>
-			气相色谱柱<br>
-		</a>
+    <div class="col p-3 ">
+        <a href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=1373"
+            class="text-decoration-none text-dark" style="font-weight:600;">
+            气相色谱柱<br>
+            <img src="https://shop.jkchemical.com/res/0-0241.jpg" /><br>
+            气相色谱柱<br>
+        </a>
     </div>
-		<div class="col p-3 ">
-			<a class="d-flex h-100 flex-column text-decoration-none text-dark"
-				href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=1374"
-				style="font-weight:600;">
-			<div>液相色谱柱</div>
-			<div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-				<img src="https://c.jkchemical.com/res/0-0242.jpg" style="max-width: 100%;" />
-			</div>
-			<div>液相色谱柱</div>
-		</a>
+    <div class="col p-3 ">
+        <a class="d-flex h-100 flex-column text-decoration-none text-dark"
+            href="https://www.jkchemical.com/InformationContent.aspx?language=ch&id=1374" style="font-weight:600;">
+            <div>液相色谱柱</div>
+            <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+                <img src="https://shop.jkchemical.com/res/0-0242.jpg" style="max-width: 100%;" />
+            </div>
+            <div>液相色谱柱</div>
+        </a>
     </div>
-	<div class="col p-3">
-		<a class="d-flex h-100 flex-column text-decoration-none text-dark" href="#" 
-			style="font-weight:600; max-height: 10rem;">
-			<div>超洁净移液器吸头</div>
-			<div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-				<img src="img/vert.png" style="max-width: 100%;" />
-			</div>
-			<div>超洁净移液器吸头</div>
-		</a>
-	</div>
+    <div class="col p-3">
+        <a class="d-flex h-100 flex-column text-decoration-none text-dark" href="#"
+            style="font-weight:600; max-height: 10rem;">
+            <div>超洁净移液器吸头</div>
+            <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+                <img src="img/vert.png" style="max-width: 100%;" />
+            </div>
+            <div>超洁净移液器吸头</div>
+        </a>
+    </div>
 </div>

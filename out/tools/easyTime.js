@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.easyTime = void 0;
 function easyTime(vDate, withTime) {
     if (!vDate)
         return null;

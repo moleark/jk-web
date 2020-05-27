@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.product = void 0;
 const ejs = require("ejs");
 const _ = require("lodash");
 const db_1 = require("../db");

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.latestProducts = void 0;
 exports.latestProducts = [
     { caption: 'CT#56-胺化试剂' },
     { caption: '针式过滤器——100%完整性测试的匠心之作' },

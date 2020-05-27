@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.buildData = exports.getRootPath = void 0;
 const root = '/jk-web';
 const rootEndSlash = root + '/';
 function getRootPath(req) {

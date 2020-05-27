@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.hmParse = void 0;
 const _hm_funcs = {
     __append: function (err, cmd, style, cell, data) {
         console.log(cmd, style, cell, data);

@@ -1,22 +1,27 @@
 <style>
-    p {margin-bottom:0.7em;}
+    p {
+        margin-bottom: 0.7em;
+    }
+
     .title-top-line-right-angle {
         border-top-width: 0.15em;
-        border-top-style: solid; 
+        border-top-style: solid;
         padding-top: 0.1rem;
     }
+
     .title-top-line-right-angle>:first-child {
-        line-height: 1.4em; 
-        padding: 0.3em 3em 0.3em 0.8em; 
+        line-height: 1.4em;
+        padding: 0.3em 3em 0.3em 0.8em;
         border-bottom-right-radius: 3em;
     }
+
     .first-char-large::first-letter {
         font-size: 200%;
     }
 
     .title-top-line {
         border-top-width: 0.15em;
-        border-top-style: solid; 
+        border-top-style: solid;
         padding-top: 0.1rem;
     }
 </style>
@@ -32,15 +37,15 @@ function product(p) {
     }
 %>
 <div class="col-sm py-1 py-sm-2 border-bottom border-muted">
-<a href="<%=url%>" class="text-decoration-none">
-<div class="d-sm-flex"  style="line-height:1.5em; ">
-    <div class="w-5c" style="color: tomato; font-weight:600;"><%=no%></div>
-    <div class="text-dark">
-        <b><%=caption%></b>
-        <div><%=pack%></div>
-    </div>
-</div>
-</a>
+    <a href="<%=url%>" class="text-decoration-none">
+        <div class="d-sm-flex" style="line-height:1.5em; ">
+            <div class="w-5c" style="color: tomato; font-weight:600;"><%=no%></div>
+            <div class="text-dark">
+                <b><%=caption%></b>
+                <div><%=pack%></div>
+            </div>
+        </div>
+    </a>
 </div>
 <%
 }
@@ -55,24 +60,24 @@ function products(arr) {
 
 function subtitle1(text) {
     %>
-        <div class="title-top-line-right-angle border-info text-white d-flex clearfix">
-            <div class="border-info bg-info py-2 mb-0 pl-2 pr-4 d-flex align-items-center">
-                <i class="mr-2 fa fa-circle" style="font-size: 60%;"></i>
-                <div><b><%-text%></b></div>
-            </div>
-        </div>
-    <%
+<div class="title-top-line-right-angle border-info text-white d-flex clearfix">
+    <div class="border-info bg-info py-2 mb-0 pl-2 pr-4 d-flex align-items-center">
+        <i class="mr-2 fa fa-circle" style="font-size: 60%;"></i>
+        <div><b><%-text%></b></div>
+    </div>
+</div>
+<%
 }
 
 function subtitle2(text) {
     %>
-        <div class="title-top-line border-info text-primary d-flex clearfix">
-            <div class="border-info py-2 mb-0 pl-2 pr-4 d-flex align-items-center">
-                <i class="mr-2 fa fa-circle" style="font-size: 60%;"></i>
-                <div><b><%-text%></b></div>
-            </div>
-        </div>
-    <%
+<div class="title-top-line border-info text-primary d-flex clearfix">
+    <div class="border-info py-2 mb-0 pl-2 pr-4 d-flex align-items-center">
+        <i class="mr-2 fa fa-circle" style="font-size: 60%;"></i>
+        <div><b><%-text%></b></div>
+    </div>
+</div>
+<%
 }
 
 let 有效氯游离碱的测定试剂及耗材 = [
@@ -130,46 +135,45 @@ let 污水水质监测实验所需耗材 = [
 
 <h4 class="text-info text-center px-5 my-3 pb-3 border-info" style="border-bottom: dotted 0.15rem;">
     <b>「GB/T19106-2013 次氯酸钠」检测试剂</b>
-</h3>
+    </h3>
 
-<div class="clearfix mb-3">
-<img class="d-block w-100 float-sm-right w-sm-50 w-lg-25 ml-sm-3 mb-3 mb-sm-0 border border-danger rounded" 
-    src="https://c.jkchemical.com/res/0-0286.png" />
-<p class="first-char-large">
-  随着新型冠状病毒肺炎疫情发展，全国一心，致力于打赢这场没有硝烟的战役，消灭病毒传播途径成为关键。其中，室内外、物体表面的消毒将用到大量的84消毒液，生产原液中有效成分次氯酸钠的检测以及重金属残余的分析，是消毒液安全生产、使用的保障。
-</p>
-<p class="">
-  百灵威针对国标方法《GBT19106-2013次氯酸钠测定》，提供试剂耗材解决方案，供检测单位及相关部门选用。
-</p>
-<p class="">
- 众志成城，百灵威愿为全国抗“疫”物资生产及安全使用，贡献力量。
-</p>
-</div>
-
-<div class="clearfix mb-3">
-    <div class="d-block w-100 h-50 float-sm-right w-sm-50 w-lg-25 ml-sm-3 mb-3 mb-sm-0 
-        border border-danger rounded overflow-hidden">
-        <img class="w-100" style="margin: -4.5rem 0 -3rem 0;" src="https://c.jkchemical.com/res/0-0239.jpg" />
+    <div class="clearfix mb-3">
+        <img class="d-block w-100 float-sm-right w-sm-50 w-lg-25 ml-sm-3 mb-3 mb-sm-0 border border-danger rounded"
+            src="https://shop.jkchemical.com/res/0-0286.png" />
+        <p class="first-char-large">
+            随着新型冠状病毒肺炎疫情发展，全国一心，致力于打赢这场没有硝烟的战役，消灭病毒传播途径成为关键。其中，室内外、物体表面的消毒将用到大量的84消毒液，生产原液中有效成分次氯酸钠的检测以及重金属残余的分析，是消毒液安全生产、使用的保障。
+        </p>
+        <p class="">
+            百灵威针对国标方法《GBT19106-2013次氯酸钠测定》，提供试剂耗材解决方案，供检测单位及相关部门选用。
+        </p>
+        <p class="">
+            众志成城，百灵威愿为全国抗“疫”物资生产及安全使用，贡献力量。
+        </p>
     </div>
-        
-    <p class="first-char-large">
-        存在于样品和溶剂中的杂质不仅容易对色谱仪器装置（如液相泵、进样阀、色谱柱等）造成损坏或堵塞，而且会对分析结果造成干扰。因此，在样品上机检测前对样品及溶剂进行过滤显得尤为重要，并可以有效降低上述问题的发生，提高色谱检测的灵敏度和准确度。
-    </p>
-    <p class="">
-        百灵威提供多种滤膜材质的针式过滤器产品，满足实验室对亲水、疏水及生物类多种待检样品过滤的需求。
-    </p>
-</div>
+
+    <div class="clearfix mb-3">
+        <div class="d-block w-100 h-50 float-sm-right w-sm-50 w-lg-25 ml-sm-3 mb-3 mb-sm-0 
+        border border-danger rounded overflow-hidden">
+            <img class="w-100" style="margin: -4.5rem 0 -3rem 0;" src="https://shop.jkchemical.com/res/0-0239.jpg" />
+        </div>
+
+        <p class="first-char-large">
+            存在于样品和溶剂中的杂质不仅容易对色谱仪器装置（如液相泵、进样阀、色谱柱等）造成损坏或堵塞，而且会对分析结果造成干扰。因此，在样品上机检测前对样品及溶剂进行过滤显得尤为重要，并可以有效降低上述问题的发生，提高色谱检测的灵敏度和准确度。
+        </p>
+        <p class="">
+            百灵威提供多种滤膜材质的针式过滤器产品，满足实验室对亲水、疏水及生物类多种待检样品过滤的需求。
+        </p>
+    </div>
 
 
-<% subtitle1('有效氯、游离碱的测定试剂及耗材') %>
-<% products(有效氯游离碱的测定试剂及耗材); %>
+    <% subtitle1('有效氯、游离碱的测定试剂及耗材') %>
+    <% products(有效氯游离碱的测定试剂及耗材); %>
 
-<% subtitle2('铁、重金属和砷的测定试剂　　　') %>
-<% products(铁重金属和砷的测定试剂); %>
+    <% subtitle2('铁、重金属和砷的测定试剂　　　') %>
+    <% products(铁重金属和砷的测定试剂); %>
 
-<% subtitle1('其他配套耗材　　　　　　　　　') %>
-<% products(其他配套耗材); %>
+    <% subtitle1('其他配套耗材　　　　　　　　　') %>
+    <% products(其他配套耗材); %>
 
-<% subtitle2('污水水质监测实验所需耗材　　　') %>
-<% products(污水水质监测实验所需耗材); %>
-
+    <% subtitle2('污水水质监测实验所需耗材　　　') %>
+    <% products(污水水质监测实验所需耗材); %>
