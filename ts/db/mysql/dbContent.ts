@@ -9,6 +9,8 @@ export class DbContent extends Db {
     private sqlCategoryPostExplain: string;
     private sqlSubjectById: string;
     private sqlSubjectPost: string;
+    private sqlRouter: string;
+    private sqlPagebranch: string;
 
     constructor() {
         super('content');
@@ -95,6 +97,21 @@ export class DbContent extends Db {
             ORDER BY b.update desc
             LIMIT ?,?;
         `;
+
+        this.sqlRouter = `
+            SELECT a.name
+            FROM ${db}.tv_webpage a
+            WHERE a.name is not null;
+        `;
+
+        this.sqlPagebranch = `
+            SELECT  a.name, c.content, b.sort
+            FROM    ${db}.tv_webpage a
+                    JOIN ${db}.tv_webpagebranch as b on a.id = b.webpage
+                    JOIN ${db}.tv_branch AS c ON c.id= b.branch
+            WHERE   a.name = ?
+            ORDER BY b.sort;
+        `;
     }
 
     async homePostList(): Promise<any> {
@@ -139,4 +156,13 @@ export class DbContent extends Db {
         return ret;
     }
 
+    async getRoute(): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlRouter);
+        return ret;
+    }
+
+    async getPage(name: string): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlPagebranch, [name]);
+        return ret;
+    }
 }

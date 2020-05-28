@@ -90,6 +90,19 @@ class DbContent extends db_1.Db {
             ORDER BY b.update desc
             LIMIT ?,?;
         `;
+        this.sqlRouter = `
+            SELECT a.name
+            FROM ${db}.tv_webpage a
+            WHERE a.name is not null;
+        `;
+        this.sqlPagebranch = `
+            SELECT  a.name, c.content, b.sort
+            FROM    ${db}.tv_webpage a
+                    JOIN ${db}.tv_webpagebranch as b on a.id = b.webpage
+                    JOIN ${db}.tv_branch AS c ON c.id= b.branch
+            WHERE   a.name = ?
+            ORDER BY b.sort;
+        `;
     }
     homePostList() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -138,6 +151,18 @@ class DbContent extends db_1.Db {
     subjectPost(id, pageStart, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlSubjectPost, [id, pageStart, pageSize]);
+            return ret;
+        });
+    }
+    getRoute() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlRouter);
+            return ret;
+        });
+    }
+    getPage(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlPagebranch, [name]);
             return ret;
         });
     }

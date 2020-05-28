@@ -14,7 +14,9 @@ export class Dbs {
         Dbs.content = new DbContent();
         Dbs.product = new DbProduct();
         Dbs.productIndex = new DbProductIndex();
+
     }
+
 }
 
 export { Db } from './db';

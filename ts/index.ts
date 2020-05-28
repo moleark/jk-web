@@ -8,6 +8,7 @@ import * as express from 'express';
 import { homeRouter } from './pages';
 import { easyTime, csv } from './tools';
 import { Dbs } from './db';
+import { page } from './pages/page';
 
 (async function () {
     Dbs.init();
@@ -85,6 +86,10 @@ import { Dbs } from './db';
     });
 
     //buildRouter(app, pages);
+    let routeArray = await Dbs.content.getRoute();
+    routeArray.forEach(element => {
+        homeRouter.get("/" + element.name, page);
+    });
     app.use('/', homeRouter);
     app.use('/jk-web', homeRouter);
     //app.get('/wayne-ligsh-text', wayneLigshTest);

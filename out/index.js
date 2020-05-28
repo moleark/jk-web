@@ -18,6 +18,7 @@ const express = require("express");
 const pages_1 = require("./pages");
 const tools_1 = require("./tools");
 const db_1 = require("./db");
+const page_1 = require("./pages/page");
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         db_1.Dbs.init();
@@ -87,6 +88,10 @@ const db_1 = require("./db");
             next();
         });
         //buildRouter(app, pages);
+        let routeArray = yield db_1.Dbs.content.getRoute();
+        routeArray.forEach(element => {
+            pages_1.homeRouter.get("/" + element.name, page_1.page);
+        });
         app.use('/', pages_1.homeRouter);
         app.use('/jk-web', pages_1.homeRouter);
         //app.get('/wayne-ligsh-text', wayneLigshTest);
