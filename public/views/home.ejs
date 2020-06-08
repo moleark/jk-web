@@ -2,6 +2,7 @@
 <%- include('headers/home-header.ejs') -%>
 
 <script>
+    /*
     var countInCart = 1;
     function showCart() {
         let a = document.getElementById('cart');
@@ -20,8 +21,9 @@
         showCart();
     }
     window.onblur = cartClick;
+    */
     function search(e) {
-        document.location.href = 'search/' + encodeURIComponent(searchForm.keyInput.value);
+        document.location.href = 'search/?type=search&key=' + encodeURIComponent(searchForm.keyInput.value);
         return false;
     }
 </script>
@@ -94,7 +96,6 @@ let arr = [
     </ul>
 
     <div style="margin-top: 0.1rem; height:0.1rem;background-color:darkgray;"></div>
-
     <div class="row my-3">
         <div class="col-lg-8">
             <div class="d-flex bg-primary px-4 rounded font-weight-bold text-white mb-1">

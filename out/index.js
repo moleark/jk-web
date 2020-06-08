@@ -65,7 +65,7 @@ const page_1 = require("./pages/page");
         app.use(express.static(p, { maxAge: 36000 }));
         app.use('/jk-web', express.static(p, { maxAge: 36000 }));
         // 下面是结合cart运行需要的unit.json文件
-        app.get('/unit.json', function (req, res) {
+        app.get(/unit.json$/, function (req, res) {
             res.sendfile('./public/unit.json');
         });
         //设置模板视图的目录

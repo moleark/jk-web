@@ -59,7 +59,7 @@ import { page } from './pages/page';
     app.use((express.static as any)(p, { maxAge: 36000 }));
     app.use('/jk-web', (express.static as any)(p, { maxAge: 36000 }));
     // 下面是结合cart运行需要的unit.json文件
-    app.get('/unit.json', function (req, res) {
+    app.get(/unit.json$/, function (req, res) {
         res.sendfile('./public/unit.json');
     });
 
