@@ -22,6 +22,7 @@ import { casSubclass } from './casSubclass';
 import { technicalSupport } from './technicalSupport'
 import { subjectpost } from './subjectpost';
 import { categoryInstruction } from './categoryinstruction';
+import { cart } from './cart';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -32,7 +33,7 @@ homeRouter.get('/search/:key', search);
 homeRouter.get('/search', search);
 homeRouter.get('/product/:id', product);
 homeRouter.get('/iframe', iframe);
-// homeRouter.get('/shop', shop);   -- 转移到nginx中实现，免去在web中维护shop的麻烦
+homeRouter.get('/shop', shop);   //转移到nginx中实现，免去在web中维护shop的麻烦
 homeRouter.get('/version', version);
 homeRouter.get('/law', law);
 homeRouter.get('/contact', contact);
@@ -48,5 +49,6 @@ homeRouter.get('/ProductResources', ProductResources);
 homeRouter.get('/casSubclass/:current', casSubclass);
 homeRouter.get('/technicalSupport', technicalSupport);
 homeRouter.get('/subjectpost/:current', subjectpost);
+homeRouter.get('/cart', cart);
 
 homeRouter.get('/partial/categoryinstruction/:current', categoryInstruction);

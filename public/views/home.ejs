@@ -23,7 +23,8 @@
     window.onblur = cartClick;
     */
     function search(e) {
-        document.location.href = 'search/?type=search&key=' + encodeURIComponent(searchForm.keyInput.value);
+        //document.location.href = 'search/?type=search&key=' + encodeURIComponent(searchForm.keyInput.value);
+        document.location.href = 'shop/?type=productlist&key=' + encodeURIComponent(searchForm.keyInput.value);
         return false;
     }
 </script>
