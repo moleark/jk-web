@@ -1,210 +1,104 @@
-<footer class=" py-2 mt-3 text-center bg-light" style="border-top: 0.1rem lightgray solid;">
+<!-- /.container -->
+<!--Only For Desktop-->
+<div class="footer footer-m display-desktop">
     <div class="container">
-        <div class="d-none d-sm-block">
-            <div class="wrap d-flex"
-                style="justify-content: space-evenly; margin: 0 auto; padding: 10px 0; box-sizing: border-box;">
-                <dl class="text-left mb-0">
-                    <dt class="text-dark-blue small" style="font-weight: 550; color: #909090; font-size: 15px;">公司
-                    </dt>
-                    <dd class="text-muted small">
-                        <div class="my-1">
-                            <a href="<%=$root%>webMap" target="_blank" class="text-muted"><small
-                                    style="color: #5d5d5d; font-size: 12px;">网站地图</small></a>
-                        </div>
-                        <div class="my-1">
-                            <a href="<%=$root%>contact" target="_blank" class="text-muted">
-                                <small style="color: #5d5d5d; font-size: 12px;">联系我们</small>
-                            </a>
-                        </div>
-                    </dd>
-                </dl>
-                <div class="line" style="width: 2px; height: 70px; background-color: #777777; margin-top: 5px;">
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <img src="<%=$root%>img/icon/footer-logo.svg">
+                <p class="mt-lg-3">促进科技与工业<br>
+                    发展，造福人类</p>
+                <img src="<%=$root%>img/qrcode.png" style="width:100px" class="mt-lg-50 qrcode">
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="footer-title">百灵威集团</div>
+                <ul>
+                    <li><a href="about">公司简介</a></li>
+                    <li><a href="promise">企业承诺</a></li>
+                    <li><a href="cooperativebrand">合作品牌</a></li>
+                    <li><a href="inviteapplications">招贤纳士</a></li>
+
+                </ul>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="footer-title">浏览</div>
+                <ul>
+                    <li><a href="morepost">资讯中心</a></li>
+                    <li><a href="#">质量证书(COA)</a></li>
+                    <li><a href="#">安全说明书(SDS)</a></li>
+                    <li><a href="#">大包装与定制生产</a></li>
+                    <li><a href="#">订购指南</a></li>
+                    <li><a href="#">产品</a></li>
+                    <ul>
+                        <% for (let i=0; i< rootcategories.length; i++) {
+                            let {id, name, children } = rootcategories[i];
+                            %>
+                        <li><a href="category/<%=id%>"><%=name%></a></li>
+                        <% } %>
+                    </ul>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="footer-title">联系我们</div>
+                <div class="contact ">
+                    电话：<br>400-666-7788<br>+86 10 8284 8833
                 </div>
-                <dl class="text-left mb-0">
-                    <dt class="text-dark-blue small" style="font-weight: 550; color: #909090; font-size: 15px;">导航链接
-                    </dt>
-                    <dd class="text-muted small">
-                        <div class="my-1">
-                            <a href="<%=$root%>productName" target="blank" class="text-muted">
-                                <small style="color: #5d5d5d; font-size: 12px;">产品名称索引</small>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="<%=$root%>cas" target="blank" class="text-muted">
-                                <small style="color: #5d5d5d; font-size: 12px;">CAS索引</small>
-                            </a>
-                        </div>
-                    </dd>
-                </dl>
-                <div class="line" style="width: 2px; height: 70px; background-color: #777777; margin-top: 5px;"></div>
-                <dl class="text-left mb-0">
-                    <dt class="text-dark-blue small" style="font-weight: 550; color: #909090; font-size: 15px;">服务&支持
-                    </dt>
-                    <dd class="text-muted small">
-                        <div class="my-1">
-                            <a href="<%=$root%>law" target="_blank" class="text-muted">
-                                <small style="color: #5d5d5d; font-size: 12px;">法律声明</small>
-                            </a>
-                        </div>
-                        <div class="my-1">
-                            <a href="<%=$root%>technicalSupport" target="_blank" class="text-muted">
-                                <small style="color: #5d5d5d; font-size: 12px;">技术支持</small>
-                            </a>
-                        </div>
-                    </dd>
-                </dl>
-                <div class="line" style="width: 2px; height: 70px; background-color: #777777; margin-top: 5px;"></div>
-                <dl class="text-left mb-0">
-                    <dt class="text-dark-blue small" style="font-weight: 550; color: #909090; font-size: 15px;">栏目
-                    </dt>
-                    <dd class="text-muted small">
-                        <div class="caidan">
-                            <div class="py-1">
-                                <a href="<%=$root%>subjectpost/29">
-                                    <small style="color: #5d5d5d; font-size: 12px;">品牌宣传</small>
-                                </a>
-                                <ul class="erji">
-                                    <div> <a href="<%=$root%>subjectpost/24"><small
-                                                style="color: #5d5d5d; font-size: 12px;">百灵威人</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/23"><small
-                                                style="color: #5d5d5d; font-size: 12px;">公告通知</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/22"><small
-                                                style="color: #5d5d5d; font-size: 12px;">公司新闻</small></a>
-                                    </div>
-                                </ul>
-                            </div>
-                            <div class="py-1">
-                                <a href="<%=$root%>subjectpost/28"><small
-                                        style="color: #5d5d5d; font-size: 12px;">活动推广</small></a>
-                                <ul class="erji">
-                                    <div><a href="<%=$root%>subjectpost/21"><small
-                                                style="color: #5d5d5d; font-size: 12px;">会员专区</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/20"><small
-                                                style="color: #5d5d5d; font-size: 12px;">样品试用</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/19"><small
-                                                style="color: #5d5d5d; font-size: 12px;">新客户推广</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/18"><small
-                                                style="color: #5d5d5d; font-size: 12px;">促销活动</small></a>
-                                    </div>
-
-                                </ul>
-                            </div>
-                            <div class="py-1">
-                                <a href="<%=$root%>subjectpost/27"><small
-                                        style="color: #5d5d5d; font-size: 12px;">产品宣传</small></a>
-                                <ul class="erji">
-                                    <div><a href="<%=$root%>subjectpost/17"><small
-                                                style="color: #5d5d5d; font-size: 12px;">产品推荐</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/16"><small
-                                                style="color: #5d5d5d; font-size: 12px;">试用说明</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/15"><small
-                                                style="color: #5d5d5d; font-size: 12px;">选用指南</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/14"><small
-                                                style="color: #5d5d5d; font-size: 12px;">应用介绍</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/13"><small
-                                                style="color: #5d5d5d; font-size: 12px;">系列介绍</small></a>
-                                    </div>
-                                </ul>
-                            </div>
-                            <div class="py-1">
-                                <a href="<%=$root%>subjectpost/26"><small
-                                        style="color: #5d5d5d; font-size: 12px;">专栏</small></a>
-                                <ul class="erji">
-                                    <div><a href="<%=$root%>subjectpost/12"><small
-                                                style="color: #5d5d5d; font-size: 12px;">专业著作</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/11"><small
-                                                style="color: #5d5d5d; font-size: 12px;">趣味化学</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/10"><small
-                                                style="color: #5d5d5d; font-size: 12px;">实验技术</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/9"><small
-                                                style="color: #5d5d5d; font-size: 12px;">化学家</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/8"><small
-                                                style="color: #5d5d5d; font-size: 12px;">化学安全</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/7"><small
-                                                style="color: #5d5d5d; font-size: 12px;">绿色化学</small></a>
-                                    </div>
-                                    <div><a href="<%=$root%>subjectpost/6"><small
-                                                style="color: #5d5d5d; font-size: 12px;">人名反应</small></a>
-                                    </div>
-                                </ul>
-                            </div>
-                            <div class="py-1">
-                                <a href="<%=$root%>subjectpost/25">
-                                    <small style="color: #5d5d5d; font-size: 12px;">行业资讯</small>
-                                </a>
-                                <ul class="erji">
-                                    <div>
-                                        <a href="<%=$root%>subjectpost/5">
-                                            <small style="color: #5d5d5d; font-size: 12px;">项目合作</small>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a href="<%=$root%>subjectpost/4">
-                                            <small style="color: #5d5d5d; font-size: 12px;">招聘信息</small>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a href="<%=$root%>subjectpost/3">
-                                            <small style="color: #5d5d5d; font-size: 12px;">行业会议</small>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a href="<%=$root%>subjectpost/2">
-                                            <small style="color: #5d5d5d; font-size: 12px;">科技进展</small>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a href="<%=$root%>subjectpost/1">
-                                            <small style="color: #5d5d5d; font-size: 12px;">政策法规</small>
-                                        </a>
-                                    </div>
-                                </ul>
-                            </div>
-                        </div>
-                    </dd>
-                </dl>
-
-                <div class="line" style="width: 2px; height: 70px; background-color: #777777; "></div>
-                <dl class="text-left mb-0">
-                    <dt class="text-dark-blue text-center " style="font-weight: 550; color: #909090; font-size: 15px;">
-                        <img class="h-max-4c mt-0" src="https://shop.jkchemical.com/res/0-0427.png" />
-                        <div class="text-muted small">百灵威商城</div>
-                    </dt>
-                </dl>
-            </div>
-            <div class="text-muted small ">©Copyright J&K Scientific Ltd., All Rights Reserved.保留所有权利。
-                <a href="http://www.beian.miit.gov.cn/" target="blank" class="text-muted">京ICP备09071033号-3</a>
-                京公网安备11010502027473
-            </div>
-        </div>
-        <div class="d-sm-none">
-            <span class="fa-stack fa  text-primary">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
-            </span>
-            &nbsp;
-            <span class="text-muted small">订购/客服: </span><b>400-666-7788</b>
-            <div class="mt-3">
-                <img class="h-max-4c mt-0" src="https://shop.jkchemical.com/res/0-0427.png" />
-                <div class="text-muted small">百灵威商城</div>
+                <div class="contact mt-lg-28 mb-lg-58">
+                    传真：<br>+86 10 8284 9933
+                </div>
+                <div class="contact mb-lg-2">
+                    电子邮件：<br>
+                    <a href="mailto:jkinfo@jkchemical.com">jkinfo@jkchemical.com</a><br><a
+                        href="mailto:jkinfo@jk-sci.com">jkinfo@jk-sci.com</a>
+                </div>
+                <div class="footer-social">
+                    <!--for english website<a href="https://www.facebook.com/" target="blank"><img src="img/icon/facebook.svg"></a>
+                    <a href="https://www.twitter.com/" target="blank"><img src="img/icon/twitter.svg"></a>
+                    <a href="https://www.instagram.com/" target="blank"><img src="img/icon/instagram.svg"></a>
+                    <a href="https://www.youtube.com/" target="blank"><img src="img/icon/youtube.svg"></a>-->
+                </div>
             </div>
         </div>
     </div>
-</footer>
+
+</div>
+<!--Only For Desktop End-->
+
+<div class="mobile-footer-wrap display-mobile">
+    <a href="#" class="menu">
+        <img src="<%=$root%>img/icon/home.svg">
+        <h3>首页</h3>
+    </a>
+    <a href="#" class="menu">
+        <img src="<%=$root%>img/icon/product.svg">
+        <h3>产品</h3>
+    </a>
+    <a href="#" class="menu">
+        <img src="<%=$root%>img/icon/service.svg">
+        <h3>服务</h3>
+    </a>
+    <a href="#" class="menu">
+        <img src="<%=$root%>img/icon/my.svg">
+        <h3>我的</h3>
+    </a>
+</div>
+<!-- Bootstrap core JavaScript -->
+<script>
+    $(function () {
+        $(".dropdown").hover(
+            function () {
+                $('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");
+            },
+            function () {
+                $('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");
+            });
+    });
+
+</script>
+</body>
 
 <script src="<%=shopJsPath.runtime%>"></script>
 <script src="<%=shopJsPath.module%>"></script>

@@ -1,56 +1,53 @@
 import { Request, Response } from "express";
-import * as ejs from 'ejs';
 import { Dbs } from "../db";
-import { viewPath, ejsSuffix, buildData, getRootPath, ejsError } from "../tools";
+import { buildData, getRootPath, ejsError } from "../tools";
 
 export async function morepost(req: Request, res: Response) {
     let rootPath = getRootPath(req);
-    let postpage: any[];
-    let pageCount: number;
-    let pageSize: number = 30;
+
     try {
+
+        //获取当前页贴文
+        let postpage: any[];
+        let pageCount: number;
+        let pageSize: number = 10;
         pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
         postpage = await Dbs.content.morePostPage(pageCount * pageSize, pageSize)
-
-		/*
-        let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
-        let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
-        let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
-        let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
-        let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
-
-        let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
-        let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-		let body = ejs.fileLoader(viewPath + 'morepost.ejs').toString();
-        */
         let nextpage: number = pageCount + 1;
         let prepage: number = pageCount - 1
+
+        //获取栏目
+        let subject: any[];
+        subject = await Dbs.content.getSubject();
+
+        //获取产品目录树根节点
+        const rootcategories = await Dbs.product.getRootCategories();
+
+        //获取热点贴文
+        let cacheHotPosts: any[];
+        let lastHotTick = 0;
+        let now = Date.now();
+        if (cacheHotPosts === undefined || now - lastHotTick > 60 * 1000) {
+            lastHotTick = now;
+            cacheHotPosts = await Dbs.content.getHotPost();
+        }
+
         let data = buildData(req, {
             nextpage: rootPath + 'morepost/?pageCount=' + nextpage,
             prepage: rootPath + 'morepost/?pageCount=' + prepage,
             path: rootPath + 'post/',
             post: postpage,
-            pageCount: pageCount
+            pageCount: pageCount,
+            hotPosts: cacheHotPosts,
+            subject: subject,
+            rootcategories: rootcategories
         });
-        console.log(nextpage,'nextpage')
-		/*
-        let html = ejs.render(
-            header
-            + jk
-            + hmInclude
-            + homeHeader
-            + postHeader
-            + body
-            + postFooter
-            + homeFooter
-            , data);
-		res.end(html);
-		*/
+
+        console.log(nextpage, 'nextpage')
         res.render('morepost.ejs', data, (err, html) => {
             if (ejsError(err, res) === true) return;
             res.end(html);
         });
-
     }
     catch (err) {
         console.error(err);

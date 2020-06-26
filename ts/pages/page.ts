@@ -9,6 +9,13 @@ export async function page(req: Request, res: Response) {
         let pagename = req.path.substring(1, req.path.length);
         const ret = await Dbs.content.getPage(pagename);
         let template: string, title: string;
+
+        //获取产品目录树根节点
+        const rootcategories = await Dbs.product.getRootCategories();
+        //获取栏目
+        let subject: any[];
+        subject = await Dbs.content.getSubject();
+
         if (ret.length === 0) {
             template = `post id=${id} is not defined`;
         }
@@ -17,10 +24,7 @@ export async function page(req: Request, res: Response) {
             let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
             let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
-            let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
-            let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-
 
             let bodys: any = "";
             ret.forEach(element => {
@@ -31,17 +35,18 @@ export async function page(req: Request, res: Response) {
                 bodys += body;
             });
 
+
             template = header
                 + jk
                 + hmInclude
                 + homeHeader
-                + postHeader
+
                 + bodys
-                + postFooter
+
                 + homeFooter;
             title = ret[0].caption;
         }
-        let data = buildData(req, { $title: title });
+        let data = buildData(req, { $title: title, rootcategories: rootcategories });
         let html = ejs.render(template, data);
         res.end(html);
 

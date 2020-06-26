@@ -1,0 +1,40 @@
+<div class="side-block display-desktop">
+    <h3 class="side-block-title">栏目</h3>
+    <ul class="categories-list">
+        <%
+        let spn = 0;
+        for (let pn of subject) {
+            spn++;
+            if (spn > 10) break;
+            let {name} = pn;
+        %>
+        <li><a href="#"><%=name%></a></li>
+        <% } %>
+        <li><a href="#">全部</a></li>
+    </ul>
+</div>
+<div class="side-block">
+    <h3 class="side-block-title">最受欢迎</h3>
+    <%
+    let hpn = 0;
+    for (let pn of hotPosts) {
+        hpn++;
+        if (hpn > 10) break;
+        let {post, caption,subject,image} = pn;
+    %>
+    <div class="overflow">
+        <div class="post-preview  col-xs-9">
+            <h4 class="post-title"><a href="#"><%=subject%></a></h4>
+            <p><a href="<%=path+post%>"><%=caption%></a></p>
+        </div>
+        <!-- mobile -->
+        <div class="col-xs-3 display-mobile">
+            <div class="img-wrap">
+                <a href="<%=path+post%>"><img src="<%=image%>"></a>
+            </div>
+        </div>
+        <!-- mobile end-->
+    </div>
+    <hr class="mobile-divider">
+    <% } %>
+</div>

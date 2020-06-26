@@ -18,6 +18,7 @@ function category(req, res) {
         let rootPath = tools_1.getRootPath(req);
         let current = req.params.current;
         let currentId = Number(current);
+        let rootcategories = yield db_1.Dbs.product.getRootCategories();
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
         let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
         category.children = children;
@@ -46,13 +47,14 @@ function category(req, res) {
         let pageSize = 30;
         productpage = yield db_1.Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize);
         let data = tools_1.buildData(req, {
+            rootcategories: rootcategories,
             current: current,
             category: category,
+            explain: explain,
+            categoryPost: categoryPost,
             path: rootPath + 'category/',
             productPath: rootPath + 'productCategory/',
-            postpath: rootPath + 'post/',
-            explain: explain,
-            categoryPost: categoryPost
+            postpath: rootPath + 'post/'
         });
         res.render('category.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)

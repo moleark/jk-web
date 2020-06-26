@@ -11,6 +11,8 @@ export class DbContent extends Db {
     private sqlSubjectPost: string;
     private sqlRouter: string;
     private sqlPagebranch: string;
+    private sqlSubject: string;
+    private sqlHotPost: string;
 
     constructor() {
         super('content');
@@ -112,6 +114,26 @@ export class DbContent extends Db {
             WHERE   a.name = ?
             ORDER BY b.sort;
         `;
+
+        this.sqlSubject = `
+            SELECT 	*
+            FROM    ${db}.tv_subject AS a
+            WHERE 	parent = 0 
+        `;
+
+        this.sqlHotPost = `
+            SELECT	distinct a.hits, a.post, b.caption, b.discription, im.path as image, b.author, IFNULL(e.name, d.name) as subject
+            FROM 	${db}.tv_hot as a
+                    JOIN ${db}.tv_postpublish as p on p.post = a.post and p.openweb = 1
+                    JOIN ${db}.tv_post as b on a.post = b.id
+                    JOIN ${db}.tv_postsubject AS c ON a.post = c.post
+                    JOIN ${db}.tv_subject AS d ON c.subject = d.id
+                    LEFT JOIN ${db}.tv_subject AS e ON d.parent = e.id
+                    LEFT JOIN ${db}.tv_image im on b.image=im.id
+            WHERE 	a.post > 0
+            ORDER BY a.hits DESC
+            LIMIT 100
+        `;
     }
 
     async homePostList(): Promise<any> {
@@ -165,4 +187,18 @@ export class DbContent extends Db {
         const ret = await this.tableFromSql(this.sqlPagebranch, [name]);
         return ret;
     }
+
+    async getSubject(): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlSubject);
+        return ret;
+    }
+
+
+    async getHotPost(): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlHotPost);
+        return ret;
+    }
+
+
+
 }

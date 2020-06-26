@@ -7,9 +7,9 @@ import { device, viewPath, ejsSuffix, buildData, getRootPath } from "../tools";
 export async function search(req: Request, res: Response) {
     let rootPath = getRootPath(req);
     let key = req.params.key;
-    
+
     // if (key) key = req.query.key;
-    
+
     let dbs = Dbs;
     let pageCount: number = 0;
     let pageSize: number = 5;
@@ -33,11 +33,17 @@ export async function search(req: Request, res: Response) {
         + homeFooter;
     let nextpage: number = pageCount + 1;
     let prepage: number = pageCount - 1;
+
+    //获取产品目录树根节点
+    const rootcategories = await Dbs.product.getRootCategories();
+
+
     let data = buildData(req, {
-        nextpage: rootPath + 'search/'+ key +'/?pageCount=' + nextpage,
-        prepage: rootPath + 'search/'+ key +'/?pageCount=' + prepage,
+        nextpage: rootPath + 'search/' + key + '/?pageCount=' + nextpage,
+        prepage: rootPath + 'search/' + key + '/?pageCount=' + prepage,
         products: products,
         pageCount: pageCount,
+        rootcategories: rootcategories
     });
 
     let html = ejs.render(template, data);

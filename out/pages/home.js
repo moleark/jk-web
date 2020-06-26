@@ -11,52 +11,69 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.home = void 0;
 const db_1 = require("../db");
+const ejs = require("ejs");
 const tools_1 = require("../tools");
 let lastHomeTick = Date.now();
 let cacheHtml;
-let cacheHotPosts;
-let lastHotTick = 0;
 //测试
 function home(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let rootPath = tools_1.getRootPath(req);
-        tools_1.ipHit(req, -1);
-        let now = Date.now();
-        if (false && cacheHtml !== undefined) {
-            let ht = lastHomeTick;
-            lastHomeTick = now;
-            if (lastHomeTick - ht < 3600 * 1000) {
-                res.end(cacheHtml);
-                return;
+        try {
+            let rootPath = tools_1.getRootPath(req);
+            tools_1.ipHit(req, -1);
+            let now = Date.now();
+            if (false && cacheHtml !== undefined) {
+                let ht = lastHomeTick;
+                lastHomeTick = now;
+                if (lastHomeTick - ht < 3600 * 1000) {
+                    res.end(cacheHtml);
+                    return;
+                }
+                ;
             }
-            ;
+            //获取最新贴文
+            let newpost = yield db_1.Dbs.content.homePostList();
+            //优惠活动
+            let discounts = yield db_1.Dbs.content.subjectPost(18, 0, 30);
+            //产品推荐
+            let recommend = yield db_1.Dbs.content.subjectPost(17, 0, 30);
+            //获取热点贴文
+            let cacheHotPosts;
+            let lastHotTick = 0;
+            if (cacheHotPosts === undefined || now - lastHotTick > 60 * 1000) {
+                lastHotTick = now;
+                cacheHotPosts = yield db_1.Dbs.content.getHotPost();
+            }
+            //获取根目录节点
+            const rootcategories = yield db_1.Dbs.product.getRootCategories();
+            for (let i = 0; i < rootcategories.length; i++) {
+                let category = rootcategories[i];
+                let { id } = category;
+                rootcategories[i].children = yield db_1.Dbs.product.getChildrenCategories(id);
+            }
+            let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
+            let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
+            let home = ejs.fileLoader(tools_1.viewPath + 'home' + tools_1.ejsSuffix).toString();
+            let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
+            let template = header
+                + homeHeader
+                + home
+                + homeFooter;
+            console.log(rootPath, 'rootPath');
+            let data = tools_1.buildData(req, {
+                path: rootPath + 'post/',
+                news: newpost,
+                hots: cacheHotPosts,
+                discounts: discounts,
+                recommend: recommend,
+                rootcategories: rootcategories,
+            });
+            let html = ejs.render(template, data);
+            res.end(html);
         }
-        const ret = yield db_1.Dbs.content.homePostList();
-        const categories = yield db_1.Dbs.product.getRootCategories();
-        const casList = yield db_1.Dbs.productIndex.CASInterval(tools_1.SALESREGION);
-        console.log(casList, 'CASInterval');
-        for (let i = 0; i < categories.length; i++) {
-            let category = categories[i];
-            let { id } = category;
-            categories[i].children = yield db_1.Dbs.product.getChildrenCategories(id);
+        catch (e) {
+            tools_1.ejsError(e, res);
         }
-        if (cacheHotPosts === undefined || now - lastHotTick > 60 * 1000) {
-            lastHotTick = now;
-            let ret = yield db_1.Dbs.content.execProc('tv_hotPosts', [db_1.Dbs.unit, 0]);
-            cacheHotPosts = ret[0];
-        }
-        console.log(rootPath, 'rootPath');
-        let data = tools_1.buildData(req, {
-            path: rootPath + 'post/',
-            news: ret,
-            categories: categories,
-            hotPosts: cacheHotPosts,
-        });
-        res.render('home.ejs', data, (err, html) => {
-            if (tools_1.ejsError(err, res) === true)
-                return;
-            res.end(cacheHtml = html);
-        });
     });
 }
 exports.home = home;

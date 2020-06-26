@@ -15,36 +15,66 @@ const db_1 = require("../db");
 const tools_1 = require("../tools");
 function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        let rootPath = tools_1.getRootPath(req);
         try {
+            let template, content, title;
             let id = req.params.id;
+            //获取内容
             const ret = yield db_1.Dbs.content.postFromId(id);
-            let template, title;
             if (ret.length === 0) {
                 template = `post id=${id} is not defined`;
             }
             else {
+                //获取模板
                 let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
                 let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
                 let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
                 let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
                 let postHeader = ejs.fileLoader(tools_1.viewPath + 'headers/post' + tools_1.ejsSuffix).toString();
-                let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
+                let subjectHeader = ejs.fileLoader(tools_1.viewPath + 'headers/subject' + tools_1.ejsSuffix).toString();
+                let subject = ejs.fileLoader(tools_1.viewPath + 'right/subject' + tools_1.ejsSuffix).toString();
+                let subjectFooter = ejs.fileLoader(tools_1.viewPath + 'footers/subject' + tools_1.ejsSuffix).toString();
                 let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
-                let body = ret[0].content;
-                if (body.charAt(0) === '#') {
-                    body = tools_1.hmToEjs(body);
+                let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
+                //获取内容明细
+                content = ret[0].content;
+                if (content.charAt(0) === '#') {
+                    content = tools_1.hmToEjs(content);
                 }
                 template = header
                     + jk
                     + hmInclude
                     + homeHeader
                     + postHeader
-                    + body
+                    + content
                     + postFooter
+                    + subjectHeader
+                    + subject
+                    + subjectFooter
                     + homeFooter;
                 title = ret[0].caption;
             }
-            let data = tools_1.buildData(req, { $title: title });
+            //获取产品目录树根节点
+            const rootcategories = yield db_1.Dbs.product.getRootCategories();
+            //获取贴点贴文
+            let cacheHotPosts;
+            let lastHotTick = 0;
+            let now = Date.now();
+            if (cacheHotPosts === undefined || now - lastHotTick > 60 * 1000) {
+                lastHotTick = now;
+                cacheHotPosts = yield db_1.Dbs.content.getHotPost();
+            }
+            //获取栏目
+            let subject;
+            subject = yield db_1.Dbs.content.getSubject();
+            let data = tools_1.buildData(req, {
+                path: rootPath + 'post/',
+                $title: title,
+                subject: subject,
+                hotPosts: cacheHotPosts,
+                rootcategories: rootcategories,
+                content: content
+            });
             let html = ejs.render(template, data);
             res.end(html);
             tools_1.ipHit(req, id);
@@ -52,21 +82,8 @@ function post(req, res) {
         catch (e) {
             tools_1.ejsError(e, res);
         }
-        /*
-        res.render('post.ejs', data, (err, html) => {
-            if (ejsError(err, res) === true) return;
-            res.end(html);
-        });
-        */
     });
 }
 exports.post = post;
 ;
-function loadPage(list) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let promises;
-        for (let model of list) {
-        }
-    });
-}
 //# sourceMappingURL=post.js.map
