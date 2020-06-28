@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="57px" height="30px" viewBox="0 0 57 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="home" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-903.000000, -1223.000000)" id="Group" stroke="#B8BABB">
+            <g transform="translate(904.000000, 1224.000000)">
+                <path d="M23.4674418,14.7596587 C24.1775194,14.3428646 24.1775194,13.656679 23.4674418,13.2373434 L1.29059718,0.179487149 C0.578028081,-0.239848446 0,0.100702886 0,0.939374076 L0,27.0601695 C0,27.8962993 0.578028081,28.239392 1.29059718,27.8225979 L23.4674418,14.7596587 Z" id="Stroke-15"></path>
+                <path d="M54.4674418,14.7596587 C55.1775194,14.3428646 55.1775194,13.656679 54.4674418,13.2373434 L32.2905972,0.179487149 C31.5780281,-0.239848446 31,0.100702886 31,0.939374076 L31,27.0601695 C31,27.8962993 31.5780281,28.239392 32.2905972,27.8225979 L54.4674418,14.7596587 Z" id="Stroke-15-Copy"></path>
+            </g>
+        </g>
+    </g>
+</svg>
