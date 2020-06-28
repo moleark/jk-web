@@ -8,11 +8,13 @@ export async function morepost(req: Request, res: Response) {
     try {
 
         //获取当前页贴文
+        let caption: string;
         let postpage: any[];
         let pageCount: number;
         let pageSize: number = 10;
         pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
         postpage = await Dbs.content.morePostPage(pageCount * pageSize, pageSize)
+
         let nextpage: number = pageCount + 1;
         let prepage: number = pageCount - 1
 

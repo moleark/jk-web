@@ -17,6 +17,7 @@ function morepost(req, res) {
         let rootPath = tools_1.getRootPath(req);
         try {
             //获取当前页贴文
+            let caption;
             let postpage;
             let pageCount;
             let pageSize = 10;
