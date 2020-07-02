@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-lg-9 article">
             <% for(var i=0;i<post.length;i++){ 
-                let {id, caption, disp, date, by, image, sumHits} = post[i];
+                let {id, caption, disp, date, by, image, name} = post[i];
             %>
             <div class="article-list row">
                 <div class="col-lg-3">
@@ -34,7 +34,7 @@
                 <div class="col-lg-9">
                     <h2 class="h1"> <a href="<%=path+id%>"><%=caption%></a></h2>
                     <div class="h-sub">
-                        <a href="#">单体</a> | <a href="./">大分子</a>
+                        <a href="#"><%=name%></a>
                     </div>
                     <p class="mt-lg-24"><a href="<%=path+id%>"><%=disp%></a></p>
                 </div>

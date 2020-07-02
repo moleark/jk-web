@@ -35,11 +35,16 @@ class DbContent extends db_1.Db {
         `;
         this.sqlInformationPage = `
             SELECT a.id, a.caption, a.discription as disp, c.path as image,
-                    cp.update as date, d.hits, d.sumHits
+                    cp.update as date, f.name
             FROM    ${db}.tv_postpublish cp 
                     join ${db}.tv_post a on cp.post=a.id
+                    JOIN (
+                        SELECT	*
+                        FROM 		${db}.tv_postsubject AS aa 
+                        WHERE		aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
+                    )  AS e ON cp.post = e.post
+                    JOIN ${db}.tv_subject AS f ON e.subject = f.id
                     left join ${db}.tv_image c on a.image=c.id
-                    left join ${db}.tv_hot d on a.id=d.post
             WHERE   cp.openweb = 1
             ORDER BY a.id desc
             LIMIT ?,?;
@@ -77,13 +82,12 @@ class DbContent extends db_1.Db {
             WHERE  a.id=?; 
         `;
         this.sqlSubjectPost = `
-            SELECT c.id, c.caption, c.discription as disp, d.path as image,
-                    b.update as date, e.hits, e.sumHits
+            SELECT c.id, c.caption, c.discription as disp, d.path as image, b.update as date, e.name
             FROM    ${db}.tv_postsubject a 
                     join ${db}.tv_postpublish b on a.post = b.post        
                     join ${db}.tv_post c on c.id = a.post
-                    left join ${db}.tv_image d on c.image=d.id
-                    left join ${db}.tv_hot e on a.post=e.post
+                    LEFT JOIN ${db}.tv_image d on c.image=d.id
+                    LEFT JOIN ${db}.tv_subject AS e ON a.subject = e.id
             WHERE  a.subject = ? and b.openweb = 1
             ORDER BY b.update desc
             LIMIT ?,?;
