@@ -41,6 +41,7 @@ function post(req, res) {
                 if (content.charAt(0) === '#') {
                     content = tools_1.hmToEjs(content);
                 }
+                //获取优惠活动
                 template = header
                     + jk
                     + hmInclude

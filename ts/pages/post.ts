@@ -33,6 +33,8 @@ export async function post(req: Request, res: Response) {
                 content = hmToEjs(content);
             }
 
+            //获取优惠活动
+
             template = header
                 + jk
                 + hmInclude
