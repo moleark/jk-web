@@ -12,27 +12,25 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="footer-title">百灵威集团</div>
                 <ul>
-                    <li><a href="about">公司简介</a></li>
-                    <li><a href="promise">企业承诺</a></li>
-                    <li><a href="cooperativebrand">合作品牌</a></li>
-                    <li><a href="inviteapplications">招贤纳士</a></li>
-
+                    <li><a href="https://www.jkchemical.com/Company-inf.aspx?language=ch">公司简介</a></li>
+                    <li><a href="https://www.jkchemical.com/brand.aspx?language=ch">合作品牌</a></li>
+                    <li><a href="https://www.jkchemical.com/job.aspx?language=ch">招贤纳士</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-xs-6">
                 <div class="footer-title">浏览</div>
                 <ul>
-                    <li><a href="morepost">资讯中心</a></li>
-                    <li><a href="#">质量证书(COA)</a></li>
-                    <li><a href="#">安全说明书(SDS)</a></li>
-                    <li><a href="#">大包装与定制生产</a></li>
-                    <li><a href="#">订购指南</a></li>
-                    <li><a href="#">产品</a></li>
+                    <li><a href="<%=$root%>information">资讯中心</a></li>
+                    <li><a>质量证书(COA)</a></li>
+                    <li><a>安全说明书(SDS)</a></li>
+                    <li><a>大包装与定制生产</a></li>
+                    <li><a>订购指南</a></li>
+                    <li><a>产品</a></li>
                     <ul>
                         <% for (let i=0; i< rootcategories.length; i++) {
                             let {id, name, children } = rootcategories[i];
                             %>
-                        <li><a href="category/<%=id%>"><%=name%></a></li>
+                        <li><a href="<%=$root%>category/<%=id%>"><%=name%></a></li>
                         <% } %>
                     </ul>
                 </ul>

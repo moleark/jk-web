@@ -9,23 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subjectpost = void 0;
-const tools_1 = require("../tools");
+exports.information = void 0;
 const db_1 = require("../db");
-function subjectpost(req, res) {
+const tools_1 = require("../tools");
+function information(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
         try {
-            //获取当前栏目
-            let currentId = Number(req.params.current);
-            let currentSubject = yield db_1.Dbs.content.subjectByid(currentId);
-            let caption = currentSubject.name;
             //获取当前页贴文
+            let caption;
             let postpage;
             let pageCount;
             let pageSize = 10;
             pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
-            postpage = yield db_1.Dbs.content.subjectPost(currentId, pageCount * pageSize, pageSize);
+            postpage = yield db_1.Dbs.content.informationPage(pageCount * pageSize, pageSize);
             let nextpage = pageCount + 1;
             let prepage = pageCount - 1;
             //获取栏目
@@ -42,18 +39,17 @@ function subjectpost(req, res) {
                 cacheHotPosts = yield db_1.Dbs.content.getHotPost();
             }
             let data = tools_1.buildData(req, {
-                nextpage: rootPath + 'subjectpost/' + currentId + '?pageCount=' + nextpage,
-                prepage: rootPath + 'subjectpost/' + currentId + '?pageCount=' + prepage,
+                nextpage: rootPath + 'information/?pageCount=' + nextpage,
+                prepage: rootPath + 'information/?pageCount=' + prepage,
                 path: rootPath + 'post/',
                 post: postpage,
                 pageCount: pageCount,
                 hotPosts: cacheHotPosts,
                 subject: subject,
-                caption: caption,
                 rootcategories: rootcategories
             });
             console.log(nextpage, 'nextpage');
-            res.render('subjectpost.ejs', data, (err, html) => {
+            res.render('information.ejs', data, (err, html) => {
                 if (tools_1.ejsError(err, res) === true)
                     return;
                 res.end(html);
@@ -65,6 +61,6 @@ function subjectpost(req, res) {
         }
     });
 }
-exports.subjectpost = subjectpost;
+exports.information = information;
 ;
-//# sourceMappingURL=subjectpost.js.map
+//# sourceMappingURL=information.js.map

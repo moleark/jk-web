@@ -3,7 +3,7 @@ import { Db } from "./db";
 export class DbContent extends Db {
     private sqlHomePostList: string;
     private sqlPostFromId: string;
-    private sqlMorePostPage: string;
+    private sqlInformationPage: string;
     private sqlAllPosts: string;
     private sqlCategoryPost: string;
     private sqlCategoryPostExplain: string;
@@ -37,16 +37,14 @@ export class DbContent extends Db {
                 WHERE a.id= ? ;
         `;
 
-        this.sqlMorePostPage = `
+        this.sqlInformationPage = `
             SELECT a.id, a.caption, a.discription as disp, c.path as image,
                     cp.update as date, d.hits, d.sumHits
-            FROM ${db}.tv_postpublish cp 
-                join ${db}.tv_post a on cp.post=a.id
-                -- ${db}.tv_post a 
-                left join ${db}.tv_template b on a.template=b.id 
-                left join ${db}.tv_image c on a.image=c.id
-                left join ${db}.tv_hot d on a.id=d.post
-            WHERE cp.openweb = 1
+            FROM    ${db}.tv_postpublish cp 
+                    join ${db}.tv_post a on cp.post=a.id
+                    left join ${db}.tv_image c on a.image=c.id
+                    left join ${db}.tv_hot d on a.id=d.post
+            WHERE   cp.openweb = 1
             ORDER BY a.id desc
             LIMIT ?,?;
         `;
@@ -134,6 +132,7 @@ export class DbContent extends Db {
             ORDER BY a.hits DESC
             LIMIT 100
         `;
+
     }
 
     async homePostList(): Promise<any> {
@@ -146,8 +145,8 @@ export class DbContent extends Db {
         return ret;
     }
 
-    async morePostPage(pageStart: number, pageSize: number): Promise<any> {
-        const ret = await this.tableFromSql(this.sqlMorePostPage, [pageStart, pageSize]);
+    async informationPage(pageStart: number, pageSize: number): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlInformationPage, [pageStart, pageSize]);
         return ret;
     }
 

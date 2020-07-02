@@ -15,7 +15,7 @@ const version_1 = require("./version");
 const law_1 = require("./law");
 const contact_1 = require("./contact");
 const webMap_1 = require("./webMap");
-const morepost_1 = require("./morepost");
+const information_1 = require("./information");
 const allPosts_1 = require("./allPosts");
 const productCategory_1 = require("./productCategory");
 const cas_1 = require("./cas");
@@ -39,7 +39,7 @@ exports.homeRouter.get('/shop', shop_1.shop); //转移到nginx中实现，免去
 exports.homeRouter.get('/version', version_1.version);
 exports.homeRouter.get('/law', law_1.law);
 exports.homeRouter.get('/contact', contact_1.contact);
-exports.homeRouter.get('/morepost', morepost_1.morepost);
+exports.homeRouter.get('/information', information_1.information);
 exports.homeRouter.get('/all-posts', allPosts_1.allPosts);
 exports.homeRouter.get('/language', language_1.language);
 exports.homeRouter.get('/webMap', webMap_1.webMap);

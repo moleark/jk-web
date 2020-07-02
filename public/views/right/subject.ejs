@@ -6,11 +6,11 @@
         for (let pn of subject) {
             spn++;
             if (spn > 10) break;
-            let {name} = pn;
+            let {id,name} = pn;
         %>
-        <li><a href="#"><%=name%></a></li>
+        <li><a href="<%=$root%>subjectpost/<%=id%>"><%=name%></a></li>
         <% } %>
-        <li><a href="#">全部</a></li>
+        <li><a href="infrometion">全部</a></li>
     </ul>
 </div>
 <div class="side-block">

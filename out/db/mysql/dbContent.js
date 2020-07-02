@@ -33,16 +33,14 @@ class DbContent extends db_1.Db {
                 FROM ${db}.tv_post a
                 WHERE a.id= ? ;
         `;
-        this.sqlMorePostPage = `
+        this.sqlInformationPage = `
             SELECT a.id, a.caption, a.discription as disp, c.path as image,
                     cp.update as date, d.hits, d.sumHits
-            FROM ${db}.tv_postpublish cp 
-                join ${db}.tv_post a on cp.post=a.id
-                -- ${db}.tv_post a 
-                left join ${db}.tv_template b on a.template=b.id 
-                left join ${db}.tv_image c on a.image=c.id
-                left join ${db}.tv_hot d on a.id=d.post
-            WHERE cp.openweb = 1
+            FROM    ${db}.tv_postpublish cp 
+                    join ${db}.tv_post a on cp.post=a.id
+                    left join ${db}.tv_image c on a.image=c.id
+                    left join ${db}.tv_hot d on a.id=d.post
+            WHERE   cp.openweb = 1
             ORDER BY a.id desc
             LIMIT ?,?;
         `;
@@ -134,9 +132,9 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
-    morePostPage(pageStart, pageSize) {
+    informationPage(pageStart, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlMorePostPage, [pageStart, pageSize]);
+            const ret = yield this.tableFromSql(this.sqlInformationPage, [pageStart, pageSize]);
             return ret;
         });
     }

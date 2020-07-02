@@ -12,7 +12,7 @@ import { version } from './version';
 import { law } from './law';
 import { contact } from './contact';
 import { webMap } from './webMap'
-import { morepost } from './morepost';
+import { information } from './information';
 import { allPosts } from './allPosts';
 import { productCategory } from './productCategory';
 import { cas } from './cas';
@@ -37,7 +37,7 @@ homeRouter.get('/shop', shop);   //转移到nginx中实现，免去在web中维�
 homeRouter.get('/version', version);
 homeRouter.get('/law', law);
 homeRouter.get('/contact', contact);
-homeRouter.get('/morepost', morepost);
+homeRouter.get('/information', information);
 homeRouter.get('/all-posts', allPosts);
 homeRouter.get('/language', language);
 homeRouter.get('/webMap', webMap);

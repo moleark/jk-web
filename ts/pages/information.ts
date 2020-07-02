@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Dbs } from "../db";
 import { buildData, getRootPath, ejsError } from "../tools";
 
-export async function morepost(req: Request, res: Response) {
+export async function information(req: Request, res: Response) {
     let rootPath = getRootPath(req);
 
     try {
@@ -13,7 +13,7 @@ export async function morepost(req: Request, res: Response) {
         let pageCount: number;
         let pageSize: number = 10;
         pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
-        postpage = await Dbs.content.morePostPage(pageCount * pageSize, pageSize)
+        postpage = await Dbs.content.informationPage(pageCount * pageSize, pageSize)
 
         let nextpage: number = pageCount + 1;
         let prepage: number = pageCount - 1
@@ -35,8 +35,8 @@ export async function morepost(req: Request, res: Response) {
         }
 
         let data = buildData(req, {
-            nextpage: rootPath + 'morepost/?pageCount=' + nextpage,
-            prepage: rootPath + 'morepost/?pageCount=' + prepage,
+            nextpage: rootPath + 'information/?pageCount=' + nextpage,
+            prepage: rootPath + 'information/?pageCount=' + prepage,
             path: rootPath + 'post/',
             post: postpage,
             pageCount: pageCount,
@@ -46,7 +46,7 @@ export async function morepost(req: Request, res: Response) {
         });
 
         console.log(nextpage, 'nextpage')
-        res.render('morepost.ejs', data, (err, html) => {
+        res.render('information.ejs', data, (err, html) => {
             if (ejsError(err, res) === true) return;
             res.end(html);
         });
