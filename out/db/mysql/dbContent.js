@@ -111,7 +111,11 @@ class DbContent extends db_1.Db {
             FROM 	${db}.tv_hot as a
                     JOIN ${db}.tv_postpublish as p on p.post = a.post and p.openweb = 1
                     JOIN ${db}.tv_post as b on a.post = b.id
-                    JOIN ${db}.tv_postsubject AS c ON a.post = c.post
+                    JOIN (
+                        SELECT	*
+                        FROM 		${db}.tv_postsubject AS aa 
+                        WHERE		aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
+                    )  AS c ON a.post = c.post
                     JOIN ${db}.tv_subject AS d ON c.subject = d.id
                     LEFT JOIN ${db}.tv_subject AS e ON d.parent = e.id
                     LEFT JOIN ${db}.tv_image im on b.image=im.id
