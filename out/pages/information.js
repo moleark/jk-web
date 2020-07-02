@@ -46,7 +46,8 @@ function information(req, res) {
                 pageCount: pageCount,
                 hotPosts: cacheHotPosts,
                 subject: subject,
-                rootcategories: rootcategories
+                rootcategories: rootcategories,
+                titleshow: true
             });
             console.log(nextpage, 'nextpage');
             res.render('information.ejs', data, (err, html) => {

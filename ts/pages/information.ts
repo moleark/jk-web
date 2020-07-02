@@ -42,7 +42,8 @@ export async function information(req: Request, res: Response) {
             pageCount: pageCount,
             hotPosts: cacheHotPosts,
             subject: subject,
-            rootcategories: rootcategories
+            rootcategories: rootcategories,
+            titleshow: true
         });
 
         console.log(nextpage, 'nextpage')

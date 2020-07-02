@@ -72,7 +72,8 @@ export async function post(req: Request, res: Response) {
             subject: subject,
             hotPosts: cacheHotPosts,
             rootcategories: rootcategories,
-            content: content
+            content: content,
+            titleshow: false
         });
 
         let html = ejs.render(template, data);

@@ -50,7 +50,8 @@ function subjectpost(req, res) {
                 hotPosts: cacheHotPosts,
                 subject: subject,
                 caption: caption,
-                rootcategories: rootcategories
+                rootcategories: rootcategories,
+                titleshow: false
             });
             console.log(nextpage, 'nextpage');
             res.render('subjectpost.ejs', data, (err, html) => {

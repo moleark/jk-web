@@ -49,7 +49,8 @@ export async function subjectpost(req: Request, res: Response) {
             hotPosts: cacheHotPosts,
             subject: subject,
             caption: caption,
-            rootcategories: rootcategories
+            rootcategories: rootcategories,
+            titleshow: false
         });
 
         console.log(nextpage, 'nextpage')

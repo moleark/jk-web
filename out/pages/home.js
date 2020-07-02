@@ -67,6 +67,7 @@ function home(req, res) {
                 discounts: discounts,
                 recommend: recommend,
                 rootcategories: rootcategories,
+                titleshow: true
             });
             let html = ejs.render(template, data);
             res.end(html);
