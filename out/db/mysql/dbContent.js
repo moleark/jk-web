@@ -29,13 +29,15 @@ class DbContent extends db_1.Db {
             LIMIT 10;
         `;
         this.sqlPostFromId = `
-            SELECT a.content, a.caption
-                FROM ${db}.tv_post a
-                WHERE a.id= ? ;
+            SELECT a.content, a.caption, 
+                    case  
+                        when datediff( NOW(), $UPDATE ) > 1 then DATE_FORMAT( $update ,'%Y-%m-%d')
+                    else  DATE_FORMAT( $update, "%H:%i") end as $update
+            FROM ${db}.tv_post a
+            WHERE a.id= ? ;
         `;
         this.sqlInformationPage = `
-            SELECT a.id, a.caption, a.discription as disp, c.path as image,
-                    cp.update as date, f.name
+            SELECT a.id, a.caption, a.discription as disp, c.path as image, cp.update as date, f.name
             FROM    ${db}.tv_postpublish cp 
                     join ${db}.tv_post a on cp.post=a.id
                     JOIN (
@@ -48,6 +50,20 @@ class DbContent extends db_1.Db {
             WHERE   cp.openweb = 1
             ORDER BY a.id desc
             LIMIT ?,?;
+        `;
+        this.sqlInformationPost = `
+            SELECT 	a.id, a.caption, a.discription as disp, c.path as image, cp.update as date, f.name
+            FROM   	${db}.tv_postpublish cp 
+                    JOIN ${db}.tv_informationpost AS ip ON ip.post = cp.post
+                    join ${db}.tv_post a on cp.post=a.id
+                    JOIN (
+                        SELECT	*
+                        FROM 		${db}.tv_postsubject AS aa 
+                        WHERE		aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
+                    )  AS e ON cp.post = e.post
+                    JOIN ${db}.tv_subject AS f ON e.subject = f.id
+                    left join ${db}.tv_image c on a.image=c.id
+            ORDER BY ip.sort;
         `;
         this.sqlAllPosts = `
             SELECT a.id, a.caption, a.discription as disp, c.path as image,
@@ -92,6 +108,17 @@ class DbContent extends db_1.Db {
             ORDER BY b.update desc
             LIMIT ?,?;
         `;
+        this.sqlSubject = `
+            SELECT 	*
+            FROM    ${db}.tv_subject AS a
+            WHERE 	parent = 0 
+        `;
+        this.sqlPostSubject = `
+            SELECT 	b.id, b.name
+            FROM    ${db}.tv_postsubject as a
+                    join ${db}.tv_subject AS b on a.subject = b.id
+            WHERE   a.post=?
+        `;
         this.sqlRouter = `
             SELECT a.name
             FROM ${db}.tv_webpage a
@@ -105,11 +132,6 @@ class DbContent extends db_1.Db {
             WHERE   a.name = ?
             ORDER BY b.sort;
         `;
-        this.sqlSubject = `
-            SELECT 	*
-            FROM    ${db}.tv_subject AS a
-            WHERE 	parent = 0 
-        `;
         this.sqlHotPost = `
             SELECT	distinct a.hits, a.post, b.caption, b.discription, im.path as image, b.author, IFNULL(e.name, d.name) as subject
             FROM 	${db}.tv_hot as a
@@ -117,8 +139,8 @@ class DbContent extends db_1.Db {
                     JOIN ${db}.tv_post as b on a.post = b.id
                     JOIN (
                         SELECT	*
-                        FROM 		${db}.tv_postsubject AS aa 
-                        WHERE		aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
+                        FROM    ${db}.tv_postsubject AS aa 
+                        WHERE	aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
                     )  AS c ON a.post = c.post
                     JOIN ${db}.tv_subject AS d ON c.subject = d.id
                     LEFT JOIN ${db}.tv_subject AS e ON d.parent = e.id
@@ -143,6 +165,12 @@ class DbContent extends db_1.Db {
     informationPage(pageStart, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlInformationPage, [pageStart, pageSize]);
+            return ret;
+        });
+    }
+    informationPost() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlInformationPost);
             return ret;
         });
     }
@@ -178,6 +206,18 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
+    postSubject(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlPostSubject, [id]);
+            return ret;
+        });
+    }
+    getSubject() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlSubject);
+            return ret;
+        });
+    }
     getRoute() {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlRouter);
@@ -187,12 +227,6 @@ class DbContent extends db_1.Db {
     getPage(name) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlPagebranch, [name]);
-            return ret;
-        });
-    }
-    getSubject() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlSubject);
             return ret;
         });
     }

@@ -21,8 +21,8 @@ export async function home(req: Request, res: Response) {
             };
         }
 
-        //获取最新贴文
-        let newpost = await Dbs.content.homePostList();
+        //资讯中心
+        let information = await Dbs.content.informationPost();
         //优惠活动
         let discounts = await Dbs.content.subjectPost(18, 0, 30);
         //产品推荐
@@ -54,7 +54,7 @@ export async function home(req: Request, res: Response) {
         console.log(rootPath, 'rootPath')
         let data = buildData(req, {
             path: rootPath + 'post/',
-            news: newpost,
+            information: information,
             hots: cacheHotPosts,
             discounts: discounts,
             recommend: recommend,

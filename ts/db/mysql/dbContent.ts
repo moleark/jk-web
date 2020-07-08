@@ -4,14 +4,16 @@ export class DbContent extends Db {
     private sqlHomePostList: string;
     private sqlPostFromId: string;
     private sqlInformationPage: string;
+    private sqlInformationPost: string;
     private sqlAllPosts: string;
     private sqlCategoryPost: string;
     private sqlCategoryPostExplain: string;
     private sqlSubjectById: string;
     private sqlSubjectPost: string;
+    private sqlPostSubject: string;
+    private sqlSubject: string;
     private sqlRouter: string;
     private sqlPagebranch: string;
-    private sqlSubject: string;
     private sqlHotPost: string;
 
     constructor() {
@@ -32,14 +34,16 @@ export class DbContent extends Db {
         `;
 
         this.sqlPostFromId = `
-            SELECT a.content, a.caption
-                FROM ${db}.tv_post a
-                WHERE a.id= ? ;
+            SELECT a.content, a.caption, 
+                    case  
+                        when datediff( NOW(), $UPDATE ) > 1 then DATE_FORMAT( $update ,'%Y-%m-%d')
+                    else  DATE_FORMAT( $update, "%H:%i") end as $update
+            FROM ${db}.tv_post a
+            WHERE a.id= ? ;
         `;
 
         this.sqlInformationPage = `
-            SELECT a.id, a.caption, a.discription as disp, c.path as image,
-                    cp.update as date, f.name
+            SELECT a.id, a.caption, a.discription as disp, c.path as image, cp.update as date, f.name
             FROM    ${db}.tv_postpublish cp 
                     join ${db}.tv_post a on cp.post=a.id
                     JOIN (
@@ -52,6 +56,21 @@ export class DbContent extends Db {
             WHERE   cp.openweb = 1
             ORDER BY a.id desc
             LIMIT ?,?;
+        `;
+
+        this.sqlInformationPost = `
+            SELECT 	a.id, a.caption, a.discription as disp, c.path as image, cp.update as date, f.name
+            FROM   	${db}.tv_postpublish cp 
+                    JOIN ${db}.tv_informationpost AS ip ON ip.post = cp.post
+                    join ${db}.tv_post a on cp.post=a.id
+                    JOIN (
+                        SELECT	*
+                        FROM 		${db}.tv_postsubject AS aa 
+                        WHERE		aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
+                    )  AS e ON cp.post = e.post
+                    JOIN ${db}.tv_subject AS f ON e.subject = f.id
+                    left join ${db}.tv_image c on a.image=c.id
+            ORDER BY ip.sort;
         `;
 
         this.sqlAllPosts = `
@@ -101,6 +120,18 @@ export class DbContent extends Db {
             ORDER BY b.update desc
             LIMIT ?,?;
         `;
+        this.sqlSubject = `
+            SELECT 	*
+            FROM    ${db}.tv_subject AS a
+            WHERE 	parent = 0 
+        `;
+
+        this.sqlPostSubject = `
+            SELECT 	b.id, b.name
+            FROM    ${db}.tv_postsubject as a
+                    join ${db}.tv_subject AS b on a.subject = b.id
+            WHERE   a.post=?
+        `;
 
         this.sqlRouter = `
             SELECT a.name
@@ -117,11 +148,6 @@ export class DbContent extends Db {
             ORDER BY b.sort;
         `;
 
-        this.sqlSubject = `
-            SELECT 	*
-            FROM    ${db}.tv_subject AS a
-            WHERE 	parent = 0 
-        `;
 
         this.sqlHotPost = `
             SELECT	distinct a.hits, a.post, b.caption, b.discription, im.path as image, b.author, IFNULL(e.name, d.name) as subject
@@ -130,8 +156,8 @@ export class DbContent extends Db {
                     JOIN ${db}.tv_post as b on a.post = b.id
                     JOIN (
                         SELECT	*
-                        FROM 		${db}.tv_postsubject AS aa 
-                        WHERE		aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
+                        FROM    ${db}.tv_postsubject AS aa 
+                        WHERE	aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
                     )  AS c ON a.post = c.post
                     JOIN ${db}.tv_subject AS d ON c.subject = d.id
                     LEFT JOIN ${db}.tv_subject AS e ON d.parent = e.id
@@ -155,6 +181,11 @@ export class DbContent extends Db {
 
     async informationPage(pageStart: number, pageSize: number): Promise<any> {
         const ret = await this.tableFromSql(this.sqlInformationPage, [pageStart, pageSize]);
+        return ret;
+    }
+
+    async informationPost(): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlInformationPost);
         return ret;
     }
 
@@ -185,6 +216,17 @@ export class DbContent extends Db {
         return ret;
     }
 
+    async postSubject(id: any): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlPostSubject, [id]);
+        return ret;
+    }
+
+    async getSubject(): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlSubject);
+        return ret;
+    }
+
+
     async getRoute(): Promise<any> {
         const ret = await this.tableFromSql(this.sqlRouter);
         return ret;
@@ -192,11 +234,6 @@ export class DbContent extends Db {
 
     async getPage(name: string): Promise<any> {
         const ret = await this.tableFromSql(this.sqlPagebranch, [name]);
-        return ret;
-    }
-
-    async getSubject(): Promise<any> {
-        const ret = await this.tableFromSql(this.sqlSubject);
         return ret;
     }
 

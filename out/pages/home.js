@@ -31,8 +31,8 @@ function home(req, res) {
                 }
                 ;
             }
-            //获取最新贴文
-            let newpost = yield db_1.Dbs.content.homePostList();
+            //资讯中心
+            let information = yield db_1.Dbs.content.informationPost();
             //优惠活动
             let discounts = yield db_1.Dbs.content.subjectPost(18, 0, 30);
             //产品推荐
@@ -62,7 +62,7 @@ function home(req, res) {
             console.log(rootPath, 'rootPath');
             let data = tools_1.buildData(req, {
                 path: rootPath + 'post/',
-                news: newpost,
+                information: information,
                 hots: cacheHotPosts,
                 discounts: discounts,
                 recommend: recommend,

@@ -17,7 +17,7 @@ function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
         try {
-            let template, content, title;
+            let template, content, current, postsubject;
             let id = req.params.id;
             //获取内容
             const ret = yield db_1.Dbs.content.postFromId(id);
@@ -25,6 +25,7 @@ function post(req, res) {
                 template = `post id=${id} is not defined`;
             }
             else {
+                postsubject = yield db_1.Dbs.content.postSubject(id);
                 //获取模板
                 let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
                 let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
@@ -53,7 +54,7 @@ function post(req, res) {
                     + subject
                     + subjectFooter
                     + homeFooter;
-                title = ret[0].caption;
+                current = ret[0];
             }
             //获取产品目录树根节点
             const rootcategories = yield db_1.Dbs.product.getRootCategories();
@@ -70,11 +71,12 @@ function post(req, res) {
             subject = yield db_1.Dbs.content.getSubject();
             let data = tools_1.buildData(req, {
                 path: rootPath + 'post/',
-                $title: title,
+                current: current,
                 subject: subject,
                 hotPosts: cacheHotPosts,
                 rootcategories: rootcategories,
                 content: content,
+                postsubject: postsubject,
                 titleshow: false
             });
             let html = ejs.render(template, data);

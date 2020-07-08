@@ -62,19 +62,19 @@ let arr = [
                 <div class="col-lg-7 pad-lf35">
                     <div class="bottom-block">
                         <div class="row">
-                            <% let { id:id0, caption:caption0 , disp:disp0, image:image0 } = news[0]; %>
+                            <% let { id:id0, caption:caption0 , disp:disp0, image:image0 , name:name0  } = information[0]; %>
                             <div class="col-lg-12 position-re">
                                 <div class="img-wrap">
                                     <a href="<%=path+id0%>"><img src="<%=image0%>"></a>
                                 </div>
                                 <div class="title-wrap mint">
-                                    <a href="#">人名反应</a>
+                                    <a href="<%=path+id0%>"><%=name0%></a>
                                 </div>
                                 <a href="<%=path+id0%>">
                                     <p><%=caption0%></p>
                                 </a>
                             </div>
-                            <% let { id:id1, caption:caption1, disp:disp1, image:image1 } = news[1]; %>
+                            <% let { id:id1, caption:caption1, disp:disp1, image:image1 , name:name1} = information[1]; %>
                             <hr class="mobile-divider">
                             <div class="col-lg-6 pad-l-0 col-sm-6 position-re-s">
                                 <div class="col-xs-3 display-desktop">
@@ -84,7 +84,7 @@ let arr = [
                                 </div>
                                 <div class="col-xs-9">
                                     <div class="title-wrap">
-                                        <div class="mint"><a href="<%=path+id1%>">人名反应</a></div>
+                                        <div class="mint"><a href="<%=path+id1%>"><%=name1%></a></div>
                                     </div>
                                     <a href="<%=path+id1%>">
                                         <p><%=caption1%></p>
@@ -93,13 +93,13 @@ let arr = [
                                 <!-- mobile -->
                                 <div class="col-xs-3 display-mobile">
                                     <div class="img-wrap">
-                                        <a href="#"><img src="<%=image1%>"></a>
+                                        <a href="<%=path+id1%>"><img src="<%=image1%>"></a>
                                     </div>
                                 </div>
                                 <!-- mobile end-->
                             </div>
 
-                            <% let { id:id2, caption:caption2, disp:disp2, image:image2 } = news[2]; %>
+                            <% let { id:id2, caption:caption2, disp:disp2, image:image2, name:name2 } = information[2]; %>
                             <hr class="mobile-divider">
                             <div class="col-lg-6 pad-l-0 col-sm-6 position-re-s">
                                 <div class="col-xs-3 display-desktop">
@@ -109,16 +109,16 @@ let arr = [
                                 </div>
                                 <div class="col-xs-9">
                                     <div class="title-wrap">
-                                        <div class="mint"><a href="<%=path+id2%>">人名反应</a></div>
+                                        <div class="mint"><a href="<%=path+id2%>"><%=name2%></a></div>
                                     </div>
                                     <a href="<%=path+id2%>">
-                                        <p><%=caption1%></p>
+                                        <p><%=caption2%></p>
                                     </a>
                                 </div>
                                 <!-- mobile -->
                                 <div class="col-xs-3 display-mobile">
                                     <div class="img-wrap">
-                                        <a href="#"><img src="<%=image2%>"></a>
+                                        <a href="<%=path+id2%>"><img src="<%=image2%>"></a>
                                     </div>
                                 </div>
                                 <!-- mobile end-->

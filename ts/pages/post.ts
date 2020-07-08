@@ -6,7 +6,7 @@ import { getRootPath, viewPath, ejsSuffix, ipHit, ejsError, buildData, hmToEjs }
 export async function post(req: Request, res: Response) {
     let rootPath = getRootPath(req);
     try {
-        let template: string, content: string, title: string;
+        let template: string, content: string, current: any, postsubject: any;
         let id = req.params.id;
 
         //获取内容
@@ -15,6 +15,8 @@ export async function post(req: Request, res: Response) {
             template = `post id=${id} is not defined`;
         }
         else {
+
+            postsubject = await Dbs.content.postSubject(id);
 
             //获取模板
             let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
@@ -47,7 +49,7 @@ export async function post(req: Request, res: Response) {
                 + subjectFooter
                 + homeFooter;
 
-            title = ret[0].caption;
+            current = ret[0];
         }
 
         //获取产品目录树根节点
@@ -66,13 +68,15 @@ export async function post(req: Request, res: Response) {
         let subject: any[];
         subject = await Dbs.content.getSubject();
 
+
         let data = buildData(req, {
             path: rootPath + 'post/',
-            $title: title,
+            current: current,
             subject: subject,
             hotPosts: cacheHotPosts,
             rootcategories: rootcategories,
             content: content,
+            postsubject: postsubject,
             titleshow: false
         });
 
