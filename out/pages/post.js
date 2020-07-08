@@ -70,6 +70,7 @@ function post(req, res) {
             let subject;
             subject = yield db_1.Dbs.content.getSubject();
             let data = tools_1.buildData(req, {
+                $title: current.caption,
                 path: rootPath + 'post/',
                 current: current,
                 subject: subject,

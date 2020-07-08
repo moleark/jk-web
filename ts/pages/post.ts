@@ -70,6 +70,7 @@ export async function post(req: Request, res: Response) {
 
 
         let data = buildData(req, {
+            $title: current.caption,
             path: rootPath + 'post/',
             current: current,
             subject: subject,
