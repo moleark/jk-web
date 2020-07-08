@@ -11,8 +11,8 @@ export async function ipHit(req: Request, post: number | string) {
         let ip = getNetIp(req);
         let now = Math.floor(Date.now() / 1000);
         let sales = req.query.sales ? req.query.sales : 0;
-        let source = req.query.from ? req.query.from : 0;
-        let hit = now + '\t' + ip + '\t' + post + '\t' + sales;
+        let source = req.query.source ? req.query.source : 0;
+        let hit = now + '\t' + ip + '\t' + post + '\t' + sales + '\t' + source;
         hits.push(hit);
         console.log('ipHit', ip, hits.length, now, lastTick, lastHotCalcTick);
         if (now - lastTick > saveGap || hits.length > 1000) {
