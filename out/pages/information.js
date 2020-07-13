@@ -16,8 +16,9 @@ function information(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
         try {
+            let discounts = [];
+            let correlation = [];
             //获取当前页贴文
-            let caption;
             let postpage;
             let pageCount;
             let pageSize = 10;
@@ -38,6 +39,10 @@ function information(req, res) {
                 lastHotTick = now;
                 cacheHotPosts = yield db_1.Dbs.content.getHotPost();
             }
+            //获取优惠贴文
+            discounts = yield db_1.Dbs.content.getDiscountsPost(0);
+            //相关贴文
+            correlation = yield db_1.Dbs.content.getCorrelationPost(0);
             let data = tools_1.buildData(req, {
                 nextpage: rootPath + 'information/?pageCount=' + nextpage,
                 prepage: rootPath + 'information/?pageCount=' + prepage,
@@ -46,6 +51,8 @@ function information(req, res) {
                 pageCount: pageCount,
                 hotPosts: cacheHotPosts,
                 subject: subject,
+                discounts: discounts,
+                correlation: correlation,
                 rootcategories: rootcategories,
                 titleshow: true
             });

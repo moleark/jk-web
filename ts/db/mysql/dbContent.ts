@@ -209,9 +209,8 @@ export class DbContent extends Db {
                             (c.startdate IS NULL AND c.enddate IS NULL) or
                             (c.startdate > NOW() AND c.enddate < NOW())
                         )
-            ORDER BY a.posttype, c.update;
+            ORDER BY a.posttype, c.update desc;
         `;
-
 
         this.sqlCorrelation = `
             SELECT  	b.id, b.caption, im.path as image, IFNULL(e.name, d.name) as subject
@@ -219,12 +218,12 @@ export class DbContent extends Db {
                         SELECT	DISTINCT 1 AS posttype, b.post
                         FROM    ${db}.tv_postproductcatalog AS a
                                 INNER JOIN  ${db}.tv_postproductcatalog AS b ON  a.productcategory = b.productcategory
-                        WHERE 	a.post = ?
+                        WHERE 	a.post = ? or '0' = ?
                         UNION
                         SELECT	DISTINCT 1, b.post
                         FROM    ${db}.tv_postdomain AS a
                                 INNER JOIN  ${db}.tv_postdomain AS b ON a.domain = b.domain
-                        WHERE 	a.post = ?
+                        WHERE 	a.post = ? or '0' = ? limit 5
                         ) AS a
                         INNER JOIN  ${db}.tv_post AS b ON a.post = b.id
                         INNER JOIN  ${db}.tv_postpublish AS pb ON pb.post = a.post
@@ -240,7 +239,7 @@ export class DbContent extends Db {
                             (pb.startdate IS NULL AND pb.enddate IS NULL) or
                             (pb.startdate > NOW() AND pb.enddate < NOW())
                         )
-            ORDER BY a.posttype, pb.update;
+            ORDER BY a.posttype, pb.update desc ;
             `;
 
     }
@@ -323,7 +322,7 @@ export class DbContent extends Db {
     }
 
     async getCorrelationPost(id: any): Promise<any> {
-        const ret = await this.tableFromSql(this.sqlCorrelation, [id, id]);
+        const ret = await this.tableFromSql(this.sqlCorrelation, [id, id, id, id]);
         return ret;
     }
 

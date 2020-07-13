@@ -6,9 +6,10 @@ export async function information(req: Request, res: Response) {
     let rootPath = getRootPath(req);
 
     try {
+        let discounts: any[] = [];
+        let correlation: any[] = [];
 
         //获取当前页贴文
-        let caption: string;
         let postpage: any[];
         let pageCount: number;
         let pageSize: number = 10;
@@ -34,6 +35,12 @@ export async function information(req: Request, res: Response) {
             cacheHotPosts = await Dbs.content.getHotPost();
         }
 
+        //获取优惠贴文
+        discounts = await Dbs.content.getDiscountsPost(0);
+
+        //相关贴文
+        correlation = await Dbs.content.getCorrelationPost(0);
+
         let data = buildData(req, {
             nextpage: rootPath + 'information/?pageCount=' + nextpage,
             prepage: rootPath + 'information/?pageCount=' + prepage,
@@ -42,6 +49,8 @@ export async function information(req: Request, res: Response) {
             pageCount: pageCount,
             hotPosts: cacheHotPosts,
             subject: subject,
+            discounts: discounts,
+            correlation: correlation,
             rootcategories: rootcategories,
             titleshow: true
         });
