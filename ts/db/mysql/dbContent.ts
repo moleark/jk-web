@@ -171,44 +171,44 @@ export class DbContent extends Db {
         `;
 
         this.sqlDiscountsPost = `	  
-			    SELECT  b.id, b.caption, im.path as image
-                FROM 	(
-                        SELECT  DISTINCT 1 AS posttype, c.post
-                        FROM    ${db}.tv_postdomain AS a
-                                INNER JOIN   ${db}.tv_postdomain AS b ON a.domain = b.domain
-                                INNER JOIN   ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
-                        WHERE 	a.post = ?
-                        UNION
-                        SELECT  DISTINCT 1, c.post
-                        FROM    ${db}.tv_postproductcatalog AS a
-                                INNER JOIN  ${db}.tv_postproductcatalog AS b ON a.productcategory = b.productcategory
-                                INNER JOIN  ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
-                        WHERE 	a.post = ?
-                        UNION
-                        SELECT  DISTINCT 2, post
-                        FROM    ${db}.tv_postsubject 
-                        WHERE   subject = 18
-                                AND post NOT IN(
-                                    SELECT  DISTINCT c.post
-                                    FROM 	${db}.tv_postdomain AS a
-                                            INNER JOIN   ${db}.tv_postdomain AS b ON a.domain = b.domain
-                                            INNER JOIN   ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
-                                    WHERE 	a.post = ?
-                                    UNION
-                                    SELECT  DISTINCT c.post
-                                    FROM    ${db}.tv_postproductcatalog AS a
-                                            INNER JOIN  ${db}.tv_postproductcatalog AS b ON a.productcategory = b.productcategory
-                                            INNER JOIN  ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
-                                    WHERE 	a.post = ?
-                                )
-                        ) AS a
-                        INNER JOIN  ${db}.tv_post AS b ON a.post = b.id
-                        INNER JOIN  ${db}.tv_postpublish AS c ON c.post = a.post
-                        LEFT  JOIN  ${db}.tv_image im on b.image=im.id
-                WHERE  	(
-                            (c.startdate IS NULL AND c.enddate IS NULL) or
-                            (c.startdate > NOW() AND c.enddate < NOW())
-                        )
+            SELECT  b.id, b.caption, im.path as image
+            FROM 	(
+                    SELECT  DISTINCT 1 AS posttype, c.post
+                    FROM    ${db}.tv_postdomain AS a
+                            INNER JOIN   ${db}.tv_postdomain AS b ON a.domain = b.domain
+                            INNER JOIN   ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                    WHERE 	a.post = ?
+                    UNION
+                    SELECT  DISTINCT 1, c.post
+                    FROM    ${db}.tv_postproductcatalog AS a
+                            INNER JOIN  ${db}.tv_postproductcatalog AS b ON a.productcategory = b.productcategory
+                            INNER JOIN  ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                    WHERE 	a.post = ?
+                    UNION
+                    SELECT  DISTINCT 2, post
+                    FROM    ${db}.tv_postsubject 
+                    WHERE   subject = 18
+                            AND post NOT IN(
+                                SELECT  DISTINCT c.post
+                                FROM 	${db}.tv_postdomain AS a
+                                        INNER JOIN   ${db}.tv_postdomain AS b ON a.domain = b.domain
+                                        INNER JOIN   ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                                WHERE 	a.post = ?
+                                UNION
+                                SELECT  DISTINCT c.post
+                                FROM    ${db}.tv_postproductcatalog AS a
+                                        INNER JOIN  ${db}.tv_postproductcatalog AS b ON a.productcategory = b.productcategory
+                                        INNER JOIN  ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                                WHERE 	a.post = ?
+                            )
+                    ) AS a
+                    INNER JOIN  ${db}.tv_post AS b ON a.post = b.id
+                    INNER JOIN  ${db}.tv_postpublish AS c ON c.post = a.post
+                    LEFT  JOIN  ${db}.tv_image im on b.image=im.id
+            WHERE  	(
+                        (c.startdate IS NULL AND c.enddate IS NULL) or
+                        (c.startdate > NOW() AND c.enddate < NOW())
+                    )
             ORDER BY a.posttype, c.update desc;
         `;
 
