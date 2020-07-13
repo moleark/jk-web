@@ -177,13 +177,13 @@ export class DbContent extends Db {
                         FROM    ${db}.tv_postdomain AS a
                                 INNER JOIN   ${db}.tv_postdomain AS b ON a.domain = b.domain
                                 INNER JOIN   ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
-                        WHERE 	a.post = 304
+                        WHERE 	a.post = ?
                         UNION
                         SELECT  DISTINCT 1, c.post
                         FROM    ${db}.tv_postproductcatalog AS a
                                 INNER JOIN  ${db}.tv_postproductcatalog AS b ON a.productcategory = b.productcategory
                                 INNER JOIN  ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
-                        WHERE 	a.post = 304
+                        WHERE 	a.post = ?
                         UNION
                         SELECT  DISTINCT 2, post
                         FROM    ${db}.tv_postsubject 
@@ -193,12 +193,13 @@ export class DbContent extends Db {
                                     FROM 	${db}.tv_postdomain AS a
                                             INNER JOIN   ${db}.tv_postdomain AS b ON a.domain = b.domain
                                             INNER JOIN   ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
-                                    WHERE 	a.post = 304
+                                    WHERE 	a.post = ?
                                     UNION
                                     SELECT  DISTINCT c.post
                                     FROM    ${db}.tv_postproductcatalog AS a
                                             INNER JOIN  ${db}.tv_postproductcatalog AS b ON a.productcategory = b.productcategory
                                             INNER JOIN  ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                                    WHERE 	a.post = ?
                                 )
                         ) AS a
                         INNER JOIN  ${db}.tv_post AS b ON a.post = b.id
@@ -218,12 +219,12 @@ export class DbContent extends Db {
                         SELECT	DISTINCT 1 AS posttype, b.post
                         FROM    ${db}.tv_postproductcatalog AS a
                                 INNER JOIN  ${db}.tv_postproductcatalog AS b ON  a.productcategory = b.productcategory
-                        WHERE 	a.post = 304
+                        WHERE 	a.post = ?
                         UNION
                         SELECT	DISTINCT 1, b.post
                         FROM    ${db}.tv_postdomain AS a
                                 INNER JOIN  ${db}.tv_postdomain AS b ON a.domain = b.domain
-                        WHERE 	a.post = 304
+                        WHERE 	a.post = ?
                         ) AS a
                         INNER JOIN  ${db}.tv_post AS b ON a.post = b.id
                         INNER JOIN  ${db}.tv_postpublish AS pb ON pb.post = a.post
@@ -316,13 +317,13 @@ export class DbContent extends Db {
         return ret;
     }
 
-    async getDiscountsPost(): Promise<any> {
-        const ret = await this.tableFromSql(this.sqlDiscountsPost);
+    async getDiscountsPost(id: any): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlDiscountsPost, [id, id, id, id]);
         return ret;
     }
 
-    async getCorrelationPost(): Promise<any> {
-        const ret = await this.tableFromSql(this.sqlCorrelation);
+    async getCorrelationPost(id: any): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlCorrelation, [id, id]);
         return ret;
     }
 

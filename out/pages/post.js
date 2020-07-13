@@ -18,6 +18,8 @@ function post(req, res) {
         let rootPath = tools_1.getRootPath(req);
         try {
             let template, content, current, postsubject;
+            let discounts = [];
+            let correlation = [];
             let id = req.params.id;
             //获取内容
             const ret = yield db_1.Dbs.content.postFromId(id);
@@ -25,6 +27,11 @@ function post(req, res) {
                 template = `post id=${id} is not defined`;
             }
             else {
+                //获取优惠贴文
+                discounts = yield db_1.Dbs.content.getDiscountsPost(id);
+                //相关贴文
+                correlation = yield db_1.Dbs.content.getCorrelationPost(id);
+                //获取贴文的栏目
                 postsubject = yield db_1.Dbs.content.postSubject(id);
                 //获取模板
                 let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
@@ -69,12 +76,6 @@ function post(req, res) {
             //获取栏目
             let subject;
             subject = yield db_1.Dbs.content.getSubject();
-            //获取优惠贴文
-            let discounts = [];
-            discounts = yield db_1.Dbs.content.getDiscountsPost();
-            //相关贴文
-            let correlation = [];
-            correlation = yield db_1.Dbs.content.getCorrelationPost();
             let data = tools_1.buildData(req, {
                 $title: current.caption,
                 path: rootPath + 'post/',

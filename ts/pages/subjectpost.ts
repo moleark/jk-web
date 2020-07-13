@@ -11,6 +11,8 @@ export async function subjectpost(req: Request, res: Response) {
         let currentId = Number(req.params.current);
         let currentSubject = await Dbs.content.subjectByid(currentId);
         let caption = currentSubject.name;
+        let discounts: any[] = [];
+        let correlation: any[] = [];
 
         //获取当前页贴文
 
@@ -39,6 +41,12 @@ export async function subjectpost(req: Request, res: Response) {
             cacheHotPosts = await Dbs.content.getHotPost();
         }
 
+        //获取优惠贴文
+        discounts = await Dbs.content.getDiscountsPost(0);
+
+        //相关贴文
+        correlation = await Dbs.content.getCorrelationPost(0);
+
 
         let data = buildData(req, {
             nextpage: rootPath + 'subjectpost/' + currentId + '?pageCount=' + nextpage,
@@ -48,6 +56,8 @@ export async function subjectpost(req: Request, res: Response) {
             pageCount: pageCount,
             hotPosts: cacheHotPosts,
             subject: subject,
+            discounts: discounts,
+            correlation: correlation,
             caption: caption,
             rootcategories: rootcategories,
             titleshow: false

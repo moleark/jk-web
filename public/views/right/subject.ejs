@@ -52,7 +52,11 @@
 </div>
 
 <div class="side-block">
+    <%
+      if(correlation.length>0){
+    %>
     <h3 class="side-block-title">相关贴文</h3>
+    <% } %>
     <%
     let cpn = 0;
     for (let pn of correlation) {

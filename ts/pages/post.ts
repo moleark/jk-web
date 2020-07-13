@@ -7,6 +7,8 @@ export async function post(req: Request, res: Response) {
     let rootPath = getRootPath(req);
     try {
         let template: string, content: string, current: any, postsubject: any;
+        let discounts: any[] = [];
+        let correlation: any[] = [];
         let id = req.params.id;
 
         //获取内容
@@ -16,6 +18,13 @@ export async function post(req: Request, res: Response) {
         }
         else {
 
+            //获取优惠贴文
+            discounts = await Dbs.content.getDiscountsPost(id);
+
+            //相关贴文
+            correlation = await Dbs.content.getCorrelationPost(id);
+
+            //获取贴文的栏目
             postsubject = await Dbs.content.postSubject(id);
 
             //获取模板
@@ -29,6 +38,7 @@ export async function post(req: Request, res: Response) {
             let subjectFooter = ejs.fileLoader(viewPath + 'footers/subject' + ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
             let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
+
             //获取内容明细
             content = ret[0].content;
             if (content.charAt(0) === '#') {
@@ -36,7 +46,6 @@ export async function post(req: Request, res: Response) {
             }
 
             //获取优惠活动
-
             template = header
                 + jk
                 + hmInclude
@@ -67,14 +76,6 @@ export async function post(req: Request, res: Response) {
         //获取栏目
         let subject: any[];
         subject = await Dbs.content.getSubject();
-
-        //获取优惠贴文
-        let discounts: any[] = [];
-        discounts = await Dbs.content.getDiscountsPost();
-
-        //相关贴文
-        let correlation: any[] = [];
-        correlation = await Dbs.content.getCorrelationPost();
 
         let data = buildData(req, {
             $title: current.caption,
