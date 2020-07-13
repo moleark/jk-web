@@ -26,6 +26,7 @@ const technicalSupport_1 = require("./technicalSupport");
 const subjectpost_1 = require("./subjectpost");
 const categoryinstruction_1 = require("./categoryinstruction");
 const cart_1 = require("./cart");
+const post_test_1 = require("./post_test");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -52,5 +53,6 @@ exports.homeRouter.get('/casSubclass/:current', casSubclass_1.casSubclass);
 exports.homeRouter.get('/technicalSupport', technicalSupport_1.technicalSupport);
 exports.homeRouter.get('/subjectpost/:current', subjectpost_1.subjectpost);
 exports.homeRouter.get('/cart', cart_1.cart);
+exports.homeRouter.get('/post_test/:id', post_test_1.post_test);
 exports.homeRouter.get('/partial/categoryinstruction/:current', categoryinstruction_1.categoryInstruction);
 //# sourceMappingURL=index.js.map

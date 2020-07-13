@@ -14,26 +14,57 @@
     </ul>
 </div>
 <div class="side-block">
+    <%
+      if(discounts.length>0){
+    %>
+    <h3 class="side-block-title">促销活动</h3>
+    <% } %>
+    <%
+    let dpn = 0;
+    for (let pn of discounts) {
+        dpn++;
+        if (dpn > 5) break;
+        let {id, caption, image} = pn;
+    %>
+    <div class="img-wrap img-promo">
+        <a href="<%=path+id%>"><img src="<%=image%>"></a>
+    </div>
+    <p><a href="<%=path+id%>"><%=caption%></a></p>
+    <% } %>
+</div>
+<div class="side-block">
     <h3 class="side-block-title">最受欢迎</h3>
     <%
     let hpn = 0;
     for (let pn of hotPosts) {
         hpn++;
-        if (hpn > 10) break;
+        if (hpn >5) break;
         let {post, caption,subject,image} = pn;
     %>
     <div class="overflow">
-        <div class="post-preview  col-xs-9">
-            <h4 class="post-title"><a href="#"><%=subject%></a></h4>
+        <div class="post-preview p-flot mt-lg-1">
+            <h4 class="post-title"><a href="#"><%=subject%></a></h4> |
             <p><a href="<%=path+post%>"><%=caption%></a></p>
         </div>
-        <!-- mobile -->
-        <div class="col-xs-3 display-mobile">
-            <div class="img-wrap">
-                <a href="<%=path+post%>"><img src="<%=image%>"></a>
-            </div>
+    </div>
+    <hr class="mobile-divider">
+    <% } %>
+</div>
+
+<div class="side-block">
+    <h3 class="side-block-title">相关贴文</h3>
+    <%
+    let cpn = 0;
+    for (let pn of correlation) {
+        cpn++;
+        if (cpn >5) break;
+        let {id, caption,subject,image} = pn;
+    %>
+    <div class="overflow">
+        <div class="post-preview p-flot mt-lg-1">
+            <h4 class="post-title"><a href="#"><%=subject%></a></h4> |
+            <p><a href="<%=path+id%>"><%=caption%></a></p>
         </div>
-        <!-- mobile end-->
     </div>
     <hr class="mobile-divider">
     <% } %>

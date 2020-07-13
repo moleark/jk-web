@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.post = void 0;
+exports.post_test = void 0;
 const ejs = require("ejs");
 const db_1 = require("../db");
 const tools_1 = require("../tools");
-function post(req, res) {
+function post_test(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
         try {
@@ -37,23 +37,14 @@ function post(req, res) {
                 let subjectFooter = ejs.fileLoader(tools_1.viewPath + 'footers/subject' + tools_1.ejsSuffix).toString();
                 let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
                 let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
+                let post_test = ejs.fileLoader(tools_1.viewPath + 'post_test' + tools_1.ejsSuffix).toString();
                 //获取内容明细
                 content = ret[0].content;
                 if (content.charAt(0) === '#') {
                     content = tools_1.hmToEjs(content);
                 }
                 //获取优惠活动
-                template = header
-                    + jk
-                    + hmInclude
-                    + homeHeader
-                    + postHeader
-                    + content
-                    + postFooter
-                    + subjectHeader
-                    + subject
-                    + subjectFooter
-                    + homeFooter;
+                template = post_test;
                 current = ret[0];
             }
             //获取产品目录树根节点
@@ -69,19 +60,11 @@ function post(req, res) {
             //获取栏目
             let subject;
             subject = yield db_1.Dbs.content.getSubject();
-            //获取优惠贴文
-            let discounts = [];
-            discounts = yield db_1.Dbs.content.getDiscountsPost();
-            //相关贴文
-            let correlation = [];
-            correlation = yield db_1.Dbs.content.getCorrelationPost();
             let data = tools_1.buildData(req, {
                 $title: current.caption,
                 path: rootPath + 'post/',
                 current: current,
                 subject: subject,
-                discounts: discounts,
-                correlation: correlation,
                 hotPosts: cacheHotPosts,
                 rootcategories: rootcategories,
                 content: content,
@@ -97,6 +80,6 @@ function post(req, res) {
         }
     });
 }
-exports.post = post;
+exports.post_test = post_test;
 ;
-//# sourceMappingURL=post.js.map
+//# sourceMappingURL=post_test.js.map

@@ -23,6 +23,7 @@ import { technicalSupport } from './technicalSupport'
 import { subjectpost } from './subjectpost';
 import { categoryInstruction } from './categoryinstruction';
 import { cart } from './cart';
+import { post_test } from './post_test';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -50,5 +51,6 @@ homeRouter.get('/casSubclass/:current', casSubclass);
 homeRouter.get('/technicalSupport', technicalSupport);
 homeRouter.get('/subjectpost/:current', subjectpost);
 homeRouter.get('/cart', cart);
+homeRouter.get('/post_test/:id', post_test);
 
 homeRouter.get('/partial/categoryinstruction/:current', categoryInstruction);

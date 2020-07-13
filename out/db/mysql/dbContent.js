@@ -149,6 +149,75 @@ class DbContent extends db_1.Db {
             ORDER BY a.hits DESC
             LIMIT 100
         `;
+        this.sqlDiscountsPost = `	  
+			    SELECT  b.id, b.caption, im.path as image
+                FROM 	(
+                        SELECT  DISTINCT 1 AS posttype, c.post
+                        FROM    ${db}.tv_postdomain AS a
+                                INNER JOIN   ${db}.tv_postdomain AS b ON a.domain = b.domain
+                                INNER JOIN   ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                        WHERE 	a.post = 304
+                        UNION
+                        SELECT  DISTINCT 1, c.post
+                        FROM    ${db}.tv_postproductcatalog AS a
+                                INNER JOIN  ${db}.tv_postproductcatalog AS b ON a.productcategory = b.productcategory
+                                INNER JOIN  ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                        WHERE 	a.post = 304
+                        UNION
+                        SELECT  DISTINCT 2, post
+                        FROM    ${db}.tv_postsubject 
+                        WHERE   subject = 18
+                                AND post NOT IN(
+                                    SELECT  DISTINCT c.post
+                                    FROM 	${db}.tv_postdomain AS a
+                                            INNER JOIN   ${db}.tv_postdomain AS b ON a.domain = b.domain
+                                            INNER JOIN   ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                                    WHERE 	a.post = 304
+                                    UNION
+                                    SELECT  DISTINCT c.post
+                                    FROM    ${db}.tv_postproductcatalog AS a
+                                            INNER JOIN  ${db}.tv_postproductcatalog AS b ON a.productcategory = b.productcategory
+                                            INNER JOIN  ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                                )
+                        ) AS a
+                        INNER JOIN  ${db}.tv_post AS b ON a.post = b.id
+                        INNER JOIN  ${db}.tv_postpublish AS c ON c.post = a.post
+                        LEFT  JOIN  ${db}.tv_image im on b.image=im.id
+                WHERE  	(
+                            (c.startdate IS NULL AND c.enddate IS NULL) or
+                            (c.startdate > NOW() AND c.enddate < NOW())
+                        )
+            ORDER BY a.posttype, c.update;
+        `;
+        this.sqlCorrelation = `
+            SELECT  	b.id, b.caption, im.path as image, IFNULL(e.name, d.name) as subject
+            FROM 		(
+                        SELECT	DISTINCT 1 AS posttype, b.post
+                        FROM    ${db}.tv_postproductcatalog AS a
+                                INNER JOIN  ${db}.tv_postproductcatalog AS b ON  a.productcategory = b.productcategory
+                        WHERE 	a.post = 304
+                        UNION
+                        SELECT	DISTINCT 1, b.post
+                        FROM    ${db}.tv_postdomain AS a
+                                INNER JOIN  ${db}.tv_postdomain AS b ON a.domain = b.domain
+                        WHERE 	a.post = 304
+                        ) AS a
+                        INNER JOIN  ${db}.tv_post AS b ON a.post = b.id
+                        INNER JOIN  ${db}.tv_postpublish AS pb ON pb.post = a.post
+                        JOIN (
+                            SELECT	*
+                            FROM    ${db}.tv_postsubject AS aa 
+                            WHERE	aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
+                        )  AS c ON a.post = c.post
+                        JOIN ${db}.tv_subject AS d ON c.subject = d.id
+                        LEFT JOIN ${db}.tv_subject AS e ON d.parent = e.id
+                        LEFT  JOIN  ${db}.tv_image im on b.image=im.id
+            WHERE  	    (
+                            (pb.startdate IS NULL AND pb.enddate IS NULL) or
+                            (pb.startdate > NOW() AND pb.enddate < NOW())
+                        )
+            ORDER BY a.posttype, pb.update;
+            `;
     }
     homePostList() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -233,6 +302,18 @@ class DbContent extends db_1.Db {
     getHotPost() {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlHotPost);
+            return ret;
+        });
+    }
+    getDiscountsPost() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlDiscountsPost);
+            return ret;
+        });
+    }
+    getCorrelationPost() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlCorrelation);
             return ret;
         });
     }
