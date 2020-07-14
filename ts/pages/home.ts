@@ -23,7 +23,7 @@ export async function home(req: Request, res: Response) {
 
         //轮播图
         let slideshowlist = await Dbs.content.getSlideshow();
-        let random = Math.floor(Math.random() * 10 % slideshowlist.length);
+        let random = Math.floor(Math.random() * 10 % (slideshowlist.length));
         let slideshow = slideshowlist[random];
         //资讯中心
         let information = await Dbs.content.informationPost();

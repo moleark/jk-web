@@ -66,14 +66,14 @@ export class DbContent extends Db {
             SELECT 	a.id, a.caption, a.discription as disp, c.path as image, cp.update as date, f.name
             FROM   	${db}.tv_postpublish cp 
                     JOIN ${db}.tv_informationpost AS ip ON ip.post = cp.post
-                    join ${db}.tv_post a on cp.post=a.id
-                    JOIN (
+                    JOIN ${db}.tv_post a on cp.post=a.id
+                    LEFT JOIN (
                         SELECT	*
                         FROM 		${db}.tv_postsubject AS aa 
                         WHERE		aa.subject in ( SELECT MAX(subject) FROM ${db}.tv_postsubject AS bb WHERE aa.post = bb.post )
                     )  AS e ON cp.post = e.post
-                    JOIN ${db}.tv_subject AS f ON e.subject = f.id
-                    left join ${db}.tv_image c on a.image=c.id
+                    LEFT JOIN ${db}.tv_subject AS f ON e.subject = f.id
+                    LEFT JOIN ${db}.tv_image c on a.image=c.id
             ORDER BY ip.sort;
         `;
 
