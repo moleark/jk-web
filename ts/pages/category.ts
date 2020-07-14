@@ -49,7 +49,8 @@ export async function category(req: Request, res: Response) {
         categoryPost: categoryPost,
         path: rootPath + 'category/',
         productPath: rootPath + 'productCategory/',
-        postpath: rootPath + 'post/'
+        postpath: rootPath + 'post/',
+        titleshow: true
 
     });
 

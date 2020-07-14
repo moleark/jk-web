@@ -54,7 +54,8 @@ function category(req, res) {
             categoryPost: categoryPost,
             path: rootPath + 'category/',
             productPath: rootPath + 'productCategory/',
-            postpath: rootPath + 'post/'
+            postpath: rootPath + 'post/',
+            titleshow: true
         });
         res.render('category.ejs', data, (err, html) => {
             if (tools_1.ejsError(err, res) === true)
