@@ -24,14 +24,16 @@ let arr = [
 %>
 
 <% let { description, caption, path, src } = slideshow; %>
-<div class="main-content" style="background: url(<%=path%>)  no-repeat top;">
-    <div class="container">
-        <div class="banner-info">
-            <h3><%=caption%></h3>
-            <p><%=description%></p>
+<a href="<%=src%>">
+    <div class="main-content" style="background: url(<%=path%>)  no-repeat top;">
+        <div class="container">
+            <div class="banner-info">
+                <h3><%=caption%></h3>
+                <p><%=description%></p>
+            </div>
         </div>
     </div>
-</div>
+</a>
 <section>
     <div class="postion-img">
         <img src="<%=$root%>img/triangle.svg">
