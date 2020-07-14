@@ -220,9 +220,9 @@ class DbContent extends db_1.Db {
             ORDER BY a.posttype, pb.update desc ;
             `;
         this.sqlSlideshow = `
-            SELECT	a.description, a.caption, b.path, a.src
-            FROM 		webbuilder.tv_slideshow AS a
-                        INNER JOIN webbuilder.tv_image AS b ON a.image = b.id 
+            SELECT  a.description, a.caption, b.path, a.src
+            FROM 	${db}.tv_slideshow AS a
+                    INNER JOIN ${db}.tv_image AS b ON a.image = b.id 
             WHERE 	a.types = 1
             `;
     }
