@@ -23,12 +23,12 @@ let arr = [
     ]
 %>
 
-
-<div class="main-content" style="background: url(<%=$root%>img/slide-01.jpg)  no-repeat top;">
+<% let { description, caption, path, src } = slideshow; %>
+<div class="main-content" style="background: url(<%=path%>)  no-repeat top;">
     <div class="container">
         <div class="banner-info">
-            <h3>食品安全快速检测</h3>
-            <p>100+ 试剂、标准品及耗材解决方案</p>
+            <h3><%=caption%></h3>
+            <p><%=description%></p>
         </div>
     </div>
 </div>

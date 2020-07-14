@@ -18,6 +18,7 @@ export class DbContent extends Db {
     private sqlHotPost: string;
     private sqlDiscountsPost: string;
     private sqlCorrelation: string;
+    private sqlSlideshow: string;
 
     constructor() {
         super('content');
@@ -242,6 +243,14 @@ export class DbContent extends Db {
             ORDER BY a.posttype, pb.update desc ;
             `;
 
+
+        this.sqlSlideshow = `
+            SELECT	a.description, a.caption, b.path, a.src
+            FROM 		webbuilder.tv_slideshow AS a
+                        INNER JOIN webbuilder.tv_image AS b ON a.image = b.id 
+            WHERE 	a.types = 1
+            `;
+
     }
 
     async homePostList(): Promise<any> {
@@ -323,6 +332,11 @@ export class DbContent extends Db {
 
     async getCorrelationPost(id: any): Promise<any> {
         const ret = await this.tableFromSql(this.sqlCorrelation, [id, id, id, id]);
+        return ret;
+    }
+
+    async getSlideshow(): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlSlideshow);
         return ret;
     }
 

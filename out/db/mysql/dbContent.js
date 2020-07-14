@@ -219,6 +219,12 @@ class DbContent extends db_1.Db {
                         )
             ORDER BY a.posttype, pb.update desc ;
             `;
+        this.sqlSlideshow = `
+            SELECT	a.description, a.caption, b.path, a.src
+            FROM 		webbuilder.tv_slideshow AS a
+                        INNER JOIN webbuilder.tv_image AS b ON a.image = b.id 
+            WHERE 	a.types = 1
+            `;
     }
     homePostList() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -315,6 +321,12 @@ class DbContent extends db_1.Db {
     getCorrelationPost(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlCorrelation, [id, id, id, id]);
+            return ret;
+        });
+    }
+    getSlideshow() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlSlideshow);
             return ret;
         });
     }

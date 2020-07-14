@@ -31,6 +31,10 @@ function home(req, res) {
                 }
                 ;
             }
+            //轮播图
+            let slideshowlist = yield db_1.Dbs.content.getSlideshow();
+            let random = Math.floor(Math.random() * 10 % slideshowlist.length);
+            let slideshow = slideshowlist[random];
             //资讯中心
             let information = yield db_1.Dbs.content.informationPost();
             //优惠活动
@@ -62,6 +66,7 @@ function home(req, res) {
             console.log(rootPath, 'rootPath');
             let data = tools_1.buildData(req, {
                 path: rootPath + 'post/',
+                slideshow: slideshow,
                 information: information,
                 hots: cacheHotPosts,
                 discounts: discounts,

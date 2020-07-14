@@ -21,6 +21,10 @@ export async function home(req: Request, res: Response) {
             };
         }
 
+        //轮播图
+        let slideshowlist = await Dbs.content.getSlideshow();
+        let random = Math.floor(Math.random() * 10 % slideshowlist.length);
+        let slideshow = slideshowlist[random];
         //资讯中心
         let information = await Dbs.content.informationPost();
         //优惠活动
@@ -54,6 +58,7 @@ export async function home(req: Request, res: Response) {
         console.log(rootPath, 'rootPath')
         let data = buildData(req, {
             path: rootPath + 'post/',
+            slideshow: slideshow,
             information: information,
             hots: cacheHotPosts,
             discounts: discounts,
