@@ -176,8 +176,8 @@ export class DbContent extends Db {
             FROM 	(
                     SELECT  DISTINCT 1 AS posttype, c.post
                     FROM    ${db}.tv_postdomain AS a
-                            INNER JOIN   ${db}.tv_postdomain AS b ON a.domain = b.domain
-                            INNER JOIN   ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
+                            INNER JOIN ${db}.tv_postdomain AS b ON a.domain = b.domain
+                            INNER JOIN ${db}.tv_postsubject AS c ON c.post = b.post AND  c.subject = 18
                     WHERE 	a.post = ?
                     UNION
                     SELECT  DISTINCT 1, c.post
@@ -206,7 +206,8 @@ export class DbContent extends Db {
                     INNER JOIN  ${db}.tv_post AS b ON a.post = b.id
                     INNER JOIN  ${db}.tv_postpublish AS c ON c.post = a.post
                     LEFT  JOIN  ${db}.tv_image im on b.image=im.id
-            WHERE  	(
+            WHERE   c.openweb = 1	
+                    and (
                         (c.startdate IS NULL AND c.enddate IS NULL) or
                         (c.startdate > NOW() AND c.enddate < NOW())
                     )
@@ -236,7 +237,7 @@ export class DbContent extends Db {
                         JOIN ${db}.tv_subject AS d ON c.subject = d.id
                         LEFT JOIN ${db}.tv_subject AS e ON d.parent = e.id
                         LEFT  JOIN  ${db}.tv_image im on b.image=im.id
-            WHERE  	    (
+            WHERE  	    pb.openweb = 1 and (
                             (pb.startdate IS NULL AND pb.enddate IS NULL) or
                             (pb.startdate > NOW() AND pb.enddate < NOW())
                         )

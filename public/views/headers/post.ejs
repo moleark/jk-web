@@ -4,16 +4,7 @@
             <div class="article-post">
                 <% let { caption, $update }= current; %>
                 <h1><%=caption%></h1>
-                <div class="date mr-lg-10">发表于 <span><%=$update%></span> </div>
-                <div class="h-sub mb-3">
+            </div>
+            <div class="h-sub my-3">
 
-                    <% 
-                    if(postsubject.length > 0){
-                    for(var i=0;i<postsubject.length;i++){    
-                        let { id, name } = postsubject[i];
-                    %>
-                    | <a href="<%=$root%>subjectpost/<%=id%>"><%=name%></a>
-                    <% } } else {%>
-                    &nbsp;
-                    <% } %>
-                </div>
+            </div>
