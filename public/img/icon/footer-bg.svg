@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="457px" viewBox="0 0 1920 457" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>footer-bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="footer-bg">
+            <rect id="Footer-Background" fill="#F1F1F1" fill-rule="nonzero" x="0" y="0" width="1920" height="457"></rect>
+            <path d="M1671.0039,172.182683 C1674.9987,169.88245 1674.9987,166.118255 1671.0039,163.816055 L1546.26363,91.9815063 C1542.26686,89.6812738 1539,91.5643555 1539,96.1648204 L1539,239.835885 C1539,244.43635 1542.26686,246.319431 1546.26363,244.017231 L1671.0039,172.182683 Z" id="Stroke-1-Copy-5" stroke="#B2B4B5" stroke-width="2.261" opacity="0.33"></path>
+        </g>
+    </g>
+</svg>

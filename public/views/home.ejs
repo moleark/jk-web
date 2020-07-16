@@ -24,16 +24,18 @@ let arr = [
 %>
 
 <% let { description, caption, path:imagepath, src } = slideshow; %>
-<a href="<%=src%>">
-    <div class="main-content" style="background: url(<%=imagepath%>)  no-repeat top;">
-        <div class="container">
-            <div class="banner-info">
-                <h3><%=caption%></h3>
-                <p><%=description%></p>
-            </div>
+
+<div class="main-content index" style="background: url(<%=imagepath%>)  no-repeat top;">
+    <a href="<%=src%>"></a>
+    <div class="container">
+        <div class="banner-info">
+            <h3><%=caption%></h3>
+            <p><%=description%></p>
         </div>
     </div>
-</a>
+    </a>
+</div>
+
 <section>
     <div class="postion-img">
         <img src="<%=$root%>img/triangle.svg">
@@ -58,23 +60,24 @@ let arr = [
 
     <div class="resource ptb-lg-75">
         <div class="container">
-            <h2 class="main-title text-center px-3"> <a href="<%=$root%>information">资讯中心</a> </h2>
+            <h2 class="main-title text-center"> <a href="<%=$root%>information">资讯中心</a> </h2>
             <div class="row">
                 <div class="col-lg-1"></div>
                 <div class="col-lg-7 pad-lf35">
                     <div class="bottom-block">
                         <div class="row">
                             <% let { id:id0, caption:caption0 , disp:disp0, image:image0 , name:name0  } = information[0]; %>
-                            <div class="col-lg-12 position-re">
+                            <div class="col-lg-12 position-re home-main-pic">
                                 <div class="img-wrap">
                                     <a href="<%=path+id0%>"><img src="<%=image0%>"></a>
                                 </div>
-                                <div class="title-wrap mint">
-                                    <a href="<%=path+id0%>"><%=name0%></a>
+                                <div class="home-main-pic-info">
+                                    <div class="title-wrap mint">
+                                    </div>
+                                    <a href="<%=path+id0%>">
+                                        <p><%=caption0%></p>
+                                    </a>
                                 </div>
-                                <a href="<%=path+id0%>">
-                                    <p><%=caption0%></p>
-                                </a>
                             </div>
                             <% let { id:id1, caption:caption1, disp:disp1, image:image1 , name:name1} = information[1]; %>
                             <hr class="mobile-divider">
@@ -86,7 +89,6 @@ let arr = [
                                 </div>
                                 <div class="col-xs-9">
                                     <div class="title-wrap">
-                                        <div class="mint"><a href="<%=path+id1%>"><%=name1%></a></div>
                                     </div>
                                     <a href="<%=path+id1%>">
                                         <p><%=caption1%></p>
@@ -111,7 +113,7 @@ let arr = [
                                 </div>
                                 <div class="col-xs-9">
                                     <div class="title-wrap">
-                                        <div class="mint"><a href="<%=path+id2%>"><%=name2%></a></div>
+
                                     </div>
                                     <a href="<%=path+id2%>">
                                         <p><%=caption2%></p>
@@ -125,22 +127,19 @@ let arr = [
                                 </div>
                                 <!-- mobile end-->
                             </div>
-
-
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-3">
                     <div class="side-block  mt-lg-4">
-                        <% for(var i=5;i<hots.length;i++){
-                            if (i > 10) break;
+                        <% for(var i=0;i<hots.length;i++){
+                            if (i > 5) break;
                             let {post, caption,subject,image } = hots[i];
                         %>
                         <hr class="mobile-divider">
                         <div class="overflow">
                             <div class="post-preview  mt-lg-4 col-xs-9">
-                                <h4 class="post-title"><a href="<%=path+post%>"><%=subject%></a></h4>
                                 <p><a href="<%=path+post%>"><%=caption%></a></p>
                             </div>
                             <!-- mobile -->
@@ -167,7 +166,7 @@ let arr = [
     <div class="special-offer">
         <h2 class="main-title text-center"><a href="<%=$root%>subjectpost/18">特惠活动</a> </h2>
         <div class="container">
-            <div class="row mt-lg-4">
+            <div class="row mt-lg-4" style="text-align: center;">
                 <% for(var j = 0; j<discounts.length; j++){
                     if (j > 3) break;
                     let {id, caption, image } = discounts[j];
@@ -176,8 +175,8 @@ let arr = [
                     <div class="img-wrap">
                         <a href="<%=path+id%>"><img src="<%=image%>" class="w-100"></a>
                     </div>
-                    <a href="<%=path+id%>">
-                        <h2 class="h1 mt-lg-24"><%=caption%></h2>
+                    <a href="<%=path+id%>"></a>
+                    <h2 class="h1 mt-lg-1"><%=caption%></h2>
                     </a>
                 </div>
                 <% } %>
@@ -203,7 +202,7 @@ let arr = [
                             <a href="<%=path+id%>"><img src="<%=image%>" class="w-100"></a>
                         </div>
                         <a href="#">
-                            <h2 class="h1 mt-lg-24"><%=caption%></h2>
+                            <h2 class="h1 mt-lg-1"><%=caption%></h2>
                         </a>
                     </div>
                     <% } %>

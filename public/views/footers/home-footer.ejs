@@ -18,49 +18,41 @@
                 </ul>
             </div>
             <div class="col-lg-3 col-xs-6">
-                <div class="footer-title">浏览</div>
+                <div class="footer-title">专业服务</div>
                 <ul>
+                    <li><a>百灵威商城</a></li>
                     <li><a href="<%=$root%>information">资讯中心</a></li>
                     <li><a>质量证书(COA)</a></li>
                     <li><a>安全说明书(SDS)</a></li>
-                    <li><a>大包装与定制生产</a></li>
+                    <li><a>项目合作与定制生产</a></li>
                     <li><a>订购指南</a></li>
-                    <li><a>产品</a></li>
-                    <ul>
-                        <% for (let i=0; i< rootcategories.length; i++) {
-                            let {id, name, children } = rootcategories[i];
-                            %>
-                        <li><a href="<%=$root%>category/<%=id%>"><%=name%></a></li>
-                        <% } %>
-                    </ul>
+                    <li><a>引用领域</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-xs-6">
                 <div class="footer-title">联系我们</div>
                 <div class="contact ">
-                    电话：<br>400-666-7788<br>+86 10 8284 8833
+                    电话：400-666-7788<span class="ml-lg-42">+86 10 8284 8833</span>
                 </div>
-                <div class="contact mt-lg-28 mb-lg-58">
-                    传真：<br>+86 10 8284 9933
+                <div class="contact">
+                    邮箱：<a href="mailto:jkinfo@jk-sci.com">jkinfo@jk-sci.com</a>
                 </div>
-                <div class="contact mb-lg-2">
-                    电子邮件：<br>
-                    <a href="mailto:jkinfo@jkchemical.com">jkinfo@jkchemical.com</a><br><a
-                        href="mailto:jkinfo@jk-sci.com">jkinfo@jk-sci.com</a>
+                <div class="contact">
+                    传真：+86 10 8284 9933
                 </div>
-                <div class="footer-social">
+                <div class="footer-social mt-lg-05">
+                    <a href="#" class="wechat" target="blank"></a>
                     <!--for english website<a href="https://www.facebook.com/" target="blank"><img src="img/icon/facebook.svg"></a>
-                    <a href="https://www.twitter.com/" target="blank"><img src="img/icon/twitter.svg"></a>
-                    <a href="https://www.instagram.com/" target="blank"><img src="img/icon/instagram.svg"></a>
-                    <a href="https://www.youtube.com/" target="blank"><img src="img/icon/youtube.svg"></a>-->
+                  <a href="https://www.twitter.com/" target="blank"><img src="img/icon/twitter.svg"></a>
+                  <a href="https://www.instagram.com/" target="blank"><img src="img/icon/instagram.svg"></a>
+                              <a href="https://www.youtube.com/" target="blank"><img src="img/icon/youtube.svg"></a>-->
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
-<!--Only For Desktop End-->
-<!--
+    </div>
+    <!--Only For Desktop End-->
+    <!--
 <div class="mobile-footer-wrap display-mobile">
     <a href="#" class="menu">
         <img src="<%=$root%>img/icon/home.svg">
@@ -80,30 +72,30 @@
     </a>
 </div>
 -->
-<!-- Bootstrap core JavaScript -->
-<script>
-    $(function () {
-        $(".dropdown").hover(
-            function () {
-                $('.dropdown-menu', this).stop(true, true).fadeIn("fast");
-                $(this).toggleClass('open');
-                $('b', this).toggleClass("caret caret-up");
-            },
-            function () {
-                $('.dropdown-menu', this).stop(true, true).fadeOut("fast");
-                $(this).toggleClass('open');
-                $('b', this).toggleClass("caret caret-up");
-            });
-    });
+    <!-- Bootstrap core JavaScript -->
+    <script>
+        $(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+                    $(this).toggleClass('open');
+                    $('b', this).toggleClass("caret caret-up");
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+                    $(this).toggleClass('open');
+                    $('b', this).toggleClass("caret caret-up");
+                });
+        });
 
-</script>
-</body>
+    </script>
+    </body>
 
-<script src="<%=shopJsPath.runtime%>"></script>
-<script src="<%=shopJsPath.module%>"></script>
-<script src="<%=shopJsPath.module2%>"></script>
-<script src="<%=shopJsPath.module3%>"></script>
-<script src="<%=shopJsPath.main%>"></script>
-</body>
+    <script src="<%=shopJsPath.runtime%>"></script>
+    <script src="<%=shopJsPath.module%>"></script>
+    <script src="<%=shopJsPath.module2%>"></script>
+    <script src="<%=shopJsPath.module3%>"></script>
+    <script src="<%=shopJsPath.main%>"></script>
+    </body>
 
-</html>
+    </html>
