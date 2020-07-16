@@ -5,9 +5,7 @@
         <div class="row">
             <div class="col-lg-3 col-xs-6">
                 <img src="<%=$root%>img/icon/footer-logo.svg">
-                <p class="mt-lg-3">促进科技与工业<br>
-                    发展，造福人类</p>
-                <img src="<%=$root%>img/qrcode.png" style="width:100px" class="mt-lg-50 qrcode">
+                <p>促进科技与工业发展，造福人类</p>
             </div>
             <div class="col-lg-3 col-xs-6">
                 <div class="footer-title">百灵威集团</div>
@@ -49,10 +47,20 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <!--Only For Desktop End-->
-    <!--
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-sm">© 2020 - Copyright <a href="#">J&K Scientific Ltd., All Rights Reserved</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Only For Desktop End-->
+<!--
 <div class="mobile-footer-wrap display-mobile">
     <a href="#" class="menu">
         <img src="<%=$root%>img/icon/home.svg">
@@ -70,32 +78,33 @@
         <img src="<%=$root%>img/icon/my.svg">
         <h3>我的</h3>
     </a>
-</div>
--->
-    <!-- Bootstrap core JavaScript -->
-    <script>
-        $(function () {
-            $(".dropdown").hover(
-                function () {
-                    $('.dropdown-menu', this).stop(true, true).fadeIn("fast");
-                    $(this).toggleClass('open');
-                    $('b', this).toggleClass("caret caret-up");
-                },
-                function () {
-                    $('.dropdown-menu', this).stop(true, true).fadeOut("fast");
-                    $(this).toggleClass('open');
-                    $('b', this).toggleClass("caret caret-up");
-                });
-        });
+   </div> -->
 
-    </script>
-    </body>
 
-    <script src="<%=shopJsPath.runtime%>"></script>
-    <script src="<%=shopJsPath.module%>"></script>
-    <script src="<%=shopJsPath.module2%>"></script>
-    <script src="<%=shopJsPath.module3%>"></script>
-    <script src="<%=shopJsPath.main%>"></script>
-    </body>
+<!-- Bootstrap core JavaScript -->
+<script>
+    $(function () {
+        $(".dropdown").hover(
+            function () {
+                $('.dropdown-menu', this).stop(true, true).fadeIn("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");
+            },
+            function () {
+                $('.dropdown-menu', this).stop(true, true).fadeOut("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");
+            });
+    });
 
-    </html>
+</script>
+</body>
+
+<script src="<%=shopJsPath.runtime%>"></script>
+<script src="<%=shopJsPath.module%>"></script>
+<script src="<%=shopJsPath.module2%>"></script>
+<script src="<%=shopJsPath.module3%>"></script>
+<script src="<%=shopJsPath.main%>"></script>
+</body>
+
+</html>
