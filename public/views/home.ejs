@@ -23,16 +23,16 @@ let arr = [
     ]
 %>
 
-<% let { description, caption, path:imagepath, src } = slideshow; %>
+<% let { description, caption, path:imagepath, src:postsrc } = slideshow; %>
 
 <div class="main-content index" style="background: url(<%=imagepath%>)  no-repeat top;">
-    <a href="<%=src%>"></a>
-    <div class="container">
-        <div class="banner-info">
-            <h3><%=caption%></h3>
-            <p><%=description%></p>
+    <a href="<%=postsrc%>">
+        <div class="container">
+            <div class="banner-info">
+                <h3><%=caption%></h3>
+                <p><%=description%></p>
+            </div>
         </div>
-    </div>
     </a>
 </div>
 
