@@ -1,9 +1,10 @@
 <script>
     function search(e) {
-        document.location.href = 'shop/?type=productlist&key=' + encodeURIComponent(searchForm.keyInput.value);
-        return false;
-        //document.location.href = 'search/' + encodeURIComponent(searchForm.keyInput.value);
-        //return false;
+        e.preventDefault();
+        let key = e.target.keyInput.value;
+        if (key) {
+            location.href = 'https://shop.jkchemical.com/?type=productlist&key=' + encodeURIComponent(key);
+        }
     }
 </script>
 
@@ -15,11 +16,11 @@
             <img src="<%=$root%>img/icon/footer-logo.svg">
         </div>
         <div class="w-70">
-            <form class="custom-search-input" onsubmit="return search()">
+            <form class="custom-search-input" onsubmit="search(event)">
                 <div class="input-group">
-                    <input type="text" class="search-query form-control" placeholder="Search" />
+                    <input name="keyInput" type="text" class="search-query form-control" placeholder="Search" />
                     <span class="input-group-btn">
-                        <button class="btn" type="button">
+                        <button class="btn" type="submit" abv="aege">
                             <img src="<%=$root%>img/icon/magnifier.svg">
                         </button>
                     </span>
@@ -34,7 +35,7 @@
         <div class="top-header">
             <div class="container">
                 <div class="row">
-                    <div class="col-auto ml-auto d-flex align-items-center flot-right">
+                    <div class="col-auto ml-auto d-flex align-items-center float-right">
                         <div class="phone">
                             <img src="<%=$root%>img/icon/Phone.svg"> Call Us 400-666-7788
                         </div>
@@ -68,20 +69,21 @@
                         <li><a href="#">COA</a> </li>
                         <li><a href="#">SDS</a> </li>
                     </ul>
-                    <form class="custom-search-input">
+                    <form class="custom-search-input" onsubmit="search(event)">
                         <div class="input-group col-md-12">
-                            <input type="text" class="search-query form-control" placeholder="Search"
-                                onsubmit="return search()" />
+                            <input name="keyInput" type="text" class="search-query form-control" placeholder="Search" />
                             <span class="input-group-btn">
-                                <button class="btn" type="button">
+                                <button class="btn" type="submit">
                                     <img src="<%=$root%>img/icon/magnifier.svg">
                                 </button>
                             </span>
                         </div>
                     </form>
                 </div>
-                <a class="display-mobile-block-shoppingcart shopping-cart" href="#"><img
-                        src="<%=$root%>img/commerce-and-shopping.svg" width="40px"></a>
+
+                <a class="display-mobile-block-shoppingcart shopping-cart" href="#">
+                    <img src="<%=$root%>img/commerce-and-shopping.svg" width="40px">
+                </a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                     aria-label="Toggle navigation">

@@ -102,9 +102,6 @@ section {
 	position: relative;
 	margin-top: 90px;
 }
-.flot-right {
-	float: right;
-}
 .ml-auto, .mx-auto {
 	margin-left: auto !important;
 }

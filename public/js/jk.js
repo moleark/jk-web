@@ -1,6 +1,6 @@
 window.onload = function () {
-    let ismobel = browserRedirect();
-    if (!ismobel) {
+    let isMobile = browserRedirect();
+    if (!isMobile) {
 
         $("div a").each(function (index, element) {
             $(element).attr("target", "_blank");
