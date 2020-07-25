@@ -44,7 +44,8 @@ function search(req, res) {
             prepage: rootPath + 'search/' + key + '/?pageCount=' + prepage,
             products: products,
             pageCount: pageCount,
-            rootcategories: rootcategories
+            rootcategories: rootcategories,
+            titleshow: true
         });
         let html = ejs.render(template, data);
         res.end(html);

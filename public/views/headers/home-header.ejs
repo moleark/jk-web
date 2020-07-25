@@ -3,7 +3,8 @@
         e.preventDefault();
         let key = e.target.keyInput.value;
         if (key) {
-            location.href = 'https://shop.jkchemical.com/?type=productlist&key=' + encodeURIComponent(key);
+            // location.href = 'https://shop.jkchemical.com/?type=productlist&key=' + encodeURIComponent(key);
+            location.href = 'search?type=search&key=' + encodeURIComponent(key);
         }
     }
 </script>
@@ -128,14 +129,17 @@
                                     href="https://www.jkchemical.com/ChangePassword.aspx?language=ch">修改密码</a>
                             </div>
                         </li>
+                        <!--注册登录区域-->
                         <li class="nav-item">
-                            <a class="nav-link header-login"
-                                href="https://www.jkchemical.com/Login.aspx?language=ch">注册/登录</a>
+                            <div id="login">
+                            </div>
                         </li>
+                        <!--购物车图标-->
                         <li class="nav-item display-none">
                             <a class="nav-link shopping-cart"
-                                href="https://www.jkchemical.com/Member/Share/Shopping.aspx?language=ch"><img
-                                    src="<%=$root%>img/commerce-and-shopping.svg" width="40px"></a>
+                                href="https://www.jkchemical.com/Member/Share/Shopping.aspx?language=ch">
+                                <img src="<%=$root%>img/commerce-and-shopping.svg" width="40px">
+                            </a>
                         </li>
                     </ul>
                 </div>
