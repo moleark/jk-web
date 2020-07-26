@@ -6,5 +6,7 @@
         "module3": "http://localhost:7798/static/js/1.chunk.js",
         "main": "http://localhost:7798/static/js/main.chunk.js",
         "hot": "http://localhost:7798/main.40884621e3e1b4f868ed.hot-update.js"
-    }
+    },
+    "SALESREGION": 4,
+    "CHINESE": 197
 }
