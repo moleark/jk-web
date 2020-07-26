@@ -3,8 +3,8 @@
         e.preventDefault();
         let key = e.target.keyInput.value;
         if (key) {
-            // location.href = 'https://shop.jkchemical.com/?type=productlist&key=' + encodeURIComponent(key);
-            location.href = 'search?type=search&key=' + encodeURIComponent(key);
+            location.href = '/shop?type=productlist&key=' + encodeURIComponent(key);
+            //location.href = 'search?type=search&key=' + encodeURIComponent(key);
         }
     }
 </script>
