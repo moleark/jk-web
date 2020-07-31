@@ -50,7 +50,7 @@ function page(req, res) {
                     + homeFooter;
                 title = ret[0].caption;
             }
-            let data = tools_1.buildData(req, { $title: title, rootcategories: rootcategories });
+            let data = tools_1.buildData(req, { $title: title, rootcategories: rootcategories, titleshow: true });
             let html = ejs.render(template, data);
             res.end(html);
         }

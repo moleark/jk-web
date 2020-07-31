@@ -46,7 +46,7 @@ export async function page(req: Request, res: Response) {
                 + homeFooter;
             title = ret[0].caption;
         }
-        let data = buildData(req, { $title: title, rootcategories: rootcategories });
+        let data = buildData(req, { $title: title, rootcategories: rootcategories, titleshow: true });
         let html = ejs.render(template, data);
         res.end(html);
 
