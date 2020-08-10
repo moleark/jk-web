@@ -173,7 +173,7 @@ let arr = [
                 %>
                 <div class="col-lg-3 col-sm-6 col-xs-6">
                     <div class="img-wrap">
-                        <a href="<%=path+id%>"><img src="<%=image%>" class="w-100"></a>
+                        <a href="<%=path+id%>"><img src="<%=image%>"></a>
                     </div>
                     <a href="<%=path+id%>"></a>
                     <h2 class="h1 mt-lg-1"><%=caption%></h2>
@@ -191,22 +191,19 @@ let arr = [
         <h2 class="main-title text-center"><a href="<%=$root%>subjectpost/17">推荐产品 </a></h2>
         <div class="container">
             <div class="row mt-lg-4">
-
-                <div class="row mt-lg-4">
-                    <% for(var j=0; j<recommend.length; j++){
+                <% for(var j=0; j<recommend.length; j++){
                         if (j > 3) break;
                         let {id, caption, image } = recommend[j];
                     %>
-                    <div class="col-lg-3 col-sm-6 col-xs-6">
-                        <div class="img-wrap">
-                            <a href="<%=path+id%>"><img src="<%=image%>" class="w-100"></a>
-                        </div>
-                        <a href="#">
-                            <h2 class="h1 mt-lg-1"><%=caption%></h2>
-                        </a>
+                <div class="col-lg-3 col-sm-6 col-xs-6">
+                    <div class="img-wrap">
+                        <a href="<%=path+id%>"><img src="<%=image%>"></a>
                     </div>
-                    <% } %>
+                    <a href="#">
+                        <h2 class="h1 mt-lg-1"><%=caption%></h2>
+                    </a>
                 </div>
+                <% } %>
             </div>
         </div>
     </div>

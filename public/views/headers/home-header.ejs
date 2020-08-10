@@ -9,141 +9,118 @@
     }
 </script>
 
-<body>
-    <!--Only For Mobile-->
-    <% if(titleshow){ %>
-    <div class="mobile-wrap display-mobile">
-        <div class="w-30">
-            <img src="<%=$root%>img/icon/footer-logo.svg">
-        </div>
-        <div class="w-70">
-            <form class="custom-search-input" onsubmit="search(event)">
-                <div class="input-group">
-                    <input name="keyInput" type="text" class="search-query form-control" placeholder="Search" />
-                    <span class="input-group-btn">
-                        <button class="btn" type="submit" abv="aege">
-                            <img src="<%=$root%>img/icon/magnifier.svg">
-                        </button>
-                    </span>
-                </div>
-            </form>
-        </div>
-    </div>
-    <% } %>
-    <!--Only For Mobile End-->
-    <!--Only For Desktop-->
-    <header class="display-desktop">
-        <div class="top-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-auto ml-auto d-flex align-items-center float-right">
-                        <div class="phone">
-                            <img src="<%=$root%>img/icon/Phone.svg"> Call Us 400-666-7788
-                        </div>
-                        <div class="area">
-                            <div class="dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    中国<b class="caret"></b>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">1 Column</a>
-                                    <a class="dropdown-item" href="#">2 Column</a>
-                                </div>
+<!--Only For Desktop-->
+<header>
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-auto ml-auto d-flex align-items-center float-right">
+                    <div class="phone">
+                        <img src="<%=$root%>img/icon/Phone.svg"> Call Us 400-666-7788
+                    </div>
+                    <div class="area">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                中国<b class="caret"></b>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">1 Column</a>
+                                <a class="dropdown-item" href="#">2 Column</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="clearfix"></div>
             </div>
+            <div class="clearfix"></div>
         </div>
+    </div>
 
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark pad-tb20 di">
-            <div class="container">
-                <a href="<%=$root%>" class="header-logo"><img src="<%=$root%>img/logo.svg" alt="" class="img-fluid"></a>
-                <div class="justify-content-center search-wrap">
-                    <ul class="top-list justify-content-center">
-                        <li><a href="subjectpost/18">特惠活动</a> </li>
-                        <li><a href="#">结构检索</a> </li>
-                        <li><a href="#">订单查询</a> </li>
-                        <li><a href="#">COA</a> </li>
-                        <li><a href="#">SDS</a> </li>
-                    </ul>
-                    <form class="custom-search-input" onsubmit="search(event)">
-                        <div class="input-group col-md-12">
-                            <input name="keyInput" type="text" class="search-query form-control" placeholder="Search" />
-                            <span class="input-group-btn">
-                                <button class="btn" type="submit">
-                                    <img src="<%=$root%>img/icon/magnifier.svg">
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-
-                <a class="display-mobile-block-shoppingcart shopping-cart" href="#">
-                    <img src="<%=$root%>img/commerce-and-shopping.svg" width="40px">
-                </a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                产品<b class="caret"></b>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                                <% for (let i=0; i< rootcategories.length; i++) {
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark pad-tb20 di">
+        <div class="container">
+            <a href="<%=$root%>" class="header-logo"><img src="<%=$root%>img/logo.svg" alt="" class="img-fluid"></a>
+            <div class="justify-content-center search-wrap">
+                <ul class="top-list justify-content-center">
+                    <li><a href="subjectpost/18">特惠活动</a> </li>
+                    <li><a href="#">结构检索</a> </li>
+                    <li><a href="#">订单查询</a> </li>
+                    <li><a href="#">COA</a> </li>
+                    <li><a href="#">SDS</a> </li>
+                </ul>
+                <form class="custom-search-input" onsubmit="search(event)">
+                    <div class="input-group col-md-12">
+                        <input name="keyInput" type="text" class="search-query form-control" placeholder="Search" />
+                        <span class="input-group-btn">
+                            <button class="btn" type="submit">
+                                <img src="<%=$root%>img/icon/magnifier.svg">
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <a href="#" class="display-mobile-block-login display-mobile">登入</a>
+            <a class="display-mobile-block-shoppingcart shopping-cart" href="#">
+                <img src="<%=$root%>img/commerce-and-shopping.svg" width="40px">
+            </a>
+            <button class="navbar-toggle navbar-toggler navbar-toggler-right collapsed" type="button"
+                data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="bar1"></span>
+                <span class="bar2"></span>
+                <span class="bar3"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            产品<b class="caret"></b>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                            <% for (let i=0; i< rootcategories.length; i++) {
                                 let {id, name, children } = rootcategories[i];
                                 %>
-                                <a class="dropdown-item" href="category/<%=id%>"><%=name%></a>
-                                <% } %>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                服务<b class="caret"></b>
+                            <a class="dropdown-item" href="category/<%=id%>"><%=name%></a>
+                            <% } %>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            服务<b class="caret"></b>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                            <a class="dropdown-item"
+                                href="http://www.jkchemical.com/Member/Center/SaleOrderList.aspx?language=ch">订单查询
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                                <a class="dropdown-item"
-                                    href="http://www.jkchemical.com/Member/Center/SaleOrderList.aspx?language=ch">订单查询
-                                </a>
-                                <a class="dropdown-item"
-                                    href="https://www.jkchemical.com/PointsSearch.aspx?language=ch">积分查询</a>
+                            <a class="dropdown-item"
+                                href="https://www.jkchemical.com/PointsSearch.aspx?language=ch">积分查询</a>
 
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                会员<b class="caret"></b>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                                <a class="dropdown-item"
-                                    href="https://www.jkchemical.com/ChangePassword.aspx?language=ch">修改密码</a>
-                            </div>
-                        </li>
-                        <!--注册登录区域-->
-                        <li class="nav-item">
-                            <div id="login">
-                            </div>
-                        </li>
-                        <!--购物车图标-->
-                        <li class="nav-item display-none">
-                            <a class="nav-link shopping-cart"
-                                href="https://www.jkchemical.com/Member/Share/Shopping.aspx?language=ch">
-                                <img src="<%=$root%>img/commerce-and-shopping.svg" width="40px">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            会员<b class="caret"></b>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                            <a class="dropdown-item"
+                                href="https://www.jkchemical.com/ChangePassword.aspx?language=ch">修改密码</a>
+                        </div>
+                    </li>
+                    <!--注册登录区域-->
+                    <li class="nav-item display-desktop">
+                        <a class="nav-link header-login" href="#">注册/登录</a>
+                    </li>
+                    <!--购物车图标-->
+                    <li class="nav-item display-none">
+                        <a class="nav-link shopping-cart"
+                            href="https://www.jkchemical.com/Member/Share/Shopping.aspx?language=ch">购物车</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-        <!-- Navigation-->
-    </header>
+        </div>
+    </nav>
+    <!-- Navigation-->
+</header>

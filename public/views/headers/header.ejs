@@ -34,6 +34,30 @@
         return ret;
     }
     %>
+    <style>
+        /* 超大螢幕 */
+        @media screen and (min-width: 1024px) {
+            .dropdown-menu li:hover .sub-menu {
+                visibility: visible;
+            }
+
+            .dropdown:hover .dropdown-menu {
+                display: block;
+            }
+        }
+
+        /* 桌機板 */
+        @media screen and (min-width: 992px) and (max-width: 1024px) {
+            .dropdown-menu li:hover .sub-menu {
+                visibility: visible;
+            }
+
+            .dropdown:hover .dropdown-menu {
+                display: block;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
