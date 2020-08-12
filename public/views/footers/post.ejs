@@ -3,7 +3,7 @@
         const imagePath = 'https://www.jkchemical.com/static/Structure/';
         const altimagePath = "https://www.jkchemical.com/static/Structure/999.png";
         const productPath ="https://shop.jkchemical.com/?type=product&product=";
-        if (j > 3) break;
+
         let {id, NO, brand ,brandname,origin, description, descriptionc, imageurl, cas} = postproduct[j];
         let imageSrc =  imageurl? 
                         imagePath + imageurl.substr(0,3) + '/' + imageurl + '.png'
@@ -11,12 +11,12 @@
                         altimagePath;
         let productPaths = productPath + id;
     %>
-    <div class="col-lg-3">
+    <div class="col-lg-2">
         <div class="img-wrap">
             <a href="<%=productPaths%>"><img src="<%=imageSrc%>"></a>
         </div>
     </div>
-    <div class="col-lg-9 each-product">
+    <div class="col-lg-10 each-product">
         <h3>
             <a href="<%=productPaths%>">
                 <%=description%>
