@@ -19,19 +19,20 @@ export class DbContent extends Db {
     private sqlDiscountsPost: string;
     private sqlCorrelation: string;
     private sqlSlideshow: string;
+    private sqlPostProduct: string;
 
     constructor() {
         super('content');
         let db = this.databaseName;
         this.sqlHomePostList = `
-            SELECT a.id, a.caption, a.discription as disp, c.path as image,
-                cp.update as date, d.hits, d.sumHits
-            FROM ${db}.tv_postpublish cp 
-                join ${db}.tv_post a on cp.post=a.id
-                -- ${db}.tv_post a 
-                left join ${db}.tv_template b on a.template=b.id 
-                left join ${db}.tv_image c on a.image=c.id
-                left join ${db}.tv_hot d on a.id=d.post
+            SELECT  a.id, a.caption, a.discription as disp, c.path as image,
+                    cp.update as date, d.hits, d.sumHits
+            FROM    ${db}.tv_postpublish cp 
+                    join ${db}.tv_post a on cp.post=a.id
+                    -- ${db}.tv_post a 
+                    left join ${db}.tv_template b on a.template=b.id 
+                    left join ${db}.tv_image c on a.image=c.id
+                    left join ${db}.tv_hot d on a.id=d.post
             WHERE cp.openweb = 1
             ORDER BY a.id desc
             LIMIT 10;
@@ -78,13 +79,13 @@ export class DbContent extends Db {
         `;
 
         this.sqlAllPosts = `
-            SELECT a.id, a.caption, a.discription as disp, c.path as image,
-                a.$update as date, d.hits, d.sumHits
-            FROM -- ${db}.tv_customerpost cp join ${db}.tv_post a on cp.post=a.id
-                ${db}.tv_post a 
-                left join ${db}.tv_template b on a.template=b.id 
-                left join ${db}.tv_image c on a.image=c.id
-                left join ${db}.tv_hot d on a.id=d.post
+            SELECT  a.id, a.caption, a.discription as disp, c.path as image,
+                    a.$update as date, d.hits, d.sumHits
+            FROM    -- ${db}.tv_customerpost cp join ${db}.tv_post a on cp.post=a.id
+                    ${db}.tv_post a 
+                    left join ${db}.tv_template b on a.template=b.id 
+                    left join ${db}.tv_image c on a.image=c.id
+                    left join ${db}.tv_hot d on a.id=d.post
             ORDER BY a.id desc;
             -- LIMIT 10;
         `;
@@ -97,7 +98,7 @@ export class DbContent extends Db {
         `;
 
         this.sqlCategoryPost = `
-            SELECT p.id, p.caption, p.discription as disp, c.path as image,
+            SELECT  p.id, p.caption, p.discription as disp, c.path as image,
                     p.$update as date, d.hits, d.sumHits
             FROM    ${db}.tv_postproductcatalog a 
                     join ${db}.tv_post p on a.post = p.id   
@@ -114,7 +115,7 @@ export class DbContent extends Db {
         `;
 
         this.sqlSubjectPost = `
-            SELECT c.id, c.caption, c.discription as disp, d.path as image, b.update as date, e.name
+            SELECT  c.id, c.caption, c.discription as disp, d.path as image, b.update as date, e.name
             FROM    ${db}.tv_postsubject a 
                     join ${db}.tv_postpublish b on a.post = b.post        
                     join ${db}.tv_post c on c.id = a.post
@@ -252,6 +253,16 @@ export class DbContent extends Db {
             WHERE 	a.types = 1 AND b.isvalid  =1
             `;
 
+        this.sqlPostProduct = `
+            SELECT  p.id, p.NO, p.brand, p.origin, p.description, p.descriptionc, p.imageurl, pc.chemical
+                    , pc.cas, pc.purity, pc.molecularfomula, pc.molecularweight, b.name as brandname
+            FROM    webbuilder.tv_postproduct AS a
+                    INNER JOIN product.tv_productx AS p on p.id = a.product
+                    INNER JOIN product.tv_brand AS b ON p.$unit = b.$unit and p.brand = b.id
+                    INNER JOIN product.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
+            WHERE 	a.post =?;
+            `;
+
     }
 
     async homePostList(): Promise<any> {
@@ -338,6 +349,11 @@ export class DbContent extends Db {
 
     async getSlideshow(): Promise<any> {
         const ret = await this.tableFromSql(this.sqlSlideshow);
+        return ret;
+    }
+
+    async getPostProduct(id: any): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlPostProduct, [id]);
         return ret;
     }
 

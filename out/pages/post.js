@@ -17,7 +17,7 @@ function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
         try {
-            let template, content, current, postsubject;
+            let template, content, current, postsubject, postproduct;
             let discounts = [];
             let correlation = [];
             let id = req.params.id;
@@ -33,6 +33,8 @@ function post(req, res) {
                 correlation = yield db_1.Dbs.content.getCorrelationPost(id);
                 //获取贴文的栏目
                 postsubject = yield db_1.Dbs.content.postSubject(id);
+                //获取贴文产品
+                postproduct = yield db_1.Dbs.content.getPostProduct(id);
                 //获取模板
                 let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
                 let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
@@ -87,6 +89,7 @@ function post(req, res) {
                 rootcategories: rootcategories,
                 content: content,
                 postsubject: postsubject,
+                postproduct: postproduct,
                 titleshow: false
             });
             let html = ejs.render(template, data);

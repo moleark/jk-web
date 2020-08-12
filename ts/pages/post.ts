@@ -6,7 +6,7 @@ import { getRootPath, viewPath, ejsSuffix, ipHit, ejsError, buildData, hmToEjs }
 export async function post(req: Request, res: Response) {
     let rootPath = getRootPath(req);
     try {
-        let template: string, content: string, current: any, postsubject: any;
+        let template: string, content: string, current: any, postsubject: any, postproduct: any;
         let discounts: any[] = [];
         let correlation: any[] = [];
         let id = req.params.id;
@@ -26,6 +26,10 @@ export async function post(req: Request, res: Response) {
 
             //获取贴文的栏目
             postsubject = await Dbs.content.postSubject(id);
+
+
+            //获取贴文产品
+            postproduct = await Dbs.content.getPostProduct(id);
 
             //获取模板
             let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
@@ -88,6 +92,7 @@ export async function post(req: Request, res: Response) {
             rootcategories: rootcategories,
             content: content,
             postsubject: postsubject,
+            postproduct: postproduct,
             titleshow: false
         });
 

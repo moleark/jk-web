@@ -2662,3 +2662,116 @@ section.home{
 	padding-top: 3em;
 }
 }
+
+
+
+.product-side input:checked + .tab-label {
+	color: #239AB7;
+}
+.product-side input:checked + .tab-label::after {
+	margin-top: 2px;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+.product-side input:checked ~ .tab-content {
+	max-height: 100vh;
+	padding: 1em 1em 0;
+}
+.product-side input {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+}
+.product-side h2 {
+	color: #AEB7C1;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.product-introduct h1 {
+	line-height: 1.1;
+	font-weight: 500;
+	font-size: 38px;
+	margin-bottom: 20px;
+}
+.product-introduct p {
+	margin-bottom: 20px;
+}
+.product-introduct .background-grey p {
+	margin-bottom: 10px;
+}
+.product-introduct img {
+	border-radius: 0;
+	margin-bottom: 20px;
+}
+.product-introduct .quantity img{
+	margin-bottom: 0;
+}
+.product-introduct .img-wrap {
+	width: 120px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    border-radius: 0;
+}
+.product-introduct .img-wrap img{
+	width: 120px;
+	margin-bottom: 0;
+}
+.each-product {
+	position: relative;
+	margin-bottom: 20px;
+}
+.each-product .background-grey{
+	padding: 20px;
+}
+.each-product h2 {
+	margin-bottom: 0;
+	color: #fff;
+	padding: 10px;
+	font-size: 16px;
+}
+.each-product h3 {
+	font-weight: 700;
+	line-height: 1.4em;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+.each-product a.button {
+	margin-bottom: -20px;
+    position: absolute;
+    color: #239AB7;
+    border: 1px solid #239AB7;
+    padding: 5px 25px 5px 10px;
+    background: url(../img/icon/under-arrow.svg);
+    background-repeat: no-repeat;
+    background-position: 90% 55%;
+    width: 70px;
+    bottom: 0;
+    right: 15px;
+    margin-top: -10px;
+}
+.each-product a.button:hover{
+	border:1px solid #AD2031;
+	color: #AD2031;
+	background: url(../img/icon/under-arrow-1hover.svg);
+	background-repeat: no-repeat;
+    background-position: 90% 55%;
+}
+.each-product a.button:focus{
+	border:1px solid #AD2031;
+	color: #AD2031;
+	background: url(../img/icon/under-arrow-hover.svg);
+	background-repeat: no-repeat;
+    background-position: 90% 55%;
+}
+
+.each-product ul {
+	border: 1px solid #DCDCDC;
+	padding: 15px 15px 15px 35px;
+	margin-bottom: 0;
+}
+.each-product ul li {
+	color: #6D7783;
+	line-height: 2.2em;
+}
