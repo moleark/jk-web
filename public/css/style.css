@@ -2707,15 +2707,15 @@ section.home{
 	margin-bottom: 0;
 }
 .product-introduct .img-wrap {
-	width: 120px;
+	width: 150px;
 	display: flex;
     justify-content: center;
     align-items: center;
-    height: 120px;
+    height: 150px;
     border-radius: 0;
 }
 .product-introduct .img-wrap img{
-	width: 120px;
+	width: 150px;
 	margin-bottom: 0;
 }
 .each-product {
