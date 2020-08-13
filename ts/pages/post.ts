@@ -30,7 +30,9 @@ export async function post(req: Request, res: Response) {
 
             //获取贴文产品
             postproduct = await Dbs.content.getPostProduct(id);
-
+            if (postproduct.length === 0) {
+                postproduct = await Dbs.content.getPostProductServise(id);
+            }
             //获取模板
             let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
             let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();

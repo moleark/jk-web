@@ -264,15 +264,7 @@ export class DbContent extends Db {
             WHERE 	a.post =?;
             `;
 
-        this.sqlPostProductFormServise = `
-            SELECT  p.id, p.NO, p.brand, p.origin, p.description, p.descriptionc, p.imageurl, pc.chemical
-                    , pc.cas, pc.purity, pc.molecularfomula, pc.molecularweight, b.name as brandname
-            FROM    ${db}.tv_postproduct AS a
-                    INNER JOIN product.tv_productx AS p on p.id = a.product
-                    INNER JOIN product.tv_brand AS b ON p.$unit = b.$unit and p.brand = b.id
-                    INNER JOIN product.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
-            WHERE 	a.post =?;
-            `;
+        this.sqlPostProductFormServise = `CALL webbuilder.tv_PostProduct(266); `;
 
     }
 

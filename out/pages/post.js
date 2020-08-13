@@ -35,6 +35,9 @@ function post(req, res) {
                 postsubject = yield db_1.Dbs.content.postSubject(id);
                 //获取贴文产品
                 postproduct = yield db_1.Dbs.content.getPostProduct(id);
+                if (postproduct.length === 0) {
+                    postproduct = yield db_1.Dbs.content.getPostProductServise(id);
+                }
                 //获取模板
                 let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
                 let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
