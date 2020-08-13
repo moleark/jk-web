@@ -235,6 +235,15 @@ class DbContent extends db_1.Db {
                     INNER JOIN product.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
             WHERE 	a.post =?;
             `;
+        this.sqlPostProductFormServise = `
+            SELECT  p.id, p.NO, p.brand, p.origin, p.description, p.descriptionc, p.imageurl, pc.chemical
+                    , pc.cas, pc.purity, pc.molecularfomula, pc.molecularweight, b.name as brandname
+            FROM    ${db}.tv_postproduct AS a
+                    INNER JOIN product.tv_productx AS p on p.id = a.product
+                    INNER JOIN product.tv_brand AS b ON p.$unit = b.$unit and p.brand = b.id
+                    INNER JOIN product.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
+            WHERE 	a.post =?;
+            `;
     }
     homePostList() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -343,6 +352,12 @@ class DbContent extends db_1.Db {
     getPostProduct(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlPostProduct, [id]);
+            return ret;
+        });
+    }
+    getPostProductServise(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlPostProductFormServise, [id]);
             return ret;
         });
     }
