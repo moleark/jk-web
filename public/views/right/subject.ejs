@@ -13,7 +13,7 @@
         <li><a href="<%=$root%>information">全部</a></li>
     </ul>
 </div>
-<div class="side-block">
+<div class="side-block ">
     <%
       if(discounts.length>0){
     %>
@@ -26,10 +26,14 @@
         if (dpn > 5) break;
         let {id, caption, image} = pn;
     %>
-    <div class="img-wrap img-promo">
-        <a href="<%=path+id%>"><img src="<%=image%>"></a>
+    <div class="side-main-pic">
+        <div class="img-wrap img-promo mb-lg-1">
+            <a href="<%=path+id%>"><img src="<%=image%>"></a>
+        </div>
+        <div class="side-main-pic-info txt-line-clamp">
+            <p><%=caption%></p>
+        </div>
     </div>
-    <p><a href="<%=path+id%>"><%=caption%></a></p>
     <% } %>
 </div>
 <div class="side-block">
@@ -42,12 +46,13 @@
         let {post, caption,subject,image} = pn;
     %>
     <div class="overflow">
-        <div class="post-preview p-flot mt-lg-1">
-            <h4 class="post-title"><a href="#"><%=subject%></a></h4> |
+        <div class="post-preview p-flot txt-line-clamp mt-lg-1">
+            <span class="mint">|</span>
             <p><a href="<%=path+post%>"><%=caption%></a></p>
         </div>
     </div>
     <hr class="mobile-divider">
+
     <% } %>
 </div>
 
@@ -65,8 +70,8 @@
         let {id, caption,subject,image} = pn;
     %>
     <div class="overflow">
-        <div class="post-preview p-flot mt-lg-1">
-            <h4 class="post-title"><a href="#"><%=subject%></a></h4> |
+        <div class="post-preview p-flot txt-line-clamp mt-lg-1">
+            <span class="mint">|</span>
             <p><a href="<%=path+id%>"><%=caption%></a></p>
         </div>
     </div>
