@@ -111,7 +111,7 @@ class DbContent extends db_1.Db {
         this.sqlSubject = `
             SELECT 	*
             FROM    ${db}.tv_subject AS a
-            WHERE 	parent = 100001
+            WHERE 	id in(6,7,8,25)
         `;
         this.sqlPostSubject = `
             SELECT 	b.id, b.name
