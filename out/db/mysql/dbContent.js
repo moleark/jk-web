@@ -235,7 +235,7 @@ class DbContent extends db_1.Db {
                     INNER JOIN product.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
             WHERE 	a.post =?;
             `;
-        this.sqlPostProductFormServise = `CALL webbuilder.tv_PostProduct(?); `;
+        this.sqlPostProductFormServise = `call webbuilder.tv_SearchRecommendProduct(24,47,?)`;
     }
     homePostList() {
         return __awaiter(this, void 0, void 0, function* () {

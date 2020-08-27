@@ -264,7 +264,8 @@ export class DbContent extends Db {
             WHERE 	a.post =?;
             `;
 
-        this.sqlPostProductFormServise = `CALL webbuilder.tv_PostProduct(?); `;
+
+        this.sqlPostProductFormServise = `call webbuilder.tv_SearchRecommendProduct(24,47,?)`;
 
     }
 
