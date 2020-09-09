@@ -62,7 +62,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark pad-tb20 di">
       <div class="container">
-        <a href="#" class="header-logo"><img src="img/logo.png" alt="" class="img-fluid"></a>
+        <a href="#" class="header-logo"><img src="img/logo.svg" alt="" class="img-fluid"></a>
         <div class="justify-content-center search-wrap">
           <ul class="top-list justify-content-center">
             <li><a href="#">特惠活动</a> </li>
@@ -118,10 +118,10 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link background-grey" href="#">注册/登录</a>
+              <a class="nav-link header-login" href="#">注册/登录</a>
             </li>
             <li class="nav-item display-none">
-              <a class="nav-link shopping-cart" href="#"><img src="img/commerce-and-shopping.svg" width="40px"></a>
+              <a class="nav-link shopping-cart" href="#">购物车</a>
             </li>
           </ul>
         </div>
@@ -499,22 +499,7 @@ background-position: center bottom;background-repeat: no-repeat;">
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script>
-    $(function(){
-    $(".dropdown").hover(            
-            function() {
-                $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-                $(this).toggleClass('open');
-                $('b', this).toggleClass("caret caret-up");                
-            },
-            function() {
-                $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-                $(this).toggleClass('open');
-                $('b', this).toggleClass("caret caret-up");                
-            });
-    });
-    
-  </script>
+  <script src="vendor/jquery/jk.js"></script>
 
 </body>
 
