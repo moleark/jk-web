@@ -16,28 +16,7 @@
 </head>
 
 <body>
-	<!-- navbar-->
-	<!--Only For Mobile-->
-	<div class="mobile-wrap display-mobile">
-		<div class="w-30">
-		  <img src="img/icon/footer-logo.svg">
-		</div>
-		<div class="w-70">
-		  <div class="custom-search-input">
-			<div class="input-group">
-				<input type="text" class="search-query form-control" placeholder="Search" />
-				<span class="input-group-btn">
-					<button class="btn" type="button">
-						<img src="img/icon/magnifier.svg">
-					</button>
-				</span>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	  <!--Only For Mobile End-->
-	  <!--Only For Desktop-->
-	  <header class="display-desktop">
+	<header>
 		<div class="top-header">
 		  <div class="container">
 			<div class="row">
@@ -65,7 +44,7 @@
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark pad-tb20 di">
 		  <div class="container">
-			<a href="#" class="header-logo"><img src="img/logo.png" alt="" class="img-fluid"></a>
+			<a href="#" class="header-logo"><img src="img/logo.svg" alt="" class="img-fluid"></a>
 			<div class="justify-content-center search-wrap">
 			  <ul class="top-list justify-content-center">
 				<li><a href="#">特惠活动</a> </li>
@@ -85,9 +64,13 @@
 				</div>
 			  </div>
 			</div>
-			<a class="display-mobile-block-shoppingcart shopping-cart" href="#"><img src="img/commerce-and-shopping.svg" width="40px"></a>
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-			  <span class="navbar-toggler-icon"></span>
+			<a href="#" class="display-mobile-block-login display-mobile">登入</a>
+			<a href="#" class="display-mobile-block-shoppingcart shopping-cart"><img src="img/commerce-and-shopping.svg" width="40px"></a>
+			<button class="navbar-toggle navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="bar1"></span>
+		<span class="bar2"></span>
+	
+		<span class="bar3"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 			  <ul class="navbar-nav ml-auto">
@@ -120,11 +103,11 @@
 					<a class="dropdown-item" href="#">2 Column Portfolio</a>
 				  </div>
 				</li>
-				<li class="nav-item">
-				  <a class="nav-link background-grey" href="#">注册/登录</a>
+				<li class="nav-item display-desktop">
+				  <a class="nav-link header-login" href="#">注册/登录</a>
 				</li>
 				<li class="nav-item display-none">
-				  <a class="nav-link shopping-cart" href="#"><img src="img/commerce-and-shopping.svg" width="40px"></a>
+				  <a class="nav-link shopping-cart" href="#">购物车</a>
 				</li>
 			  </ul>
 			</div>
@@ -154,7 +137,7 @@
 									<table class="table" >
 										<tbody>
 											<tr>
-												<td>小计</td>
+												<td>产品 (2件)</td>
 												<th>￥640.00</th>
 											</tr>
 											<tr>
@@ -162,12 +145,12 @@
 												<th>￥55.00</th>
 											</tr>
 											<tr>
-												<td style="padding-bottom:20px!important;">手续费</td>
+											<td>手续费</td>
 												<th>￥0.00</th>
 											</tr>
-											<tr class="total" style="border-bottom:none!important;">
-												<td style="padding-top:20px!important;"><strong>总计 (RMB)</strong></td>
-												<th style="padding-top:20px!important;">￥695.00</th>
+											<tr class="total">
+												<td>活动优惠</td>
+												<th> -￥2.00</th>
 											</tr>
 										</tbody>
 									</table>
@@ -211,16 +194,16 @@
 							<form method="post" action="checkout1.html">
 								<div class="table">
 									<div class="row header">
-									  <div class="cell"></div>
-									  <div class="cell">产品</div>
-									  <div class="cell">单价</div>
-									  <div class="cell">包装</div>
-									  <div class="cell quantity-center text-center">数量</div>
-									  <div class="cell">小计</div>
+										<div class="cell"></div>
+										<div class="cell"></div>
+										<div class="cell header text-right">单价</div>
+										<div class="cell header text-right">包装</div>
+										<div class="cell header text-right">数量</div>
+										<div class="cell header text-right">小计</div>
 									</div>	
 									<div class="row  postion-re">
-									  <div class="cell" data-title="">
-										<a href="#"><img src="https://dummyimage.com/96x68/000/fff" alt="White Blouse Armani"></a>
+									  <div class="cell " data-title="">
+										<a href="#"><img src="img/100x100.png" alt="White Blouse Armani"></a>
 									  </div>
 									  <div class="cell product-item"  data-title="">
 										<a href="#">106361</a>
@@ -228,13 +211,13 @@
 												<p>双【1-（叔丁基过氧）-1-甲基乙基】苯</p>
 												
 									  </div>
-									  <div class="cell w-333" data-title="单价">
+									  <div class="cell w-333 text-right" data-title="单价">
 										￥640.00
 									  </div>
-									  <div class="cell w-333" data-title="编号">
+									  <div class="cell w-333 text-right" data-title="编号">
 										1G
 									  </div>
-									  <div class="cell w-333" data-title="数量">
+									  <div class="cell w-333 text-right" data-title="数量">
 										<div class="quantity">
 											<button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt="" /></button>
 											<input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="" />
@@ -242,7 +225,7 @@
 										</div>
 										<!--<input type="number" value="2" class="form-control">-->
 									  </div>
-									  <div class="cell" data-title="Subtotal">
+									  <div class="cell text-right" data-title="Subtotal">
 										￥640.00
 										<br/>
 										<div class="shop-cart-product-list-icon">
@@ -258,7 +241,7 @@
 
 							<!-- /.table-responsive-->
 							<div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
-								<div class="left"><a class="btn btn-outline-secondary" data-toggle="modal" data-target="#lightbox" style="color:#293340;"><i class="fa fa-times-circle" style="color:#293340;"></i> 清空购物车</a></div>
+								<div class="left"><a class="btn" data-toggle="modal" data-target="#lightbox" style="color:#293340;"><i class="fa fa-times-circle" style="color:#293340;"></i> 清空购物车</a></div>
 
 							</div>
 
@@ -293,10 +276,10 @@
 								</div>
 
 								<div class="table-responsive">
-									<table class="table" >
+									<table class="table">
 										<tbody>
 											<tr>
-												<td>小计</td>
+												<td>产品 (2件)</td>
 												<th>￥640.00</th>
 											</tr>
 											<tr>
@@ -304,17 +287,19 @@
 												<th>￥55.00</th>
 											</tr>
 											<tr>
-												<td style="padding-bottom:20px!important;">手续费</td>
+											<td>手续费</td>
 												<th>￥0.00</th>
 											</tr>
-											<tr class="total" style="border-bottom:none!important;">
-												<td style="padding-top:20px!important;"><strong>总计 (RMB)</strong></td>
-												<th style="padding-top:20px!important;">￥695.00</th>
+											<tr class="total">
+												<td>活动优惠</td>
+												<th> -￥2.00</th>
 											</tr>
 										</tbody>
 									</table>
 								</div>
 							</div>
+
+
 							<div class="box">
 								<div class="box-header">
 									<a href="#coupon" data-toggle="collapse" style="width:100%;border-radius:0;" class="addcode"><i class="fa fa-plus" aria-hidden="true"></i>添加优惠码</a>
@@ -332,10 +317,9 @@
 
 							</div>
 
-							<table class="table" style="margin-top:20px;">
+							<table class="table">
 								<tbody>
-
-									<tr class="order-total" style="border:none!important;">
+									<tr class="order-total">
 										<td><strong>订单金额</strong></td>
 										<th>￥695.00</th>
 									</tr>
@@ -350,115 +334,69 @@
 		</div>
 	</section>
 	<!-- /.container -->
-	<!-- partial:index.partial.html -->
-
-  <!--Only For Desktop-->
-  <div class="footer footer-m display-desktop">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <img src="img/icon/footer-logo.svg">
-          <p class="mt-lg-3">促进科技与工业<br>
-            发展，造福人类</p>
-          <img src="img/qrcode.png" style="width:100px" class="mt-lg-50 qrcode">
-        </div> 
-        <div class="col-lg-3 col-xs-6">
-          <div class="footer-title">百灵威集团</div>
-          <ul>
-            <li><a href="#">公司简介</a></li>
-            <li><a href="#">企业承诺</a></li>
-            <li><a href="#">合作品牌</a></li>
-            <li><a href="#">招贤纳士</a></li>
-            
-          </ul>
-        </div> 
-        <div class="col-lg-3 col-xs-6">
-          <div class="footer-title">浏览</div>
-          <ul>
-            <li><a href="#">资讯中心</a></li>
-            <li><a href="#">质量证书(COA)</a></li>
-            <li><a href="#">安全说明书(SDS)</a></li>
-            <li><a href="#">大包装与定制生产</a></li>
-            <li><a href="#">订购指南</a></li>
-            <li><a href="#">产品</a></li>
-            <ul>
-              <li><a href="#">有机化学</a></li>
-              <li><a href="#">分析化学</a></li>
-              <li><a href="#">生命科学</a></li>
-              <li><a href="#">材料科学</a></li>
-              <li><a href="#">仪器耗材</a></li>
-            </ul>
-          </ul>
-        </div>  
-        <div class="col-lg-3 col-xs-6">
-          <div class="footer-title">联系我们</div>
-          <div class="contact ">
-            电话：<br>400-666-7788<br>+86 10 8284 8833
-          </div>
-          <div class="contact mt-lg-28 mb-lg-58">
-            传真：<br>+86 10 8284 9933
-          </div>
-          <div class="contact mb-lg-2">
-            电子邮件：<br>
-            <a href="mailto:jkinfo@jkchemical.com">jkinfo@jkchemical.com</a><br><a href="mailto:jkinfo@jk-sci.com">jkinfo@jk-sci.com</a>
-          </div>
-          <div class="footer-social">
-            <!--for english website<a href="https://www.facebook.com/" target="blank"><img src="img/icon/facebook.svg"></a>
-            <a href="https://www.twitter.com/" target="blank"><img src="img/icon/twitter.svg"></a>
-            <a href="https://www.instagram.com/" target="blank"><img src="img/icon/instagram.svg"></a>
-						<a href="https://www.youtube.com/" target="blank"><img src="img/icon/youtube.svg"></a>-->
-          </div>
-        </div>  
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-sm">© 2020 - Copyright <a href="#">J&K Scientific Ltd., All Rights Reserved</a></div>
-        
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--Only For Desktop End-->
-
-  <div class="mobile-footer-wrap display-mobile">
-    <a href="#" class="menu">
-      <img src="img/icon/home.svg">
-      <h3>首页</h3>
-    </a>
-    <a href="#" class="menu">
-      <img src="img/icon/product.svg">
-      <h3>产品</h3>
-    </a>
-    <a href="#" class="menu">
-      <img src="img/icon/service.svg">
-      <h3>服务</h3>
-    </a>
-    <a href="#" class="menu">
-      <img src="img/icon/my.svg">
-      <h3>我的</h3>
-    </a>
-  </div>
+	<div class="footer footer-m display-desktop">
+		<div class="container">
+		  <div class="row">
+			<div class="col-lg-3 col-xs-6">
+			  <img src="img/icon/footer-logo.svg">
+			  <p>促进科技与工业发展，造福人类</p>
+			</div> 
+			<div class="col-lg-3 col-xs-6">
+			  <div class="footer-title">百灵威集团</div>
+			  <ul>
+				<li><a href="#">公司简介</a></li>
+				<li><a href="#">合作品牌</a></li>
+				<li><a href="#">招贤纳士</a></li>
+				
+			  </ul>
+			</div> 
+			<div class="col-lg-3 col-xs-6">
+			  <div class="footer-title">专业服务</div>
+			  <ul>
+				<li><a href="#">百灵威商城</a></li>
+				<li><a href="#">资讯中心</a></li>
+				<li><a href="#">质量证书(COA)</a></li>
+				<li><a href="#">安全说明书(SDS)</a></li>
+				<li><a href="#">项目合作与定制生产</a></li>
+				<li><a href="#">订购指南</a></li>
+				<li><a href="#">应用领域</a></li>
+			  
+			  </ul>
+			</div>  
+			<div class="col-lg-3 col-xs-6">
+			  <div class="footer-title">联系我们</div>
+			  <div class="contact ">
+				电话：400-666-7788<span class="ml-lg-42">+86 10 8284 8833</span>
+			  </div>
+			  <div class="contact">
+				邮箱：<a href="mailto:jkinfo@jk-sci.com">jkinfo@jk-sci.com</a>
+			  </div>
+			  <div class="contact">
+				传真：+86 10 8284 9933
+			  </div>
+			  <div class="footer-social mt-lg-05">
+				<a href="#" class="wechat" target="blank"></a>
+				<!--for english website<a href="https://www.facebook.com/" target="blank"><img src="img/icon/facebook.svg"></a>
+				<a href="https://www.twitter.com/" target="blank"><img src="img/icon/twitter.svg"></a>
+				<a href="https://www.instagram.com/" target="blank"><img src="img/icon/instagram.svg"></a>
+							<a href="https://www.youtube.com/" target="blank"><img src="img/icon/youtube.svg"></a>-->
+			  </div>
+			</div>  
+		  </div>
+		</div>
+		<div class="footer-bottom">
+		  <div class="container">
+			<div class="row text-center">
+			  <div class="col-sm">© 2020 - Copyright <a href="#">J&K Scientific Ltd., All Rights Reserved</a></div>
+			
+			</div>
+		  </div>
+		</div>
+	  </div>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script>
-    ￥(function(){
-    ￥(".dropdown").hover(            
-            function() {
-                ￥('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-                ￥(this).toggleClass('open');
-                ￥('b', this).toggleClass("caret caret-up");                
-            },
-            function() {
-                ￥('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-                ￥(this).toggleClass('open');
-                ￥('b', this).toggleClass("caret caret-up");                
-            });
-    });
-	
-  </script>
+  <script src="vendor/jquery/jk.js"></script>
 </body>
 
 </html>

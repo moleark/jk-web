@@ -15,7 +15,6 @@
 </head>
 
 <body>
-	<!-- navbar-->
 	<!--Only For Mobile-->
 	<div class="mobile-wrap display-mobile">
 		<div class="w-30">
@@ -64,7 +63,7 @@
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark pad-tb20 di">
 		  <div class="container">
-			<a href="#" class="header-logo"><img src="img/logo.png" alt="" class="img-fluid"></a>
+			<a href="#" class="header-logo"><img src="img/logo.svg" alt="" class="img-fluid"></a>
 			<div class="justify-content-center search-wrap">
 			  <ul class="top-list justify-content-center">
 				<li><a href="#">特惠活动</a> </li>
@@ -120,10 +119,10 @@
 				  </div>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link background-grey" href="#">注册/登录</a>
+				  <a class="nav-link header-login" href="#">注册/登录</a>
 				</li>
 				<li class="nav-item display-none">
-				  <a class="nav-link shopping-cart" href="#"><img src="img/commerce-and-shopping.svg" width="40px"></a>
+				  <a class="nav-link shopping-cart" href="#">购物车</a>
 				</li>
 			  </ul>
 			</div>
@@ -153,24 +152,21 @@
 									<table class="table">
 										<tbody>
 											<tr>
-												<td>小计</td>
+												<td>产品 (2件)</td>
 												<th>￥640.00</th>
 											</tr>
 											<tr>
 												<td>运费</td>
 												<th>￥55.00</th>
 											</tr>
-
 											<tr>
-											<td style="padding-bottom:20px!important;">手续费</td>
+											<td>手续费</td>
 												<th>￥0.00</th>
 											</tr>
-
 											<tr class="total">
-												<td style="padding-top:20px!important;"><strong> (RMB)</strong></td>
-												<th style="padding-top:20px!important;">￥695.00</th>
+												<td>活动优惠</td>
+												<th> -￥2.00</th>
 											</tr>
-
 										</tbody>
 									</table>
 								</div>
@@ -194,10 +190,9 @@
 
 							</div>
 
-							<table class="table" style="margin-top:20px;">
+							<table class="table">
 								<tbody>
-
-								<tr class="order-total" style="border:none!important;">
+									<tr class="order-total">
 										<td><strong>订单金额</strong></td>
 										<th>￥695.00</th>
 									</tr>
@@ -231,24 +226,17 @@
 												<div class="form-group">
 													<label for="address1"><span class="star">*</span>地址信息:</label>
 													<div class="row">
-														<div class="col-lg-4">
+														<div class="col-lg-6">
 															<select id="state" class="form-control">
 																<option selected value="na">
-																	请选择省
+																	省
 																</option>
 															</select>
 														</div>
-														<div class="col-lg-4">
+														<div class="col-lg-6">
 															<select id="state" class="form-control">
 																<option selected value="na">
-																	请选择市
-																</option>
-															</select>
-														</div>
-														<div class="col-lg-4">
-															<select id="state" class="form-control">
-																<option selected value="na">
-																	请选择区/街道
+																	市
 																</option>
 															</select>
 														</div>
@@ -303,6 +291,7 @@
 											
 										</div>
 										<!-- /.row-->
+										<div class="read-more-btn-mint text-right"><a href="https://www.jkchemical.com/zh-cn/product-catalog/1727/1/10.html " class="">储存地址</a></div>
 									</div>
 
 							</form>
@@ -314,7 +303,7 @@
 					<!--Only For Desktop-->
 					<div class="col-lg-3 mt-120 display-desktop">
 						<div>
-							<button type="submit" class="btn btn-primary step display-desktop" style="width:100%;border-radius:0;"><a href="#" style="color:white;">结账<i class="fa fa-caret-right" aria-hidden="true"></i></a></button>
+							<button type="submit" class="btn btn-primary step display-desktop" style="width:100%;border-radius:0;"><a href="#" style="color:white;">下一步<i class="fa fa-caret-right" aria-hidden="true"></i></a></button>
 						</div>
 						<div class="greybox">
 							<div id="order-summary" class="box">
@@ -326,24 +315,21 @@
 									<table class="table">
 										<tbody>
 											<tr>
-												<td>小计</td>
+												<td>产品 (2件)</td>
 												<th>￥640.00</th>
 											</tr>
 											<tr>
 												<td>运费</td>
 												<th>￥55.00</th>
 											</tr>
-
 											<tr>
-											<td style="padding-bottom:20px!important;">手续费</td>
+											<td>手续费</td>
 												<th>￥0.00</th>
 											</tr>
-
 											<tr class="total">
-												<td style="padding-top:20px!important;"><strong>总计 (RMB)</strong></td>
-												<th style="padding-top:20px!important;">￥695.00</th>
+												<td>活动优惠</td>
+												<th> -￥2.00</th>
 											</tr>
-
 										</tbody>
 									</table>
 								</div>
@@ -367,10 +353,9 @@
 
 							</div>
 
-							<table class="table" style="margin-top:20px;">
+							<table class="table">
 								<tbody>
-
-								<tr class="order-total" style="border:none!important;">
+									<tr class="order-total">
 										<td><strong>订单金额</strong></td>
 										<th>￥695.00</th>
 									</tr>
@@ -477,82 +462,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script>
-    ￥(function(){
-    ￥(".dropdown").hover(            
-            function() {
-                ￥('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-                ￥(this).toggleClass('open');
-                ￥('b', this).toggleClass("caret caret-up");                
-            },
-            function() {
-                ￥('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-                ￥(this).toggleClass('open');
-                ￥('b', this).toggleClass("caret caret-up");                
-            });
-    });
-    ￥(document).ready(function() {
-
-   
-// inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
-￥('.table-responsive-stack').find("th").each(function (i) {
-   
-   ￥('.table-responsive-stack td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead">'+ ￥(this).text() + '</span> ');
-   ￥('.table-responsive-stack-thead').hide();
-});
-
-
-
-
-
-￥( '.table-responsive-stack' ).each(function() {
-var thCount = ￥(this).find("th").length; 
-var rowGrow = 100 / thCount + '%';
-//console.log(rowGrow);
-￥(this).find("th, td").css('flex-basis', rowGrow);   
-});
-
-
-
-
-function flexTable(){
-if (￥(window).width() < 768) {
-   
-￥(".table-responsive-stack").each(function (i) {
-   ￥(this).find(".table-responsive-stack-thead").show();
-   ￥(this).find('thead').hide();
-});
-   
- 
-// window is less than 768px   
-} else {
-   
-   
-￥(".table-responsive-stack").each(function (i) {
-   ￥(this).find(".table-responsive-stack-thead").hide();
-   ￥(this).find('thead').show();
-});
-   
-   
-
-}
-// flextable   
-}      
-
-flexTable();
-
-window.onresize = function(event) {
- flexTable();
-};
-
-
-
-
-
-
-// document ready  
-});
-  </script>
+  <script src="vendor/jquery/jk.js"></script>
 </body>
 
 </html>

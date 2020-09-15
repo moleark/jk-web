@@ -15,7 +15,6 @@
 </head>
 
 <body>
-	<!-- navbar-->
 	<!--Only For Mobile-->
 	<div class="mobile-wrap display-mobile">
 		<div class="w-30">
@@ -64,7 +63,7 @@
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark pad-tb20 di">
 		  <div class="container">
-			<a href="#" class="header-logo"><img src="img/logo.png" alt="" class="img-fluid"></a>
+			<a href="#" class="header-logo"><img src="img/logo.svg" alt="" class="img-fluid"></a>
 			<div class="justify-content-center search-wrap">
 			  <ul class="top-list justify-content-center">
 				<li><a href="#">特惠活动</a> </li>
@@ -120,10 +119,10 @@
 				  </div>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link background-grey" href="#">注册/登录</a>
+				  <a class="nav-link header-login" href="#">注册/登录</a>
 				</li>
 				<li class="nav-item display-none">
-				  <a class="nav-link shopping-cart" href="#"><img src="img/commerce-and-shopping.svg" width="40px"></a>
+				  <a class="nav-link shopping-cart" href="#">购物车</a>
 				</li>
 			  </ul>
 			</div>
@@ -145,56 +144,47 @@
 						<div id="order-summary" class="box">
 
 							<div class="review-box">
-								<div class="box-header" style="border-bottom: 1px solid lightgrey; margin-bottom:6%; display:block;">
-									<h4 class="mb-0" style="display:inline-block;">1 件产品</h4>
-									<a href="" style="float:right;margin-top:10px;margin-right: 12px;">编辑</a>
+								<div class="box-header" style="display:block;">
+									<h4 class="mb-0" style="display:inline-block;">订单</h4>
 								</div>
 
 
 								<div class="productinfo-review position:relative;">
-
-									<div class="infoproduct" style="display:block; ">
-										<img src="https://dummyimage.com/96x68/000/fff" alt="">
-										<div  class="narrow-p" style="float:right;padding-right:30%;">
-										<p><strong>￥640.00</strong></p>
-										<p>1克</p>
-										<p>数量:1</p>
-									</div>
-									</div>
-									<div class="product-item-review"><a href="#">106361</a>
-											<p>Bis(tert-butylperoxyl)benzene,96%</p>
-												<p>双【1-（叔丁基过氧）-1-甲基乙基】苯</p>
-
-
-
-									</div>
 									<div class="table-responsive-2">
-										<table class="table">
+										<table class="table mb-lg-0">
 											<tbody>
 												<tr>
-													<td>小计</td>
+													<td>产品 (2件)</td>
 													<th>￥640.00</th>
 												</tr>
 												<tr>
 													<td>运费</td>
-													<th>￥0.00</th>
+													<th>￥55.00</th>
 												</tr>
+	
 												<tr>
-													<td style="padding-bottom:20px!important;">手续费</td>
+													<td>手续费</td>
 													<th>￥0.00</th>
 												</tr>
 												<tr class="total">
-													<td style="padding-top:20px!important;"><strong> (RMB)</strong></td>
-													<th style="padding-top:20px!important;">￥695.00</th>
+													<td>活动优惠</td>
+													<th> -￥2.00</th>
 												</tr>
+											
+												
 												<tr class="code-applied">
-													<td>已省</td>
-													<th>￥-73.00</th>
+													<td>积分</td>
+													<th>640</th>
 												</tr>
-
+											</tbody>
+										
+										</table>
+										<table class="table">
+											<tbody>
+			
 												<tr class="order-total">
 													<td><strong>订单金额</strong></td>
-													<th>￥622.00</th>
+													<th>￥693.00</th>
 												</tr>
 											</tbody>
 										</table>
@@ -218,36 +208,36 @@
 									<a href="#" class="nav-link2 flex-sm-fill col-lg-4 text-sm-center active" style="color:black;border-bottom:2px solid black;text-decoration: none;">3. 确认订单</a></div>
 
 							<form method="post" action="checkout1.html">
-								<div class="table">
+								<div class="table">	
 									<div class="row header">
-									  <div class="cell"></div>
-									  <div class="cell">产品</div>
-									  <div class="cell">单价</div>
-									  <div class="cell">包装</div>
-									  <div class="cell">数量</div>
-									  <div class="cell">小计</div>
-									</div>	
-									<div class="row  postion-re">
-									  <div class="cell" data-title="">
-										<a href="#"><img src="https://dummyimage.com/96x68/000/fff" alt="White Blouse Armani"></a>
+										<div class="cell"></div>
+										<div class="cell"></div>
+										<div class="cell header text-right">单价</div>
+										<div class="cell header text-right">包装</div>
+										<div class="cell header text-right">数量</div>
+										<div class="cell header text-right">小计</div>
 									  </div>
+									<div class="row  postion-re">
+										<div class="cell pl-lg-28" data-title="">
+											<a href="#"><img src="img/100x100.png" alt="White Blouse Armani"></a>
+										</div>
 									  <div class="cell product-item"  data-title="">
 										<a href="#">106361</a>
 												<p>Bis(tert-butylperoxyl)benzene,96%</p>
 												<p>双【1-（叔丁基过氧）-1-甲基乙基】苯</p>
 												
 									  </div>
-									  <div class="cell w-333" data-title="单价">
+									  <div class="cell w-333 text-right" data-title="单价">
 										￥640.00
 									  </div>
-									  <div class="cell w-333" data-title="编号">
+									  <div class="cell w-333 text-right" data-title="编号">
 										1G
 									  </div>
-									  <div class="cell w-333" data-title="数量" >
+									  <div class="cell w-333 text-right" data-title="数量" >
 										1
 		
 									  </div>
-									  <div class="cell" data-title="Subtotal">
+									  <div class="cell text-right" data-title="Subtotal">
 										￥640.00
 									  </div>
 									</div>
@@ -261,10 +251,10 @@
 								<h3>收货地址</h3>
 								<div class="col-lg-3"></div>
 								<div class="col-lg-3"></div>
-								<p><span style="width: 60px;display: inline-block;">地  址：</span>北京市朝阳区北辰西路69号峻峰华亭A座5层  邮编：100029</p>
-								<p><span style="width: 60px;display: inline-block;">收货人：</span>张三</p>
-								<p><span style="width: 60px;display: inline-block;">手机：</span>12345678910</p>
-								<p><span style="width: 60px;display: inline-block;">邮件：</span>info@jkchemical.com </p>
+								<p><span class="name">地&nbsp;&nbsp;&nbsp;&nbsp;址：</span>北京市朝阳区北辰西路69号峻峰华亭A座5层  邮编：100029</p>
+								<p><span class="name">收货人：</span>张三</p>
+								<p><span class="name">手&nbsp;&nbsp;&nbsp;&nbsp;机：</span>12345678910</p>
+								<p><span class="name">邮&nbsp;&nbsp;&nbsp;&nbsp;件：</span>info@jkchemical.com </p>
 
 								<div class="changebtn">
 									<button>修改</button>
@@ -274,10 +264,10 @@
 							<div class="paymentbox narrow-p">
 								<div class="billing" style="padding-bottom:3%;">
 									<h3>账单地址</h3>
-									<p><span style="width: 60px;display: inline-block;">地  址：</span>北京市朝阳区北辰西路69号峻峰华亭A座5层  邮编：100029</p>
-								<p><span style="width: 60px;display: inline-block;">收货人：</span>张三</p>
-								<p><span style="width: 60px;display: inline-block;">手机：</span>12345678910</p>
-								<p><span style="width: 60px;display: inline-block;">邮件：</span>info@jkchemical.com </p>
+									<p><span class="name">地&nbsp;&nbsp;&nbsp;&nbsp;址：</span>北京市朝阳区北辰西路69号峻峰华亭A座5层  邮编：100029</p>
+									<p><span class="name">收货人：</span>张三</p>
+									<p><span class="name">手&nbsp;&nbsp;&nbsp;&nbsp;机：</span>12345678910</p>
+									<p><span class="name">邮&nbsp;&nbsp;&nbsp;&nbsp;件：</span>info@jkchemical.com </p>
 
 									<div class="changebtn">
 									<button>修改</button></div>
@@ -314,43 +304,47 @@
 						<div id="order-summary" class="box">
 
 							<div class="review-box">
-								<div class="box-header" style="border-bottom: 1px solid lightgrey; margin-bottom:6%; display:block;">
-									<h4 class="mb-0" style="display:inline-block;">1 件产品</h4>
-									<a href="" style="float:right;margin-top:10px;margin-right: 12px;">编辑</a>
+								<div class="box-header" style="display:block;">
+									<h4 class="mb-0" style="display:inline-block;">订单</h4>
 								</div>
 
 
 								<div class="productinfo-review position:relative;">
 									<div class="table-responsive-2">
-										<table class="table">
+										<table class="table mb-lg-0">
 											<tbody>
 												<tr>
-													<td>小计</td>
+													<td>产品 (2件)</td>
 													<th>￥640.00</th>
 												</tr>
 												<tr>
 													<td>运费</td>
 													<th>￥55.00</th>
 												</tr>
+	
 												<tr>
-													<td style="padding-bottom:20px!important;">手续费</td>
+													<td>手续费</td>
 													<th>￥0.00</th>
 												</tr>
 												<tr class="total">
-													<td style="padding-top:20px!important;"><strong>总计 (RMB)</strong></td>
-													<th style="padding-top:20px!important;">￥695.00</th>
+													<td>活动优惠</td>
+													<th> -￥2.00</th>
 												</tr>
+											
+												
 												<tr class="code-applied">
 													<td>积分</td>
 													<th>640</th>
 												</tr>
-												<tr class="code-applied">
-													<td>已省</td>
-													<th>$-73.00</th>
-												</tr>
+											</tbody>
+										
+										</table>
+										<table class="table">
+											<tbody>
+			
 												<tr class="order-total">
 													<td><strong>订单金额</strong></td>
-													<th>￥622.00</th>
+													<th>￥693.00</th>
 												</tr>
 											</tbody>
 										</table>
@@ -462,51 +456,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script>
-    ￥(function(){
-    ￥(".dropdown").hover(            
-            function() {
-                ￥('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-                ￥(this).toggleClass('open');
-                ￥('b', this).toggleClass("caret caret-up");                
-            },
-            function() {
-                ￥('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-                ￥(this).toggleClass('open');
-                ￥('b', this).toggleClass("caret caret-up");                
-            });
-    });
-		￥('.minus-btn').on('click', function(e) {
-			e.preventDefault();
-			var ￥this = ￥(this);
-			var ￥input = ￥this.closest('div').find('input');
-			var value = parseInt(￥input.val());
-
-			if (value & amp; gt; 1) {
-				value = value - 1;
-			} else {
-				value = 0;
-			}
-
-			￥input.val(value);
-
-		});
-
-		￥('.plus-btn').on('click', function(e) {
-			e.preventDefault();
-			var ￥this = ￥(this);
-			var ￥input = ￥this.closest('div').find('input');
-			var value = parseInt(￥input.val());
-
-			if (value & amp; lt; 100) {
-				value = value + 1;
-			} else {
-				value = 100;
-			}
-
-			￥input.val(value);
-		});
-  </script>
+  <script src="vendor/jquery/jk.js"></script>
 </body>
 
 </html>
