@@ -24,7 +24,7 @@ class DbContent extends db_1.Db {
                     left join ${db}.tv_template b on a.template=b.id 
                     left join ${db}.tv_image c on a.image=c.id
                     left join ${db}.tv_hot d on a.id=d.post
-            WHERE cp.openweb = 1
+            WHERE   a.businessscope = 1 and cp.openweb = 1
             ORDER BY a.id desc
             LIMIT 10;
         `;
@@ -47,7 +47,7 @@ class DbContent extends db_1.Db {
                     )  AS e ON cp.post = e.post
                     JOIN ${db}.tv_subject AS f ON e.subject = f.id
                     left join ${db}.tv_image c on a.image=c.id
-            WHERE   cp.openweb = 1
+            WHERE   a.businessscope = 1 and cp.openweb = 1
             ORDER BY a.id desc
             LIMIT ?,?;
         `;
@@ -63,6 +63,7 @@ class DbContent extends db_1.Db {
                     )  AS e ON cp.post = e.post
                     LEFT JOIN ${db}.tv_subject AS f ON e.subject = f.id
                     LEFT JOIN ${db}.tv_image c on a.image=c.id
+            where   a.businessscope = 1
             ORDER BY ip.sort;
         `;
         this.sqlAllPosts = `
@@ -73,6 +74,7 @@ class DbContent extends db_1.Db {
                     left join ${db}.tv_template b on a.template=b.id 
                     left join ${db}.tv_image c on a.image=c.id
                     left join ${db}.tv_hot d on a.id=d.post
+            where   a.businessscope = 1
             ORDER BY a.id desc;
             -- LIMIT 10;
         `;
@@ -90,7 +92,7 @@ class DbContent extends db_1.Db {
                     join ${db}.tv_postpublish cp on p.id = cp.post
                     left join ${db}.tv_image c on p.image=c.id
                     left join ${db}.tv_hot d on p.id=d.post
-            WHERE  a.productcategory=? and cp.openweb = 1; 
+            WHERE   p.businessscope = 1 and a.productcategory=? and cp.openweb = 1; 
         `;
         this.sqlSubjectById = `
             SELECT a.id, a.name, a.parent  
