@@ -21,9 +21,11 @@ export abstract class Db {
     }
 
     protected readonly databaseName: string;
+    protected readonly istest: boolean;
     private readonly pool: Pool;
 
     constructor(dbName: string) {
+        this.istest = Db.isTest;
         let myConfig = Db.dbConfig[dbName];
         if (myConfig === undefined) {
             console.error('config.json db 没有定义 database ' + dbName);

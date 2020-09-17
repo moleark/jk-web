@@ -25,6 +25,7 @@ export class DbContent extends Db {
     constructor() {
         super('content');
         let db = this.databaseName;
+        let test = this.istest ? "$test" : "";
         this.sqlHomePostList = `
             SELECT  a.id, a.caption, a.discription as disp, c.path as image,
                     cp.update as date, d.hits, d.sumHits
@@ -253,22 +254,19 @@ export class DbContent extends Db {
             SELECT  a.description, a.caption, b.path, a.src
             FROM 	${db}.tv_slideshow AS a
                     INNER JOIN ${db}.tv_image AS b ON a.image = b.id 
-            WHERE 	a.types = 1 AND b.isvalid  =1
+            WHERE 	a.types = 1 AND b.isvalid = 1
             `;
 
         this.sqlPostProduct = `
             SELECT  p.id, p.NO, p.brand, p.origin, p.description, p.descriptionc, p.imageurl, pc.chemical
                     , pc.cas, pc.purity, pc.molecularfomula, pc.molecularweight, b.name as brandname
             FROM     ${db}.tv_postproduct AS a
-                    INNER JOIN product$test.tv_productx AS p on p.id = a.product
-                    INNER JOIN product$test.tv_brand AS b ON p.$unit = b.$unit and p.brand = b.id
-                    INNER JOIN product$test.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
+                    INNER JOIN product${test}.tv_productx AS p on p.id = a.product
+                    INNER JOIN product${test}.tv_brand AS b ON p.$unit = b.$unit and p.brand = b.id
+                    INNER JOIN product${test}.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
             WHERE 	a.post =?;
             `;
-
-
         this.sqlPostProductFormServise = `call ${db}.tv_SearchRecommendProduct(24,47,?)`;
-
     }
 
     async homePostList(): Promise<any> {
