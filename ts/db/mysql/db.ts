@@ -7,7 +7,7 @@ export abstract class Db {
     private static dbConfig: any;
 
     static init() {
-        Db.isTest = config.has('test') === true? config.get<boolean>('test') : false;
+        Db.isTest = config.has('test') === true ? config.get<boolean>('test') : false;
 
         if (config.has('connection') === false) {
             console.error('config.json 没有定义 connection');

@@ -259,15 +259,15 @@ export class DbContent extends Db {
         this.sqlPostProduct = `
             SELECT  p.id, p.NO, p.brand, p.origin, p.description, p.descriptionc, p.imageurl, pc.chemical
                     , pc.cas, pc.purity, pc.molecularfomula, pc.molecularweight, b.name as brandname
-            FROM    webbuilder.tv_postproduct AS a
-                    INNER JOIN product.tv_productx AS p on p.id = a.product
-                    INNER JOIN product.tv_brand AS b ON p.$unit = b.$unit and p.brand = b.id
-                    INNER JOIN product.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
+            FROM     ${db}.tv_postproduct AS a
+                    INNER JOIN product$test.tv_productx AS p on p.id = a.product
+                    INNER JOIN product$test.tv_brand AS b ON p.$unit = b.$unit and p.brand = b.id
+                    INNER JOIN product$test.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
             WHERE 	a.post =?;
             `;
 
 
-        this.sqlPostProductFormServise = `call webbuilder.tv_SearchRecommendProduct(24,47,?)`;
+        this.sqlPostProductFormServise = `call ${db}.tv_SearchRecommendProduct(24,47,?)`;
 
     }
 
