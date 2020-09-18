@@ -20,14 +20,10 @@ export async function post(req: Request, res: Response) {
 
             //获取优惠贴文
             discounts = await Dbs.content.getDiscountsPost(id);
-
             //相关贴文
             correlation = await Dbs.content.getCorrelationPost(id);
-
             //获取贴文的栏目
             postsubject = await Dbs.content.postSubject(id);
-
-
             //获取贴文产品
             postproduct = await Dbs.content.getPostProduct(id);
             if (postproduct.length === 0) {
@@ -47,6 +43,9 @@ export async function post(req: Request, res: Response) {
 
             //获取内容明细
             content = ret[0].content;
+
+            content = await formattedTable(content);
+
             if (content.charAt(0) === '#') {
                 content = hmToEjs(content);
             }
@@ -107,3 +106,64 @@ export async function post(req: Request, res: Response) {
     }
 };
 
+
+async function formattedTable(content: string) {
+    let currentNode: number;
+    for (currentNode = 0; currentNode < content.length; currentNode++) {
+
+        let start: number, datastart: number, dataend: number;
+        start = content.indexOf('#productlist', currentNode);
+        if (start === -1)
+            return content;
+        datastart = content.indexOf('\n', start);
+        dataend = content.indexOf('\n', datastart + 1);
+        dataend = (dataend === -1) ? content.length : dataend
+        let data = content.substring(datastart + 1, dataend);
+
+        let list = data.split('|');
+        let replacement: string = "";
+        let listdata = await Dbs.product.searchProductByOrigin(list);
+
+        replacement = formattedTableRow(listdata);
+        let regexp = content.substring(start, dataend)
+        content = content.replace(regexp, replacement);
+        currentNode = currentNode > dataend ? currentNode : dataend;
+    }
+    return content;
+}
+
+function formattedTableRow(productlist: any[]) {
+    if (productlist.length === 0)
+        return "";
+    const imagePath = 'https://www.jkchemical.com/static/Structure/';
+    const productPath = "https://shop.jkchemical.com/?type=product&product=";
+    let header: string = `<div class="row product-introduct">`
+    let footers: string = `</div>`
+    let content: string = ``
+
+    productlist.forEach(element => {
+        let { brandname, origin, description, descriptionc, cas } = element
+        content += `<div class="col-lg-3">
+                <div class="img-wrap">
+                    <a href="`+ productPath + `"><img src="` + imagePath + `"></a>
+                </div>
+            </div>
+            <div class="col-lg-9 each-product">
+                <h3>
+                    <a href="`+ productPath + `">
+                    `+ description + `
+                        <br>
+                        `+ descriptionc + `
+                    </a>
+                </h3>
+                <p>产品编号：  `+ origin + ` | CAS： ` + cas + `| 品牌： ` + brandname + ` </p>
+            </div>
+            <div class="col-lg-12 mt-lg-2">
+            </div>`;
+
+
+    });
+
+    return header + content + footers;
+
+}

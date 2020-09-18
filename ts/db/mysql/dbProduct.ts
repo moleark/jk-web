@@ -8,6 +8,7 @@ export class DbProduct extends Db {
     private sqlGetRootCategories: string;
     private sqlSearchProductByCategory: string;
     private sqlSearchProductByKey: string;
+    private sqlSearchProductByOrigin: string;
 
     constructor() {
         super('product');
@@ -56,6 +57,17 @@ export class DbProduct extends Db {
                     or p.descriptionc like ? or pc.cas like ?
                 )
         LIMIT  ?,?;
+        `;
+
+
+        this.sqlSearchProductByOrigin = `
+        SELECT  distinct p.id, p.NO, p.brand, p.origin, p.description, p.descriptionc, p.imageurl, pc.chemical
+                , pc.cas, pc.purity, pc.molecularfomula, pc.molecularweight, b.name as brandname
+        FROM     ${db}.tv_productproductcategorycache as pp
+                inner join ${db}.tv_productx as p on p.id = pp.product
+                left join ${db}.tv_brand as b on p.$unit = b.$unit and p.brand = b.id
+                LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
+        WHERE 	pp.$unit =? AND pp.salesRegion=? 
         `;
     }
 
@@ -107,6 +119,18 @@ export class DbProduct extends Db {
     async searchProductByKey(key: string, pageStart: number, pageSize: number) {
         key = '%' + key + '%';
         const ret = await this.tableFromSql(this.sqlSearchProductByKey, [24, 5, key, key, key, key, pageStart, pageSize]);
+        return ret;
+    }
+
+    /**
+     * 根据产品编号查询产品
+     * @param key 关键字
+     */
+    async searchProductByOrigin(key: string[]) {
+        let origin: string = "  AND p.origin in( ";
+        key.forEach(element => { origin += element + "," });
+        origin = origin.substring(0, origin.length - 1);
+        const ret = await this.tableFromSql(this.sqlSearchProductByOrigin + origin + ")", [24, 5]);
         return ret;
     }
 }

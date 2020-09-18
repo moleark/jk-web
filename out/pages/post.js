@@ -51,6 +51,7 @@ function post(req, res) {
                 let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
                 //获取内容明细
                 content = ret[0].content;
+                content = yield formattedTable(content);
                 if (content.charAt(0) === '#') {
                     content = tools_1.hmToEjs(content);
                 }
@@ -106,4 +107,57 @@ function post(req, res) {
 }
 exports.post = post;
 ;
+function formattedTable(content) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let currentNode;
+        for (currentNode = 0; currentNode < content.length; currentNode++) {
+            let start, datastart, dataend;
+            start = content.indexOf('#productlist', currentNode);
+            if (start === -1)
+                return content;
+            datastart = content.indexOf('\n', start);
+            dataend = content.indexOf('\n', datastart + 1);
+            dataend = (dataend === -1) ? content.length : dataend;
+            let data = content.substring(datastart + 1, dataend);
+            let list = data.split('|');
+            let replacement = "";
+            let listdata = yield db_1.Dbs.product.searchProductByOrigin(list);
+            replacement = formattedTableRow(listdata);
+            let regexp = content.substring(start, dataend);
+            content = content.replace(regexp, replacement);
+            currentNode = currentNode > dataend ? currentNode : dataend;
+        }
+        return content;
+    });
+}
+function formattedTableRow(productlist) {
+    if (productlist.length === 0)
+        return "";
+    const imagePath = 'https://www.jkchemical.com/static/Structure/';
+    const productPath = "https://shop.jkchemical.com/?type=product&product=";
+    let header = `<div class="row product-introduct">`;
+    let footers = `</div>`;
+    let content = ``;
+    productlist.forEach(element => {
+        let { brandname, origin, description, descriptionc, cas } = element;
+        content += `<div class="col-lg-3">
+                <div class="img-wrap">
+                    <a href="` + productPath + `"><img src="` + imagePath + `"></a>
+                </div>
+            </div>
+            <div class="col-lg-9 each-product">
+                <h3>
+                    <a href="` + productPath + `">
+                    ` + description + `
+                        <br>
+                        ` + descriptionc + `
+                    </a>
+                </h3>
+                <p>产品编号：  ` + origin + ` | CAS： ` + cas + `| 品牌： ` + brandname + ` </p>
+            </div>
+            <div class="col-lg-12 mt-lg-2">
+            </div>`;
+    });
+    return header + content + footers;
+}
 //# sourceMappingURL=post.js.map
