@@ -13,7 +13,7 @@ export class DbPointShop extends Db {
         `;
     }
 
-    async categoryPostExplain(id: any): Promise<any> {
+    async getPointProductDetail(id: any): Promise<any> {
         const ret = await this.tableFromSql(this.sqlGetPointProductDetail, [id]);
         return ret;
     }

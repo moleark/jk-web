@@ -21,7 +21,7 @@ class DbPointShop extends db_1.Db {
             WHERE pointproduct = ? 
         `;
     }
-    categoryPostExplain(id) {
+    getPointProductDetail(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetPointProductDetail, [id]);
             return ret;

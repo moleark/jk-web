@@ -10,14 +10,12 @@ export async function pointProductDetail(req: Request, res: Response) {
     let detailContent: string = "";
     let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
     let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
-    let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
-    let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
 
-    const pointProductDetail = await Dbs.pointshop.categoryPostExplain(currentId);
+    const pointProductDetail = await Dbs.pointshop.getPointProductDetail(currentId);
     if (pointProductDetail.length > 0) {
         let content = pointProductDetail[0].content;
         content = hmToEjs(content);
-        detailContent = jk + hmInclude + postHeader + content + postFooter;
+        detailContent = jk + hmInclude + content;
         let datas = buildData(req, {});
         detailContent = ejs.render(detailContent, datas);
         res.send(detailContent);
