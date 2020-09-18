@@ -127,10 +127,14 @@ export class DbProduct extends Db {
      * @param key 关键字
      */
     async searchProductByOrigin(key: string[]) {
-        let origin: string = "  AND p.origin in( ";
+        let start: string = "  AND p.origin in( ";
+        let origin: string = "";
         key.forEach(element => { origin += element + "," });
         origin = origin.substring(0, origin.length - 1);
-        const ret = await this.tableFromSql(this.sqlSearchProductByOrigin + origin + ")", [24, 5]);
+        origin = origin.replace(/\s*/g, "");
+        if (origin.length === 0)
+            return [];
+        const ret = await this.tableFromSql(this.sqlSearchProductByOrigin + start + origin + ")", [24, 5]);
         return ret;
     }
 }
