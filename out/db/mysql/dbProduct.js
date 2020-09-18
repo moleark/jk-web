@@ -132,10 +132,14 @@ class DbProduct extends db_1.Db {
      */
     searchProductByOrigin(key) {
         return __awaiter(this, void 0, void 0, function* () {
-            let origin = "  AND p.origin in( ";
+            let start = "  AND p.origin in( ";
+            let origin = "";
             key.forEach(element => { origin += element + ","; });
             origin = origin.substring(0, origin.length - 1);
-            const ret = yield this.tableFromSql(this.sqlSearchProductByOrigin + origin + ")", [24, 5]);
+            origin = origin.replace(/\s*/g, "");
+            if (origin.length === 0)
+                return [];
+            const ret = yield this.tableFromSql(this.sqlSearchProductByOrigin + start + origin + ")", [24, 5]);
             return ret;
         });
     }
