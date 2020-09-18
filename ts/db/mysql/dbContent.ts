@@ -130,9 +130,9 @@ export class DbContent extends Db {
             LIMIT ?,?;
         `;
         this.sqlSubject = `
-            SELECT 	*
+            SELECT 	a.*
             FROM    ${db}.tv_subject AS a
-            WHERE 	id in(6,7,8,25)
+                    join ${db}.tv_subjectdefault as b on a.id = b.subject and b.businessscope = 1
         `;
 
         this.sqlPostSubject = `
