@@ -19,13 +19,11 @@ export async function categoryInstruction(req: Request, res: Response) {
         const ret = await Dbs.content.postFromId(postID);
         if (ret.length > 0) {
             let content = ret[0].content;
-            if (content.charAt(0) === '#') {
-                content = hmToEjs(content);
-                explain = jk + hmInclude + postHeader + content + postFooter;
-                let datas = buildData(req, {});
-                explain = ejs.render(explain, datas);
-                res.send(explain);
-            }
+            content = hmToEjs(content);
+            explain = jk + hmInclude + postHeader + content + postFooter;
+            let datas = buildData(req, {});
+            explain = ejs.render(explain, datas);
+            res.send(explain);
         }
     } else {
         res.status(404).end();

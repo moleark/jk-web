@@ -16,15 +16,12 @@ export async function pointProductDetail(req: Request, res: Response) {
     const pointProductDetail = await Dbs.pointshop.categoryPostExplain(currentId);
     if (pointProductDetail.length > 0) {
         let content = pointProductDetail[0].content;
-        if (content.charAt(0) === '#') {
-            content = hmToEjs(content);
-            detailContent = jk + hmInclude + postHeader + content + postFooter;
-            let datas = buildData(req, {});
-            detailContent = ejs.render(detailContent, datas);
-            res.send(detailContent);
-        }
+        content = hmToEjs(content);
+        detailContent = jk + hmInclude + postHeader + content + postFooter;
+        let datas = buildData(req, {});
+        detailContent = ejs.render(detailContent, datas);
+        res.send(detailContent);
     } else {
         res.status(404).end();
     }
-    res.status(404).end();
 };
