@@ -28,13 +28,11 @@ function categoryInstruction(req, res) {
             const ret = yield db_1.Dbs.content.postFromId(postID);
             if (ret.length > 0) {
                 let content = ret[0].content;
-                if (content.charAt(0) === '#') {
-                    content = tools_1.hmToEjs(content);
-                    explain = jk + hmInclude + postHeader + content + postFooter;
-                    let datas = tools_1.buildData(req, {});
-                    explain = ejs.render(explain, datas);
-                    res.send(explain);
-                }
+                content = tools_1.hmToEjs(content);
+                explain = jk + hmInclude + postHeader + content + postFooter;
+                let datas = tools_1.buildData(req, {});
+                explain = ejs.render(explain, datas);
+                res.send(explain);
             }
         }
         else {

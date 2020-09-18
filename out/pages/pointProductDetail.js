@@ -25,18 +25,15 @@ function pointProductDetail(req, res) {
         const pointProductDetail = yield db_1.Dbs.pointshop.categoryPostExplain(currentId);
         if (pointProductDetail.length > 0) {
             let content = pointProductDetail[0].content;
-            if (content.charAt(0) === '#') {
-                content = tools_1.hmToEjs(content);
-                detailContent = jk + hmInclude + postHeader + content + postFooter;
-                let datas = tools_1.buildData(req, {});
-                detailContent = ejs.render(detailContent, datas);
-                res.send(detailContent);
-            }
+            content = tools_1.hmToEjs(content);
+            detailContent = jk + hmInclude + postHeader + content + postFooter;
+            let datas = tools_1.buildData(req, {});
+            detailContent = ejs.render(detailContent, datas);
+            res.send(detailContent);
         }
         else {
             res.status(404).end();
         }
-        res.status(404).end();
     });
 }
 exports.pointProductDetail = pointProductDetail;
