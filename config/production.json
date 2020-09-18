@@ -1,5 +1,6 @@
 {
     "shopJsPath": {
+        "shopmain": "http://shop.jkchemical.com/",
         "runtime": "/shop/static/js/runtime-main.186aa552.js",
         "module": "/shop/static/js/2.48d8527.chunk.js",
         "main": "/shop/static/js/main.8530d318.chunk.js"

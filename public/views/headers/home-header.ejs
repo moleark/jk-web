@@ -3,8 +3,8 @@
         e.preventDefault();
         let key = e.target.keyInput.value;
         if (key) {
-            location.href = '/shop?type=productlist&key=' + encodeURIComponent(key);
-            //location.href = 'search?type=search&key=' + encodeURIComponent(key);
+            // location.href = '/shop?type=productlist&key=' + encodeURIComponent(key);
+            location.href = '<%=shopJsPath.shopmain%>search/' + encodeURIComponent(key);
         }
     }
 </script>
@@ -37,7 +37,7 @@
     </div>
 
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark pad-tb20 di">
+    <nav class="navbar navbar-expand-lg navbar-dark pad-tb20">
         <div class="container">
             <a href="<%=$root%>" class="header-logo"><img src="<%=$root%>img/logo.svg" alt="" class="img-fluid"></a>
             <div class="justify-content-center search-wrap">
@@ -59,7 +59,7 @@
                     </div>
                 </form>
             </div>
-            <a href="#" class="display-mobile-block-login display-mobile">登录</a>
+            <a href="#" class="display-mobile-block-login d-block d-sm-none">登录</a>
             <a class="display-mobile-block-shoppingcart shopping-cart" href="#">
                 <img src="<%=$root%>img/commerce-and-shopping.svg" width="40px">
             </a>

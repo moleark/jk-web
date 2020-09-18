@@ -6,7 +6,6 @@ import * as ejs from 'ejs';
 export async function categoryInstruction(req: Request, res: Response) {
     let current = req.params.current;
     let currentId = Number(current);
-    // let category = await Dbs.product.getCategoryById(currentId);
 
     let explain: string = "", postID: string;
     let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
