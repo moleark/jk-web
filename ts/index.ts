@@ -9,6 +9,7 @@ import { homeRouter } from './pages';
 import { easyTime, csv } from './tools';
 import { Dbs } from './db';
 import { page } from './pages/page';
+import * as session from 'express-session';
 
 (async function () {
     Dbs.init();
@@ -35,6 +36,8 @@ import { page } from './pages/page';
         return value;
     });
 
+    app.use(session());
+
     app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         //let json = res.json;
         let s = req.socket;
@@ -60,7 +63,7 @@ import { page } from './pages/page';
     app.use('/jk-web', (express.static as any)(p, { maxAge: 36000 }));
     // 下面是结合cart运行需要的unit.json文件
     app.get(/unit.json$/, function (req, res) {
-        res.sendfile('./public/unit.json');
+        res.sendFile('./public/unit.json');
     });
 
     //设置模板视图的目录
