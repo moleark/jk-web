@@ -25,6 +25,8 @@ import { categoryInstruction } from './categoryinstruction';
 import { cart } from './cart';
 import { post_test } from './post_test';
 import { pointProductDetail } from './pointProductDetail';
+import { captcha } from './captcha';
+import { productPdfFile } from './productPdfFile';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -56,3 +58,7 @@ homeRouter.get('/post_test/:id', post_test);
 
 homeRouter.get('/partial/categoryinstruction/:current', categoryInstruction);
 homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail);
+
+homeRouter.get('/partial/captcha', captcha);
+homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile);
+
