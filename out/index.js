@@ -19,6 +19,7 @@ const pages_1 = require("./pages");
 const tools_1 = require("./tools");
 const db_1 = require("./db");
 const page_1 = require("./pages/page");
+const session = require("express-session");
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         db_1.Dbs.init();
@@ -42,6 +43,7 @@ const page_1 = require("./pages/page");
                 return undefined;
             return value;
         });
+        app.use(session());
         app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
             //let json = res.json;
             let s = req.socket;
@@ -66,7 +68,7 @@ const page_1 = require("./pages/page");
         app.use('/jk-web', express.static(p, { maxAge: 36000 }));
         // 下面是结合cart运行需要的unit.json文件
         app.get(/unit.json$/, function (req, res) {
-            res.sendfile('./public/unit.json');
+            res.sendFile('./public/unit.json');
         });
         //设置模板视图的目录
         app.set("views", "./public/views");
