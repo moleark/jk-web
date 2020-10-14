@@ -24,6 +24,7 @@
         "@types/mysql": "^2.15.5",
         "@types/node-fetch": "^2.1.4",
         "body-parser": "^1.19.0",
+        "captchapng": "0.0.1",
         "config": "^3.2.5",
         "cors": "^2.8.5",
         "dateformat": "^3.0.3",

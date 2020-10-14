@@ -9,6 +9,8 @@ export class DbProduct extends Db {
     private sqlSearchProductByCategory: string;
     private sqlSearchProductByKey: string;
     private sqlSearchProductByOrigin: string;
+    private sqlGetProductMSDSFile: string;
+    private sqlGetProductSPECFile: string;
 
     constructor() {
         super('product');
@@ -68,6 +70,18 @@ export class DbProduct extends Db {
                 left join ${db}.tv_brand as b on p.$unit = b.$unit and p.brand = b.id
                 LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
         WHERE 	pp.$unit =? AND pp.salesRegion=? 
+        `;
+
+        this.sqlGetProductMSDSFile = `
+            SELECT  pm.product, pm.language, pm.filename
+            FROM    ${db}.tv_productmsdsfile as pm
+            where   pm.$unit = 24 and pm.product = ? and pm.language = ?;
+        `;
+
+        this.sqlGetProductSPECFile = `
+            SELECT  ps.product, ps.filename
+            FROM    ${db}.tv_productspecfile as ps
+            where   ps.$unit = 24 and ps.product = ?;
         `;
     }
 
@@ -136,5 +150,18 @@ export class DbProduct extends Db {
             return [];
         const ret = await this.tableFromSql(this.sqlSearchProductByOrigin + start + origin + ")", [24, 5]);
         return ret;
+    }
+
+    /**
+     * 
+     * @param id
+     */
+    async getProductPdfFile(productId: any, langId: any): Promise<any> {
+        let sqlGetProductPdfFile = langId ? this.sqlGetProductMSDSFile : this.sqlGetProductSPECFile;
+        let param = langId ? [productId, langId] : [productId];
+        const ret = await this.tableFromSql(sqlGetProductPdfFile, param);
+        if (ret && ret.length > 0)
+            return ret[0];
+        return undefined;
     }
 }

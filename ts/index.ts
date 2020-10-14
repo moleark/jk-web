@@ -10,6 +10,7 @@ import { easyTime, csv } from './tools';
 import { Dbs } from './db';
 import { page } from './pages/page';
 import * as session from 'express-session';
+import { MemoryStore } from 'express-session';
 
 (async function () {
     Dbs.init();
@@ -36,7 +37,19 @@ import * as session from 'express-session';
         return value;
     });
 
-    app.use(session());
+    app.use(session({
+        secret: 'session-cat',//keyboard cat
+        name: 'session-cat',
+        resave: false,
+        saveUninitialized: false,
+        unset: 'destroy',
+        rolling: true,
+        store: new MemoryStore(),
+        cookie: {
+            maxAge: 60 * 1000 * 30,
+            secure: false,
+        }
+    }));
 
     app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         //let json = res.json;

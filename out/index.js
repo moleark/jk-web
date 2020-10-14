@@ -20,6 +20,7 @@ const tools_1 = require("./tools");
 const db_1 = require("./db");
 const page_1 = require("./pages/page");
 const session = require("express-session");
+const express_session_1 = require("express-session");
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         db_1.Dbs.init();
@@ -43,7 +44,19 @@ const session = require("express-session");
                 return undefined;
             return value;
         });
-        app.use(session());
+        app.use(session({
+            secret: 'session-cat',
+            name: 'session-cat',
+            resave: false,
+            saveUninitialized: false,
+            unset: 'destroy',
+            rolling: true,
+            store: new express_session_1.MemoryStore(),
+            cookie: {
+                maxAge: 60 * 1000 * 30,
+                secure: false,
+            }
+        }));
         app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
             //let json = res.json;
             let s = req.socket;
