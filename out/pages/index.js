@@ -27,6 +27,9 @@ const subjectpost_1 = require("./subjectpost");
 const categoryinstruction_1 = require("./categoryinstruction");
 const cart_1 = require("./cart");
 const post_test_1 = require("./post_test");
+const pointProductDetail_1 = require("./pointProductDetail");
+const captcha_1 = require("./captcha");
+const productPdfFile_1 = require("./productPdfFile");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -55,4 +58,7 @@ exports.homeRouter.get('/subjectpost/:current', subjectpost_1.subjectpost);
 exports.homeRouter.get('/cart', cart_1.cart);
 exports.homeRouter.get('/post_test/:id', post_test_1.post_test);
 exports.homeRouter.get('/partial/categoryinstruction/:current', categoryinstruction_1.categoryInstruction);
+exports.homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail_1.pointProductDetail);
+exports.homeRouter.get('/partial/captcha', captcha_1.captcha);
+exports.homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile_1.productPdfFile);
 //# sourceMappingURL=index.js.map

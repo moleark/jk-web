@@ -14,6 +14,7 @@ const mysql_1 = require("mysql");
 const config = require("config");
 class Db {
     constructor(dbName) {
+        this.istest = Db.isTest;
         let myConfig = Db.dbConfig[dbName];
         if (myConfig === undefined) {
             console.error('config.json db 没有定义 database ' + dbName);

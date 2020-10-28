@@ -7,7 +7,7 @@ export abstract class Db {
     private static dbConfig: any;
 
     static init() {
-        Db.isTest = config.has('test') === true? config.get<boolean>('test') : false;
+        Db.isTest = config.has('test') === true ? config.get<boolean>('test') : false;
 
         if (config.has('connection') === false) {
             console.error('config.json 没有定义 connection');
@@ -21,9 +21,11 @@ export abstract class Db {
     }
 
     protected readonly databaseName: string;
+    protected readonly istest: boolean;
     private readonly pool: Pool;
 
     constructor(dbName: string) {
+        this.istest = Db.isTest;
         let myConfig = Db.dbConfig[dbName];
         if (myConfig === undefined) {
             console.error('config.json db 没有定义 database ' + dbName);

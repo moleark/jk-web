@@ -8,6 +8,9 @@ export class DbProduct extends Db {
     private sqlGetRootCategories: string;
     private sqlSearchProductByCategory: string;
     private sqlSearchProductByKey: string;
+    private sqlSearchProductByOrigin: string;
+    private sqlGetProductMSDSFile: string;
+    private sqlGetProductSPECFile: string;
 
     constructor() {
         super('product');
@@ -56,6 +59,29 @@ export class DbProduct extends Db {
                     or p.descriptionc like ? or pc.cas like ?
                 )
         LIMIT  ?,?;
+        `;
+
+
+        this.sqlSearchProductByOrigin = `
+        SELECT  distinct p.id, p.NO, p.brand, p.origin, p.description, p.descriptionc, p.imageurl, pc.chemical
+                , pc.cas, pc.purity, pc.molecularfomula, pc.molecularweight, b.name as brandname
+        FROM     ${db}.tv_productproductcategorycache as pp
+                inner join ${db}.tv_productx as p on p.id = pp.product
+                left join ${db}.tv_brand as b on p.$unit = b.$unit and p.brand = b.id
+                LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
+        WHERE 	pp.$unit =? AND pp.salesRegion=? 
+        `;
+
+        this.sqlGetProductMSDSFile = `
+            SELECT  pm.product, pm.language, pm.filename
+            FROM    ${db}.tv_productmsdsfile as pm
+            where   pm.$unit = 24 and pm.product = ? and pm.language = ?;
+        `;
+
+        this.sqlGetProductSPECFile = `
+            SELECT  ps.product, ps.filename
+            FROM    ${db}.tv_productspecfile as ps
+            where   ps.$unit = 24 and ps.product = ?;
         `;
     }
 
@@ -108,5 +134,34 @@ export class DbProduct extends Db {
         key = '%' + key + '%';
         const ret = await this.tableFromSql(this.sqlSearchProductByKey, [24, 5, key, key, key, key, pageStart, pageSize]);
         return ret;
+    }
+
+    /**
+     * 根据产品编号查询产品
+     * @param key 关键字
+     */
+    async searchProductByOrigin(key: string[]) {
+        let start: string = "  AND p.origin in( ";
+        let origin: string = "";
+        key.forEach(element => { origin += element + "," });
+        origin = origin.substring(0, origin.length - 1);
+        origin = origin.replace(/\s*/g, "");
+        if (origin.length === 0)
+            return [];
+        const ret = await this.tableFromSql(this.sqlSearchProductByOrigin + start + origin + ")", [24, 5]);
+        return ret;
+    }
+
+    /**
+     * 
+     * @param id
+     */
+    async getProductPdfFile(productId: any, langId: any): Promise<any> {
+        let sqlGetProductPdfFile = langId ? this.sqlGetProductMSDSFile : this.sqlGetProductSPECFile;
+        let param = langId ? [productId, langId] : [productId];
+        const ret = await this.tableFromSql(sqlGetProductPdfFile, param);
+        if (ret && ret.length > 0)
+            return ret[0];
+        return undefined;
     }
 }
