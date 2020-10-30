@@ -411,7 +411,7 @@ fieldset {
 	padding: 20px 16px 20px 5px;
 	z-index: 1;
 	display: block;
-	width: 100%;/* border: none; */
+	width: 100%;
 }
 .group input:focus {
 	outline: 2px solid #AD2031;
@@ -481,7 +481,7 @@ button:focus {
 	display: inline-block;
 	padding: 10px 20px;
 	color: #fff!important;
-	background-color: #4a99b5;
+	background-color: #239ab7;
 }
 .read-more-btn-mint a:hover {
 	background-color: #AD2031;
@@ -491,8 +491,8 @@ button:focus {
 	border-radius: 4px;
 	display: inline-block;
 	padding: 10px 20px;
-	color: #4a99b5!important;
-	border: #4a99b5 1px solid;
+	color: #239ab7!important;
+	border: #239ab7 1px solid;
 }
 .read-more-btn-mint-outline a:hover {
 	background-color: #AD2031;
@@ -547,7 +547,7 @@ section {
 	background-color: #f8f9fa;
 }
 .mint, .mint a {
-	color: #41A6C0!important;
+	color: #239ab7!important;
 }
 .mint:hover, .mint a:hover {
 	color: #AD2031!important;
@@ -1932,7 +1932,7 @@ button {
 	color: #2cb865;
 }
 .btn-primary {
-	background-color: #4a99b5;
+	background-color: #239ab7;
 	padding: 10px 0!important;
 }
 .form-horizontal {
@@ -2471,6 +2471,50 @@ table.product-table th {
 #module a:not(.collapsed):after {
 	content: '- Show Less';
 }
+/*6.0 member*/
+	/*--------------------------*/
+.member-wrap{
+	padding-top:64px;
+}
+.member-wrap .group{
+	height: auto;
+    margin: 0 auto 20px auto;
+}
+.member-wrap .title{
+	font-size:24px;
+	font-weight:500;
+	margin-bottom: 16px;
+}
+.member-wrap .button{
+    text-align: center;
+    padding: 7px 20px;
+    display: block;
+    color: #fff;
+    font-size: 14px;
+}
+.member-wrap .button:hover{
+	color: #fff!important;
+}
+.member-wrap .y-hr{
+	height: 100%;
+    border: 1px solid #ccc;
+    width: 0;
+}
+.member-wrap a, .member-wrap .form-inline label{
+	font-size:14px;	
+}
+.member-wrap .form-inline .form-check-input{
+	margin-top: 5px;
+}
+.member-wrap .float-r{
+	float: right;
+}
+.member-wrap .padl-20{
+	padding-left: 20px;
+}
+.member-wrap .notes{
+	font-size:12px;
+}
 /*footer*/
 	/*--------------------------*/
 .footer {
@@ -2878,6 +2922,12 @@ ul.navbar-nav li {
 @media (max-width: 768px) {
 .modal-dialog-country{
 	max-width: 90%!important;
+}
+.member-wrap {
+    padding-top: 0;
+}
+.member-wrap .padl-20-mobile{
+	padding-left: 20px;
 }
 .display-desktop {
 	display: none;
