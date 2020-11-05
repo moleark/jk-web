@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productPdfFile = void 0;
-const db_1 = require("../db");
+exports.productMsdsVersions = exports.productMsdsFile = void 0;
 const config = require("config");
+const db_1 = require("../../db");
 const o = process.env.NODE_ENV === 'production'
     ? {
         196: "CN",
@@ -25,7 +25,7 @@ const o = process.env.NODE_ENV === 'production'
         32: "DE",
         55: "EN-US",
     };
-function productPdfFile(req, res, next) {
+function productMsdsFile(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let { productid, lang, captcha } = req.params;
         let productId = Number(productid);
@@ -53,6 +53,24 @@ function productPdfFile(req, res, next) {
         }
     });
 }
-exports.productPdfFile = productPdfFile;
+exports.productMsdsFile = productMsdsFile;
 ;
-//# sourceMappingURL=productPdfFile.js.map
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
+function productMsdsVersions(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let { origin } = req.params;
+        let versions = yield db_1.Dbs.productMSCU.getProductMsdsVersions(origin);
+        if (versions && versions.length > 0)
+            res.json(versions);
+        else
+            res.status(404).end();
+    });
+}
+exports.productMsdsVersions = productMsdsVersions;
+;
+//# sourceMappingURL=productMsds.js.map

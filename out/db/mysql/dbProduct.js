@@ -67,18 +67,7 @@ class DbProduct extends db_1.Db {
                 inner join ${db}.tv_productx as p on p.id = pp.product
                 left join ${db}.tv_brand as b on p.$unit = b.$unit and p.brand = b.id
                 LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
-        WHERE 	pp.$unit =? AND pp.salesRegion=? 
-        `;
-        this.sqlGetProductMSDSFile = `
-            SELECT  pm.product, pm.language, pm.filename
-            FROM    ${db}.tv_productmsdsfile as pm
-            where   pm.$unit = 24 and pm.product = ? and pm.language = ?;
-        `;
-        this.sqlGetProductSPECFile = `
-            SELECT  ps.product, ps.filename
-            FROM    ${db}.tv_productspecfile as ps
-            where   ps.$unit = 24 and ps.product = ?;
-        `;
+        WHERE 	pp.$unit =? AND pp.salesRegion=? `;
     }
     /**
      *
@@ -151,20 +140,6 @@ class DbProduct extends db_1.Db {
                 return [];
             const ret = yield this.tableFromSql(this.sqlSearchProductByOrigin + start + origin + ")", [24, 5]);
             return ret;
-        });
-    }
-    /**
-     *
-     * @param id
-     */
-    getProductPdfFile(productId, langId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let sqlGetProductPdfFile = langId ? this.sqlGetProductMSDSFile : this.sqlGetProductSPECFile;
-            let param = langId ? [productId, langId] : [productId];
-            const ret = yield this.tableFromSql(sqlGetProductPdfFile, param);
-            if (ret && ret.length > 0)
-                return ret[0];
-            return undefined;
         });
     }
 }

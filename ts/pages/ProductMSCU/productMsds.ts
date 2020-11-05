@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Dbs } from "../db";
 import * as config from 'config';
+import { Dbs } from "../../db";
 
 const o = process.env.NODE_ENV === 'production'
     ? {
@@ -16,7 +16,7 @@ const o = process.env.NODE_ENV === 'production'
         55: "EN-US",
     }
 
-export async function productPdfFile(req: Request, res: Response, next: any) {
+export async function productMsdsFile(req: Request, res: Response, next: any) {
 
     let { productid, lang, captcha } = req.params;
     let productId = Number(productid);
@@ -39,4 +39,21 @@ export async function productPdfFile(req: Request, res: Response, next: any) {
     } else {
         res.status(412).end();
     }
+};
+
+
+/**
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
+export async function productMsdsVersions(req: Request, res: Response, next: any) {
+
+    let { origin } = req.params;
+    let versions = await Dbs.productMSCU.getProductMsdsVersions(origin);
+    if (versions && versions.length > 0)
+        res.json(versions);
+    else
+        res.status(404).end();
 };

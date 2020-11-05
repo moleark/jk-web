@@ -1,0 +1,44 @@
+{
+    "port": 6061,
+    "name": "web",
+    "interval": 3000,
+    "database": "DB-TEST-1",
+    "test": true,
+    "connection-ligsh-test": {
+        "host": "",
+        "user": "",
+        "port": "",
+        "password": ""
+    },
+    "connection": {
+        "host": "",
+        "user": "",
+        "port": "",
+        "password": ""
+    },
+    "db": {
+        "content": {
+            "database": "webbuilder",
+            "connection": "connection-ligsh-test"
+        },
+        "product": {
+            "database": "product",
+            "connection": "connection-ligsh-test"
+        },
+        "productIndex": {
+            "database": "productindex",
+            "connection": "connection-ligsh-test"
+        },
+        "pointshop": {
+            "database": "pointshop",
+            "connection": "connection-ligsh-test"
+        },
+        "productMSCU": {
+            "database": "product",
+            "connection": "connection-ligsh-test"
+        }
+    },
+    "ex": "null",
+    "SALESREGION": 1,
+    "CHINESE": 196
+}
