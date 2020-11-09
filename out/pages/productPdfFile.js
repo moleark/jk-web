@@ -25,6 +25,7 @@ const o = process.env.NODE_ENV === 'production'
         32: "DE",
         55: "EN-US",
     };
+//delete
 function productPdfFile(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let { productid, lang, captcha } = req.params;
@@ -39,7 +40,7 @@ function productPdfFile(req, res, next) {
             if (productPdfFile && productPdfFile.filename) {
                 let fileName = productPdfFile.filename;
                 let fileAscr = langId !== undefined ? o[langId] : (fileName.includes('_EN') ? 'EN' : 'CN');
-                let filePath = `${config.get("MSCUPath")}/${langId !== undefined ? 'msds' : 'spec'}/${fileAscr}/${fileName}`;
+                let filePath = `${config.get("MSCUPath")}${langId !== undefined ? 'msds' : 'spec'}/${fileAscr}/${fileName}`;
                 if (process.env.NODE_ENV !== 'production')
                     filePath = config.get("MSCUPath") + fileName;
                 yield res.sendFile(filePath); //'100008_CN.PDF'

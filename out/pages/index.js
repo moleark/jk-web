@@ -31,6 +31,7 @@ const pointProductDetail_1 = require("./pointProductDetail");
 const captcha_1 = require("./captcha");
 const productPdfFile_1 = require("./productPdfFile");
 const productMsds_1 = require("./ProductMSCU/productMsds");
+const productSpec_1 = require("./ProductMSCU/productSpec");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -61,8 +62,10 @@ exports.homeRouter.get('/post_test/:id', post_test_1.post_test);
 exports.homeRouter.get('/partial/categoryinstruction/:current', categoryinstruction_1.categoryInstruction);
 exports.homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail_1.pointProductDetail);
 exports.homeRouter.get('/partial/captcha', captcha_1.captcha);
-exports.homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile_1.productPdfFile); // 保持兼容，暂时保留
-exports.homeRouter.get('/partial/productMsdsFile/:captcha/:lang/:productid', productPdfFile_1.productPdfFile);
 exports.homeRouter.get('/partial/productMsdsVersion/:origin', productMsds_1.productMsdsVersions);
-exports.homeRouter.get('/partial/productSpecFile/:captcha/:productid', productPdfFile_1.productPdfFile); // 保持兼容，暂时保留
+exports.homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', productMsds_1.productMsdsFileByOrigin);
+exports.homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', productMsds_1.productMsdsFile);
+exports.homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpec_1.productSpecFile);
+//delete
+exports.homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile_1.productPdfFile); // 保持兼容，暂时保留
 //# sourceMappingURL=index.js.map

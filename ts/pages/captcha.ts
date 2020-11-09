@@ -7,7 +7,7 @@ export async function captcha(req: Request, res: Response) {
     SessionCaptcha = req.session.captcha;
     // console.log(req.session);
 
-    let p = new captchapng(80, 30, mynum); // width,height,numeric captcha
+    let p = new captchapng(60, 22, mynum); // width,height,numeric captcha
     p.color(0, 0, 0, 0);  // First color: background (red, green, blue, alpha)
     p.color(80, 80, 80, 255); // Second color: paint (red, green, blue, alpha)
     let img = p.getBase64();

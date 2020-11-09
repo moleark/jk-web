@@ -27,7 +27,8 @@ import { post_test } from './post_test';
 import { pointProductDetail } from './pointProductDetail';
 import { captcha } from './captcha';
 import { productPdfFile } from './productPdfFile';
-import { productMsdsVersions } from './ProductMSCU/productMsds';
+import { productMsdsFile, productMsdsFileByOrigin, productMsdsVersions } from './ProductMSCU/productMsds';
+import { productSpecFile } from './ProductMSCU/productSpec';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -61,7 +62,11 @@ homeRouter.get('/partial/categoryinstruction/:current', categoryInstruction);
 homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail);
 
 homeRouter.get('/partial/captcha', captcha);
-homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile);  // 保持兼容，暂时保留
-homeRouter.get('/partial/productMsdsFile/:captcha/:lang/:productid', productPdfFile);
 homeRouter.get('/partial/productMsdsVersion/:origin', productMsdsVersions);
-homeRouter.get('/partial/productSpecFile/:captcha/:productid', productPdfFile);  // 保持兼容，暂时保留
+homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', productMsdsFileByOrigin);
+
+homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', productMsdsFile);
+homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpecFile);
+
+//delete
+homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile);  // 保持兼容，暂时保留

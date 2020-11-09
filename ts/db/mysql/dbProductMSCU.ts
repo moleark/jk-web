@@ -18,9 +18,9 @@ export class DbProductMSCU extends Db {
         `;
 
         this.sqlGetProductVersions = `
-            select  language
+            select  pm.language, pm.filename, p.origin
             FROM    ${db}.tv_productmsdsfile as pm
-                    inner join ${db}.tv_product p as p on p.$unit = pm.$unit and p.id = pm.product
+                    inner join ${db}.tv_productx as p on p.$unit = pm.$unit and p.id = pm.product
             where   p.$unit = 24 and p.origin = ? and p.brand in (18, 71);
         `;
 
@@ -52,7 +52,7 @@ export class DbProductMSCU extends Db {
     async getProductMsdsVersions(jkOrigin: string): Promise<any> {
         const ret = await this.tableFromSql(this.sqlGetProductVersions, [jkOrigin]);
         if (ret && ret.length > 0)
-            return ret[0];
+            return ret;
         return undefined;
     }
 

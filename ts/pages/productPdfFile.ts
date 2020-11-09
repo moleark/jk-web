@@ -16,6 +16,7 @@ const o = process.env.NODE_ENV === 'production'
         55: "EN-US",
     }
 
+//delete
 export async function productPdfFile(req: Request, res: Response, next: any) {
 
     let { productid, lang, captcha } = req.params;
@@ -30,7 +31,7 @@ export async function productPdfFile(req: Request, res: Response, next: any) {
         if (productPdfFile && productPdfFile.filename) {
             let fileName = productPdfFile.filename;
             let fileAscr = langId !== undefined ? o[langId] : (fileName.includes('_EN') ? 'EN' : 'CN');
-            let filePath = `${config.get("MSCUPath")}/${langId !== undefined ? 'msds' : 'spec'}/${fileAscr}/${fileName}`;
+            let filePath = `${config.get("MSCUPath")}${langId !== undefined ? 'msds' : 'spec'}/${fileAscr}/${fileName}`;
             if (process.env.NODE_ENV !== 'production') filePath = config.get("MSCUPath") + fileName;
             await res.sendFile(filePath);//'100008_CN.PDF'
         } else {

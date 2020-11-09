@@ -9,40 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productMsdsVersions = exports.productMsdsFile = void 0;
-const config = require("config");
+exports.productMsdsFileByOrigin = exports.productMsdsVersions = exports.productMsdsFile = void 0;
 const db_1 = require("../../db");
-const o = process.env.NODE_ENV === 'production'
-    ? {
-        196: "CN",
-        38: "EN",
-        35: "DE",
-        56: "EN-US",
-    }
-    : {
-        197: "CN",
-        52: "EN",
-        32: "DE",
-        55: "EN-US",
-    };
+const getFilePath_1 = require("./getFilePath");
 function productMsdsFile(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let { productid, lang, captcha } = req.params;
         let productId = Number(productid);
         let langId = lang === 'undefined' ? undefined : Number(lang);
         let sessionCaptcha = req.session.captcha;
-        // console.log(req.session);
         let isCorrectCaptcha = String(captcha) === String(sessionCaptcha) ? true : false;
-        // let isCorrectCaptcha = String(captcha) === String(req.session.captcha) ? true : false;
         if (isCorrectCaptcha) {
             const productPdfFile = yield db_1.Dbs.productMSCU.getProductMsds(productId, langId);
             if (productPdfFile && productPdfFile.filename) {
-                let fileName = productPdfFile.filename;
-                let fileAscr = langId !== undefined ? o[langId] : (fileName.includes('_EN') ? 'EN' : 'CN');
-                let filePath = `${config.get("MSCUPath")}/${langId !== undefined ? 'msds' : 'spec'}/${fileAscr}/${fileName}`;
-                if (process.env.NODE_ENV !== 'production')
-                    filePath = config.get("MSCUPath") + fileName;
-                yield res.sendFile(filePath); //'100008_CN.PDF'
+                let filePath = getFilePath_1.getFilePath('msds', productPdfFile.filename, langId);
+                yield res.sendFile(filePath);
             }
             else {
                 res.status(404).end();
@@ -65,12 +46,45 @@ function productMsdsVersions(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let { origin } = req.params;
         let versions = yield db_1.Dbs.productMSCU.getProductMsdsVersions(origin);
-        if (versions && versions.length > 0)
-            res.json(versions);
+        if (versions && versions.length > 0) {
+            let result = versions.map((v) => { return { language: getFilePath_1.o[v.language], origin: v.origin }; });
+            res.json(result);
+        }
         else
             res.status(404).end();
     });
 }
 exports.productMsdsVersions = productMsdsVersions;
+;
+/**
+ * 根据编号获取指定产品及语言的Msds文件
+ * @param req
+ * @param res
+ * @param next
+ */
+function productMsdsFileByOrigin(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let { origin, lang, captcha } = req.params;
+        let sessionCaptcha = req.session.captcha;
+        let isCorrectCaptcha = String(captcha) === String(sessionCaptcha) ? true : false;
+        if (isCorrectCaptcha) {
+            let versions = yield db_1.Dbs.productMSCU.getProductMsdsVersions(origin);
+            if (versions) {
+                let productMsdsFile = versions.find((v) => getFilePath_1.o[v.language] === lang);
+                if (productMsdsFile && productMsdsFile.filename) {
+                    let filePath = getFilePath_1.getFilePath('msds', productMsdsFile.filename, productMsdsFile.language);
+                    yield res.sendFile(filePath);
+                }
+                else
+                    res.status(404).end();
+            }
+            else
+                res.status(404).end();
+        }
+        else
+            res.status(400).end();
+    });
+}
+exports.productMsdsFileByOrigin = productMsdsFileByOrigin;
 ;
 //# sourceMappingURL=productMsds.js.map

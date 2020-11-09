@@ -1,20 +1,9 @@
 import { Request, Response } from "express";
 import * as config from 'config';
 import { Dbs } from "../../db";
+import * as fs from 'fs';
+import { getFilePath, o } from "./getFilePath";
 
-const o = process.env.NODE_ENV === 'production'
-    ? {
-        196: "CN",
-        38: "EN",
-        35: "DE",
-        56: "EN-US",
-    }
-    : {
-        197: "CN",
-        52: "EN",
-        32: "DE",
-        55: "EN-US",
-    }
 
 export async function productMsdsFile(req: Request, res: Response, next: any) {
 
@@ -22,17 +11,12 @@ export async function productMsdsFile(req: Request, res: Response, next: any) {
     let productId = Number(productid);
     let langId = lang === 'undefined' ? undefined : Number(lang);
     let sessionCaptcha = req.session.captcha;
-    // console.log(req.session);
     let isCorrectCaptcha = String(captcha) === String(sessionCaptcha) ? true : false;
-    // let isCorrectCaptcha = String(captcha) === String(req.session.captcha) ? true : false;
     if (isCorrectCaptcha) {
         const productPdfFile = await Dbs.productMSCU.getProductMsds(productId, langId);
         if (productPdfFile && productPdfFile.filename) {
-            let fileName = productPdfFile.filename;
-            let fileAscr = langId !== undefined ? o[langId] : (fileName.includes('_EN') ? 'EN' : 'CN');
-            let filePath = `${config.get("MSCUPath")}/${langId !== undefined ? 'msds' : 'spec'}/${fileAscr}/${fileName}`;
-            if (process.env.NODE_ENV !== 'production') filePath = config.get("MSCUPath") + fileName;
-            await res.sendFile(filePath);//'100008_CN.PDF'
+            let filePath = getFilePath('msds', productPdfFile.filename, langId);
+            await res.sendFile(filePath);
         } else {
             res.status(404).end();
         }
@@ -52,8 +36,36 @@ export async function productMsdsVersions(req: Request, res: Response, next: any
 
     let { origin } = req.params;
     let versions = await Dbs.productMSCU.getProductMsdsVersions(origin);
-    if (versions && versions.length > 0)
-        res.json(versions);
-    else
-        res.status(404).end();
+    if (versions && versions.length > 0) {
+        let result = versions.map((v: any) => { return { language: o[v.language], origin: v.origin } });
+        res.json(result);
+    }
+    else res.status(404).end();
 };
+
+/**
+ * 根据编号获取指定产品及语言的Msds文件
+ * @param req
+ * @param res
+ * @param next
+ */
+export async function productMsdsFileByOrigin(req: Request, res: Response, next: any) {
+
+    let { origin, lang, captcha } = req.params;
+    let sessionCaptcha = req.session.captcha;
+    let isCorrectCaptcha = String(captcha) === String(sessionCaptcha) ? true : false;
+    if (isCorrectCaptcha) {
+        let versions = await Dbs.productMSCU.getProductMsdsVersions(origin);
+        if (versions) {
+            let productMsdsFile = versions.find((v: any) => o[v.language] === lang);
+            if (productMsdsFile && productMsdsFile.filename) {
+                let filePath = getFilePath('msds', productMsdsFile.filename, productMsdsFile.language);
+                await res.sendFile(filePath);
+            } else
+                res.status(404).end();
+        } else
+            res.status(404).end();
+    } else
+        res.status(400).end();
+};
+
