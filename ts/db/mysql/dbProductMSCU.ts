@@ -1,4 +1,5 @@
 import { Db } from './db';
+import * as config from 'config';
 
 export class DbProductMSCU extends Db {
 
@@ -6,6 +7,7 @@ export class DbProductMSCU extends Db {
     private sqlGetProductVersions: string;
 
     private sqlGetProductSpecFile: string;
+    private selfBrands: number[];
 
     constructor() {
         super('product');
@@ -17,11 +19,12 @@ export class DbProductMSCU extends Db {
             where   pm.$unit = 24 and pm.product = ? and pm.language = ?;
         `;
 
+        this.selfBrands = config.get<number[]>("selfBrands");
         this.sqlGetProductVersions = `
             select  pm.language, pm.filename, p.origin
             FROM    ${db}.tv_productmsdsfile as pm
                     inner join ${db}.tv_productx as p on p.$unit = pm.$unit and p.id = pm.product
-            where   p.$unit = 24 and p.origin = ? and p.brand in (18, 71);
+            where   p.$unit = 24 and p.origin = ? and p.brand in (${this.selfBrands});
         `;
 
         this.sqlGetProductSpecFile = `
