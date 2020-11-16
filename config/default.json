@@ -40,5 +40,9 @@
     },
     "ex": "null",
     "SALESREGION": 1,
-    "CHINESE": 196
+    "CHINESE": 196,
+    "shopJsPath": {
+
+    },
+    "selfBrands": [2, 8]
 }

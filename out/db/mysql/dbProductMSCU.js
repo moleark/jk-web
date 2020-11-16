@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DbProductMSCU = void 0;
 const db_1 = require("./db");
+const config = require("config");
 class DbProductMSCU extends db_1.Db {
     constructor() {
         super('product');
@@ -20,11 +21,12 @@ class DbProductMSCU extends db_1.Db {
             FROM    ${db}.tv_productmsdsfile as pm
             where   pm.$unit = 24 and pm.product = ? and pm.language = ?;
         `;
+        this.selfBrands = config.get("selfBrands");
         this.sqlGetProductVersions = `
             select  pm.language, pm.filename, p.origin
             FROM    ${db}.tv_productmsdsfile as pm
                     inner join ${db}.tv_productx as p on p.$unit = pm.$unit and p.id = pm.product
-            where   p.$unit = 24 and p.origin = ? and p.brand in (18, 71);
+            where   p.$unit = 24 and p.origin = ? and p.brand in (${this.selfBrands});
         `;
         this.sqlGetProductSpecFile = `
             SELECT  ps.product, ps.filename
