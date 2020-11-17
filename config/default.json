@@ -45,5 +45,11 @@
 
     },
     "selfBrands": [2, 8],
-    "MSCUPath": "D://zwgKing//"
+    "MSCUPath": "D://zwgKing//",
+    "FILELANGVER":{
+        "197": "CN",
+        "52": "EN",
+        "32": "DE",
+        "55": "EN-US"
+    }
 }
