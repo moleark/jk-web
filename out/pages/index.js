@@ -64,6 +64,7 @@ exports.homeRouter.get('/partial/pointproductdetail/:current', pointProductDetai
 exports.homeRouter.get('/partial/captcha', captcha_1.captcha);
 exports.homeRouter.get('/partial/productMsdsVersion/:origin', productMsds_1.productMsdsVersions);
 exports.homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', productMsds_1.productMsdsFileByOrigin);
+exports.homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', productSpec_1.productSpecFileByOrigin);
 exports.homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', productMsds_1.productMsdsFile);
 exports.homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpec_1.productSpecFile);
 //delete

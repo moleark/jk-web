@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productSpecFile = void 0;
+exports.productSpecFileByOrigin = exports.productSpecFile = void 0;
 const db_1 = require("../../db");
 const getFilePath_1 = require("./getFilePath");
 function productSpecFile(req, res, next) {
@@ -32,5 +32,31 @@ function productSpecFile(req, res, next) {
     });
 }
 exports.productSpecFile = productSpecFile;
+;
+/**
+ * 根据编号获取指定产品及语言的Spec文件
+ * @param req
+ * @param res
+ * @param next
+ */
+function productSpecFileByOrigin(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let { origin, captcha } = req.params;
+        let sessionCaptcha = req.session.captcha;
+        let isCorrectCaptcha = String(captcha) === String(sessionCaptcha) ? true : false;
+        if (isCorrectCaptcha) {
+            const productPdfFile = yield db_1.Dbs.productMSCU.getProductSpecByOrigin(origin);
+            if (productPdfFile && productPdfFile.filename) {
+                let filePath = getFilePath_1.getFilePath('spec', productPdfFile.filename);
+                yield res.sendFile(filePath);
+            }
+            else
+                res.status(404).end();
+        }
+        else
+            res.status(400).end();
+    });
+}
+exports.productSpecFileByOrigin = productSpecFileByOrigin;
 ;
 //# sourceMappingURL=productSpec.js.map

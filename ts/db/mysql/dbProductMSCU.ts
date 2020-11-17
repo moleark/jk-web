@@ -7,6 +7,7 @@ export class DbProductMSCU extends Db {
     private sqlGetProductVersions: string;
 
     private sqlGetProductSpecFile: string;
+    private sqlGetProductSpecFileByOrigin: string;
     private selfBrands: number[];
 
     constructor() {
@@ -31,6 +32,13 @@ export class DbProductMSCU extends Db {
             SELECT  ps.product, ps.filename
             FROM    ${db}.tv_productspecfile as ps
             where   ps.$unit = 24 and ps.product = ?;
+        `;
+
+        this.sqlGetProductSpecFileByOrigin = `
+            select  pm.filename, p.origin
+            FROM    ${db}.tv_productspecfile as pm
+                    inner join ${db}.tv_productx as p on p.$unit = pm.$unit and p.id = pm.product
+            where   p.$unit = 24 and p.origin = ? and p.brand in (${this.selfBrands});
         `;
     }
 
@@ -66,6 +74,17 @@ export class DbProductMSCU extends Db {
      */
     async getProductSpec(productId: any): Promise<any> {
         const ret = await this.tableFromSql(this.sqlGetProductSpecFile, productId);
+        if (ret && ret.length > 0)
+            return ret[0];
+        return undefined;
+    }
+
+    /**
+     * 根据编号获取指定产品的Spec文件 
+     * @param jkOrigin
+     */
+    async getProductSpecByOrigin(jkOrigin: string): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlGetProductSpecFileByOrigin, [jkOrigin]);
         if (ret && ret.length > 0)
             return ret[0];
         return undefined;

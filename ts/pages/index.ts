@@ -28,7 +28,7 @@ import { pointProductDetail } from './pointProductDetail';
 import { captcha } from './captcha';
 import { productPdfFile } from './productPdfFile';
 import { productMsdsFile, productMsdsFileByOrigin, productMsdsVersions } from './ProductMSCU/productMsds';
-import { productSpecFile } from './ProductMSCU/productSpec';
+import { productSpecFile, productSpecFileByOrigin } from './ProductMSCU/productSpec';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -64,6 +64,8 @@ homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail);
 homeRouter.get('/partial/captcha', captcha);
 homeRouter.get('/partial/productMsdsVersion/:origin', productMsdsVersions);
 homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', productMsdsFileByOrigin);
+homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', productSpecFileByOrigin);
+
 
 homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', productMsdsFile);
 homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpecFile);
