@@ -7,7 +7,7 @@ function getFilePath(type, fileName, lang) {
     let fileAscr = o[lang] ? o[lang] : (fileName.includes('_EN') ? 'EN' : 'CN');
     let MSCUPath = config.get("MSCUPath");
     if (type === 'spec')
-        return `${MSCUPath}${type}/${fileName}`;
+        return `${MSCUPath}/${fileName}`;
     return `${MSCUPath}${type}/${fileAscr}/${fileName}`;
     /* if (process.env.NODE_ENV === 'production')
         return `${MSCUPath}${type}/${fileAscr}/${fileName}`;
