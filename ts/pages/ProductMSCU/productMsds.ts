@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import * as config from 'config';
 import { Dbs } from "../../db";
 import * as fs from 'fs';
-import { getFilePath, o } from "./getFilePath";
+import { getFilePath } from "./getFilePath";
 
 
 export async function productMsdsFile(req: Request, res: Response, next: any) {
@@ -37,6 +37,7 @@ export async function productMsdsVersions(req: Request, res: Response, next: any
     let { origin } = req.params;
     let versions = await Dbs.productMSCU.getProductMsdsVersions(origin);
     if (versions && versions.length > 0) {
+        let o = config.get('FILELANGVER');
         let result = versions.map((v: any) => { return { language: o[v.language], origin: v.origin } });
         res.json(result);
     }
@@ -57,6 +58,7 @@ export async function productMsdsFileByOrigin(req: Request, res: Response, next:
     if (isCorrectCaptcha) {
         let versions = await Dbs.productMSCU.getProductMsdsVersions(origin);
         if (versions) {
+            let o = config.get('FILELANGVER');
             let productMsdsFile = versions.find((v: any) => o[v.language] === lang);
             if (productMsdsFile && productMsdsFile.filename) {
                 let filePath = getFilePath('msds', productMsdsFile.filename, productMsdsFile.language);

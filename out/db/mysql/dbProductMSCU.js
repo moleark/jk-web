@@ -33,6 +33,12 @@ class DbProductMSCU extends db_1.Db {
             FROM    ${db}.tv_productspecfile as ps
             where   ps.$unit = 24 and ps.product = ?;
         `;
+        this.sqlGetProductSpecFileByOrigin = `
+            select  pm.filename, p.origin
+            FROM    ${db}.tv_productspecfile as pm
+                    inner join ${db}.tv_productx as p on p.$unit = pm.$unit and p.id = pm.product
+            where   p.$unit = 24 and p.origin = ? and p.brand in (${this.selfBrands});
+        `;
     }
     /**
      * 获取产品指定语言版本的MSDS文件
@@ -67,6 +73,18 @@ class DbProductMSCU extends db_1.Db {
     getProductSpec(productId) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetProductSpecFile, productId);
+            if (ret && ret.length > 0)
+                return ret[0];
+            return undefined;
+        });
+    }
+    /**
+     * 根据编号获取指定产品的Spec文件
+     * @param jkOrigin
+     */
+    getProductSpecByOrigin(jkOrigin) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlGetProductSpecFileByOrigin, [jkOrigin]);
             if (ret && ret.length > 0)
                 return ret[0];
             return undefined;

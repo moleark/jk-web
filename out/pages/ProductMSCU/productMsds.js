@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.productMsdsFileByOrigin = exports.productMsdsVersions = exports.productMsdsFile = void 0;
+const config = require("config");
 const db_1 = require("../../db");
 const getFilePath_1 = require("./getFilePath");
 function productMsdsFile(req, res, next) {
@@ -47,7 +48,8 @@ function productMsdsVersions(req, res, next) {
         let { origin } = req.params;
         let versions = yield db_1.Dbs.productMSCU.getProductMsdsVersions(origin);
         if (versions && versions.length > 0) {
-            let result = versions.map((v) => { return { language: getFilePath_1.o[v.language], origin: v.origin }; });
+            let o = config.get('FILELANGVER');
+            let result = versions.map((v) => { return { language: o[v.language], origin: v.origin }; });
             res.json(result);
         }
         else
@@ -70,7 +72,8 @@ function productMsdsFileByOrigin(req, res, next) {
         if (isCorrectCaptcha) {
             let versions = yield db_1.Dbs.productMSCU.getProductMsdsVersions(origin);
             if (versions) {
-                let productMsdsFile = versions.find((v) => getFilePath_1.o[v.language] === lang);
+                let o = config.get('FILELANGVER');
+                let productMsdsFile = versions.find((v) => o[v.language] === lang);
                 if (productMsdsFile && productMsdsFile.filename) {
                     let filePath = getFilePath_1.getFilePath('msds', productMsdsFile.filename, productMsdsFile.language);
                     yield res.sendFile(filePath);
