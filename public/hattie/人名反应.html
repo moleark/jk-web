@@ -133,34 +133,47 @@
   <!--Only For Desktop End-->
   
   <!-- Page Content -->
-  <div class="name-reation-top">
-    <div class="breadcrumbs-wrap">
-      <div class="container">
-        <div class="breadcrumbs white">
-          <a href="#">首页</a>
-          <a href="#">资讯中心 </a>
-          <span>绿色化学</span>
-        </div>
+  <div class="breadcrumbs-wrap">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="#">首页</a>
+        <a href="#">资讯中心 </a>
+        <span>绿色化学</span>
       </div>
     </div>
-    <div class="container">
-      <h5 class="white">83 Name Reactions for the Synthetic Chemist’s Toolbox:</h5>
-      <p class="white">Honoring the discoverers of groundbreaking chemical reactions, over 500 name reactions (since 1822) have been reported, ever expanding the toolbox of synthetic chemists. As name reactions are closely associated with their substrates, bond formations, reaction conditions and mechanistic details, they are used as a shorthand to convey complex information about chemical transformations. J&K Scientific introduces 83 common name reactions, organized by functional group formation, to help readers easily learn and locate important information related to each reaction.</p>  
-    </div>
+  </div>  
+  <div class="container">
+    <h5 class="red mb-lg-1">Name Reactions for the Synthetic Chemist’s Toolbox:</h5>
+    <img src="img/namerecation.jpg" class="w-100">
+    <p class="mt-lg-1">Honoring the discoverers of groundbreaking chemical reactions, over 500 name reactions (since 1822) have been reported, ever expanding the toolbox of synthetic chemists. As name reactions are closely associated with their substrates, bond formations, reaction conditions and mechanistic details, they are used as a shorthand to convey complex information about chemical transformations. J&K Scientific introduces 83 common name reactions, organized by functional group formation, to help readers easily learn and locate important information related to each reaction.</p>  
+    <h5>Featured reactions: </h5>
+    <ul>
+      <li> Amide bond formation (Beckmann Rearrangement) </li>
+      <li> SnAr (Sandmeyer Reaction) </li>
+      <li> Boc protect/deprotect</li>
+      <li> Ester hydrolysis</li>
+      <li> Suzuki Coupling </li>
+      <li> Electrophile reaction with amine (Buchwald-Hartwig Amination)</li>
+      <li> Heterocycle synthesis (Bartoli Indole Synthesis) </li>
+      <li> Reductive amination (Eschweiler-Clarke Reaction)</li>
+      <li> Debenzylation </li>
+      <li> Phenol alkylation (Friedel-Crafts Alkylation)</li>
+    </ul>
+
   </div>
   <div class="container name-reation">
    <div class=" name-reation-bg-left"></div>
    <div class=" name-reation-bg-right"></div>
-    <div class="accordion mt-lg-50 mb-lg-3" id="accordionExample">
+    <div class="panel-group accordion mt-lg-1 mb-lg-1" id="accordionExample" role="tablist" aria-multiselectable="true">
       <div class="row">
         <div class="col-lg-6">
-          
+        
             <div class="card">
-                <div class="card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true">     
-                    <span class="title">Alcohol Formation:</span>
+                <div class="card-header" role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">     
+                    <span >Alcohol Formation:</span>
                     <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
                 </div>
-                <div id="collapseOne" class="collapse" data-parent="#accordionExample">
+                <div id="collapseOne" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingOne">
                     <div class="card-body">
                         <ul>
                           <li><a href="https://web.jkchemical.com/post/332" target="_blank">Baylis-Hillman Reaction<span class="red">(3 ͦ )</span></a></li>
@@ -174,11 +187,11 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">     
-                    <span class="title">Aldehyde and Ketone Formation:</span>
-                    <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
-                </div>
-                <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
+              <div class="card-header" role="button" data-toggle="collapse" href="#collapseTwo" data-target="#collapseTwo">        
+                  <span class="title">Alcohol Formation:</span>
+                  <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
+              </div>
+                <div id="collapseTwo" class="collapse show" >
                     <div class="card-body">
                       <ul>
                         <li><a href="https://web.jkchemical.com/post/340" target="_blank">Claisen Rearrangement<span class="red">(γ,δ-unsaturated carbonyl)</span></a></li>
@@ -199,11 +212,11 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false">
+                <div class="card-header" role="button" data-toggle="collapse" href="#collapseThree" data-target="#collapseThree">
                     <span class="title">Amine Formation</span>
                     <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
                 </div>
-                <div id="collapseThree" class="collapse" data-parent="#accordionExample">
+                <div id="collapseThree" class="collapse show">
                     <div class="card-body">
                       <ul>
                         <li><a href="https://web.jkchemical.com/post/614" target="_blank">Aldehyde Reductive Amination<span class="red">(1 ͦ, 2 ͦ, 3 ͦ )</span></a></li>
@@ -220,11 +233,11 @@
                 </div>
             </div>
             <div class="card">
-              <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false">
+              <div class="card-header" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true">
                   <span class="title">α-Amino Acid Formation</span>
                   <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
               </div>
-              <div id="collapseFour" class="collapse" data-parent="#accordionExample">
+              <div id="collapseFour" class="collapse show">
                   <div class="card-body">
                     <ul>
                       <li><a href="https://web.jkchemical.com/post/513" target="_blank">Strecker Amino Acid Synthesis</a></li>
@@ -233,11 +246,11 @@
               </div>
           </div>
           <div class="card">
-            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false">
+            <div class="card-header" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true">
                 <span class="title">Carboxylic Acid Formation</span>
                 <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
             </div>
-            <div id="collapseFive" class="collapse" data-parent="#accordionExample">
+            <div id="collapseFive" class="collapse show">
                 <div class="card-body">
                   <ul>
                     <li><a href="https://web.jkchemical.com/post/331" target="_blank">Baeyer-Villiger Oxidation<span class="red">(Hydroxy Acid)</span></a></li>
@@ -254,11 +267,11 @@
             </div>
         </div>
         <div class="card">
-          <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false">
+          <div class="card-header" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true">
               <span class="title">Ester Formation</span>
               <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
           </div>
-          <div id="collapseSix" class="collapse" data-parent="#accordionExample">
+          <div id="collapseSix" class="collapse show">
               <div class="card-body">
                 <ul>
                   <li><a href="https://web.jkchemical.com/post/331" target="_blank">Baeyer-Villiger Oxidation</a></li>
@@ -274,11 +287,11 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false">
+          <div class="card-header" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true">
               <span class="title">Ether Formation</span>
               <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
           </div>
-          <div id="collapseSeven" class="collapse" data-parent="#accordionExample">
+          <div id="collapseSeven" class="collapse show">
               <div class="card-body">
                 <ul>
                   <li><a href="https://web.jkchemical.com/post/337" target="_blank">Buchwald-Hartwig Cross Coupling<span class="red">(Aryl Ether)</span></a></li>
@@ -289,11 +302,11 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false">
+          <div class="card-header" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true">
               <span class="title">Imine Formation</span>
               <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
           </div>
-          <div id="collapseEight" class="collapse" data-parent="#accordionExample">
+          <div id="collapseEight" class="collapse show">
               <div class="card-body">
                 <ul>
                   <li><a href="https://web.jkchemical.com/post/502" target="_blank">Schmidt Reaction</a></li>
@@ -302,11 +315,11 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false">
+          <div class="card-header" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true">
               <span class="title">Miscellaneous</span>
               <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
           </div>
-          <div id="collapseNine" class="collapse" data-parent="#accordionExample">
+          <div id="collapseNine" class="collapse show">
               <div class="card-body">
                 <ul>
                   <li><a href="https://web.jkchemical.com/post/357" target="_blank">Cope Rearrangement<span class="red">(1,5-Diene Isomerization)</span></a></li>
@@ -322,11 +335,11 @@
         </div>
       <div class="col-lg-6">
           <div class="card">
-            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false">
+            <div class="card-header" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true">
                 <span class="title">Nitrile Formation</span>
                 <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
             </div>
-            <div id="collapseTen" class="collapse" data-parent="#accordionExample">
+            <div id="collapseTen" class="collapse show">
                 <div class="card-body">
                   <ul>
                     <li><a href="https://web.jkchemical.com/post/502" target="_blank">Schmidt Reaction</a></li>
@@ -335,11 +348,11 @@
             </div>
           </div>
           <div class="card">
-              <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false">     
+              <div class="card-header" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="true">     
                   <span class="title">Alkane Formation</span>
                   <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
               </div>
-              <div id="collapseEleven" class="collapse" data-parent="#accordionExample">
+              <div id="collapseEleven" class="collapse show">
                   <div class="card-body">
                     <ul>
                       <li><a href="https://web.jkchemical.com/post/325" target="_blank">Clemmensen Reduction</a></li>
@@ -350,11 +363,11 @@
               </div>
           </div>
           <div class="card">
-            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false">     
+            <div class="card-header" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="true">     
                 <span class="title">Amide Formation</span>
                 <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
             </div>
-            <div id="collapseTwelve" class="collapse" data-parent="#accordionExample">
+            <div id="collapseTwelve" class="collapse show">
                 <div class="card-body">
                   <ul>
                     <li><a href="https://web.jkchemical.com/post/334" target="_blank">Beckmann Rearrangement</a></li>
@@ -369,11 +382,11 @@
             </div>
           </div>
           <div class="card">
-            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false">     
+            <div class="card-header" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="true">     
                 <span class="title">C-C Bond Formation</span>
                 <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
             </div>
-            <div id="collapseThirteen" class="collapse" data-parent="#accordionExample">
+            <div id="collapseThirteen" class="collapse show">
                 <div class="card-body">
                   <ul>
                     <li><a href="https://web.jkchemical.com/post/332" target="_blank">Baylis-Hillman Reaction</a></li>
@@ -391,11 +404,11 @@
             </div>
           </div>
           <div class="card">
-            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false">     
+            <div class="card-header" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="true">     
                 <span class="title">Cyclic Compound Formation</span>
                 <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
             </div>
-            <div id="collapseFourteen" class="collapse" data-parent="#accordionExample">
+            <div id="collapseFourteen" class="collapse show">
                 <div class="card-body">
                   <ul>
                     <li><a href="https://web.jkchemical.com/post/332" target="_blank">Baeyer-Villiger Oxidation <span class="red">(Lactone)</span></a></li>
@@ -421,11 +434,11 @@
             
           </div>
           <div class="card">
-            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false">     
+            <div class="card-header" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="true">     
                 <span class="title">Olefin (C=C) Formation</span>
                 <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
             </div>
-            <div id="collapseFifteen" class="collapse" data-parent="#accordionExample">
+            <div id="collapseFifteen" class="collapse show">
                 <div class="card-body">
                   <ul>
                     <li><a href="https://web.jkchemical.com/post/589" target="_blank">Wittig Reaction</a></li>
@@ -437,11 +450,11 @@
             
           </div>
           <div class="card">
-            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false">     
+            <div class="card-header" data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="true">     
                 <span class="title">Protection/Deprotection</span>
                 <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
             </div>
-            <div id="collapseSixteen" class="collapse" data-parent="#accordionExample">
+            <div id="collapseSixteen" class="collapse show">
                 <div class="card-body">
                   <ul>
                     <li><a href="https://web.jkchemical.com/post/602" target="_blank">Benzyl Group<span class="red">(Alcohol)</span></a></li>
@@ -454,11 +467,11 @@
             
           </div>
           <div class="card">
-            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseseventeen" aria-expanded="false">     
+            <div class="card-header" data-toggle="collapse" data-target="#collapseseventeen" aria-expanded="true">     
                 <span class="title">Thioether Formation</span>
                 <span class="accicon"><i class="fas fa-angle-down rotate-icon"></i></span>
             </div>
-            <div id="collapseseventeen" class="collapse" data-parent="#accordionExample">
+            <div id="collapseseventeen" class="collapse show">
                 <div class="card-body">
                   <ul>
                     <li><a href="https://web.jkchemical.com/post/463" target="_blank">Mitsunobu Reaction</a></li>

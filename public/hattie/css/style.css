@@ -2614,17 +2614,8 @@ table.product-table th {
     background-repeat: no-repeat;
     left: -50px;
 }
-.name-reation-top{
-	padding-bottom: 30px;
-	background-color: #00B2D0;
-	background-image: url(../img/reaction-topbg.svg);
-	background-position: right 30%;
-}
 .name-reation{
 	position: relative;
-}
-.name-reation-top .white, .name-reation-top .white a{
-	color:#fff;
 }
 .name-reation .card {
 	padding: unset;
@@ -2642,18 +2633,17 @@ table.product-table th {
 }
 .name-reation .card-header{
 	cursor: pointer;
-    border-bottom: none;
     background: #fff;
     box-shadow: 0 0 3px 0px #cecece;
-    margin-bottom: 20px;
 }
 .name-reation .card{
+	margin-bottom: 20px;
 	border: none;
 }
 .name-reation .card-body{
+  border: 1px solid #ececec;
   background: #F8F8F8;
   border-top: 0;
-  margin-bottom: 20px;
 }
 .name-reation .accordion i {
     position: absolute;
@@ -3071,6 +3061,9 @@ ul.navbar-nav li {
 }
 
 @media (max-width: 768px) {
+.name-reation-bg-left, .name-reation-bg-right{
+	display: none;
+}
 .member-wrap .nav {
 	width: 100%;
 }
