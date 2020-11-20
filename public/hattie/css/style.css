@@ -828,10 +828,16 @@ ul.top-list li a:hover {
 	border-radius: 30px;
 }
 .input-group-btn {
-	z-index: 3;
-	position: absolute;
-	right: 16px;
-	top: -3px;
+	height:100%;
+    border-left: 1px solid #ced4da;
+    z-index: 3;
+    position: absolute;
+    right: 16px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.input-group-btn .btn{
+	line-height: 1.2;
 }
 .header-login {
 	padding: 5px 20px;
@@ -1006,7 +1012,7 @@ section.home {
 	margin-left: -500px;
 }
 .article a{
-	color:#00B2D0;
+	color:#333;
 }
 .article-product-table {
 	width: 100%;
@@ -1086,6 +1092,8 @@ h2.h1 {
 }
 .line {
 	color: #239AB7;
+	border-left:2px solid #239AB7;
+	margin-right: 12px;
 }
 .h-sub, .h-sub > a {
 	font-size: 14px;
@@ -1233,6 +1241,7 @@ ul.categories-list li:before {
 .mobile-divider {
 	display: none;
 }
+
 /*homepage*/
 	/*--------------------------*/
 .main-content {
@@ -1351,24 +1360,29 @@ ul.categories-list li:before {
 	background-color: #1B12AC;
 }
 .main-icon .organic-border {
-	border: 3px solid #14a2c2;
+	border: 2px solid #14a2c2;
 	padding: 15px 30px;
+	border-radius: 4px;
 }
 .main-icon .analytical-border {
-	border: 3px solid #80A040;
+	border: 2px solid #80A040;
 	padding: 15px 30px;
+	border-radius: 4px;
 }
 .main-icon .Life-border {
-	border: 3px solid #C51414;
+	border: 2px solid #C51414;
 	padding: 15px 30px;
+	border-radius: 4px;
 }
 .main-icon .material-border {
-	border: 3px solid #9F53A1;
+	border: 2px solid #9F53A1;
 	padding: 15px 30px;
+	border-radius: 4px;
 }
 .main-icon .instrument-border {
-	border: 3px solid #1B12AC;
+	border: 2px solid #1B12AC;
 	padding: 15px 30px;
+	border-radius: 4px;
 }
 .main-icon .organic-border:hover, .main-icon .analytical-border:hover, .main-icon .Life-border:hover, .main-icon .material-border:hover, .main-icon .instrument-border:hover {
 	border-bottom-left-radius: 0;
@@ -1767,6 +1781,33 @@ label {
 .modal-content p {
 	font-size: 14px;
 }
+.order-popup.modal-dialog {
+    max-width: 100%;
+}
+.order-popup .addressbox{
+	margin-bottom: 0;
+}
+.order-popup .cell.header {
+    padding: 12px 28px 12px 0;
+}
+.order-popup .btn-primary{
+	text-align: center;
+	display: block;
+	background-color: #239ab7;
+    padding: 10px 10px!important;
+}
+.order-popup .link-wrap{
+	font-size: 14px;
+    text-align: right;
+    margin-right: 30px;
+}
+.order-popup .link{
+	margin: 0 0 0 10px;
+	color:#239ab7;
+}
+.order-popup .table .row{
+	margin-bottom: 0;
+}
 .modal-dialog {
 	position: relative;
 	background: #fff;
@@ -1836,6 +1877,7 @@ ul.countrySelectorList {
     padding: 0 !important;
 }
 button.close {
+	z-index: 1;
 	position: absolute;
 	color: #3B3B3B;
 	right: 15px;
@@ -2594,6 +2636,27 @@ table.product-table th {
 }
 /*name reation*/
 	/*--------------------------*/
+.name-reation-top{
+		box-shadow: 0px 0px 1px 1px rgba(221,221,221,1);
+		height:auto
+		background-size: cover!important;
+		-webkit-background-size: cover;
+		-o-background-size: cover;
+		-moz-background-size: cover;
+		-ms-background-size: cover;
+}
+.name-reation-top .banner-info {
+    padding-top:2em;
+    width: 60%;
+    padding-bottom: 4em;
+}
+.name-reation-top .banner-info h3 {
+    padding: 30px 0 20px 20px;
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 2.5em;
+    color: #333;
+}
 .name-reation-bg-right{
 	height: 200px;
     top: 50%;
@@ -2623,8 +2686,8 @@ table.product-table th {
 	width: 100%;
 }
 .name-reation .card-header .title {
-    font-size: 17px;
-    color: #000;
+    font-size: 16px;
+    color: #fff;
 }
 .name-reation .card-header .accicon {
   float: right;
@@ -2632,18 +2695,17 @@ table.product-table th {
   width: 1.2em;
 }
 .name-reation .card-header{
-	cursor: pointer;
-    background: #fff;
-    box-shadow: 0 0 3px 0px #cecece;
+	color: #fff;
+    cursor: pointer;
+	background: #17b2cd;
 }
 .name-reation .card{
 	margin-bottom: 20px;
 	border: none;
 }
 .name-reation .card-body{
-  border: 1px solid #ececec;
-  background: #F8F8F8;
-  border-top: 0;
+	border: 1px solid #d1eaef;
+    background: #d1eaef;
 }
 .name-reation .accordion i {
     position: absolute;
@@ -3061,6 +3123,14 @@ ul.navbar-nav li {
 }
 
 @media (max-width: 768px) {
+.order-popup .link-wrap{
+	margin-right:0;
+}
+.order-popup.modal-dialog {
+	margin-top: 100px;
+	max-width: 100%;
+	padding: 20px 0 0 0;
+}
 .name-reation-bg-left, .name-reation-bg-right{
 	display: none;
 }
