@@ -102,7 +102,8 @@ const express_session_1 = require("express-session");
         app.use((req, res, next) => {
             next();
         });
-        //buildRouter(app, pages);
+        // buildRouter(app, pages);
+        // 这种动态添加路由的方式需要重启express后才能生效
         let routeArray = yield db_1.Dbs.content.getRoute();
         routeArray.forEach(element => {
             pages_1.homeRouter.get("/" + element.name, page_1.page);
