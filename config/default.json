@@ -36,6 +36,10 @@
         "productMSCU": {
             "database": "product",
             "connection": "connection-ligsh-test"
+        },
+        "order": {
+            "database": "order",
+            "connection": "connection-ligsh-test"
         }
     },
     "ex": "null",
@@ -51,5 +55,20 @@
         "52": "EN",
         "32": "DE",
         "55": "EN-US"
+    },
+    "wxPay":{
+        "wxPayParam":{
+            "appid": "wx74beb9b6fe52f561",
+            "mch_id": "1300077401",
+            "notify_url": "http://www.weixin.qq.com/wxpay/pay.php"
+        },
+        "wxSecretKey":"526ba202ee1a714498402913b5f15dcc"
+    },
+    "aliPay":{
+        "aliPayParam":{
+            "appId": "2021002110619307",
+            "notify_url": "http://api.test.alipay.net/atinterface/receive_notify.htm"
+        },
+        "aliCretPath":"C:\\Users\\z539\\Desktop\\cref\\"
     }
 }

@@ -12,6 +12,7 @@
     "author": "Henry",
     "license": "ISC",
     "dependencies": {
+        "@fidm/x509": "^1.2.1",
         "@types/body-parser": "^1.17.0",
         "@types/config": "0.0.34",
         "@types/cors": "^2.8.4",
@@ -23,6 +24,8 @@
         "@types/mssql": "^6.0.0",
         "@types/mysql": "^2.15.5",
         "@types/node-fetch": "^2.1.4",
+        "alipay-sdk": "^3.1.5",
+        "bignumber.js": "^9.0.1",
         "body-parser": "^1.19.0",
         "captchapng": "0.0.1",
         "config": "^3.2.5",
@@ -32,10 +35,13 @@
         "express": "^4.17.1",
         "express-session": "^1.17.1",
         "http": "0.0.0",
+        "iconv-lite": "^0.6.2",
         "lodash": "^4.17.11",
+        "md5": "^2.3.0",
         "mssql": "^6.0.1",
         "mysql": "^2.17.1",
         "node-fetch": "^2.3.0",
+        "snakecase-keys": "^3.2.0",
         "typescript": "^3.2.1"
     }
 }
