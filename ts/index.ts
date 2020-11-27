@@ -101,7 +101,8 @@ import { MemoryStore } from 'express-session';
         next();
     });
 
-    //buildRouter(app, pages);
+    // buildRouter(app, pages);
+    // 这种动态添加路由的方式需要重启express后才能生效
     let routeArray = await Dbs.content.getRoute();
     routeArray.forEach(element => {
         homeRouter.get("/" + element.name, page);

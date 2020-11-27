@@ -5,7 +5,6 @@ import * as ejs from 'ejs';
 
 export async function page(req: Request, res: Response) {
     try {
-        let id = req.params.id;
         let pagename = req.path.substring(1, req.path.length);
         const ret = await Dbs.content.getPage(pagename);
         let template: string, title: string;
@@ -17,7 +16,7 @@ export async function page(req: Request, res: Response) {
         subject = await Dbs.content.getSubject();
 
         if (ret.length === 0) {
-            template = `post id=${id} is not defined`;
+            template = `post name =${pagename} is not defined`;
         }
         else {
             let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
