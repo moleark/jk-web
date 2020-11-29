@@ -11,6 +11,7 @@ import { Dbs } from './db';
 import { page } from './pages/page';
 import * as session from 'express-session';
 import { MemoryStore } from 'express-session';
+import { apiRouter } from './api';
 
 (async function () {
     Dbs.init();
@@ -109,6 +110,7 @@ import { MemoryStore } from 'express-session';
     });
     app.use('/', homeRouter);
     app.use('/jk-web', homeRouter);
+    app.use('/api', apiRouter);
     //app.get('/wayne-ligsh-text', wayneLigshTest);
     //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
 

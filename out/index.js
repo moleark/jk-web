@@ -21,6 +21,7 @@ const db_1 = require("./db");
 const page_1 = require("./pages/page");
 const session = require("express-session");
 const express_session_1 = require("express-session");
+const api_1 = require("./api");
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         db_1.Dbs.init();
@@ -110,6 +111,7 @@ const express_session_1 = require("express-session");
         });
         app.use('/', pages_1.homeRouter);
         app.use('/jk-web', pages_1.homeRouter);
+        app.use('/api', api_1.apiRouter);
         //app.get('/wayne-ligsh-text', wayneLigshTest);
         //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
         // 监听服务
