@@ -12,14 +12,15 @@ class ProductService {
     }
 
     // 根据输入的查询关键字key构建调用es服务的查询
-    async search(key: string, pageStart = 0, pageSize = 20) {
+    async search(key: string, pageNumber = 1, pageSize = 20) {
 
         if (!key)
             throw '';
 
+        let from = (pageNumber - 1) * pageSize;
         let param: Search = {
             index: "products",
-            from: pageStart,
+            from: from,
             size: pageSize,
             body: {
                 query: {

@@ -14,11 +14,12 @@ const productService_1 = require("../services/product/productService");
 function search(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let { params } = req;
-        let { key, pageStart } = params;
-        let pageNumer = 0;
-        if (pageStart)
-            pageNumer = parseInt(pageStart);
-        let result = yield productService_1.productService.search(key, pageNumer);
+        let { key, pageNumber: pn } = params;
+        let pageNumber = 1;
+        if (pn)
+            pageNumber = parseInt(pn);
+        pageNumber = pageNumber < 1 ? 1 : pageNumber;
+        let result = yield productService_1.productService.search(key, pageNumber);
         return res.json(result);
     });
 }

@@ -18,13 +18,14 @@ class ProductService {
         this.esClient = new elasticsearch_1.Client({ node: 'https://c.jkchemical.com/elasticsearch' });
     }
     // 根据输入的查询关键字key构建调用es服务的查询
-    search(key, pageStart = 0, pageSize = 20) {
+    search(key, pageNumber = 1, pageSize = 20) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!key)
                 throw '';
+            let from = (pageNumber - 1) * pageSize;
             let param = {
                 index: "products",
-                from: pageStart,
+                from: from,
                 size: pageSize,
                 body: {
                     query: {

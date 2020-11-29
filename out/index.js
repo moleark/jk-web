@@ -112,6 +112,7 @@ const api_1 = require("./api");
         app.use('/', pages_1.homeRouter);
         app.use('/jk-web', pages_1.homeRouter);
         app.use('/api', api_1.apiRouter);
+        app.use('/jk-web/api', api_1.apiRouter);
         //app.get('/wayne-ligsh-text', wayneLigshTest);
         //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
         // 监听服务

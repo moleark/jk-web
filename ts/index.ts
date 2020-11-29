@@ -111,6 +111,7 @@ import { apiRouter } from './api';
     app.use('/', homeRouter);
     app.use('/jk-web', homeRouter);
     app.use('/api', apiRouter);
+    app.use('/jk-web/api', apiRouter);
     //app.get('/wayne-ligsh-text', wayneLigshTest);
     //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
 
