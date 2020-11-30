@@ -35,6 +35,7 @@ const productSpec_1 = require("./ProductMSCU/productSpec");
 const orderPayment_1 = require("./orderPayment/orderPayment");
 const wxPay_1 = require("./orderPayment/wxPay");
 const notice_1 = require("./orderPayment/notice");
+const privacy_1 = require("./privacy");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -75,4 +76,5 @@ exports.homeRouter.get('/partial/payOrderQuery/:orderid', wxPay_1.wxOrderQuery);
 exports.homeRouter.get('/partial/wxpay/notice', notice_1.wxNotice);
 //delete
 exports.homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile_1.productPdfFile); // 保持兼容，暂时保留
+exports.homeRouter.get('/privacy', privacy_1.privacy); // 保持兼容，暂时保留
 //# sourceMappingURL=index.js.map

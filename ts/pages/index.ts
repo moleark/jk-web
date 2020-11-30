@@ -32,6 +32,7 @@ import { productSpecFile, productSpecFileByOrigin } from './ProductMSCU/productS
 import { orderPayment } from './orderPayment/orderPayment';
 import { wxOrderQuery } from './orderPayment/wxPay';
 import { wxNotice } from './orderPayment/notice';
+import { privacy } from './privacy';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -81,3 +82,5 @@ homeRouter.get('/partial/wxpay/notice', wxNotice);
 
 //delete
 homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile);  // 保持兼容，暂时保留
+
+homeRouter.get('/privacy', privacy);  // 保持兼容，暂时保留
