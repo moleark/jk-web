@@ -20,8 +20,9 @@ function categoryInstruction(req, res) {
         let explain = "", postID;
         let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
         let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
-        let postHeader = ejs.fileLoader(tools_1.viewPath + 'headers/post' + tools_1.ejsSuffix).toString();
-        let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
+        let postHeader = ejs.fileLoader(tools_1.viewPath + 'post/post-header' + tools_1.ejsSuffix).toString();
+        let postAttachProduct = ejs.fileLoader(tools_1.viewPath + 'post/post-attachproduct' + tools_1.ejsSuffix).toString();
+        let postFooter = ejs.fileLoader(tools_1.viewPath + 'post/post-footer' + tools_1.ejsSuffix).toString();
         const explainlist = yield db_1.Dbs.content.categoryPostExplain(currentId);
         if (explainlist.length > 0) {
             postID = explainlist[0].post;
@@ -29,7 +30,7 @@ function categoryInstruction(req, res) {
             if (ret.length > 0) {
                 let content = ret[0].content;
                 content = tools_1.hmToEjs(content);
-                explain = jk + hmInclude + postHeader + content + postFooter;
+                explain = jk + hmInclude + postHeader + content + postAttachProduct + postFooter;
                 let datas = tools_1.buildData(req, {});
                 explain = ejs.render(explain, datas);
                 res.send(explain);

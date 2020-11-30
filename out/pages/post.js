@@ -43,12 +43,13 @@ function post(req, res) {
                 let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
                 let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
                 let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
-                let postHeader = ejs.fileLoader(tools_1.viewPath + 'headers/post' + tools_1.ejsSuffix).toString();
+                let postHeader = ejs.fileLoader(tools_1.viewPath + 'post/post-header' + tools_1.ejsSuffix).toString();
                 let subjectHeader = ejs.fileLoader(tools_1.viewPath + 'headers/subject' + tools_1.ejsSuffix).toString();
                 let subject = ejs.fileLoader(tools_1.viewPath + 'right/subject' + tools_1.ejsSuffix).toString();
                 let subjectFooter = ejs.fileLoader(tools_1.viewPath + 'footers/subject' + tools_1.ejsSuffix).toString();
+                let postAttachProduct = ejs.fileLoader(tools_1.viewPath + 'post/post-attachproduct' + tools_1.ejsSuffix).toString();
+                let postFooter = ejs.fileLoader(tools_1.viewPath + 'post/post-footer' + tools_1.ejsSuffix).toString();
                 let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
-                let postFooter = ejs.fileLoader(tools_1.viewPath + 'footers/post' + tools_1.ejsSuffix).toString();
                 //获取内容明细
                 content = ret[0].content;
                 content = yield formattedTable(content);
@@ -62,6 +63,7 @@ function post(req, res) {
                     + homeHeader
                     + postHeader
                     + content
+                    + postAttachProduct
                     + postFooter
                     + subjectHeader
                     + subject
