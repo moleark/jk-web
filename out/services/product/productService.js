@@ -13,8 +13,8 @@ exports.productService = void 0;
 const elasticsearch_1 = require("@elastic/elasticsearch");
 const cas_1 = require("../tools/cas");
 const utils_1 = require("../tools/utils");
-const config_1 = require("config");
-const esBaseUrl = config_1.default.get('esBaseUrl');
+const config = require("config");
+const esBaseUrl = config.get('esBaseUrl');
 class ProductService {
     constructor() {
         this.esClient = new elasticsearch_1.Client({ node: esBaseUrl });

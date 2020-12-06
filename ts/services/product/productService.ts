@@ -2,7 +2,7 @@ import { Client } from "@elastic/elasticsearch";
 import { Search } from "@elastic/elasticsearch/api/requestParams";
 import { isCAS } from "../tools/cas";
 import { hasChineseChar } from "../tools/utils";
-import config from 'config';
+import * as config from 'config';
 
 const esBaseUrl = config.get<string>('esBaseUrl');
 
