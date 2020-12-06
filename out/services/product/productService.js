@@ -20,7 +20,7 @@ class ProductService {
         this.esClient = new elasticsearch_1.Client({ node: esBaseUrl });
     }
     // 根据输入的查询关键字key构建调用es服务的查询
-    search(key, pageNumber = 1, pageSize = 20) {
+    search(key, pageNumber = 1, pageSize = 20, debug = false) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!key)
                 throw '';
@@ -46,7 +46,6 @@ class ProductService {
             }
             else if (cas_1.isCAS(key)) {
                 should.push({ match: { cas: key } });
-                should.push({ match: { casint: key } });
                 should.push({ match: { origin: key } });
             }
             else if (utils_1.hasChineseChar(key)) {
@@ -59,9 +58,17 @@ class ProductService {
             }
             ;
             param.body.query.bool.should = should;
-            let result = yield this.esClient.search(param);
-            console.log(JSON.stringify(result));
-            return result;
+            try {
+                let esResult = yield this.esClient.search(param);
+                if (debug)
+                    return esResult;
+                let { body } = esResult;
+                let { took, hits } = body;
+                let { total, hits: ihits } = hits;
+                return { took, total, hits: ihits.map((e) => { return Object.assign({ "sort": e.sort, "_score": e._score }, e._source); }) };
+            }
+            catch (error) {
+            }
         });
     }
 }

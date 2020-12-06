@@ -14,7 +14,7 @@ class ProductService {
     }
 
     // 根据输入的查询关键字key构建调用es服务的查询
-    async search(key: string, pageNumber = 1, pageSize = 20) {
+    async search(key: string, pageNumber = 1, pageSize = 20, debug = false) {
 
         if (!key)
             throw '';
@@ -42,7 +42,6 @@ class ProductService {
             should.push({ match: { mdlnumber: key } });
         } else if (isCAS(key)) {
             should.push({ match: { cas: key } });
-            should.push({ match: { casint: key } });
             should.push({ match: { origin: key } });
         } else if (hasChineseChar(key)) {
             should.push({ match: { descriptionc: key } });
@@ -52,9 +51,17 @@ class ProductService {
             should.push({ match: { descriptionc: key } });
         };
         (param.body as any).query.bool.should = should;
-        let result = await this.esClient.search(param);
-        console.log(JSON.stringify(result));
-        return result;
+        try {
+            let esResult = await this.esClient.search(param);
+            if (debug)
+                return esResult;
+            let { body } = esResult;
+            let { took, hits } = body;
+            let { total, hits: ihits } = hits;
+            return { took, total, hits: ihits.map((e: any) => { return Object.assign({ "sort": e.sort, "_score": e._score }, e._source); }) };
+        } catch (error) {
+
+        }
     }
 }
 

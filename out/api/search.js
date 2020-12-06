@@ -13,14 +13,18 @@ exports.search = void 0;
 const productService_1 = require("../services/product/productService");
 function search(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let { params } = req;
+        let { params, query } = req;
         let { key, pageNumber: pn } = params;
+        let { debug } = query;
         let pageNumber = 1;
         if (pn)
             pageNumber = parseInt(pn);
         pageNumber = pageNumber < 1 ? 1 : pageNumber;
-        let result = yield productService_1.productService.search(key, pageNumber);
-        return res.json(result);
+        let result = yield productService_1.productService.search(key, pageNumber, 20, debug !== undefined);
+        if (result)
+            return res.json(result);
+        else
+            return res.status(500).end();
     });
 }
 exports.search = search;
