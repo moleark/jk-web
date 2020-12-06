@@ -13,9 +13,11 @@ exports.productService = void 0;
 const elasticsearch_1 = require("@elastic/elasticsearch");
 const cas_1 = require("../tools/cas");
 const utils_1 = require("../tools/utils");
+const config_1 = require("config");
+const esBaseUrl = config_1.default.get('esBaseUrl');
 class ProductService {
     constructor() {
-        this.esClient = new elasticsearch_1.Client({ node: 'https://c.jkchemical.com/elasticsearch' });
+        this.esClient = new elasticsearch_1.Client({ node: esBaseUrl });
     }
     // 根据输入的查询关键字key构建调用es服务的查询
     search(key, pageNumber = 1, pageSize = 20) {

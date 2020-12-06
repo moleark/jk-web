@@ -71,5 +71,6 @@
         },
         "aliCretPath":"C:\\Users\\z539\\Desktop\\cref\\"
     },
-    "privacyId": 168
+    "privacyId": 168,
+    "esBaseUrl": "https://c.jkchemical.com/elasticsearch"
 }

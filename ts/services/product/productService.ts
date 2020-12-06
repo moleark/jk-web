@@ -1,14 +1,16 @@
 import { Client } from "@elastic/elasticsearch";
 import { Search } from "@elastic/elasticsearch/api/requestParams";
-import { RequestBody } from "@elastic/elasticsearch/lib/Transport";
 import { isCAS } from "../tools/cas";
 import { hasChineseChar } from "../tools/utils";
+import config from 'config';
+
+const esBaseUrl = config.get<string>('esBaseUrl');
 
 class ProductService {
 
     private esClient: Client;
     constructor() {
-        this.esClient = new Client({ node: 'https://c.jkchemical.com/elasticsearch' });
+        this.esClient = new Client({ node: esBaseUrl });
     }
 
     // 根据输入的查询关键字key构建调用es服务的查询
