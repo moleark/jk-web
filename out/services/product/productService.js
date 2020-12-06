@@ -41,12 +41,13 @@ class ProductService {
                 }
             };
             let should = [];
-            if (key.startsWith("MFCD") || key.startsWith("mfcd")) {
-                should.push({ match: { mdlnumber: key } });
-            }
-            else if (cas_1.isCAS(key)) {
-                should.push({ match: { cas: key } });
+            if (cas_1.isCAS(key)) {
+                let dashCAS = cas_1.cas2string(key);
+                should.push({ match: { cas: dashCAS } });
                 should.push({ match: { origin: key } });
+            }
+            else if (key.startsWith("MFCD") || key.startsWith("mfcd")) {
+                should.push({ match: { mdlnumber: key } });
             }
             else if (utils_1.hasChineseChar(key)) {
                 should.push({ match: { descriptionc: key } });

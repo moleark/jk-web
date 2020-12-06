@@ -1,6 +1,6 @@
 import { Client } from "@elastic/elasticsearch";
 import { Search } from "@elastic/elasticsearch/api/requestParams";
-import { isCAS } from "../tools/cas";
+import { isCAS, cas2string } from "../tools/cas";
 import { hasChineseChar } from "../tools/utils";
 import * as config from 'config';
 
@@ -38,11 +38,12 @@ class ProductService {
         };
         let should = [];
 
-        if (key.startsWith("MFCD") || key.startsWith("mfcd")) {
-            should.push({ match: { mdlnumber: key } });
-        } else if (isCAS(key)) {
-            should.push({ match: { cas: key } });
+        if (isCAS(key)) {
+            let dashCAS = cas2string(key);
+            should.push({ match: { cas: dashCAS } });
             should.push({ match: { origin: key } });
+        } else if (key.startsWith("MFCD") || key.startsWith("mfcd")) {
+            should.push({ match: { mdlnumber: key } });
         } else if (hasChineseChar(key)) {
             should.push({ match: { descriptionc: key } });
         } else {
