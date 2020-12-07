@@ -43,19 +43,19 @@ class ProductService {
             let should = [];
             if (cas_1.isCAS(key)) {
                 let dashCAS = cas_1.cas2string(key);
-                should.push({ match: { cas: dashCAS } });
+                should.push({ match: { CAS: dashCAS } });
                 should.push({ match: { origin: key } });
             }
             else if (key.startsWith("MFCD") || key.startsWith("mfcd")) {
                 should.push({ match: { mdlnumber: key } });
             }
             else if (utils_1.hasChineseChar(key)) {
-                should.push({ match: { descriptionc: key } });
+                should.push({ match: { descriptionC: key } });
             }
             else {
                 should.push({ match: { origin: key } });
                 should.push({ match: { description: key } });
-                should.push({ match: { descriptionc: key } });
+                should.push({ match: { descriptionC: key } });
             }
             ;
             param.body.query.bool.should = should;

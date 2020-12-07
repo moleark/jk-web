@@ -40,16 +40,16 @@ class ProductService {
 
         if (isCAS(key)) {
             let dashCAS = cas2string(key);
-            should.push({ match: { cas: dashCAS } });
+            should.push({ match: { CAS: dashCAS } });
             should.push({ match: { origin: key } });
         } else if (key.startsWith("MFCD") || key.startsWith("mfcd")) {
             should.push({ match: { mdlnumber: key } });
         } else if (hasChineseChar(key)) {
-            should.push({ match: { descriptionc: key } });
+            should.push({ match: { descriptionC: key } });
         } else {
             should.push({ match: { origin: key } });
             should.push({ match: { description: key } });
-            should.push({ match: { descriptionc: key } });
+            should.push({ match: { descriptionC: key } });
         };
         (param.body as any).query.bool.should = should;
         try {
