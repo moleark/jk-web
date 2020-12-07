@@ -819,7 +819,6 @@
 		z-index: 3;
 		position: absolute;
 		right: 16px;
-		top: -3px;
 	}
 	.header-login {
 		padding: 5px 20px;
@@ -2552,7 +2551,6 @@
 	}
 	.input-group-btn {
 		right: 15px;
-		top: -3px;
 	}
 	.col-sm-6 {
 		overflow: hidden;
@@ -2973,7 +2971,6 @@
 	}
 	.input-group-btn {
 		right: 20px;
-		top: -3px;
 	}
 	.mt-lg-5 {
 		margin-top: 0 !important;

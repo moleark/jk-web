@@ -523,7 +523,7 @@ h6 {
 	font-size: 16px;
 }
 b, strong {
-	font-weight: 500;
+	font-weight: 600;
 }
 a {
 	letter-spacing: 0.4px;
@@ -1090,9 +1090,10 @@ h2.h1 {
 .date span {
 	color: #6D7783;
 }
+
 .line {
 	color: #239AB7;
-	border-left:2px solid #239AB7;
+	border-left:4px solid #239AB7;
 	margin-right: 12px;
 }
 .h-sub, .h-sub > a {
@@ -1101,6 +1102,9 @@ h2.h1 {
 }
 .h-sub > a:hover {
 	color: #AD2031;
+}
+.article .article-post a{
+	color:#239ab7;
 }
 .article-list a.block {
 	display: block;
@@ -3026,7 +3030,6 @@ ul.top-list li {
 }
 .input-group-btn {
 	right: 15px;
-	top: -3px;
 }
 .col-sm-6 {
 	overflow: hidden;
@@ -3529,7 +3532,6 @@ section.home {
 }
 .input-group-btn {
 	right: 5px;
-	top: -3px;
 }
 .mt-lg-5 {
 	margin-top: 0 !important;
