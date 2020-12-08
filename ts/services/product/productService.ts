@@ -40,14 +40,14 @@ class ProductService {
 
         if (isCAS(key)) {
             let dashCAS = cas2string(key);
-            should.push({ match: { CAS: dashCAS } });
-            should.push({ match: { origin: key } });
+            should.push({ term: { CAS: { value: dashCAS, boost: 0.8 } } });
+            should.push({ term: { origin: { value: key, boost: 1.2 } } });
         } else if (key.startsWith("MFCD") || key.startsWith("mfcd")) {
-            should.push({ match: { mdlnumber: key } });
+            should.push({ term: { mdlnumber: key } });
         } else if (hasChineseChar(key)) {
             should.push({ match: { descriptionC: key } });
         } else {
-            should.push({ match: { origin: key } });
+            should.push({ term: { origin: { value: key, boost: 3 } } });
             should.push({ match: { description: key } });
             should.push({ match: { descriptionC: key } });
         };
@@ -61,7 +61,8 @@ class ProductService {
             let { total, hits: ihits } = hits;
             return { took, total, hits: ihits.map((e: any) => { return Object.assign({ "sort": e.sort, "_score": e._score }, e._source); }) };
         } catch (error) {
-
+            console.log(error);
+            throw error;
         }
     }
 }
