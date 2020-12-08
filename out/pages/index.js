@@ -32,6 +32,10 @@ const captcha_1 = require("./captcha");
 const productPdfFile_1 = require("./productPdfFile");
 const productMsds_1 = require("./ProductMSCU/productMsds");
 const productSpec_1 = require("./ProductMSCU/productSpec");
+const orderPayment_1 = require("./orderPayment/orderPayment");
+const wxPay_1 = require("./orderPayment/wxPay");
+const notice_1 = require("./orderPayment/notice");
+const privacy_1 = require("./privacy");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -67,6 +71,10 @@ exports.homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha'
 exports.homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', productSpec_1.productSpecFileByOrigin);
 exports.homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', productMsds_1.productMsdsFile);
 exports.homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpec_1.productSpecFile);
+exports.homeRouter.get('/partial/orderPayment/:payid/:appid/:orderid', orderPayment_1.orderPayment);
+exports.homeRouter.get('/partial/payOrderQuery/:orderid', wxPay_1.wxOrderQuery);
+exports.homeRouter.get('/partial/wxpay/notice', notice_1.wxNotice);
 //delete
 exports.homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile_1.productPdfFile); // 保持兼容，暂时保留
+exports.homeRouter.get('/privacy', privacy_1.privacy); // 保持兼容，暂时保留
 //# sourceMappingURL=index.js.map

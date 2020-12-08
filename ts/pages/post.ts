@@ -34,12 +34,13 @@ export async function post(req: Request, res: Response) {
             let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
             let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
-            let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
+            let postHeader = ejs.fileLoader(viewPath + 'post/post-header' + ejsSuffix).toString();
             let subjectHeader = ejs.fileLoader(viewPath + 'headers/subject' + ejsSuffix).toString();
             let subject = ejs.fileLoader(viewPath + 'right/subject' + ejsSuffix).toString();
             let subjectFooter = ejs.fileLoader(viewPath + 'footers/subject' + ejsSuffix).toString();
+            let postAttachProduct = ejs.fileLoader(viewPath + 'post/post-attachproduct' + ejsSuffix).toString();
+            let postFooter = ejs.fileLoader(viewPath + 'post/post-footer' + ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-            let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
 
             //获取内容明细
             content = ret[0].content;
@@ -57,6 +58,7 @@ export async function post(req: Request, res: Response) {
                 + homeHeader
                 + postHeader
                 + content
+                + postAttachProduct
                 + postFooter
                 + subjectHeader
                 + subject

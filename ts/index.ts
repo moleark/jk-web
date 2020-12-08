@@ -11,6 +11,7 @@ import { Dbs } from './db';
 import { page } from './pages/page';
 import * as session from 'express-session';
 import { MemoryStore } from 'express-session';
+import { apiRouter } from './api';
 
 (async function () {
     Dbs.init();
@@ -101,13 +102,16 @@ import { MemoryStore } from 'express-session';
         next();
     });
 
-    //buildRouter(app, pages);
+    // buildRouter(app, pages);
+    // 这种动态添加路由的方式需要重启express后才能生效
     let routeArray = await Dbs.content.getRoute();
     routeArray.forEach(element => {
         homeRouter.get("/" + element.name, page);
     });
     app.use('/', homeRouter);
     app.use('/jk-web', homeRouter);
+    app.use('/api', apiRouter);
+    app.use('/jk-web/api', apiRouter);
     //app.get('/wayne-ligsh-text', wayneLigshTest);
     //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
 

@@ -7,6 +7,7 @@ const dbProduct_1 = require("./dbProduct");
 const dbProductIndex_1 = require("./dbProductIndex");
 const dbPointShop_1 = require("./dbPointShop");
 const dbProductMSCU_1 = require("./dbProductMSCU");
+const DbOrderPayment_1 = require("./DbOrderPayment");
 class Dbs {
     static init() {
         db_1.Db.init();
@@ -15,6 +16,7 @@ class Dbs {
         Dbs.productIndex = new dbProductIndex_1.DbProductIndex();
         Dbs.pointshop = new dbPointShop_1.DbPointShop();
         Dbs.productMSCU = new dbProductMSCU_1.DbProductMSCU();
+        Dbs.orderPayment = new DbOrderPayment_1.DbOrderPayment();
     }
 }
 exports.Dbs = Dbs;

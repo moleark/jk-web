@@ -21,8 +21,9 @@ function test(req, res) {
             let jk = ejs.fileLoader(tools_2.viewPath + '/headers/jk' + tools_2.ejsSuffix).toString();
             let hmInclude = ejs.fileLoader(tools_2.viewPath + '/headers/hm' + tools_2.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + tools_2.ejsSuffix).toString();
-            let postHeader = ejs.fileLoader(tools_2.viewPath + 'headers/post' + tools_2.ejsSuffix).toString();
-            let postFooter = ejs.fileLoader(tools_2.viewPath + 'footers/post' + tools_2.ejsSuffix).toString();
+            let postHeader = ejs.fileLoader(tools_2.viewPath + 'post/post-header' + tools_2.ejsSuffix).toString();
+            let postAttachProduct = ejs.fileLoader(tools_2.viewPath + 'post/post-attachproduct' + tools_2.ejsSuffix).toString();
+            let postFooter = ejs.fileLoader(tools_2.viewPath + 'post/post-footer' + tools_2.ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
             let reqPath = req.path.toLowerCase();
             if (reqPath.endsWith('/') === true) {
@@ -42,6 +43,7 @@ function test(req, res) {
                 + homeHeader
                 + postHeader
                 + body
+                + postAttachProduct
                 + postFooter
                 + homeFooter, data);
             res.end(html);

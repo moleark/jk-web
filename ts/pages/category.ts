@@ -15,8 +15,9 @@ export async function category(req: Request, res: Response) {
     let explain: string = "", postID: string;
     let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
     let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
-    let postHeader = ejs.fileLoader(viewPath + 'headers/post' + ejsSuffix).toString();
-    let postFooter = ejs.fileLoader(viewPath + 'footers/post' + ejsSuffix).toString();
+    let postHeader = ejs.fileLoader(viewPath + 'post/post-header' + ejsSuffix).toString();
+    let postAttachProduct = ejs.fileLoader(viewPath + 'post/post-attachproduct' + ejsSuffix).toString();
+    let postFooter = ejs.fileLoader(viewPath + 'post/post-footer' + ejsSuffix).toString();
 
     const categoryPost = await Dbs.content.categoryPost(currentId);
 
@@ -28,7 +29,7 @@ export async function category(req: Request, res: Response) {
             let content = ret[0].content;
             if (content.charAt(0) === '#') {
                 content = hmToEjs(content);
-                explain = jk + hmInclude + postHeader + content + postFooter;
+                explain = jk + hmInclude + postHeader + content + postAttachProduct + postFooter;
                 let datas = buildData(req, {});
                 explain = ejs.render(explain, datas);
             }

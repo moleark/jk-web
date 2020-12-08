@@ -16,7 +16,6 @@ const ejs = require("ejs");
 function page(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let id = req.params.id;
             let pagename = req.path.substring(1, req.path.length);
             const ret = yield db_1.Dbs.content.getPage(pagename);
             let template, title;
@@ -26,7 +25,7 @@ function page(req, res) {
             let subject;
             subject = yield db_1.Dbs.content.getSubject();
             if (ret.length === 0) {
-                template = `post id=${id} is not defined`;
+                template = `post name =${pagename} is not defined`;
             }
             else {
                 let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();

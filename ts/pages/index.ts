@@ -29,6 +29,10 @@ import { captcha } from './captcha';
 import { productPdfFile } from './productPdfFile';
 import { productMsdsFile, productMsdsFileByOrigin, productMsdsVersions } from './ProductMSCU/productMsds';
 import { productSpecFile, productSpecFileByOrigin } from './ProductMSCU/productSpec';
+import { orderPayment } from './orderPayment/orderPayment';
+import { wxOrderQuery } from './orderPayment/wxPay';
+import { wxNotice } from './orderPayment/notice';
+import { privacy } from './privacy';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -70,5 +74,13 @@ homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', productSpecF
 homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', productMsdsFile);
 homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpecFile);
 
+
+homeRouter.get('/partial/orderPayment/:payid/:appid/:orderid', orderPayment);
+homeRouter.get('/partial/payOrderQuery/:orderid', wxOrderQuery);
+homeRouter.get('/partial/wxpay/notice', wxNotice);
+
+
 //delete
 homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile);  // 保持兼容，暂时保留
+
+homeRouter.get('/privacy', privacy);  // 保持兼容，暂时保留
