@@ -33,13 +33,13 @@ function post(req, res) {
                 correlation = yield db_1.Dbs.content.getCorrelationPost(id);
                 //获取贴文的栏目
                 postsubject = yield db_1.Dbs.content.postSubject(id);
-                //获取贴文产品
+                //获取贴文产品(优先使用贴文关联的产品，贴文无关联产品时，使用自动推荐的产品)
                 postproduct = yield db_1.Dbs.content.getPostProduct(id);
                 if (postproduct.length === 0) {
-                    postproduct = yield db_1.Dbs.content.getPostProductServise(id);
+                    postproduct = yield db_1.Dbs.content.getRecommendProducts(id);
                 }
-                //获取模板
                 //获取内容明细
+                current = ret[0];
                 content = ret[0].content;
                 content = yield formattedTable(content);
                 if (content.charAt(0) === '#') {
@@ -59,7 +59,6 @@ function post(req, res) {
                         + ejs.fileLoader(tools_1.viewPath + 'right/subject' + tools_1.ejsSuffix).toString()
                         + ejs.fileLoader(tools_1.viewPath + 'footers/subject' + tools_1.ejsSuffix).toString()
                         + ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
-                current = ret[0];
             }
             //获取产品目录树根节点
             const rootcategories = yield db_1.Dbs.product.getRootCategories();

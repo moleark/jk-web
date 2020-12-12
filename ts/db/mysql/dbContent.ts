@@ -19,7 +19,7 @@ export class DbContent extends Db {
     private sqlCorrelation: string;
     private sqlSlideshow: string;
     private sqlPostProduct: string;
-    private sqlPostProductFormServise: string;
+    private sqlGetRecommendProducts: string;
 
     constructor() {
         super('content');
@@ -265,7 +265,7 @@ export class DbContent extends Db {
                     INNER JOIN product${test}.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
             WHERE 	a.post =?;
             `;
-        this.sqlPostProductFormServise = `call ${db}.tv_SearchRecommendProduct(24,47,?)`;
+        this.sqlGetRecommendProducts = `call ${db}.tv_SearchRecommendProduct(24,47,?)`;
     }
 
     async homePostList(): Promise<any> {
@@ -360,8 +360,8 @@ export class DbContent extends Db {
         return ret;
     }
 
-    async getPostProductServise(id: any): Promise<any> {
-        const ret = await this.tableFromSql(this.sqlPostProductFormServise, [id]);
+    async getRecommendProducts(id: any): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlGetRecommendProducts, [id]);
         return ret;
     }
 

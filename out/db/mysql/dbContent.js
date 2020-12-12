@@ -238,7 +238,7 @@ class DbContent extends db_1.Db {
                     INNER JOIN product${test}.tv_productchemical AS pc on p.$unit = pc.$unit and p.id = pc.product
             WHERE 	a.post =?;
             `;
-        this.sqlPostProductFormServise = `call ${db}.tv_SearchRecommendProduct(24,47,?)`;
+        this.sqlGetRecommendProducts = `call ${db}.tv_SearchRecommendProduct(24,47,?)`;
     }
     homePostList() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -350,9 +350,9 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
-    getPostProductServise(id) {
+    getRecommendProducts(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlPostProductFormServise, [id]);
+            const ret = yield this.tableFromSql(this.sqlGetRecommendProducts, [id]);
             return ret;
         });
     }
