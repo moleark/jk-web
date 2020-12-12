@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.post = void 0;
+exports.formattedTable = exports.post = void 0;
 const ejs = require("ejs");
 const db_1 = require("../db");
 const tools_1 = require("../tools");
@@ -39,17 +39,6 @@ function post(req, res) {
                     postproduct = yield db_1.Dbs.content.getPostProductServise(id);
                 }
                 //获取模板
-                let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
-                let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
-                let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
-                let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
-                let postHeader = ejs.fileLoader(tools_1.viewPath + 'post/post-header' + tools_1.ejsSuffix).toString();
-                let subjectHeader = ejs.fileLoader(tools_1.viewPath + 'headers/subject' + tools_1.ejsSuffix).toString();
-                let subject = ejs.fileLoader(tools_1.viewPath + 'right/subject' + tools_1.ejsSuffix).toString();
-                let subjectFooter = ejs.fileLoader(tools_1.viewPath + 'footers/subject' + tools_1.ejsSuffix).toString();
-                let postAttachProduct = ejs.fileLoader(tools_1.viewPath + 'post/post-attachproduct' + tools_1.ejsSuffix).toString();
-                let postFooter = ejs.fileLoader(tools_1.viewPath + 'post/post-footer' + tools_1.ejsSuffix).toString();
-                let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
                 //获取内容明细
                 content = ret[0].content;
                 content = yield formattedTable(content);
@@ -57,18 +46,19 @@ function post(req, res) {
                     content = tools_1.hmToEjs(content);
                 }
                 //获取优惠活动
-                template = header
-                    + jk
-                    + hmInclude
-                    + homeHeader
-                    + postHeader
-                    + content
-                    + postAttachProduct
-                    + postFooter
-                    + subjectHeader
-                    + subject
-                    + subjectFooter
-                    + homeFooter;
+                template =
+                    ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'post/post-header' + tools_1.ejsSuffix).toString()
+                        + content
+                        + ejs.fileLoader(tools_1.viewPath + 'post/post-attachproduct' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'post/post-footer' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'headers/subject' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'right/subject' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'footers/subject' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
                 current = ret[0];
             }
             //获取产品目录树根节点
@@ -132,6 +122,7 @@ function formattedTable(content) {
         return content;
     });
 }
+exports.formattedTable = formattedTable;
 function formattedTableRow(productlist) {
     if (productlist.length === 0)
         return "";

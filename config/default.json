@@ -3,13 +3,7 @@
     "name": "web",
     "interval": 3000,
     "database": "DB-TEST-1",
-    "test": true,
-    "connection-ligsh-test": {
-        "host": "",
-        "user": "",
-        "port": "",
-        "password": ""
-    },
+    "test": false,
     "connection": {
         "host": "",
         "user": "",
@@ -19,27 +13,27 @@
     "db": {
         "content": {
             "database": "webbuilder",
-            "connection": "connection-ligsh-test"
+            "connection": "connection"
         },
         "product": {
             "database": "product",
-            "connection": "connection-ligsh-test"
+            "connection": "connection"
         },
         "productIndex": {
             "database": "productindex",
-            "connection": "connection-ligsh-test"
+            "connection": "connection"
         },
         "pointshop": {
             "database": "pointshop",
-            "connection": "connection-ligsh-test"
+            "connection": "connection"
         },
         "productMSCU": {
             "database": "product",
-            "connection": "connection-ligsh-test"
+            "connection": "connection"
         },
         "order": {
             "database": "order",
-            "connection": "connection-ligsh-test"
+            "connection": "connection"
         }
     },
     "ex": "null",

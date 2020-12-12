@@ -12,12 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.post_test = void 0;
 const ejs = require("ejs");
 const db_1 = require("../db");
+const post_1 = require("./post");
 const tools_1 = require("../tools");
 function post_test(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
         try {
-            let template, content, current, postsubject;
+            let template, content, current, postsubject, postproduct;
+            let discounts = [];
+            let correlation = [];
             let id = req.params.id;
             //获取内容
             const ret = yield db_1.Dbs.content.postFromId(id);
@@ -25,26 +28,38 @@ function post_test(req, res) {
                 template = `post id=${id} is not defined`;
             }
             else {
+                //获取优惠贴文
+                discounts = yield db_1.Dbs.content.getDiscountsPost(id);
+                //相关贴文
+                correlation = yield db_1.Dbs.content.getCorrelationPost(id);
+                //获取贴文的栏目
                 postsubject = yield db_1.Dbs.content.postSubject(id);
+                //获取贴文产品
+                postproduct = yield db_1.Dbs.content.getPostProduct(id);
+                if (postproduct.length === 0) {
+                    postproduct = yield db_1.Dbs.content.getPostProductServise(id);
+                }
                 //获取模板
-                let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
-                let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
-                let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
-                let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
-                let postHeader = ejs.fileLoader(tools_1.viewPath + 'post/post-header' + tools_1.ejsSuffix).toString();
-                let subjectHeader = ejs.fileLoader(tools_1.viewPath + 'headers/subject' + tools_1.ejsSuffix).toString();
-                let subject = ejs.fileLoader(tools_1.viewPath + 'right/subject' + tools_1.ejsSuffix).toString();
-                let subjectFooter = ejs.fileLoader(tools_1.viewPath + 'footers/subject' + tools_1.ejsSuffix).toString();
-                let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
-                let postFooter = ejs.fileLoader(tools_1.viewPath + 'post/post-footer' + tools_1.ejsSuffix).toString();
-                let post_test = ejs.fileLoader(tools_1.viewPath + 'post_test' + tools_1.ejsSuffix).toString();
                 //获取内容明细
                 content = ret[0].content;
+                content = yield post_1.formattedTable(content);
                 if (content.charAt(0) === '#') {
                     content = tools_1.hmToEjs(content);
                 }
                 //获取优惠活动
-                template = post_test;
+                template =
+                    ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'post/post-header' + tools_1.ejsSuffix).toString()
+                        + content
+                        + ejs.fileLoader(tools_1.viewPath + 'post/post-attachproduct' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'post/post-footer' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'headers/subject' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'right/subject' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'footers/subject' + tools_1.ejsSuffix).toString()
+                        + ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
                 current = ret[0];
             }
             //获取产品目录树根节点
@@ -65,10 +80,13 @@ function post_test(req, res) {
                 path: rootPath + 'post/',
                 current: current,
                 subject: subject,
+                discounts: discounts,
+                correlation: correlation,
                 hotPosts: cacheHotPosts,
                 rootcategories: rootcategories,
                 content: content,
                 postsubject: postsubject,
+                postproduct: postproduct,
                 titleshow: false
             });
             let html = ejs.render(template, data);
@@ -81,5 +99,4 @@ function post_test(req, res) {
     });
 }
 exports.post_test = post_test;
-;
 //# sourceMappingURL=post_test.js.map

@@ -30,17 +30,6 @@ export async function post(req: Request, res: Response) {
                 postproduct = await Dbs.content.getPostProductServise(id);
             }
             //获取模板
-            let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
-            let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
-            let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
-            let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
-            let postHeader = ejs.fileLoader(viewPath + 'post/post-header' + ejsSuffix).toString();
-            let subjectHeader = ejs.fileLoader(viewPath + 'headers/subject' + ejsSuffix).toString();
-            let subject = ejs.fileLoader(viewPath + 'right/subject' + ejsSuffix).toString();
-            let subjectFooter = ejs.fileLoader(viewPath + 'footers/subject' + ejsSuffix).toString();
-            let postAttachProduct = ejs.fileLoader(viewPath + 'post/post-attachproduct' + ejsSuffix).toString();
-            let postFooter = ejs.fileLoader(viewPath + 'post/post-footer' + ejsSuffix).toString();
-            let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
 
             //获取内容明细
             content = ret[0].content;
@@ -52,18 +41,22 @@ export async function post(req: Request, res: Response) {
             }
 
             //获取优惠活动
-            template = header
-                + jk
-                + hmInclude
-                + homeHeader
-                + postHeader
+            template =
+                ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString()
+                + ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString()
+                + ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString()
+                + ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString()
+                + ejs.fileLoader(viewPath + 'post/post-header' + ejsSuffix).toString()
+
                 + content
-                + postAttachProduct
-                + postFooter
-                + subjectHeader
-                + subject
-                + subjectFooter
-                + homeFooter;
+
+                + ejs.fileLoader(viewPath + 'post/post-attachproduct' + ejsSuffix).toString()
+                + ejs.fileLoader(viewPath + 'post/post-footer' + ejsSuffix).toString()
+                + ejs.fileLoader(viewPath + 'headers/subject' + ejsSuffix).toString()
+                + ejs.fileLoader(viewPath + 'right/subject' + ejsSuffix).toString()
+                + ejs.fileLoader(viewPath + 'footers/subject' + ejsSuffix).toString()
+
+                + ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
 
             current = ret[0];
         }
@@ -109,7 +102,7 @@ export async function post(req: Request, res: Response) {
 };
 
 
-async function formattedTable(content: string) {
+export async function formattedTable(content: string) {
     let currentNode: number;
     for (currentNode = 0; currentNode < content.length; currentNode++) {
 
