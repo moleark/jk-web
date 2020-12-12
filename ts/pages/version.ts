@@ -3,10 +3,11 @@ import * as fs from "fs";
 import * as ejs from 'ejs';
 import { buildData, hmParse, hmToEjs } from "../tools";
 import { viewPath, ejsSuffix } from "../tools";
+import { Dbs } from "../db";
 
 export async function version(req: Request, res: Response) {
 	try {
-		let cbDataPackage = getPackageJson()
+		let cbDataPackage: any = getPackageJson();
 		function getPackageJson() {
 			console.log('----------------------1.开始读取package.json')
 			let _packageJson = fs.readFileSync('./package.json')
@@ -14,28 +15,18 @@ export async function version(req: Request, res: Response) {
 			return JSON.parse(_packageJson.toString());
 		}
 
-		let data = buildData(req, cbDataPackage);
+		const rootcategories = await Dbs.product.getRootCategories();
+		let data = buildData(req, { version: cbDataPackage.version, rootcategories: rootcategories });
 
 		let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
-		let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
-		let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
 		let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
-		let postHeader = ejs.fileLoader(viewPath + 'post/post-header' + ejsSuffix).toString();
-
-		let postAttachProduct = ejs.fileLoader(viewPath + 'post/post-attachproduct' + ejsSuffix).toString();
-		let postFooter = ejs.fileLoader(viewPath + 'post/post-footer' + ejsSuffix).toString();
-		let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
 		let body = ejs.fileLoader(viewPath + 'version.ejs').toString();
+		let homeFooter = ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
 
 		let html = ejs.render(
 			header
-			+ jk
-			+ hmInclude
 			+ homeHeader
-			+ postHeader
 			+ body
-			+ postAttachProduct
-			+ postFooter
 			+ homeFooter
 			, data);
 		res.end(html);

@@ -10,38 +10,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.language = void 0;
-const fs = require("fs");
 const ejs = require("ejs");
 const tools_1 = require("../tools");
 const tools_2 = require("../tools");
+const db_1 = require("../db");
 function language(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let cbDataPackage = getPackageJson();
-            function getPackageJson() {
-                console.log('----------------------1.开始读取package.json');
-                let _packageJson = fs.readFileSync('./package.json');
-                console.log('----------------------读取package.json文件完毕');
-                return JSON.parse(_packageJson.toString());
-            }
-            let data = tools_1.buildData(req, cbDataPackage);
+            //获取产品目录树根节点
+            const rootcategories = yield db_1.Dbs.product.getRootCategories();
+            let data = tools_1.buildData(req, { rootcategories });
             let header = ejs.fileLoader(tools_2.viewPath + 'headers/header' + tools_2.ejsSuffix).toString();
-            let jk = ejs.fileLoader(tools_2.viewPath + '/headers/jk' + tools_2.ejsSuffix).toString();
-            let hmInclude = ejs.fileLoader(tools_2.viewPath + '/headers/hm' + tools_2.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + tools_2.ejsSuffix).toString();
-            let postHeader = ejs.fileLoader(tools_2.viewPath + 'post/post-header' + tools_2.ejsSuffix).toString();
-            let postAttachProduct = ejs.fileLoader(tools_2.viewPath + 'post/post-attachproduct' + tools_2.ejsSuffix).toString();
-            let postFooter = ejs.fileLoader(tools_2.viewPath + 'post/post-footer' + tools_2.ejsSuffix).toString();
-            let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
             let body = ejs.fileLoader(tools_2.viewPath + 'language/language.ejs').toString();
+            let homeFooter = ejs.fileLoader(tools_2.viewPath + 'footers/home-footer' + tools_2.ejsSuffix).toString();
             let html = ejs.render(header
-                + jk
-                + hmInclude
                 + homeHeader
-                + postHeader
                 + body
-                + postAttachProduct
-                + postFooter
                 + homeFooter, data);
             res.end(html);
         }
