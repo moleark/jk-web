@@ -5,59 +5,32 @@ import { getRootPath, viewPath, ejsSuffix, ipHit, ejsError, buildData, hmToEjs }
 
 export async function post(req: Request, res: Response) {
     let rootPath = getRootPath(req);
+    let id = req.params.id;
+    //获取内容
+    const ret = await Dbs.content.postFromId(id);
+    if (ret.length === 0) {
+        res.status(404).end();
+        return;
+    }
+
     try {
-        let template: string, content: string, current: any, postsubject: any, postproduct: any;
+        let content: string, current: any, postsubject: any, postproduct: any;
         let discounts: any[] = [];
         let correlation: any[] = [];
-        let id = req.params.id;
 
-        //获取内容
-        const ret = await Dbs.content.postFromId(id);
-        if (ret.length === 0) {
-            template = `post id=${id} is not defined`;
+        //获取内容明细
+        current = ret[0];
+        //获取优惠贴文
+        discounts = await Dbs.content.getDiscountsPost(id);
+        //相关贴文
+        correlation = await Dbs.content.getCorrelationPost(id);
+        //获取贴文的栏目
+        postsubject = await Dbs.content.postSubject(id);
+        //获取贴文产品
+        postproduct = await Dbs.content.getPostProduct(id);
+        if (postproduct.length === 0) {
+            postproduct = await Dbs.content.getRecommendProducts(id);
         }
-        else {
-
-            //获取优惠贴文
-            discounts = await Dbs.content.getDiscountsPost(id);
-            //相关贴文
-            correlation = await Dbs.content.getCorrelationPost(id);
-            //获取贴文的栏目
-            postsubject = await Dbs.content.postSubject(id);
-            //获取贴文产品(优先使用贴文关联的产品，贴文无关联产品时，使用自动推荐的产品)
-            postproduct = await Dbs.content.getPostProduct(id);
-            if (postproduct.length === 0) {
-                postproduct = await Dbs.content.getRecommendProducts(id);
-            }
-
-            //获取内容明细
-            current = ret[0];
-            content = ret[0].content;
-            content = await formattedTable(content);
-
-            if (content.charAt(0) === '#') {
-                content = hmToEjs(content);
-            }
-
-            //获取优惠活动
-            template =
-                ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString()
-                + ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString()
-                + ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString()
-                + ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString()
-                + ejs.fileLoader(viewPath + 'post/post-header' + ejsSuffix).toString()
-
-                + content
-
-                + ejs.fileLoader(viewPath + 'post/post-attachproduct' + ejsSuffix).toString()
-                + ejs.fileLoader(viewPath + 'post/post-footer' + ejsSuffix).toString()
-                + ejs.fileLoader(viewPath + 'headers/subject' + ejsSuffix).toString()
-                + ejs.fileLoader(viewPath + 'right/subject' + ejsSuffix).toString()
-                + ejs.fileLoader(viewPath + 'footers/subject' + ejsSuffix).toString()
-
-                + ejs.fileLoader(viewPath + 'footers/home-footer' + ejsSuffix).toString();
-        }
-
         //获取产品目录树根节点
         const rootcategories = await Dbs.product.getRootCategories();
 
@@ -73,6 +46,7 @@ export async function post(req: Request, res: Response) {
         //获取栏目
         let subject: any[];
         subject = await Dbs.content.getSubject();
+        content = await renderPostArticle(current);
 
         let data = buildData(req, {
             $title: current.caption,
@@ -89,8 +63,7 @@ export async function post(req: Request, res: Response) {
             titleshow: false
         });
 
-        let html = ejs.render(template, data);
-        res.end(html);
+        res.render('post/post.ejs', data);
         ipHit(req, id);
     }
     catch (e) {
@@ -152,10 +125,23 @@ function formattedTableRow(productlist: any[]) {
             </div>
             <div class="col-lg-12 mt-lg-2">
             </div>`;
-
-
     });
 
     return header + content + footers;
+}
 
+export async function renderPostArticle(article: any) {
+    let content = article.content;
+    content = await formattedTable(content);
+
+    if (content.charAt(0) === '#') {
+        content = hmToEjs(content);
+    }
+
+    let template =
+        ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString()
+        + ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString()
+        + content;
+
+    return ejs.render(template, { article });
 }

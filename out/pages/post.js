@@ -9,56 +9,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formattedTable = exports.post = void 0;
+exports.renderPostArticle = exports.formattedTable = exports.post = void 0;
 const ejs = require("ejs");
 const db_1 = require("../db");
 const tools_1 = require("../tools");
 function post(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
+        let id = req.params.id;
+        //获取内容
+        const ret = yield db_1.Dbs.content.postFromId(id);
+        if (ret.length === 0) {
+            res.status(404).end();
+            return;
+        }
         try {
-            let template, content, current, postsubject, postproduct;
+            let content, current, postsubject, postproduct;
             let discounts = [];
             let correlation = [];
-            let id = req.params.id;
-            //获取内容
-            const ret = yield db_1.Dbs.content.postFromId(id);
-            if (ret.length === 0) {
-                template = `post id=${id} is not defined`;
-            }
-            else {
-                //获取优惠贴文
-                discounts = yield db_1.Dbs.content.getDiscountsPost(id);
-                //相关贴文
-                correlation = yield db_1.Dbs.content.getCorrelationPost(id);
-                //获取贴文的栏目
-                postsubject = yield db_1.Dbs.content.postSubject(id);
-                //获取贴文产品(优先使用贴文关联的产品，贴文无关联产品时，使用自动推荐的产品)
-                postproduct = yield db_1.Dbs.content.getPostProduct(id);
-                if (postproduct.length === 0) {
-                    postproduct = yield db_1.Dbs.content.getRecommendProducts(id);
-                }
-                //获取内容明细
-                current = ret[0];
-                content = ret[0].content;
-                content = yield formattedTable(content);
-                if (content.charAt(0) === '#') {
-                    content = tools_1.hmToEjs(content);
-                }
-                //获取优惠活动
-                template =
-                    ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString()
-                        + ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString()
-                        + ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString()
-                        + ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString()
-                        + ejs.fileLoader(tools_1.viewPath + 'post/post-header' + tools_1.ejsSuffix).toString()
-                        + content
-                        + ejs.fileLoader(tools_1.viewPath + 'post/post-attachproduct' + tools_1.ejsSuffix).toString()
-                        + ejs.fileLoader(tools_1.viewPath + 'post/post-footer' + tools_1.ejsSuffix).toString()
-                        + ejs.fileLoader(tools_1.viewPath + 'headers/subject' + tools_1.ejsSuffix).toString()
-                        + ejs.fileLoader(tools_1.viewPath + 'right/subject' + tools_1.ejsSuffix).toString()
-                        + ejs.fileLoader(tools_1.viewPath + 'footers/subject' + tools_1.ejsSuffix).toString()
-                        + ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
+            //获取内容明细
+            current = ret[0];
+            //获取优惠贴文
+            discounts = yield db_1.Dbs.content.getDiscountsPost(id);
+            //相关贴文
+            correlation = yield db_1.Dbs.content.getCorrelationPost(id);
+            //获取贴文的栏目
+            postsubject = yield db_1.Dbs.content.postSubject(id);
+            //获取贴文产品
+            postproduct = yield db_1.Dbs.content.getPostProduct(id);
+            if (postproduct.length === 0) {
+                postproduct = yield db_1.Dbs.content.getRecommendProducts(id);
             }
             //获取产品目录树根节点
             const rootcategories = yield db_1.Dbs.product.getRootCategories();
@@ -73,6 +53,7 @@ function post(req, res) {
             //获取栏目
             let subject;
             subject = yield db_1.Dbs.content.getSubject();
+            content = yield renderPostArticle(current);
             let data = tools_1.buildData(req, {
                 $title: current.caption,
                 path: rootPath + 'post/',
@@ -87,8 +68,7 @@ function post(req, res) {
                 postproduct: postproduct,
                 titleshow: false
             });
-            let html = ejs.render(template, data);
-            res.end(html);
+            res.render('post/post.ejs', data);
             tools_1.ipHit(req, id);
         }
         catch (e) {
@@ -152,4 +132,18 @@ function formattedTableRow(productlist) {
     });
     return header + content + footers;
 }
+function renderPostArticle(article) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let content = article.content;
+        content = yield formattedTable(content);
+        if (content.charAt(0) === '#') {
+            content = tools_1.hmToEjs(content);
+        }
+        let template = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString()
+            + ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString()
+            + content;
+        return ejs.render(template, { article });
+    });
+}
+exports.renderPostArticle = renderPostArticle;
 //# sourceMappingURL=post.js.map

@@ -1,0 +1,15 @@
+<%- include('../headers/header') -%>
+    <%- include('../headers/home-header') -%>
+        <section class="container mt-lg-2">
+            <div class="row">
+                <div class="col-lg-9 article mr-lg-40">
+                    <%- include('post-article', {current, content}); %>
+                        <%- include('post-attachproduct', {postproduct}); %>
+                </div>
+
+                <div class="col-lg-3">
+                    <%- include('../right/subject', {subject, discounts, hotPosts, correlation}); %>
+                </div>
+            </div>
+        </section>
+        <%- include('../footers/home-footer') -%>
