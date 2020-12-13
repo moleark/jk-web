@@ -46,7 +46,7 @@ export async function post(req: Request, res: Response) {
         //获取栏目
         let subject: any[];
         subject = await Dbs.content.getSubject();
-        content = await renderPostArticle(current);
+        content = await renderPostArticle(req, current);
 
         let data = buildData(req, {
             $title: current.caption,
@@ -130,7 +130,7 @@ function formattedTableRow(productlist: any[]) {
     return header + content + footers;
 }
 
-export async function renderPostArticle(article: any) {
+export async function renderPostArticle(req: Request, article: any) {
     let content = article.content;
     content = await formattedTable(content);
 
@@ -143,5 +143,5 @@ export async function renderPostArticle(article: any) {
         + ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString()
         + content;
 
-    return ejs.render(template, { article });
+    return ejs.render(template, buildData(req, { article }));
 }

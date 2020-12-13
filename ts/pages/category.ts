@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ejsError, getRootPath, buildData, hmToEjs, viewPath, ejsSuffix } from "../tools";
 import { Dbs } from "../db";
 import * as ejs from 'ejs';
+import { renderPostArticle } from "./post";
 
 export async function category(req: Request, res: Response) {
     let rootPath = getRootPath(req);
@@ -12,27 +13,16 @@ export async function category(req: Request, res: Response) {
     let children = await Dbs.product.getChildrenCategories(currentId);
     category.children = children;
 
-    let explain: string = "", postID: string;
-    let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();
-    let hmInclude = ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString();
-    let postHeader = ejs.fileLoader(viewPath + 'post/post-header' + ejsSuffix).toString();
-    let postFooter = ejs.fileLoader(viewPath + 'post/post-footer' + ejsSuffix).toString();
-
     const categoryPost = await Dbs.content.categoryPost(currentId);
 
+    let explain: string = "", postArticle: string = '';
     const explainlist = await Dbs.content.categoryPostExplain(currentId);
     if (explainlist.length > 0) {
-        postID = explainlist[0].post;
+        let postID = explainlist[0].post;
         const ret = await Dbs.content.postFromId(postID);
         if (ret.length > 0) {
-            let current = ret[0];
-            let content = ret[0].content;
-            if (content.charAt(0) === '#') {
-                content = hmToEjs(content);
-                explain = jk + hmInclude + postHeader + content + postFooter;
-                let datas = buildData(req, { current });
-                explain = ejs.render(explain, datas);
-            }
+            postArticle = ret[0];
+            explain = await renderPostArticle(req, postArticle);
         }
     }
 
@@ -46,7 +36,8 @@ export async function category(req: Request, res: Response) {
         rootcategories: rootcategories,
         current: current,
         category: category,
-        explain: explain,
+        postArticle: postArticle,
+        content: explain,
         categoryPost: categoryPost,
         path: rootPath + 'category/',
         productPath: rootPath + 'productCategory/',

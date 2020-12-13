@@ -3,71 +3,73 @@
 
         <div class="container my-3">
             <div class="row">
-                <%- explain %>
-                    <div class="col-sm-9">
-                        <% let {name, children}=category; %>
+                <div class="col-12">
+                    <%- include('post/post-article', {postArticle, content}); %>
+                </div>
+                <div class="col-sm-9">
+                    <% let {name, children}=category; %>
 
-                            <div class="h5 text-info> text-center border-info> py-3"
-                                style="border-bottom-width: 0.2rem;border-bottom-style: solid;">
-                                <b>
-                                    <%=name%>
-                                </b>
-                            </div>
-                            <% for (let i=0; i < children.length; i++) { let { id: childrenId, name: childrenName,
-                                isLeaf }=children[i]; %>
-                                <div class="border-muted border-bottom p-3 my-2">
-                                    <% if (isLeaf==1) { %>
-                                        <a href="<%=productPath + childrenId%>" target="blank">
+                        <div class="h5 text-info> text-center border-info> py-3"
+                            style="border-bottom-width: 0.2rem;border-bottom-style: solid;">
+                            <b>
+                                <%=name%>
+                            </b>
+                        </div>
+                        <% for (let i=0; i < children.length; i++) { let { id: childrenId, name: childrenName, isLeaf
+                            }=children[i]; %>
+                            <div class="border-muted border-bottom p-3 my-2">
+                                <% if (isLeaf==1) { %>
+                                    <a href="<%=productPath + childrenId%>" target="blank">
+                                        <%=childrenName%>
+                                    </a>
+                                    <% } else { %>
+                                        <a href="<%=path + childrenId%>">
                                             <%=childrenName%>
                                         </a>
-                                        <% } else { %>
-                                            <a href="<%=path + childrenId%>">
-                                                <%=childrenName%>
-                                            </a>
-                                            <% } %>
-                                </div>
-                                <% } %>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="h-100">
-                            <div class="pl-4 mt-3 pr-3 py-2 d-flex border-bottom align-items-end">
-                                <div class="text-dark font-weight-bold flex-grow-1">相关贴文</div>
+                                        <% } %>
                             </div>
-                            <ul class="list-group mt-1">
-                                <% let hpn=0; for (let pn of categoryPost) { hpn++; if (hpn> 10) break;
-                                    let {id, caption, imagePath, hits, create} = pn;
-                                    %>
-                                    <a href="<%=postpath+id%>"
-                                        class="list-group-item-action py-2 pl-4 pr-3 border-bottom d-flex align-items-center">
-                                        <div class="d-flex w-100">
-                                            <% if (false && imagePath) { %>
-                                                <div class="w-3-5c h-3-5c">
-                                                    <div class="h-100"
-                                                        style="max-height:3.5rem;background-size:cover;background-image: url('<%=imagePath%>');border-style:none;border-width:0;background-position: center;">
+                            <% } %>
+                </div>
+                <div class="col-sm-3">
+                    <div class="h-100">
+                        <div class="pl-4 mt-3 pr-3 py-2 d-flex border-bottom align-items-end">
+                            <div class="text-dark font-weight-bold flex-grow-1">相关贴文</div>
+                        </div>
+                        <ul class="list-group mt-1">
+                            <% let hpn=0; for (let pn of categoryPost) { hpn++; if (hpn> 10) break;
+                                let {id, caption, imagePath, hits, create} = pn;
+                                %>
+                                <a href="<%=postpath+id%>"
+                                    class="list-group-item-action py-2 pl-4 pr-3 border-bottom d-flex align-items-center">
+                                    <div class="d-flex w-100">
+                                        <% if (false && imagePath) { %>
+                                            <div class="w-3-5c h-3-5c">
+                                                <div class="h-100"
+                                                    style="max-height:3.5rem;background-size:cover;background-image: url('<%=imagePath%>');border-style:none;border-width:0;background-position: center;">
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                                <div class="flex-grow-1 d-flex flex-column">
+                                                    <div class="flex-grow-1 position-relative">
+                                                        <span class="text-muted position-absolute"
+                                                            style="left:-1em">◎</span>
+                                                        <%=caption%>
+                                                    </div>
+                                                    <div class="d-flex small text-gray mt-2">
+                                                        <div class="flex-grow-1">
+                                                            <%=easyTime(create, false)%>发表
+                                                        </div>
+                                                        <div>
+                                                            <%=hits%>次阅读
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <% } %>
-                                                    <div class="flex-grow-1 d-flex flex-column">
-                                                        <div class="flex-grow-1 position-relative">
-                                                            <span class="text-muted position-absolute"
-                                                                style="left:-1em">◎</span>
-                                                            <%=caption%>
-                                                        </div>
-                                                        <div class="d-flex small text-gray mt-2">
-                                                            <div class="flex-grow-1">
-                                                                <%=easyTime(create, false)%>发表
-                                                            </div>
-                                                            <div>
-                                                                <%=hits%>次阅读
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                        </div>
-                                    </a>
-                                    <% } %>
-                            </ul>
-                        </div>
+                                    </div>
+                                </a>
+                                <% } %>
+                        </ul>
                     </div>
+                </div>
             </div>
         </div>
         <%- include('footers/home-footer.ejs') -%>

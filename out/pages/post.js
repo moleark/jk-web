@@ -53,7 +53,7 @@ function post(req, res) {
             //获取栏目
             let subject;
             subject = yield db_1.Dbs.content.getSubject();
-            content = yield renderPostArticle(current);
+            content = yield renderPostArticle(req, current);
             let data = tools_1.buildData(req, {
                 $title: current.caption,
                 path: rootPath + 'post/',
@@ -132,7 +132,7 @@ function formattedTableRow(productlist) {
     });
     return header + content + footers;
 }
-function renderPostArticle(article) {
+function renderPostArticle(req, article) {
     return __awaiter(this, void 0, void 0, function* () {
         let content = article.content;
         content = yield formattedTable(content);
@@ -142,7 +142,7 @@ function renderPostArticle(article) {
         let template = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString()
             + ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString()
             + content;
-        return ejs.render(template, { article });
+        return ejs.render(template, tools_1.buildData(req, { article }));
     });
 }
 exports.renderPostArticle = renderPostArticle;

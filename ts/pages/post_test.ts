@@ -47,7 +47,7 @@ export async function post_test(req: Request, res: Response, next: NextFunction)
         //获取栏目
         let subject: any[];
         subject = await Dbs.content.getSubject();
-        content = await renderPostArticle(current);
+        content = await renderPostArticle(req, current);
 
         let data = buildData(req, {
             $title: current.caption,

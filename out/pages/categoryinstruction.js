@@ -10,29 +10,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.categoryInstruction = void 0;
-const tools_1 = require("../tools");
 const db_1 = require("../db");
-const ejs = require("ejs");
+const post_1 = require("./post");
 function categoryInstruction(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let current = req.params.current;
         let currentId = Number(current);
         let explain = "", postID;
-        let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
-        let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
-        let postHeader = ejs.fileLoader(tools_1.viewPath + 'post/post-header' + tools_1.ejsSuffix).toString();
-        let postAttachProduct = ejs.fileLoader(tools_1.viewPath + 'post/post-attachproduct' + tools_1.ejsSuffix).toString();
-        let postFooter = ejs.fileLoader(tools_1.viewPath + 'post/post-footer' + tools_1.ejsSuffix).toString();
         const explainlist = yield db_1.Dbs.content.categoryPostExplain(currentId);
         if (explainlist.length > 0) {
             postID = explainlist[0].post;
             const ret = yield db_1.Dbs.content.postFromId(postID);
             if (ret.length > 0) {
-                let content = ret[0].content;
-                content = tools_1.hmToEjs(content);
-                explain = jk + hmInclude + postHeader + content + postAttachProduct + postFooter;
-                let datas = tools_1.buildData(req, {});
-                explain = ejs.render(explain, datas);
+                let postArticle = ret[0];
+                explain = yield post_1.renderPostArticle(req, postArticle);
                 res.send(explain);
             }
         }

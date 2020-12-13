@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.category = void 0;
 const tools_1 = require("../tools");
 const db_1 = require("../db");
-const ejs = require("ejs");
+const post_1 = require("./post");
 function category(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
@@ -22,25 +22,15 @@ function category(req, res) {
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
         let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
         category.children = children;
-        let explain = "", postID;
-        let jk = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString();
-        let hmInclude = ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString();
-        let postHeader = ejs.fileLoader(tools_1.viewPath + 'post/post-header' + tools_1.ejsSuffix).toString();
-        let postFooter = ejs.fileLoader(tools_1.viewPath + 'post/post-footer' + tools_1.ejsSuffix).toString();
         const categoryPost = yield db_1.Dbs.content.categoryPost(currentId);
+        let explain = "", postArticle = '';
         const explainlist = yield db_1.Dbs.content.categoryPostExplain(currentId);
         if (explainlist.length > 0) {
-            postID = explainlist[0].post;
+            let postID = explainlist[0].post;
             const ret = yield db_1.Dbs.content.postFromId(postID);
             if (ret.length > 0) {
-                let current = ret[0];
-                let content = ret[0].content;
-                if (content.charAt(0) === '#') {
-                    content = tools_1.hmToEjs(content);
-                    explain = jk + hmInclude + postHeader + content + postFooter;
-                    let datas = tools_1.buildData(req, { current });
-                    explain = ejs.render(explain, datas);
-                }
+                postArticle = ret[0];
+                explain = yield post_1.renderPostArticle(req, postArticle);
             }
         }
         let productpage;
@@ -51,7 +41,8 @@ function category(req, res) {
             rootcategories: rootcategories,
             current: current,
             category: category,
-            explain: explain,
+            postArticle: postArticle,
+            content: explain,
             categoryPost: categoryPost,
             path: rootPath + 'category/',
             productPath: rootPath + 'productCategory/',

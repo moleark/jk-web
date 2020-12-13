@@ -53,7 +53,7 @@ function post_test(req, res, next) {
             //获取栏目
             let subject;
             subject = yield db_1.Dbs.content.getSubject();
-            content = yield post_1.renderPostArticle(current);
+            content = yield post_1.renderPostArticle(req, current);
             let data = tools_1.buildData(req, {
                 $title: current.caption,
                 path: rootPath + 'post/',
