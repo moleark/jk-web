@@ -360,6 +360,10 @@ export class DbContent extends Db {
         return ret;
     }
 
+    /**
+     * 获取与贴文相关的系统推荐产品 
+     * @param id 
+     */
     async getRecommendProducts(id: any): Promise<any> {
         const ret = await this.tableFromSql(this.sqlGetRecommendProducts, [id]);
         return ret;

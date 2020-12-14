@@ -37,9 +37,6 @@ function post(req, res) {
             postsubject = yield db_1.Dbs.content.postSubject(id);
             //获取贴文产品
             postproduct = yield db_1.Dbs.content.getPostProduct(id);
-            if (postproduct.length === 0) {
-                postproduct = yield db_1.Dbs.content.getRecommendProducts(id);
-            }
             //获取产品目录树根节点
             const rootcategories = yield db_1.Dbs.product.getRootCategories();
             //获取贴点贴文

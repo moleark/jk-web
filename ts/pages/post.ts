@@ -28,9 +28,6 @@ export async function post(req: Request, res: Response) {
         postsubject = await Dbs.content.postSubject(id);
         //获取贴文产品
         postproduct = await Dbs.content.getPostProduct(id);
-        if (postproduct.length === 0) {
-            postproduct = await Dbs.content.getRecommendProducts(id);
-        }
         //获取产品目录树根节点
         const rootcategories = await Dbs.product.getRootCategories();
 

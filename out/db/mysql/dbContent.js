@@ -350,6 +350,10 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
+    /**
+     * 获取与贴文相关的系统推荐产品
+     * @param id
+     */
     getRecommendProducts(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetRecommendProducts, [id]);
