@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.homeRouter = void 0;
 const express_1 = require("express");
@@ -36,6 +45,8 @@ const orderPayment_1 = require("./orderPayment/orderPayment");
 const wxPay_1 = require("./orderPayment/wxPay");
 const notice_1 = require("./orderPayment/notice");
 const privacy_1 = require("./privacy");
+const page_1 = require("./page");
+const db_1 = require("../db");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -77,4 +88,14 @@ exports.homeRouter.get('/partial/wxpay/notice', notice_1.wxNotice);
 //delete
 exports.homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile_1.productPdfFile); // 保持兼容，暂时保留
 exports.homeRouter.get('/privacy', privacy_1.privacy); // 保持兼容，暂时保留
+exports.homeRouter.post('/addroute', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let { body } = req;
+    let { pagePath } = body;
+    if (pagePath) {
+        let ret = yield db_1.Dbs.content.getPage(pagePath);
+        if (ret.length > 0)
+            exports.homeRouter.get(pagePath, page_1.page);
+    }
+    res.status(200).end();
+}));
 //# sourceMappingURL=index.js.map

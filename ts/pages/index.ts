@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { home } from './home';
 import { post } from './post';
 import { category } from './category';
@@ -33,6 +33,8 @@ import { orderPayment } from './orderPayment/orderPayment';
 import { wxOrderQuery } from './orderPayment/wxPay';
 import { wxNotice } from './orderPayment/notice';
 import { privacy } from './privacy';
+import { page } from './page';
+import { Dbs } from '../db';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -84,3 +86,14 @@ homeRouter.get('/partial/wxpay/notice', wxNotice);
 homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile);  // 保持兼容，暂时保留
 
 homeRouter.get('/privacy', privacy);  // 保持兼容，暂时保留
+
+homeRouter.post('/addroute', async (req: Request, res: Response) => {
+    let { body } = req;
+    let { pagePath } = body;
+    if (pagePath) {
+        let ret = await Dbs.content.getPage(pagePath);
+        if (ret.length > 0)
+            homeRouter.get(pagePath, page);
+    }
+    res.status(200).end();
+});
