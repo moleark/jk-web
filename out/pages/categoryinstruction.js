@@ -17,7 +17,7 @@ function categoryInstruction(req, res) {
         let current = req.params.current;
         let currentId = Number(current);
         let explain = "", postID;
-        const explainlist = yield db_1.Dbs.content.categoryPostExplain(currentId);
+        const explainlist = yield db_1.Dbs.content.getCategoryInstruction(currentId);
         if (explainlist.length > 0) {
             postID = explainlist[0].post;
             const ret = yield db_1.Dbs.content.postFromId(postID);

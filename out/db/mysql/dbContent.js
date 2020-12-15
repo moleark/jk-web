@@ -79,7 +79,7 @@ class DbContent extends db_1.Db {
             ORDER BY a.id desc;
             -- LIMIT 10;
         `;
-        this.sqlCategoryPostExplain = `
+        this.sqlCategoryInstruction = `
             SELECT a.post, a.productcategory
             FROM    ${db}.tv_postproductcatalogexplain a 
                     join ${db}.tv_postpublish cp on a.post = cp.post
@@ -123,11 +123,17 @@ class DbContent extends db_1.Db {
             WHERE   a.post=?
         `;
         this.sqlRouter = `
-            SELECT a.name
-            FROM ${db}.tv_webpage a
-            WHERE a.name is not null;
+            SELECT a.url
+            FROM ${db}.tv_postpage a
+            WHERE a.url is not null;
         `;
-        this.sqlPagebranch = `
+        this.sqlPagePost = `
+            select  post, url 
+            from    ${db}.tv_postpage
+            where   url = ?
+        `;
+        /*
+        this.sqlPagePost = `
             SELECT  a.name, c.content, b.sort
             FROM    ${db}.tv_webpage a
                     JOIN ${db}.tv_webpagebranch as b on a.id = b.webpage
@@ -135,6 +141,7 @@ class DbContent extends db_1.Db {
             WHERE   a.name = ?
             ORDER BY b.sort;
         `;
+        */
         this.sqlHotPost = `
             SELECT	distinct a.hits, a.post, b.caption, b.discription, im.path as image, b.author, IFNULL(e.name, d.name) as subject
             FROM 	${db}.tv_hot as a
@@ -276,9 +283,13 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
-    categoryPostExplain(id) {
+    /**
+     * 获取目录节点的instruction
+     * @param productCategoryId
+     */
+    getCategoryInstruction(productCategoryId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlCategoryPostExplain, [id]);
+            const ret = yield this.tableFromSql(this.sqlCategoryInstruction, [productCategoryId]);
             return ret;
         });
     }
@@ -314,9 +325,9 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
-    getPage(name) {
+    getPage(url) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlPagebranch, [name]);
+            const ret = yield this.tableFromSql(this.sqlPagePost, [url]);
             return ret;
         });
     }

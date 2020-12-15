@@ -48,13 +48,12 @@ export async function post(req: Request, res: Response) {
         let data = buildData(req, {
             $title: current.caption,
             path: rootPath + 'post/',
-            current: current,
             subject: subject,
             discounts: discounts,
             correlation: correlation,
             hotPosts: cacheHotPosts,
             rootcategories: rootcategories,
-            content: content,
+            postArticle: content,
             postsubject: postsubject,
             postproduct: postproduct,
             titleshow: false
@@ -140,5 +139,11 @@ export async function renderPostArticle(req: Request, article: any) {
         + ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString()
         + content;
 
-    return ejs.render(template, buildData(req, { article }));
+    // return ejs.render(template, buildData(req, { article }));
+    let result = '';
+    content = ejs.render(template, buildData(req, { article }));
+    ejs.renderFile<void>(viewPath + '/post/post-article.ejs', { postArticle: article, content }, (error: Error, str: string) => {
+        result = str;
+    });
+    return result;
 }

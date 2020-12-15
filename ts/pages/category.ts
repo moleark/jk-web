@@ -1,49 +1,44 @@
 import { Request, Response } from "express";
 import { ejsError, getRootPath, buildData, hmToEjs, viewPath, ejsSuffix } from "../tools";
 import { Dbs } from "../db";
-import * as ejs from 'ejs';
 import { renderPostArticle } from "./post";
 
 export async function category(req: Request, res: Response) {
-    let rootPath = getRootPath(req);
     let current = req.params.current;
     let currentId = Number(current);
-    let rootcategories = await Dbs.product.getRootCategories();
     let category = await Dbs.product.getCategoryById(currentId);
+    if (!category) {
+        res.status(404).end();
+        return;
+    }
+
     let children = await Dbs.product.getChildrenCategories(currentId);
     category.children = children;
 
+    let rootcategories = await Dbs.product.getRootCategories();
     const categoryPost = await Dbs.content.categoryPost(currentId);
 
-    let explain: string = "", postArticle: string = '';
-    const explainlist = await Dbs.content.categoryPostExplain(currentId);
+    let postArticle: string = "";
+    const explainlist = await Dbs.content.getCategoryInstruction(currentId);
     if (explainlist.length > 0) {
         let postID = explainlist[0].post;
         const ret = await Dbs.content.postFromId(postID);
         if (ret.length > 0) {
-            postArticle = ret[0];
-            explain = await renderPostArticle(req, postArticle);
+            postArticle = await renderPostArticle(req, ret[0]);
         }
     }
 
-    let productpage: any[];
-    let pageCount: number = 0;
-    let pageSize: number = 30;
-
-    productpage = await Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize);
-
+    let rootPath = getRootPath(req);
     let data = buildData(req, {
         rootcategories: rootcategories,
         current: current,
         category: category,
         postArticle: postArticle,
-        content: explain,
         categoryPost: categoryPost,
         path: rootPath + 'category/',
         productPath: rootPath + 'productCategory/',
         postpath: rootPath + 'post/',
         titleshow: true
-
     });
 
     res.render('category.ejs', data, (err, html) => {

@@ -102,11 +102,10 @@ import { apiRouter } from './api';
         next();
     });
 
-    // buildRouter(app, pages);
     // 这种动态添加路由的方式需要重启express后才能生效
     let routeArray = await Dbs.content.getRoute();
     routeArray.forEach(element => {
-        homeRouter.get("/" + element.name, page);
+        homeRouter.get(element.url, page);
     });
     app.use('/', homeRouter);
     app.use('/jk-web', homeRouter);

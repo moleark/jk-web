@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
-import { ejsError, getRootPath, buildData, hmToEjs, viewPath, ejsSuffix } from "../tools";
 import { Dbs } from "../db";
-import * as ejs from 'ejs';
 import { renderPostArticle } from "./post";
 
 export async function categoryInstruction(req: Request, res: Response) {
@@ -9,7 +7,7 @@ export async function categoryInstruction(req: Request, res: Response) {
     let currentId = Number(current);
 
     let explain: string = "", postID: string;
-    const explainlist = await Dbs.content.categoryPostExplain(currentId);
+    const explainlist = await Dbs.content.getCategoryInstruction(currentId);
     if (explainlist.length > 0) {
         postID = explainlist[0].post;
         const ret = await Dbs.content.postFromId(postID);

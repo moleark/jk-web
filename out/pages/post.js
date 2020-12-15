@@ -54,13 +54,12 @@ function post(req, res) {
             let data = tools_1.buildData(req, {
                 $title: current.caption,
                 path: rootPath + 'post/',
-                current: current,
                 subject: subject,
                 discounts: discounts,
                 correlation: correlation,
                 hotPosts: cacheHotPosts,
                 rootcategories: rootcategories,
-                content: content,
+                postArticle: content,
                 postsubject: postsubject,
                 postproduct: postproduct,
                 titleshow: false
@@ -139,7 +138,13 @@ function renderPostArticle(req, article) {
         let template = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString()
             + ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString()
             + content;
-        return ejs.render(template, tools_1.buildData(req, { article }));
+        // return ejs.render(template, buildData(req, { article }));
+        let result = '';
+        content = ejs.render(template, tools_1.buildData(req, { article }));
+        ejs.renderFile(tools_1.viewPath + '/post/post-article.ejs', { postArticle: article, content }, (error, str) => {
+            result = str;
+        });
+        return result;
     });
 }
 exports.renderPostArticle = renderPostArticle;

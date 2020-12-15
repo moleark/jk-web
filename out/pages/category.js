@@ -15,34 +15,32 @@ const db_1 = require("../db");
 const post_1 = require("./post");
 function category(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let rootPath = tools_1.getRootPath(req);
         let current = req.params.current;
         let currentId = Number(current);
-        let rootcategories = yield db_1.Dbs.product.getRootCategories();
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
+        if (!category) {
+            res.status(404).end();
+            return;
+        }
         let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
         category.children = children;
+        let rootcategories = yield db_1.Dbs.product.getRootCategories();
         const categoryPost = yield db_1.Dbs.content.categoryPost(currentId);
-        let explain = "", postArticle = '';
-        const explainlist = yield db_1.Dbs.content.categoryPostExplain(currentId);
+        let postArticle = "";
+        const explainlist = yield db_1.Dbs.content.getCategoryInstruction(currentId);
         if (explainlist.length > 0) {
             let postID = explainlist[0].post;
             const ret = yield db_1.Dbs.content.postFromId(postID);
             if (ret.length > 0) {
-                postArticle = ret[0];
-                explain = yield post_1.renderPostArticle(req, postArticle);
+                postArticle = yield post_1.renderPostArticle(req, ret[0]);
             }
         }
-        let productpage;
-        let pageCount = 0;
-        let pageSize = 30;
-        productpage = yield db_1.Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize);
+        let rootPath = tools_1.getRootPath(req);
         let data = tools_1.buildData(req, {
             rootcategories: rootcategories,
             current: current,
             category: category,
             postArticle: postArticle,
-            content: explain,
             categoryPost: categoryPost,
             path: rootPath + 'category/',
             productPath: rootPath + 'productCategory/',

@@ -103,11 +103,10 @@ const api_1 = require("./api");
         app.use((req, res, next) => {
             next();
         });
-        // buildRouter(app, pages);
         // 这种动态添加路由的方式需要重启express后才能生效
         let routeArray = yield db_1.Dbs.content.getRoute();
         routeArray.forEach(element => {
-            pages_1.homeRouter.get("/" + element.name, page_1.page);
+            pages_1.homeRouter.get(element.url, page_1.page);
         });
         app.use('/', pages_1.homeRouter);
         app.use('/jk-web', pages_1.homeRouter);

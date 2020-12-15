@@ -7,13 +7,13 @@ export class DbContent extends Db {
     private sqlInformationPost: string;
     private sqlAllPosts: string;
     private sqlCategoryPost: string;
-    private sqlCategoryPostExplain: string;
+    private sqlCategoryInstruction: string;
     private sqlSubjectById: string;
     private sqlSubjectPost: string;
     private sqlPostSubject: string;
     private sqlSubject: string;
     private sqlRouter: string;
-    private sqlPagebranch: string;
+    private sqlPagePost: string;
     private sqlHotPost: string;
     private sqlDiscountsPost: string;
     private sqlCorrelation: string;
@@ -93,7 +93,7 @@ export class DbContent extends Db {
             -- LIMIT 10;
         `;
 
-        this.sqlCategoryPostExplain = `
+        this.sqlCategoryInstruction = `
             SELECT a.post, a.productcategory
             FROM    ${db}.tv_postproductcatalogexplain a 
                     join ${db}.tv_postpublish cp on a.post = cp.post
@@ -142,12 +142,19 @@ export class DbContent extends Db {
         `;
 
         this.sqlRouter = `
-            SELECT a.name
-            FROM ${db}.tv_webpage a
-            WHERE a.name is not null;
+            SELECT a.url
+            FROM ${db}.tv_postpage a
+            WHERE a.url is not null;
         `;
 
-        this.sqlPagebranch = `
+        this.sqlPagePost = `
+            select  post, url 
+            from    ${db}.tv_postpage
+            where   url = ?
+        `;
+
+        /*
+        this.sqlPagePost = `
             SELECT  a.name, c.content, b.sort
             FROM    ${db}.tv_webpage a
                     JOIN ${db}.tv_webpagebranch as b on a.id = b.webpage
@@ -155,7 +162,7 @@ export class DbContent extends Db {
             WHERE   a.name = ?
             ORDER BY b.sort;
         `;
-
+        */
 
         this.sqlHotPost = `
             SELECT	distinct a.hits, a.post, b.caption, b.discription, im.path as image, b.author, IFNULL(e.name, d.name) as subject
@@ -298,8 +305,12 @@ export class DbContent extends Db {
         return ret;
     }
 
-    async categoryPostExplain(id: any): Promise<any> {
-        const ret = await this.tableFromSql(this.sqlCategoryPostExplain, [id]);
+    /**
+     * 获取目录节点的instruction 
+     * @param productCategoryId 
+     */
+    async getCategoryInstruction(productCategoryId: any): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlCategoryInstruction, [productCategoryId]);
         return ret;
     }
 
@@ -330,8 +341,8 @@ export class DbContent extends Db {
         return ret;
     }
 
-    async getPage(name: string): Promise<any> {
-        const ret = await this.tableFromSql(this.sqlPagebranch, [name]);
+    async getPage(url: string): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlPagePost, [url]);
         return ret;
     }
 
