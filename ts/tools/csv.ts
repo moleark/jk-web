@@ -1,6 +1,6 @@
-export function csv(text:string):string[][] {
+export function csv(text: string): string[][] {
     if (typeof csv !== 'string') return text as any;
-    let ret:string[][] = [];
+    let ret: string[][] = [];
     if (!text) return ret;
     let lines = text.split('\n');
     for (let line of lines) {

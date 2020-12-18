@@ -6,7 +6,7 @@ import * as path from 'path';
 import { Request, Response, NextFunction, Application } from 'express';
 import * as express from 'express';
 import { homeRouter } from './pages';
-import { easyTime, csv } from './tools';
+import { easyTime } from './tools';
 import { Dbs } from './db';
 import { page } from './pages/page';
 import * as session from 'express-session';
