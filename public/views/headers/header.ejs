@@ -2,62 +2,21 @@
 <html lang="en">
 
 <head>
-    <title><%=$title? $title : '百灵威科技 -- 专业高端化学试剂供应商'%></title>
+    <title>
+        <%=$title? $title : '百灵威科技 -- 专业高端化学试剂供应商' %>
+    </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/jk-web/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/jk-web/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/jk-web/css/style.css" />
+    <link rel="stylesheet" href="/jk-web/css/style.css?v=0.0.1" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
     <script src="/jk-web/js/jquery-3.4.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="/jk-web/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/jk-web/js/jk.js" crossorigin="anonymous"></script>
-
-    <% 
-    function csv(text) {
-        if (typeof text !== 'string') return text;
-        let ret = [];
-        if (!text) return ret;
-        let lines = text.split('\n');
-        for (let line of lines) {
-            let rArr = line.split('\t');
-            if (rArr.length === 1) {
-                let c0 = rArr[0].trim();
-                if (c0.length === 0) continue;
-                rArr[0] = c0;
-            }
-            ret.push(rArr);
-        }
-        return ret;
-    }
-    %>
-    <style>
-        /* 超大螢幕 */
-        @media screen and (min-width: 1024px) {
-            .dropdown-menu li:hover .sub-menu {
-                visibility: visible;
-            }
-
-            .dropdown:hover .dropdown-menu {
-                display: block;
-            }
-        }
-
-        /* 桌機板 */
-        @media screen and (min-width: 992px) and (max-width: 1024px) {
-            .dropdown-menu li:hover .sub-menu {
-                visibility: visible;
-            }
-
-            .dropdown:hover .dropdown-menu {
-                display: block;
-            }
-        }
-    </style>
-
 </head>
 
 <body>
