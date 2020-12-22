@@ -1,210 +1,205 @@
-<%
-let arr = [
-        {       
-            icon: 'img/Organic-Chemistry.svg',
-            color: 'organic',
-        },
-        {
-            icon: 'img/Analytical-Chemistry.svg',
-            color: 'analytical',
-        },
-        {
-            icon: 'img/Life-Sciences.svg',
-            color: 'Life',
-        },
-        {
-            icon: 'img/Material-Science.svg',
-            color: 'material',
-        },
-        {
-            icon: 'img/Instrument-Consumables.svg',
-            color: 'instrument',
-        }
-    ]
-%>
+<% let arr=[ { icon: 'img/Organic-Chemistry.svg' , color: 'organic' }, { icon: 'img/Analytical-Chemistry.svg' ,
+    color: 'analytical' }, { icon: 'img/Life-Sciences.svg' , color: 'Life' }, { icon: 'img/Material-Science.svg' ,
+    color: 'material' }, { icon: 'img/Instrument-Consumables.svg' , color: 'instrument' } ] %>
 
-<% let { description, caption, path:imagepath, src:postsrc } = slideshow; %>
+    <% let { description, caption, path:imagepath, src:postsrc }=slideshow; %>
 
-<div class="main-content index" style="background: url(<%=imagepath%>)  no-repeat top;">
-    <a href="<%=postsrc%>">
-        <div class="container">
-            <div class="banner-info">
-                <h3><%=caption%></h3>
-                <p><%=description%></p>
-            </div>
-        </div>
-    </a>
-</div>
-
-<section>
-    <div class="postion-img">
-        <img src="<%=$root%>img/triangle.svg">
-    </div>
-    <div class="main-icon">
-        <div class="container">
-            <div class="row">
-                <% for (let i=0; i< rootcategories.length; i++) {
-                    let {id, name, children } = rootcategories[i];
-                    let { icon,color } = arr[i];
-                %>
-                <a class="sperate-icon" href="category/<%=id%>">
-                    <div class="<%=color%>-border">
-                        <img src="<%=icon%>">
+        <div class="main-content index" style="background: url(<%=imagepath%>)  no-repeat top;">
+            <a href="<%=postsrc%>">
+                <div class="container">
+                    <div class="banner-info">
+                        <h3>
+                            <%=caption%>
+                        </h3>
+                        <p>
+                            <%=description%>
+                        </p>
                     </div>
-                    <h2 class="<%=color%>"><%=name%></h2>
-                </a>
-                <% } %>
-            </div>
+                </div>
+            </a>
         </div>
-    </div>
 
-    <div class="resource ptb-lg-75">
-        <div class="container">
-            <h2 class="main-title text-center"> <a href="<%=$root%>information">资讯中心</a> </h2>
-            <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-7 pad-lf35">
-                    <div class="bottom-block">
-                        <div class="row">
-                            <% let { id:id0, caption:caption0 , disp:disp0, image:image0 , name:name0  } = information[0]; %>
-                            <div class="col-lg-12 position-re home-main-pic">
-                                <div class="img-wrap">
-                                    <a href="<%=path+id0%>"><img src="<%=image0%>"></a>
+        <section>
+            <div class="postion-img">
+                <img src="<%=$root%>img/triangle.svg">
+            </div>
+            <div class="main-icon">
+                <div class="container">
+                    <div class="row">
+                        <% for (let i=0; i< rootcategories.length; i++) { let {id, name, children }=rootcategories[i];
+                            let { icon,color }=arr[i]; %>
+                            <a class="sperate-icon" href="category/<%=id%>">
+                                <div class="<%=color%>-border">
+                                    <img src="<%=icon%>">
                                 </div>
-                                <div class="home-main-pic-info">
-                                    <div class="title-wrap mint">
-                                    </div>
-                                    <a href="<%=path+id0%>">
-                                        <p><%=caption0%></p>
-                                    </a>
-                                </div>
-                            </div>
-                            <% let { id:id1, caption:caption1, disp:disp1, image:image1 , name:name1} = information[1]; %>
-                            <hr class="mobile-divider">
-                            <div class="col-lg-6 pad-l-0 col-sm-6 position-re-s">
-                                <div class="col-xs-3 display-desktop">
-                                    <div class="img-wrap">
-                                        <a href="<%=path+id1%>"><img src="<%=image1%>"></a>
-                                    </div>
-                                </div>
-                                <div class="col-xs-9">
-                                    <div class="title-wrap">
-                                    </div>
-                                    <a href="<%=path+id1%>">
-                                        <p><%=caption1%></p>
-                                    </a>
-                                </div>
-                                <!-- mobile -->
-                                <div class="col-xs-3 display-mobile">
-                                    <div class="img-wrap">
-                                        <a href="<%=path+id1%>"><img src="<%=image1%>"></a>
-                                    </div>
-                                </div>
-                                <!-- mobile end-->
-                            </div>
+                                <h2 class="<%=color%>">
+                                    <%=name%>
+                                </h2>
+                            </a>
+                            <% } %>
+                    </div>
+                </div>
+            </div>
 
-                            <% let { id:id2, caption:caption2, disp:disp2, image:image2, name:name2 } = information[2]; %>
-                            <hr class="mobile-divider">
-                            <div class="col-lg-6 pad-l-0 col-sm-6 position-re-s">
-                                <div class="col-xs-3 display-desktop">
-                                    <div class="img-wrap">
-                                        <a href="<%=path+id2%>"><img src="<%=image2%>"></a>
-                                    </div>
-                                </div>
-                                <div class="col-xs-9">
-                                    <div class="title-wrap">
+            <div class="resource ptb-lg-75">
+                <div class="container">
+                    <h2 class="main-title text-center"> <a href="<%=$root%>information">资讯中心</a> </h2>
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-7 pad-lf35">
+                            <div class="bottom-block">
+                                <div class="row">
+                                    <% let { id:id0, caption:caption0 , disp:disp0, image:image0 , name:name0
+                                        }=information[0]; %>
+                                        <div class="col-lg-12 position-re home-main-pic">
+                                            <div class="img-wrap">
+                                                <a href="<%=path+id0%>"><img src="<%=image0%>"></a>
+                                            </div>
+                                            <div class="home-main-pic-info">
+                                                <div class="title-wrap mint">
+                                                </div>
+                                                <a href="<%=path+id0%>">
+                                                    <p>
+                                                        <%=caption0%>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <% let { id:id1, caption:caption1, disp:disp1, image:image1, name:name1
+                                            }=information[1]; %>
+                                            <hr class="mobile-divider">
+                                            <div class="col-lg-6 pad-l-0 col-sm-6 position-re-s">
+                                                <div class="col-xs-3 display-desktop">
+                                                    <div class="img-wrap">
+                                                        <a href="<%=path+id1%>"><img src="<%=image1%>"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <div class="title-wrap">
+                                                    </div>
+                                                    <a href="<%=path+id1%>">
+                                                        <p>
+                                                            <%=caption1%>
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                                <!-- mobile -->
+                                                <div class="col-xs-3 display-mobile">
+                                                    <div class="img-wrap">
+                                                        <a href="<%=path+id1%>"><img src="<%=image1%>"></a>
+                                                    </div>
+                                                </div>
+                                                <!-- mobile end-->
+                                            </div>
 
-                                    </div>
-                                    <a href="<%=path+id2%>">
-                                        <p><%=caption2%></p>
-                                    </a>
+                                            <% let { id:id2, caption:caption2, disp:disp2, image:image2, name:name2
+                                                }=information[2]; %>
+                                                <hr class="mobile-divider">
+                                                <div class="col-lg-6 pad-l-0 col-sm-6 position-re-s">
+                                                    <div class="col-xs-3 display-desktop">
+                                                        <div class="img-wrap">
+                                                            <a href="<%=path+id2%>"><img src="<%=image2%>"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-9">
+                                                        <div class="title-wrap">
+
+                                                        </div>
+                                                        <a href="<%=path+id2%>">
+                                                            <p>
+                                                                <%=caption2%>
+                                                            </p>
+                                                        </a>
+                                                    </div>
+                                                    <!-- mobile -->
+                                                    <div class="col-xs-3 display-mobile">
+                                                        <div class="img-wrap">
+                                                            <a href="<%=path+id2%>"><img src="<%=image2%>"></a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- mobile end-->
+                                                </div>
                                 </div>
-                                <!-- mobile -->
-                                <div class="col-xs-3 display-mobile">
-                                    <div class="img-wrap">
-                                        <a href="<%=path+id2%>"><img src="<%=image2%>"></a>
-                                    </div>
-                                </div>
-                                <!-- mobile end-->
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3">
-                    <div class="side-block  mt-lg-4">
-                        <% for(var i=0;i<hots.length;i++){
-                            if (i > 5) break;
-                            let {post, caption,subject,image } = hots[i];
-                        %>
-                        <hr class="mobile-divider">
-                        <div class="overflow">
-                            <div class="post-preview  mt-lg-4 col-xs-9">
-                                <p><a href="<%=path+post%>"><%=caption%></a></p>
+                        <div class="col-lg-3">
+                            <div class="side-block  mt-lg-4">
+                                <% for(var i=0;i<hots.length;i++){ if (i> 5) break;
+                                    let {post, caption,subject,image } = hots[i];
+                                    %>
+                                    <hr class="mobile-divider">
+                                    <div class="overflow">
+                                        <div class="post-preview  mt-lg-4 col-xs-9">
+                                            <p><a href="<%=path+post%>">
+                                                    <%=caption%>
+                                                </a></p>
+                                        </div>
+                                        <!-- mobile -->
+                                        <div class="col-xs-3 display-mobile">
+                                            <div class="img-wrap">
+                                                <a href="<%=path+post%>"><img src="<%=image%>"></a>
+                                            </div>
+                                        </div>
+                                        <!-- mobile end-->
+                                    </div>
+
+                                    <% } %>
                             </div>
-                            <!-- mobile -->
-                            <div class="col-xs-3 display-mobile">
-                                <div class="img-wrap">
-                                    <a href="<%=path+post%>"><img src="<%=image%>"></a>
-                                </div>
-                            </div>
-                            <!-- mobile end-->
                         </div>
-
-                        <% } %>
+                        <div class="col-lg-1"></div>
                     </div>
                 </div>
-                <div class="col-lg-1"></div>
             </div>
-        </div>
-    </div>
 
-    <div class="postion-img-two">
-        <img src="<%=$root%>img/triangle2.svg">
-    </div>
+            <div class="postion-img-two">
+                <img src="<%=$root%>img/triangle2.svg">
+            </div>
 
-    <div class="special-offer">
-        <h2 class="main-title text-center"><a href="<%=$root%>subjectpost/18">特惠活动</a> </h2>
-        <div class="container">
-            <div class="row mt-lg-4" style="text-align: center;">
-                <% for(var j = 0; j<discounts.length; j++){
-                    if (j > 3) break;
-                    let {id, caption, image } = discounts[j];
-                %>
-                <div class="col-lg-3 col-sm-6 col-xs-6">
-                    <div class="img-wrap">
-                        <a href="<%=path+id%>"><img src="<%=image%>"></a>
+            <div class="special-offer">
+                <h2 class="main-title text-center"><a href="<%=$root%>subjectpost/18">特惠活动</a> </h2>
+                <div class="container">
+                    <div class="row mt-lg-4" style="text-align: center;">
+                        <% for(var j=0; j<discounts.length; j++){ if (j> 3) break;
+                            let {id, caption, image } = discounts[j];
+                            %>
+                            <div class="col-lg-3 col-sm-6 col-xs-6">
+                                <div class="img-wrap">
+                                    <a href="<%=path+id%>"><img src="<%=image%>"></a>
+                                </div>
+                                <a href="<%=path+id%>"></a>
+                                <h2 class="h1 mt-lg-1">
+                                    <%=caption%>
+                                </h2>
+                                </a>
+                            </div>
+                            <% } %>
                     </div>
-                    <a href="<%=path+id%>"></a>
-                    <h2 class="h1 mt-lg-1"><%=caption%></h2>
-                    </a>
                 </div>
-                <% } %>
             </div>
-        </div>
-    </div>
 
-    <div class="feature-products">
-        <div class="postion-img-three ">
-            <img src="img/triangle2.svg">
-        </div>
-        <h2 class="main-title text-center"><a href="<%=$root%>subjectpost/17">推荐产品 </a></h2>
-        <div class="container">
-            <div class="row mt-lg-4">
-                <% for(var j=0; j<recommend.length; j++){
-                        if (j > 3) break;
-                        let {id, caption, image } = recommend[j];
-                    %>
-                <div class="col-lg-3 col-sm-6 col-xs-6">
-                    <div class="img-wrap">
-                        <a href="<%=path+id%>"><img src="<%=image%>"></a>
-                    </div>
-                    <a href="#">
-                        <h2 class="h1 mt-lg-1"><%=caption%></h2>
-                    </a>
+            <div class="feature-products">
+                <div class="postion-img-three ">
+                    <img src="img/triangle2.svg">
                 </div>
-                <% } %>
+                <h2 class="main-title text-center"><a href="<%=$root%>subjectpost/17">推荐产品 </a></h2>
+                <div class="container">
+                    <div class="row mt-lg-4">
+                        <% for(var j=0; j<recommend.length; j++){ if (j> 3) break;
+                            let {id, caption, image } = recommend[j];
+                            %>
+                            <div class="col-lg-3 col-sm-6 col-xs-6">
+                                <div class="img-wrap">
+                                    <a href="<%=path+id%>"><img src="<%=image%>"></a>
+                                </div>
+                                <a href="<%=path+id%>">
+                                    <h2 class="h1 mt-lg-1">
+                                        <%=caption%>
+                                    </h2>
+                                </a>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
