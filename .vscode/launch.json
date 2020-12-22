@@ -13,7 +13,7 @@
             ],
             "program": "${workspaceFolder}/out/index.js",
             "env": {
-                "NODE_ENV": "development",
+                "NODE_ENV": "production",
             },
             "outFiles": [
                 "${workspaceFolder}/**/*.js"

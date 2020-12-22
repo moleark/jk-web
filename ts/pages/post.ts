@@ -126,7 +126,29 @@ function formattedTableRow(productlist: any[]) {
     return header + content + footers;
 }
 
+/**
+ * 渲染整个post 
+ * @param req 
+ * @param article 
+ */
 export async function renderPostArticle(req: Request, article: any) {
+
+    // return ejs.render(template, buildData(req, { article }));
+    let result = '';
+    // content = ejs.render(template, buildData(req, { article }));
+    let content = await renderPostContent(req, article);
+    ejs.renderFile<void>(viewPath + '/post/post-article.ejs', { postArticle: article, content }, (error: Error, str: string) => {
+        result = str;
+    });
+    return result;
+}
+
+/**
+ * 渲染贴文内容（和上面的区别是不带有预定模板）
+ * @param req 
+ * @param article 
+ */
+export async function renderPostContent(req: Request, article: any) {
     let content = article.content;
     content = await formattedTable(content);
 
@@ -139,11 +161,5 @@ export async function renderPostArticle(req: Request, article: any) {
         + ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString()
         + content;
 
-    // return ejs.render(template, buildData(req, { article }));
-    let result = '';
-    content = ejs.render(template, buildData(req, { article }));
-    ejs.renderFile<void>(viewPath + '/post/post-article.ejs', { postArticle: article, content }, (error: Error, str: string) => {
-        result = str;
-    });
-    return result;
+    return ejs.render(template, buildData(req, { article }));
 }

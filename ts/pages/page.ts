@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { Dbs } from "../db";
-import { viewPath, ejsSuffix, ejsError, buildData, hmToEjs } from "../tools";
+import { viewPath, ejsSuffix, ejsError, buildData } from "../tools";
 import * as ejs from 'ejs';
-import { renderPostArticle } from "./post";
+import { renderPostContent } from "./post";
 
 export async function page(req: Request, res: Response) {
     try {
@@ -16,7 +16,7 @@ export async function page(req: Request, res: Response) {
         let { post, url } = ret[0];
         let postret = await Dbs.content.postFromId(post);
         if (postret.length > 0) {
-            postArticleHtml = await renderPostArticle(req, postret[0]);
+            postArticleHtml = await renderPostContent(req, postret[0]);
         }
         /*
         let bodys: any = "";

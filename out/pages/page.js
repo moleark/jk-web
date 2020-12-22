@@ -26,7 +26,7 @@ function page(req, res) {
             let { post, url } = ret[0];
             let postret = yield db_1.Dbs.content.postFromId(post);
             if (postret.length > 0) {
-                postArticleHtml = yield post_1.renderPostArticle(req, postret[0]);
+                postArticleHtml = yield post_1.renderPostContent(req, postret[0]);
             }
             /*
             let bodys: any = "";

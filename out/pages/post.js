@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.renderPostArticle = exports.formattedTable = exports.post = void 0;
+exports.renderPostContent = exports.renderPostArticle = exports.formattedTable = exports.post = void 0;
 const ejs = require("ejs");
 const db_1 = require("../db");
 const tools_1 = require("../tools");
@@ -128,7 +128,30 @@ function formattedTableRow(productlist) {
     });
     return header + content + footers;
 }
+/**
+ * 渲染整个post
+ * @param req
+ * @param article
+ */
 function renderPostArticle(req, article) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // return ejs.render(template, buildData(req, { article }));
+        let result = '';
+        // content = ejs.render(template, buildData(req, { article }));
+        let content = yield renderPostContent(req, article);
+        ejs.renderFile(tools_1.viewPath + '/post/post-article.ejs', { postArticle: article, content }, (error, str) => {
+            result = str;
+        });
+        return result;
+    });
+}
+exports.renderPostArticle = renderPostArticle;
+/**
+ * 渲染贴文内容（和上面的区别是不带有预定模板）
+ * @param req
+ * @param article
+ */
+function renderPostContent(req, article) {
     return __awaiter(this, void 0, void 0, function* () {
         let content = article.content;
         content = yield formattedTable(content);
@@ -138,14 +161,8 @@ function renderPostArticle(req, article) {
         let template = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString()
             + ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString()
             + content;
-        // return ejs.render(template, buildData(req, { article }));
-        let result = '';
-        content = ejs.render(template, tools_1.buildData(req, { article }));
-        ejs.renderFile(tools_1.viewPath + '/post/post-article.ejs', { postArticle: article, content }, (error, str) => {
-            result = str;
-        });
-        return result;
+        return ejs.render(template, tools_1.buildData(req, { article }));
     });
 }
-exports.renderPostArticle = renderPostArticle;
+exports.renderPostContent = renderPostContent;
 //# sourceMappingURL=post.js.map
