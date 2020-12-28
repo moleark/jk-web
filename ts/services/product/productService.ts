@@ -48,7 +48,15 @@ class ProductService {
             should.push({ match: { descriptionC: key } });
         } else {
             should.push({ term: { origin: { value: key, boost: 3 } } });
-            should.push({ match: { description: key } });
+            // should.push({ match: { description: key } });
+            should.push({
+                wildcard: {
+                    description: {
+                        value: '*' + key + '*',
+                        case_insensitive: true
+                    }
+                }
+            });
             should.push({ match: { descriptionC: key } });
         };
         (param.body as any).query.bool.should = should;
