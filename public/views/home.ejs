@@ -23,16 +23,14 @@
             <div class="postion-img">
                 <img src="<%=$root%>img/triangle.svg">
             </div>
+
             <div class="main-icon">
                 <div class="container">
                     <div class="row">
                         <% for (let i=0; i< rootcategories.length; i++) { let {id, name, children }=rootcategories[i];
                             let { icon,color }=arr[i]; %>
                             <a class="sperate-icon" href="category/<%=id%>">
-                                <div class="<%=color%>-border">
-                                    <img src="<%=icon%>">
-                                </div>
-                                <h2 class="<%=color%>">
+                                <h2 class="<%=color%>-border <%=color%>">
                                     <%=name%>
                                 </h2>
                             </a>
@@ -124,16 +122,19 @@
                         </div>
 
                         <div class="col-lg-3">
-                            <div class="side-block  mt-lg-4">
+                            <div class="side-block mt-lg-4">
                                 <% for(var i=0;i<hots.length;i++){ if (i> 5) break;
                                     let {post, caption,subject,image } = hots[i];
                                     %>
                                     <hr class="mobile-divider">
                                     <div class="overflow">
-                                        <div class="post-preview  mt-lg-4 col-xs-9">
-                                            <p><a href="<%=path+post%>">
+                                        <div class="post-preview mt-lg-4 col-xs-9 p-flot">
+                                            <span class="line"></span>
+                                            <p>
+                                                <a href="<%=path+post%>">
                                                     <%=caption%>
-                                                </a></p>
+                                                </a>
+                                            </p>
                                         </div>
                                         <!-- mobile -->
                                         <div class="col-xs-3 display-mobile">
