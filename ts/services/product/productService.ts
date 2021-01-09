@@ -57,7 +57,15 @@ class ProductService {
                     }
                 }
             });
-            should.push({ match: { descriptionC: key } });
+            // should.push({ match: { descriptionC: key } });
+            should.push({
+                wildcard: {
+                    descriptionC: {
+                        value: '*' + key + '*',
+                        case_insensitive: true
+                    }
+                }
+            });
         };
         (param.body as any).query.bool.should = should;
         try {

@@ -118,6 +118,7 @@ const api_1 = require("./api");
         let port = config.get('port');
         app.listen(port, '0.0.0.0', () => __awaiter(this, void 0, void 0, function* () {
             console.log('J&K website on port ' + port);
+            console.log('env: ' + process.env.NODE_ENV);
         }));
     });
 })();

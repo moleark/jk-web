@@ -119,5 +119,6 @@ import { apiRouter } from './api';
 
     app.listen(port, '0.0.0.0', async () => {
         console.log('J&K website on port ' + port);
+        console.log('env: ' + process.env.NODE_ENV);
     });
 })();
