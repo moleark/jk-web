@@ -50,7 +50,14 @@ class ProductService {
                 should.push({ term: { mdlnumber: key } });
             }
             else if (utils_1.hasChineseChar(key)) {
-                should.push({ match: { descriptionC: key } });
+                should.push({
+                    wildcard: {
+                        descriptionC: {
+                            value: '*' + key + '*',
+                            case_insensitive: true
+                        }
+                    }
+                });
             }
             else {
                 should.push({ term: { origin: { value: key, boost: 3 } } });
