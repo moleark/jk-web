@@ -1667,7 +1667,7 @@ ul.categories-list li:before {
     border-radius: 4px;
 }
 
-.main-icon .Life-border {
+.main-icon .life-border {
     border: 2px solid #C51414;
     padding: 15px 30px;
     border-radius: 4px;
@@ -1685,12 +1685,12 @@ ul.categories-list li:before {
     border-radius: 4px;
 }
 
-.main-icon .organic-border:hover, .main-icon .analytical-border:hover, .main-icon .Life-border:hover, .main-icon .material-border:hover, .main-icon .instrument-border:hover {
+.main-icon .organic-border:hover, .main-icon .analytical-border:hover, .main-icon .life-border:hover, .main-icon .material-border:hover, .main-icon .instrument-border:hover {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
-.main-icon .organic-border img, .main-icon .analytical-border img, .main-icon .Life-border img, .main-icon .material-border img, .main-icon .instrument-border img {
+.main-icon .organic-border img, .main-icon .analytical-border img, .main-icon .life-border img, .main-icon .material-border img, .main-icon .instrument-border img {
     height: 100px;
 }
 
