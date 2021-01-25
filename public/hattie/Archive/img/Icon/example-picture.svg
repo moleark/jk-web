@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="sugar" transform="translate(16.000000, 42.000000)" fill="#231F20">
+            <g id="g10" transform="translate(100.500000, 58.500000) scale(-1, 1) rotate(-180.000000) translate(-100.500000, -58.500000) ">
+                <g id="g12" transform="translate(0.000000, -0.000000)">
+                    <g id="g14" transform="translate(93.095861, 62.013527)" font-family="Helvetica" font-size="10" font-weight="normal">
+                        <g id="text18" transform="translate(12.064352, 6.617479) scale(-1, 1) rotate(-180.000000) translate(-12.064352, -6.617479) translate(0.064352, 0.117479)">
+                            <text id="tspan16">
+                                <tspan x="0" y="10.0707494">O</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <polyline id="path20" fill-rule="nonzero" points="45.1750233 30.5299074 44.7401122 29.518833 42.4205865 31.9742995 22.9945583 65.3397565 23.8643804 65.6286349 25.7489951 64.1842428"></polyline>
+                    <polyline id="path22" fill-rule="nonzero" points="85.1868426 41.0739696 85.1868426 40.0628951 84.7519315 39.0518207 44.7401122 28.6521977 44.7401122 29.518833 45.1750233 30.5299074"></polyline>
+                    <polyline id="path24" fill-rule="nonzero" points="123.603988 30.963225 125.343632 29.518833 125.198662 28.6521977 86.9264869 38.7629422 85.1868426 40.0628951 85.1868426 41.0739696"></polyline>
+                    <polyline id="path26" fill-rule="nonzero" points="111.716418 51.3291533 113.166122 52.1957886 125.778543 30.3854682 125.343632 29.518833 123.603988 30.963225"></polyline>
+                    <polygon id="path28" fill-rule="nonzero" points="64.0211701 54.2179375 64.0211701 55.951208 89.6809237 62.5954115 90.1158348 61.0065802"></polygon>
+                    <polyline id="path30" fill-rule="nonzero" points="25.7489951 64.1842428 23.8643804 65.6286349 24.7342026 66.2063917 64.0211701 55.951208 64.0211701 54.2179375"></polyline>
+                    <g id="g32" transform="translate(12.121781, 102.836501)" font-family="Helvetica" font-size="10" font-weight="normal">
+                        <g id="text36" transform="translate(22.434911, 7.392996) scale(-1, 1) rotate(-180.000000) translate(-22.434911, -7.392996) translate(0.434911, 0.892996)">
+                            <text id="tspan34">
+                                <tspan x="0" y="10.0707494">OH</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <polyline id="path38" fill-rule="nonzero" points="22.9945583 91.1943746 24.7342026 91.1943746 24.7342026 66.2063917 23.8643804 65.6286349 22.9945583 65.3397565"></polyline>
+                    <g id="g40" transform="translate(0.000000, 37.000000)" font-family="Helvetica" font-size="10" font-weight="normal">
+                        <g id="text44" transform="translate(22.459073, 7.099903) scale(-1, 1) rotate(-180.000000) translate(-22.459073, -7.099903) translate(0.459073, 0.599903)">
+                            <text id="tspan42">
+                                <tspan x="0" y="10.0707494">HO</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <polyline id="path46" fill-rule="nonzero" points="21.3998843 41.9406048 22.2697065 43.5294361 42.4205865 31.9742995 44.7401122 29.518833 44.7401122 28.6521977"></polyline>
+                    <g id="g48" transform="translate(155.763246, 25.032115)" font-family="Helvetica" font-size="10" font-weight="normal">
+                        <g id="text52" transform="translate(22.024162, 7.489089) scale(-1, 1) rotate(-180.000000) translate(-22.024162, -7.489089) translate(0.024162, 0.989089)">
+                            <text id="tspan50">
+                                <tspan x="0" y="10.0707494">OH</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <polyline id="path54" fill-rule="nonzero" points="152.453089 30.3854682 152.453089 28.6521977 125.198662 28.6521977 125.343632 29.518833 125.778543 30.3854682"></polyline>
+                    <g id="g56" transform="translate(94.620030, -0.000000)" font-family="Helvetica" font-size="10" font-weight="normal">
+                        <g id="text60" transform="translate(22.134856, 7.099903) scale(-1, 1) rotate(-180.000000) translate(-22.134856, -7.099903) translate(0.134856, 0.599903)">
+                            <text id="tspan58">
+                                <tspan x="0" y="10.0707494">OH</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <polyline id="path62" fill-rule="nonzero" points="99.5389082 17.0970611 97.9442342 16.2304259 84.7519315 39.0518207 85.1868426 40.0628951 86.9264869 38.7629422"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
