@@ -2855,6 +2855,9 @@ table.product-table th {
 	background-image: url(../img/footer-bg.svg);
 	background-repeat: no-repeat;
 }
+.footer .footer-logo{
+	width:68px;
+}
 .footer p {
 	margin-top: 15px;
 	font-size: 12px;
