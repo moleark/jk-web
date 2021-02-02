@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//import * as cors from 'cors';
 const config = require("config");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -39,7 +38,6 @@ const api_1 = require("./api");
         // 使用 body-parser 
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json());
-        //app.use(cors());
         app.set('json replacer', (key, value) => {
             if (value === null)
                 return undefined;

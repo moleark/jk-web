@@ -1,4 +1,6 @@
 import { Router, Request, Response } from 'express';
+import * as cors from 'cors';
+import * as config from 'config';
 import { home } from './home';
 import { post } from './post';
 import { category } from './category';
@@ -67,13 +69,17 @@ homeRouter.get('/post_test/:id', post_test);
 homeRouter.get('/partial/categoryinstruction/:current', categoryInstruction);
 homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail);
 
+const MSCUCorsOptions = {
+    origin: config.get<[]>("MSCUCorsOrigins"),
+    credentials: true
+}
 homeRouter.get('/partial/captcha', captcha);
 homeRouter.get('/partial/productMsdsVersion/:origin', productMsdsVersions);
-homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', productMsdsFileByOrigin);
-homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', productSpecFileByOrigin);
+homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', cors(MSCUCorsOptions), productMsdsFileByOrigin);
+homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', cors(), productSpecFileByOrigin);
 
 
-homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', productMsdsFile);
+homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', cors(MSCUCorsOptions), productMsdsFile);
 homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpecFile);
 
 

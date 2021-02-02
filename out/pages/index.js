@@ -11,6 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.homeRouter = void 0;
 const express_1 = require("express");
+const cors = require("cors");
+const config = require("config");
 const home_1 = require("./home");
 const post_1 = require("./post");
 const category_1 = require("./category");
@@ -76,11 +78,15 @@ exports.homeRouter.get('/cart', cart_1.cart);
 exports.homeRouter.get('/post_test/:id', post_test_1.post_test);
 exports.homeRouter.get('/partial/categoryinstruction/:current', categoryinstruction_1.categoryInstruction);
 exports.homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail_1.pointProductDetail);
+const MSCUCorsOptions = {
+    origin: config.get("MSCUCorsOrigins"),
+    credentials: true
+};
 exports.homeRouter.get('/partial/captcha', captcha_1.captcha);
 exports.homeRouter.get('/partial/productMsdsVersion/:origin', productMsds_1.productMsdsVersions);
-exports.homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', productMsds_1.productMsdsFileByOrigin);
-exports.homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', productSpec_1.productSpecFileByOrigin);
-exports.homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', productMsds_1.productMsdsFile);
+exports.homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', cors(MSCUCorsOptions), productMsds_1.productMsdsFileByOrigin);
+exports.homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', cors(), productSpec_1.productSpecFileByOrigin);
+exports.homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', cors(MSCUCorsOptions), productMsds_1.productMsdsFile);
 exports.homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpec_1.productSpecFile);
 exports.homeRouter.get('/partial/orderPayment/:payid/:appid/:orderid', orderPayment_1.orderPayment);
 exports.homeRouter.get('/partial/payOrderQuery/:orderid', wxPay_1.wxOrderQuery);

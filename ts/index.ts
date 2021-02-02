@@ -1,4 +1,3 @@
-//import * as cors from 'cors';
 import * as config from 'config';
 import * as bodyParser from 'body-parser';
 import * as ejs from 'ejs';
@@ -32,7 +31,6 @@ import { apiRouter } from './api';
     // 使用 body-parser 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
-    //app.use(cors());
     app.set('json replacer', (key: string, value: any) => {
         if (value === null) return undefined;
         return value;

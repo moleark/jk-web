@@ -2,6 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getFilePath = void 0;
 const config = require("config");
+/**
+ *
+ * @param type 文件类型 msds | spec
+ * @param fileName 文件名称
+ * @param lang 语言版本
+ */
 function getFilePath(type, fileName, lang) {
     let o = config.get('FILELANGVER');
     let fileAscr = o[lang] ? o[lang] : (fileName.includes('_EN') ? 'EN' : 'CN');
@@ -9,10 +15,6 @@ function getFilePath(type, fileName, lang) {
     if (type === 'spec')
         return `${MSCUPath}/${fileName}`;
     return `${MSCUPath}${type}/${fileAscr}/${fileName}`;
-    /* if (process.env.NODE_ENV === 'production')
-        return `${MSCUPath}${type}/${fileAscr}/${fileName}`;
-    else
-        return MSCUPath + fileName;//'100008_CN.PDF' */
 }
 exports.getFilePath = getFilePath;
 //# sourceMappingURL=getFilePath.js.map
