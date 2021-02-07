@@ -36,18 +36,16 @@ import { apiRouter } from './api';
         return value;
     });
 
+    var sessionCookieOptions = config.get<any>('sessionCookieOptions');
     app.use(session({
+        name: sessionCookieOptions.name,
         secret: 'session-cat',//keyboard cat
-        name: 'session-cat',
         resave: false,
         saveUninitialized: false,
         unset: 'destroy',
         rolling: true,
         store: new MemoryStore(),
-        cookie: {
-            maxAge: 60 * 1000 * 30,
-            secure: false,
-        }
+        cookie: sessionCookieOptions
     }));
 
     app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {

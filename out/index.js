@@ -43,18 +43,16 @@ const api_1 = require("./api");
                 return undefined;
             return value;
         });
+        var sessionCookieOptions = config.get('sessionCookieOptions');
         app.use(session({
+            name: sessionCookieOptions.name,
             secret: 'session-cat',
-            name: 'session-cat',
             resave: false,
             saveUninitialized: false,
             unset: 'destroy',
             rolling: true,
             store: new express_session_1.MemoryStore(),
-            cookie: {
-                maxAge: 60 * 1000 * 30,
-                secure: false,
-            }
+            cookie: sessionCookieOptions
         }));
         app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
             //let json = res.json;
