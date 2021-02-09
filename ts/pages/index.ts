@@ -76,11 +76,11 @@ const MSCUCorsOptions = {
 homeRouter.get('/partial/captcha', captcha);
 homeRouter.get('/partial/productMsdsVersion/:origin', productMsdsVersions);
 homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', cors(MSCUCorsOptions), productMsdsFileByOrigin);
-homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', cors(), productSpecFileByOrigin);
+homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', cors(MSCUCorsOptions), productSpecFileByOrigin);
 
 
 homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', cors(MSCUCorsOptions), productMsdsFile);
-homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpecFile);
+homeRouter.get('/partial/productSpecFile/:productid/:captcha', cors(MSCUCorsOptions), productSpecFile);
 
 
 homeRouter.get('/partial/orderPayment/:payid/:appid/:orderid', orderPayment);
@@ -89,7 +89,7 @@ homeRouter.get('/partial/wxpay/notice', wxNotice);
 
 
 //delete
-homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile);  // 保持兼容，暂时保留
+homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', cors(MSCUCorsOptions), productPdfFile);  // 保持兼容，暂时保留
 
 homeRouter.get('/privacy', privacy);  // 保持兼容，暂时保留
 

@@ -85,14 +85,14 @@ const MSCUCorsOptions = {
 exports.homeRouter.get('/partial/captcha', captcha_1.captcha);
 exports.homeRouter.get('/partial/productMsdsVersion/:origin', productMsds_1.productMsdsVersions);
 exports.homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', cors(MSCUCorsOptions), productMsds_1.productMsdsFileByOrigin);
-exports.homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', cors(), productSpec_1.productSpecFileByOrigin);
+exports.homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', cors(MSCUCorsOptions), productSpec_1.productSpecFileByOrigin);
 exports.homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', cors(MSCUCorsOptions), productMsds_1.productMsdsFile);
-exports.homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpec_1.productSpecFile);
+exports.homeRouter.get('/partial/productSpecFile/:productid/:captcha', cors(MSCUCorsOptions), productSpec_1.productSpecFile);
 exports.homeRouter.get('/partial/orderPayment/:payid/:appid/:orderid', orderPayment_1.orderPayment);
 exports.homeRouter.get('/partial/payOrderQuery/:orderid', wxPay_1.wxOrderQuery);
 exports.homeRouter.get('/partial/wxpay/notice', notice_1.wxNotice);
 //delete
-exports.homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile_1.productPdfFile); // 保持兼容，暂时保留
+exports.homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', cors(MSCUCorsOptions), productPdfFile_1.productPdfFile); // 保持兼容，暂时保留
 exports.homeRouter.get('/privacy', privacy_1.privacy); // 保持兼容，暂时保留
 exports.homeRouter.post('/addroute', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let { body } = req;
