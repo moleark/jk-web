@@ -8,6 +8,7 @@ const dbProductIndex_1 = require("./dbProductIndex");
 const dbPointShop_1 = require("./dbPointShop");
 const dbProductMSCU_1 = require("./dbProductMSCU");
 const DbOrderPayment_1 = require("./DbOrderPayment");
+const DbJointPlatform_1 = require("./DbJointPlatform");
 class Dbs {
     static init() {
         db_1.Db.init();
@@ -17,6 +18,7 @@ class Dbs {
         Dbs.pointshop = new dbPointShop_1.DbPointShop();
         Dbs.productMSCU = new dbProductMSCU_1.DbProductMSCU();
         Dbs.orderPayment = new DbOrderPayment_1.DbOrderPayment();
+        Dbs.jointPlatform = new DbJointPlatform_1.DbEPEC();
     }
 }
 exports.Dbs = Dbs;

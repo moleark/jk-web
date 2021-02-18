@@ -34,6 +34,10 @@
         "order": {
             "database": "order",
             "connection": "connection"
+        },
+        "joint-uq-platform": {
+            "database": "joint-uq-platform",
+            "connection": "connection"
         }
     },
     "ex": "null",
