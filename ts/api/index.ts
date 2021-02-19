@@ -5,9 +5,8 @@ import { epecLogin } from "../epec";
 export const apiRouter = Router({ mergeParams: true });
 apiRouter.get(['/search/:key', '/search/:key/:pageNumber(\\d+)', '/search/:key?debug'], search);
 
-// 中石化
+// 中石化登录地址
 apiRouter.get('/epec/login', epecLogin);
-apiRouter.get('/epec/saveOrder', epecLogin);
 
-// 药物所
+// 药物所登录地址
 apiRouter.get('/UserIdentify.ashx', epecLogin);
