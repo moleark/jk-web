@@ -11,28 +11,27 @@
             <div class="col-lg-3 col-xs-6">
                 <div class="footer-title">百灵威集团</div>
                 <ul>
-                    <li><a href="https://web.jkchemical.com/ch/about">公司简介</a></li>
-                    <li><a href="https://web.jkchemical.com/ch/promise">企业承诺</a></li>
-                    <li><a href="https://web.jkchemical.com/ch/recommended-brand">合作品牌</a></li>
-                    <!-- <li><a href="https://www.jkchemical.com/brand.aspx?language=ch">合作品牌</a></li> -->
-                    <li><a href="https://web.jkchemical.com/job">招贤纳士</a></li>
+                    <li><a href="/ch/about" target="_blank">公司简介</a></li>
+                    <li><a href="/ch/promise" target="_blank">企业承诺</a></li>
+                    <li><a href="/ch/recommended-brand" target="_blank">合作品牌</a></li>
+                    <li><a href="/job" target="_blank">招贤纳士</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-xs-6">
                 <div class="font-weight-bold">浏览</div>
                 <ul>
-                    <li><a href="https://web.jkchemical.com/information">资讯中心</a></li>
+                    <li><a href="/information" target="_blank">资讯中心</a></li>
                     <li><a href="<%=$root%>product/mscu/coa">质量证书(COA)</a></li>
                     <li><a href="<%=$root%>product/mscu/msds">安全说明书(SDS)</a></li>
                     <li><a href="#">产品</a></li>
                     <ul class="ml-3">
-                        <% for (let i=0; i< rootcategories.length; i++) { let {id, name, children
-                            }=rootcategories[i]; %>
+                        <% for (let i=0; i< rootcategories.length; i++) { let {id, name, children }=rootcategories[i];
+                            %>
                             <li><a href="<%=$root%>category/<%=id%>">
-                                <%=name%>
-                            </a></li>
-                        <% } %>
-                        <!-- <li><a href="/productCategory/7">有机化学</a></li>
+                                    <%=name%>
+                                </a></li>
+                            <% } %>
+                                <!-- <li><a href="/productCategory/7">有机化学</a></li>
                         <li><a href="/productCategory/430">分析化学</a></li>
                         <li><a href="/productCategory/986">生命科学</a></li>
                         <li><a href="/productCategory/1214">材料科学</a></li>
@@ -40,11 +39,6 @@
                     </ul>
                     <li><a href="<%=$root%>product/mscu/msds">危险品购买提示</a></li>
                 </ul>
-                <!-- <div class="footer-title">专业服务</div>
-                <ul>
-                    <li><a href="https://shop.jkchemical.com/">百灵威商城</a></li>
-                    <li><a href="<%=$root%>information">资讯中心</a></li>
-                </ul> -->
             </div>
             <div class="col-lg-3 col-xs-6">
                 <div class="footer-title">联系我们</div>
@@ -86,11 +80,12 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-sm-5">
-                    严禁在未经同意的情况下使用本网站所有信息 | <a>法律声明</a> | <a href="https://web.jkchemical.com/privacy">隐私政策</a>
+                    严禁在未经同意的情况下使用本网站所有信息 | <a>法律声明</a> | <a href="/privacy">隐私政策</a>
                 </div>
                 <div class="col-sm-7">
                     京公安网备11010502027473 | <a href="https://beian.miit.gov.cn" target="_blank">京ICP备09071033号-3</a>&nbsp;
-                    | <a href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&entyId=20120328090456140" target="_blank">上海工商</a>&nbsp;
+                    | <a href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&entyId=20120328090456140"
+                        target="_blank">上海工商</a>&nbsp;
                     | <a target="_blank">危险化学品经营许可证</a> | <a target="_blank"> 营业执照(三证合一)</a>
                 </div>
             </div>
