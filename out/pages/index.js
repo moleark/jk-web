@@ -104,4 +104,11 @@ exports.homeRouter.post('/addroute', (req, res) => __awaiter(void 0, void 0, voi
     }
     res.status(200).end();
 }));
+exports.homeRouter.get('/initDynamicRoute', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let ret = yield db_1.Dbs.content.getRoute();
+    ret.forEach(e => {
+        exports.homeRouter.get(e.url, page_1.page);
+    });
+    res.status(200).end();
+}));
 //# sourceMappingURL=index.js.map

@@ -103,3 +103,10 @@ homeRouter.post('/addroute', async (req: Request, res: Response) => {
     }
     res.status(200).end();
 });
+homeRouter.get('/initDynamicRoute', async (req: Request, res: Response) => {
+    let ret = await Dbs.content.getRoute();
+    ret.forEach(e => {
+        homeRouter.get(e.url, page);
+    });
+    res.status(200).end();
+});
