@@ -63,18 +63,18 @@
     },
     "wxPay":{
         "wxPayParam":{
-            "appid": "wx74beb9b6fe52f561",
-            "mch_id": "1300077401",
-            "notify_url": "http://www.weixin.qq.com/wxpay/pay.php"
+            "appid": "",
+            "mch_id": "",
+            "notify_url": ""
         },
-        "wxSecretKey":"526ba202ee1a714498402913b5f15dcc"
+        "wxSecretKey":""
     },
     "aliPay":{
         "aliPayParam":{
-            "appId": "2021002110619307",
-            "notify_url": "http://api.test.alipay.net/atinterface/receive_notify.htm"
+            "appId": "",
+            "notify_url": ""
         },
-        "aliCretPath":"C:\\Users\\z539\\Desktop\\cref\\"
+        "aliCretPath":""
     },
     "privacyId": 168,
     "esBaseUrl": "https://c.jkchemical.com/elasticsearch"
