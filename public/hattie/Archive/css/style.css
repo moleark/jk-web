@@ -4122,7 +4122,7 @@ table.product-table th {
 	.footer-m .qrcode {
 		display: none;
 	}
-	.footer-m .col-xs-6 {
+	.footer-m .col-6 {
 		margin-top: 30px;
 		width: 50%;
 	}
@@ -4198,7 +4198,7 @@ table.product-table th {
 	.article-list.unset.row {
 		margin: unset;
 	}
-	.col-xs-12 {
+	.col-12 {
 		width: 100%;
 		flex: 100%!important;
 		;
@@ -4223,7 +4223,7 @@ table.product-table th {
 	.article p a {
 		display: none;
 	}
-	.article-list .col-xs-9 {
+	.article-list .col-9 {
 		padding: 0;
 	}
 	.article .mt-lg-65 {
@@ -4337,21 +4337,21 @@ table.product-table th {
 		overflow: hidden;
 		margin-bottom: 0;
 	}
-	.col-xs-6 {
+	.col-6 {
 		margin-bottom: 0;
 		width: 50%;
 	}
-	.col-xs-3 {
+	.col-3 {
 		float: left;
 		width: 33.3%;
 	}
-	.col-xs-3 .img-wrap {
+	.col-3 .img-wrap {
 		height: 4.8rem!important;
 	}
-	.col-xs-9 .title-wrap, .col-xs-9 p {
+	.col-9 .title-wrap, .col-9 p {
 		margin-top: 0px;
 	}
-	.col-xs-9 {
+	.col-9 {
 		float: left;
 		width: 66.7%;
 	}
@@ -4438,7 +4438,7 @@ table.product-table th {
 		margin-bottom: 5px;
 		margin-top: 10px;
 	}
-	.col-xs-3 .img-wrap {
+	.col-3 .img-wrap {
 		margin: 0;
 		width: 96px;
 		height: 64px!important;
