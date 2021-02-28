@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-auto ml-auto d-flex align-items-center float-right">
                     <div class="phone">
-                        <img src="<%=$root%>images/icon/Phone.svg"> 客服热线： 400-666-7788
+                        <img src="<%=$root%>images/icon/Phone.svg" /> 客服热线： 400-666-7788
                     </div>
                     <div class="area">
                         <div class="dropdown">
@@ -28,8 +28,9 @@
                     </div>
                     <div class="cart mr-3 pl-1">
                         <a className="text-primary position-relative" href="<%=shopJsPath.shopmain%>cart">
-                            <span class="text-primary small"><i class="fa fa-shopping-cart"
-                                    aria-hidden="true"></i></span>
+                            <span class="text-primary small">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </span>
                             <% if (true) { %>
                                 <u class="position-absolute d-flex align-items-center justify-content-center text-white text-right text-decoration-none ml-2"
                                     style="top: 0.2rem;font-size: 0.6rem;background-color: red;min-width: 1rem;padding: 0 3px;height: 1.0rem;border-radius: 0.6rem;
@@ -66,13 +67,12 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark pad-tb20">
         <div class="container">
-            <a href="<%=$root%>" class="header-logo"><img src="<%=$root%>images/logo.svg" alt="" class="img-fluid"></a>
+            <a href="<%=$root%>" class="header-logo"><img src="<%=$root%>images/logo.svg" alt="logo" class="img-fluid"></a>
             <div class="justify-content-center search-wrap">
                 <ul class="top-list justify-content-center">
                     <li><a href="/subjectpost/18">特惠活动</a> </li>
                     <!-- <li><a href="#">结构检索</a> </li> -->
                     <li><a href="/myOrders">订单查询</a></li>
-                    <li><a href="/product/mscu/COA" target="_blank">COA</a></li>
                     <li><a href="/product/mscu/MSDS" target="_blank">SDS</a></li>
                 </ul>
                 <form class="custom-search-input" onsubmit="search(event)">
@@ -80,14 +80,14 @@
                         <input name="keyInput" type="text" class="search-query form-control" placeholder="Search" />
                         <span class="input-group-btn" style="top:0;">
                             <button class="btn" type="submit">
-                                <img src="<%=$root%>images/icon/magnifier.svg">
+                                <img src="<%=$root%>images/icon/magnifier.svg" />
                             </button>
                         </span>
                     </div>
                 </form>
             </div>
 
-            <a style=" display: none;" class="display-mobile-block-shoppingcart shopping-cart" href="#">
+            <a style="display: none;" class="display-mobile-block-shoppingcart shopping-cart" href="#">
                 <img src="<%=$root%>images/commerce-and-shopping.svg" width="40px">
             </a>
             <button class="navbar-toggle navbar-toggler navbar-toggler-right collapsed" type="button"
@@ -100,7 +100,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="<%=root%>product-catalog" data-toggle="dropdown" aria-haspopup="true"
+                        <a class="nav-link dropdown-toggle" href="<%=$root%>product-catalog" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             产品<b class="caret"></b>
                         </a>
