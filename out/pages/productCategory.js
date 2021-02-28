@@ -26,8 +26,8 @@ function productCategory(req, res) {
         let nextpage = pageCount + 1;
         let prepage = pageCount - 1;
         let data = tools_2.buildData(req, {
-            nextpage: rootPath + 'productCategory/' + currentId + '/?pageCount=' + nextpage,
-            prepage: rootPath + 'productCategory/' + currentId + '/?pageCount=' + prepage,
+            nextpage: rootPath + 'product-catalog/' + currentId + '/?pageCount=' + nextpage,
+            prepage: rootPath + 'product-catalog/' + currentId + '/?pageCount=' + prepage,
             current: current,
             productpage: productpage,
             pageCount: pageCount,

@@ -42,8 +42,8 @@ function category(req, res) {
             category: category,
             postArticle: postArticle,
             categoryPost: categoryPost,
-            path: rootPath + 'category/',
-            productPath: rootPath + 'productCategory/',
+            path: rootPath + 'product-catalog/',
+            productPath: rootPath + 'product-catalog/',
             postpath: rootPath + 'post/',
             titleshow: true
         });

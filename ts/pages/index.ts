@@ -41,8 +41,11 @@ import { Dbs } from '../db';
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
 homeRouter.get('/post/:id', post);
+homeRouter.get('/product-catalog/:current', category);
+/*
 homeRouter.get('/category/:current', category);
 homeRouter.get('/productcategory/:current', category);
+*/
 homeRouter.get('/search/:key', search);
 homeRouter.get('/search', search);
 homeRouter.get('/product/:id', product);
