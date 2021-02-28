@@ -23,21 +23,16 @@
                     <li><a href="/information" target="_blank">资讯中心</a></li>
                     <li><a href="<%=$root%>product/mscu/coa">质量证书(COA)</a></li>
                     <li><a href="<%=$root%>product/mscu/msds">安全说明书(SDS)</a></li>
-                    <li><a href="#">产品</a></li>
+                    <li><a href="<%=$root%>product-catalog">产品</a></li>
                     <ul class="ml-3">
                         <% for (let i=0; i< rootcategories.length; i++) { let {id, name, children }=rootcategories[i];
                             %>
-                            <li><a href="<%=$root%>category/<%=id%>">
+                            <li><a href="<%=$root%>product-cataglog/<%=id%>">
                                     <%=name%>
                                 </a></li>
                             <% } %>
-                                <!-- <li><a href="/productCategory/7">有机化学</a></li>
-                        <li><a href="/productCategory/430">分析化学</a></li>
-                        <li><a href="/productCategory/986">生命科学</a></li>
-                        <li><a href="/productCategory/1214">材料科学</a></li>
-                        <li><a href="/productCategory/#">仪器耗材</a></li> -->
                     </ul>
-                    <li><a href="<%=$root%>product/mscu/msds">危险品购买提示</a></li>
+                    <li><a href="#">危险品购买提示</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-6">
