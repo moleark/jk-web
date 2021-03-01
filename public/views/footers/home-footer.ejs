@@ -6,7 +6,7 @@
             <div class="col-lg-3 col-6">
                 <img src="<%=$root%>images/icon/footer-logo.svg" class="footer-logo">
                 <p>促进科技与工业发展，造福人类</p>
-                <img src="<%=$root%>images/qrcode.png" class="w-75 mt-lg-28 qrcode" />
+                <img src="<%=$root%>images/qrcode.jpg" class="w-75 mt-lg-28 qrcode" />
             </div>
             <div class="col-lg-3 col-6">
                 <div class="footer-title">百灵威集团</div>
@@ -21,18 +21,17 @@
                 <div class="font-weight-bold">浏览</div>
                 <ul>
                     <li><a href="/information" target="_blank">资讯中心</a></li>
-                    <li><a href="<%=$root%>product/mscu/coa">质量证书(COA)</a></li>
                     <li><a href="<%=$root%>product/mscu/msds">安全说明书(SDS)</a></li>
                     <li><a href="<%=$root%>product-catalog">产品</a></li>
                     <ul class="ml-3">
                         <% for (let i=0; i< rootcategories.length; i++) { let {id, name, children }=rootcategories[i];
                             %>
-                            <li><a href="<%=$root%>product-cataglog/<%=id%>">
+                            <li><a href="<%=$root%>product-catalog/<%=id%>">
                                     <%=name%>
                                 </a></li>
                             <% } %>
                     </ul>
-                    <li><a href="images/危险化学品购买提示.png">危险品购买提示</a></li>
+                    <li><a style="color:red" href="images/危险化学品购买提示.png">危险品购买提示</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-6">
