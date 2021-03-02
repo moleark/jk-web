@@ -107,29 +107,38 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
                             <% for (let i=0; i< rootcategories.length; i++) { let {id, name, children
                                 }=rootcategories[i]; %>
-                                <a class="dropdown-item" href="<%=$root%>product-catalog/<%=id%>">
+                                <a class="dropdown-item text-center" href="<%=$root%>product-catalog/<%=id%>">
                                     <%=name%>
                                 </a>
                                 <% } %>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             服务<b class="caret"></b>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                            <a class="dropdown-item" href="/myOrders">订单查询</a>
-                            <a class="dropdown-item" href="/pointshop">积分查询</a>
+                            <a class="dropdown-item text-center" href="/myOrders">订单查询</a>
+                            <a class="dropdown-item text-center" href="/pointshop">积分查询</a>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             会员<b class="caret"></b>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                            <a class="dropdown-item" href="/password">修改密码</a>
+                            <a class="dropdown-item text-center" href="/password">修改密码</a>
+                            <a class="dropdown-item text-center" href="/meInfo">账户信息</a>
+                            <a class="dropdown-item text-center" href="/contact">地址管理</a>
+                            <hr class="my-1" />
+                            <a class="dropdown-item text-center" href="/favorites">商品收藏</a>
+                            <a class="dropdown-item text-center" href="/pointshop">积分管理</a>
+                            <a class="dropdown-item text-center" href="/couponManage">卡券管理</a>
+                            <hr class="my-1" />
+                            <a class="dropdown-item text-center" href="/myOrders">订单记录</a>
+                            <a class="dropdown-item text-center" href="/invoice">发票管理</a>
                         </div>
                     </li>
                     <!--注册登录区域-->
