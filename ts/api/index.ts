@@ -5,7 +5,7 @@ import { getProductsInCatalog } from "./getProductsInCatalog";
 
 export const apiRouter = Router({ mergeParams: true });
 apiRouter.get(['/search/:key', '/search/:key/:pageNumber(\\d+)', '/search/:key?debug'], search);
-apiRouter.get(['/product-catalog/:catalog', '/product-catalog/:catalog/:pageNumber(\\d+)', '/product-catalog/:catalog?debug'], getProductsInCatalog);
+apiRouter.get(['/product-catalog/:catalog/products', '/product-catalog/:catalog/products/:pageNumber(\\d+)', '/product-catalog/:catalog/products?debug'], getProductsInCatalog);
 
 // 中石化登录地址
 apiRouter.get('/epec/login', epecLogin);

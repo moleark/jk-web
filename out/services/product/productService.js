@@ -124,6 +124,8 @@ class ProductService {
                 }
             };
             try {
+                // 查询过程，从目录树索引中查询得到所包含的productid，然后再根据此id到product索引中再次查询
+                // 第二次的查询结果合并到第一次的查询结果中
                 let esResult = yield this.esClient.search(param);
                 if (debug)
                     return esResult;
