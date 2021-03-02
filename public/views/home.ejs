@@ -157,27 +157,30 @@
                 <img src="<%=$root%>images/triangle2.svg">
             </div>
 
-            <div class="special-offer">
-                <h2 class="main-title text-center"><a href="<%=$root%>subjectpost/18">特惠活动</a> </h2>
-                <div class="container">
-                    <div class="row mt-lg-4" style="text-align: center;">
-                        <% for(var j=0; j<discounts.length; j++){ if (j> 3) break;
-                            let {id, caption, image } = discounts[j];
-                            %>
-                            <div class="col-lg-3 col-sm-6 col-6">
-                                <div class="img-wrap">
-                                    <a href="<%=path+id%>"><img src="<%=image%>"></a>
+            <% if(discounts.count > 0){ %>
+                <div class="special-offer">
+                    <h2 class="main-title text-center"><a href="<%=$root%>subjectpost/18">特惠活动</a> </h2>
+                    <div class="container">
+                        <div class="row mt-lg-4" style="text-align: center;">
+                            <% for(var j=0; j<discounts.length; j++){ if (j> 3) break;
+                                let {id, caption, image } = discounts[j];
+                                %>
+                                <div class="col-lg-3 col-sm-6 col-6">
+                                    <div class="img-wrap">
+                                        <a href="<%=path+id%>"><img src="<%=image%>"></a>
+                                    </div>
+                                    <a href="<%=path+id%>"></a>
+                                    <h2 class="h1 mt-lg-1">
+                                        <%=caption%>
+                                    </h2>
+                                    </a>
                                 </div>
-                                <a href="<%=path+id%>"></a>
-                                <h2 class="h1 mt-lg-1">
-                                    <%=caption%>
-                                </h2>
-                                </a>
-                            </div>
-                            <% } %>
+                                <% } %>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <% } %>
+
 
             <div class="feature-products">
                 <div class="postion-img-three ">
