@@ -97,6 +97,66 @@ class ProductService {
             }
         });
     }
+    /**
+     *
+     * @param catalogId
+     * @param pageNumber
+     * @param pageSize
+     * @param debug
+     */
+    getProductsInCatalog(catalogId, pageNumber = 1, pageSize = 20, debug = false) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!catalogId)
+                throw '';
+            let from = (pageNumber - 1) * pageSize;
+            let param = {
+                index: "productproductcatalog",
+                from: from,
+                size: pageSize,
+                body: {
+                    query: {
+                        term: { catalog: { value: catalogId } }
+                    },
+                    sort: [
+                        "_score",
+                        { "order": "asc" }
+                    ]
+                }
+            };
+            try {
+                let esResult = yield this.esClient.search(param);
+                if (debug)
+                    return esResult;
+                let { body } = esResult;
+                let { took, hits } = body;
+                let { total, hits: ihits } = hits;
+                let productIds = ihits.map((e) => e._source.product);
+                let param2 = {
+                    index: "products",
+                    body: {
+                        query: { ids: { values: productIds } }
+                    }
+                };
+                let esResult2 = yield this.esClient.search(param2);
+                let { body: body2 } = esResult2;
+                let { hits: hits2 } = body2;
+                let { hits: ihits2 } = hits2;
+                return {
+                    took,
+                    total,
+                    hits: ihits.map((e) => {
+                        let product = ihits2.find((p) => p._source.id === e._source.product);
+                        if (product)
+                            return Object.assign({ "sort": e.sort, "_score": e._score }, product._source);
+                    })
+                };
+            }
+            catch (error) {
+                console.log(error);
+                throw error;
+            }
+        });
+    }
 }
 exports.productService = new ProductService();
 //# sourceMappingURL=productService.js.map
