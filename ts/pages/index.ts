@@ -94,7 +94,7 @@ homeRouter.get('/partial/wxpay/notice', wxNotice);
 //delete
 homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', cors(MSCUCorsOptions), productPdfFile);  // 保持兼容，暂时保留
 
-homeRouter.get('/privacy', privacy);  // 保持兼容，暂时保留
+// homeRouter.get('/privacy', privacy);  // 保持兼容，暂时保留
 
 homeRouter.post('/addroute', async (req: Request, res: Response) => {
     let { body } = req;
