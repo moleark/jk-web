@@ -40,23 +40,7 @@
                                     <% } %>
                         </a>
                     </div>
-                    <div class="login" style="font-size: 14px;">
-                        <% if (!true) { %>
-                            <div>
-                                <% if (true) { %>
-                                    <span class="text-primary mr-2"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                    <% } else { %>
-                                        <img src="<%=$root%>images/commerce-and-shopping.svg" width="18px"
-                                            style="display: inline-block;">
-                                        <% } %>
-                                            <a class="pr-2" href="<%=$root%>logout">退出</a>
-                            </div>
-                            <% } else { %>
-                                <div>
-                                    <a href="<%=$root%>register">注册</a> /
-                                    <a class="pr-2" href="<%=$root%>login">登录</a>
-                                </div>
-                                <% } %>
+                    <div id="login" class="login" style="font-size: 14px;">
                     </div>
                 </div>
             </div>

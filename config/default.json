@@ -44,7 +44,10 @@
     "SALESREGION": 1,
     "CHINESE": 196,
     "shopJsPath": {
-
+        "runtime": "http://localhost:7798/static/js/bundle.js",
+        "module": "http://localhost:7798/static/js/0.chunk.js",
+        "module2": "http://localhost:7798/static/js/1.chunk.js",
+        "main": "http://localhost:7798/static/js/main.chunk.js"
     },
     "selfBrands": [2, 8],
     "MSCUPath": "D://zwgKing//",
