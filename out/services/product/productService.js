@@ -135,6 +135,7 @@ class ProductService {
                 let productIds = ihits.map((e) => e._source.product);
                 let param2 = {
                     index: "products",
+                    size: pageSize,
                     body: {
                         query: { ids: { values: productIds } }
                     }
