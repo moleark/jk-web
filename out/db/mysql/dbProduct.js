@@ -68,6 +68,11 @@ class DbProduct extends db_1.Db {
                 left join ${db}.tv_brand as b on p.$unit = b.$unit and p.brand = b.id
                 LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
         WHERE 	pp.$unit =? AND pp.salesRegion=? `;
+        this.sqlGetProductByNo = `
+            select  id, brand, origin, description, descriptionc, imageurl, no, isvalid
+            from    ${db}.tv_productx
+            where   $unit = 24 and no = ?
+        `;
     }
     /**
      *
@@ -140,6 +145,18 @@ class DbProduct extends db_1.Db {
                 return [];
             const ret = yield this.tableFromSql(this.sqlSearchProductByOrigin + start + origin + ")", [24, 5]);
             return ret;
+        });
+    }
+    /**
+     * 根据no获取产品信息
+     * @param no
+     * @returns
+     */
+    getProductByNo(no) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlGetProductByNo, [no]);
+            if (ret.length > 0)
+                return ret[0];
         });
     }
 }

@@ -371,6 +371,22 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
+    /**
+     * 修改贴文内容（用于替换内容中的url)
+     * @param id
+     * @param content
+     */
+    replaceContentUrl(id, content) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this.execSql(`update ${this.databaseName}.tv_post set content = ? where id = ?`, [content, id]);
+            }
+            catch (error) {
+                console.error(error);
+                throw error;
+            }
+        });
+    }
 }
 exports.DbContent = DbContent;
 //# sourceMappingURL=dbContent.js.map
