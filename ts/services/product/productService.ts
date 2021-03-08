@@ -18,6 +18,7 @@ class ProductService {
 
         if (!key)
             throw '';
+        key = key.trim();
 
         let from = (pageNumber - 1) * pageSize;
         let param: Search = {

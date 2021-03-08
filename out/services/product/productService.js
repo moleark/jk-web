@@ -24,6 +24,7 @@ class ProductService {
         return __awaiter(this, void 0, void 0, function* () {
             if (!key)
                 throw '';
+            key = key.trim();
             let from = (pageNumber - 1) * pageSize;
             let param = {
                 index: "products",
