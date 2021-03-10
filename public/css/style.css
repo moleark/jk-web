@@ -3740,9 +3740,9 @@ table.product-table th {
     ul.top-list li {
         margin: 0 4px;
     }
-    .custom-search-input {
+    /* .custom-search-input {
         width: 288px;
-    }
+    } */
 }
 
 @media (max-width: 991px) {
