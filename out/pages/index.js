@@ -51,33 +51,31 @@ const db_1 = require("../db");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
+exports.homeRouter.get('/iframe', iframe_1.iframe);
+exports.homeRouter.get('/information', information_1.information);
+exports.homeRouter.get('/all-posts', allPosts_1.allPosts);
+exports.homeRouter.get('/webMap', webMap_1.webMap);
+// 这一组准备作废
 exports.homeRouter.get('/product-catalog/:current', category_1.category);
-/*
-homeRouter.get('/category/:current', category);
-homeRouter.get('/productcategory/:current', category);
-*/
 exports.homeRouter.get('/search/:key', search_1.search);
 exports.homeRouter.get('/search', search_1.search);
 exports.homeRouter.get('/product/:id', product_1.product);
-exports.homeRouter.get('/iframe', iframe_1.iframe);
 exports.homeRouter.get('/shop', shop_1.shop); //转移到nginx中实现，免去在web中维护shop的麻烦
 exports.homeRouter.get('/version', version_1.version);
 exports.homeRouter.get('/law', law_1.law);
 exports.homeRouter.get('/contact', contact_1.contact);
-exports.homeRouter.get('/information', information_1.information);
-exports.homeRouter.get('/all-posts', allPosts_1.allPosts);
-exports.homeRouter.get('/language', language_1.language);
-exports.homeRouter.get('/webMap', webMap_1.webMap);
 exports.homeRouter.get('/test/*', test_1.test);
+exports.homeRouter.get('/cart', cart_1.cart);
+exports.homeRouter.get('/post_test/:id', post_test_1.post_test);
+// 这一组暂未上线
 exports.homeRouter.get('/productCategory', productCategory_1.productCategory);
 exports.homeRouter.get('/cas', cas_1.cas);
 exports.homeRouter.get('/productName', productName_1.productName);
 exports.homeRouter.get('/ProductResources', ProductResources_1.ProductResources);
 exports.homeRouter.get('/casSubclass/:current', casSubclass_1.casSubclass);
 exports.homeRouter.get('/technicalSupport', technicalSupport_1.technicalSupport);
+exports.homeRouter.get('/language', language_1.language);
 exports.homeRouter.get('/subjectpost/:current', subjectpost_1.subjectpost);
-exports.homeRouter.get('/cart', cart_1.cart);
-exports.homeRouter.get('/post_test/:id', post_test_1.post_test);
 exports.homeRouter.get('/partial/categoryinstruction/:current', categoryinstruction_1.categoryInstruction);
 exports.homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail_1.pointProductDetail);
 const MSCUCorsOptions = {

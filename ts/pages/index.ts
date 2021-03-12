@@ -41,33 +41,36 @@ import { Dbs } from '../db';
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
 homeRouter.get('/post/:id', post);
+
+homeRouter.get('/iframe', iframe);
+homeRouter.get('/information', information);
+
+homeRouter.get('/all-posts', allPosts);
+homeRouter.get('/webMap', webMap);
+
+// 这一组准备作废
 homeRouter.get('/product-catalog/:current', category);
-/*
-homeRouter.get('/category/:current', category);
-homeRouter.get('/productcategory/:current', category);
-*/
 homeRouter.get('/search/:key', search);
 homeRouter.get('/search', search);
 homeRouter.get('/product/:id', product);
-homeRouter.get('/iframe', iframe);
 homeRouter.get('/shop', shop);   //转移到nginx中实现，免去在web中维护shop的麻烦
 homeRouter.get('/version', version);
 homeRouter.get('/law', law);
 homeRouter.get('/contact', contact);
-homeRouter.get('/information', information);
-homeRouter.get('/all-posts', allPosts);
-homeRouter.get('/language', language);
-homeRouter.get('/webMap', webMap);
 homeRouter.get('/test/*', test);
+homeRouter.get('/cart', cart);
+homeRouter.get('/post_test/:id', post_test);
+
+// 这一组暂未上线
 homeRouter.get('/productCategory', productCategory);
 homeRouter.get('/cas', cas);
 homeRouter.get('/productName', productName);
 homeRouter.get('/ProductResources', ProductResources);
 homeRouter.get('/casSubclass/:current', casSubclass);
 homeRouter.get('/technicalSupport', technicalSupport);
+homeRouter.get('/language', language);
+
 homeRouter.get('/subjectpost/:current', subjectpost);
-homeRouter.get('/cart', cart);
-homeRouter.get('/post_test/:id', post_test);
 
 homeRouter.get('/partial/categoryinstruction/:current', categoryInstruction);
 homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail);
