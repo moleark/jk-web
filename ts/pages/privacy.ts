@@ -51,7 +51,7 @@ export async function privacy(req: Request, res: Response) {
 
         //获取栏目
         let subject: any[];
-        subject = await Dbs.content.getSubject();
+        subject = await Dbs.content.getAllSubjects();
 
         let data = buildData(req, {
             subject: subject,

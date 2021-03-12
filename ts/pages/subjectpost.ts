@@ -1,33 +1,31 @@
 import { Request, Response } from "express";
-import { ejsError, getRootPath, buildData, hmToEjs, viewPath, ejsSuffix } from "../tools";
+import { ejsError, getRootPath, buildData } from "../tools";
 import { Dbs } from "../db";
-import * as ejs from 'ejs';
+import { setPreNextPage } from "../tools/setPreNextPage";
 
 export async function subjectpost(req: Request, res: Response) {
-    let rootPath = getRootPath(req);
 
     try {
         //获取当前栏目
-        let currentId = Number(req.params.current);
+        let { params, query } = req;
+        let currentId = Number(params.current);
         let currentSubject = await Dbs.content.subjectByid(currentId);
         let caption = currentSubject.name;
         let discounts: any[] = [];
         let correlation: any[] = [];
 
         //获取当前页贴文
-
-        let postpage: any[];
-        let pageCount: number;
+        let pageIndex: number;
         let pageSize: number = 10;
-        pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
-        postpage = await Dbs.content.subjectPost(currentId, pageCount * pageSize, pageSize)
-
-        let nextpage: number = pageCount + 1;
-        let prepage: number = pageCount - 1
+        pageIndex = query.pageIndex ? parseInt(query.pageIndex) : 0;
+        let postpage: any[] = await Dbs.content.subjectPost(currentId, pageIndex * pageSize, pageSize + 1)
+        let { prepage, nextpage } = setPreNextPage(pageIndex, pageSize, postpage.length);
+        if (nextpage > 0)
+            postpage.pop();
 
         //获取栏目
-        let subject: any[];
-        subject = await Dbs.content.getSubject();
+        let allSubjects: any[];
+        allSubjects = await Dbs.content.getAllSubjects();
 
         //获取产品目录树根节点
         const rootcategories = await Dbs.product.getRootCategories();
@@ -49,13 +47,13 @@ export async function subjectpost(req: Request, res: Response) {
 
 
         let data = buildData(req, {
-            nextpage: rootPath + 'subjectpost/' + currentId + '?pageCount=' + nextpage,
-            prepage: rootPath + 'subjectpost/' + currentId + '?pageCount=' + prepage,
-            path: rootPath + 'post/',
+            nextpage: nextpage,
+            prepage: prepage,
+            currentSubjectId: currentId,
             post: postpage,
-            pageCount: pageCount,
+            pageIndex: pageIndex,
             hotPosts: cacheHotPosts,
-            subject: subject,
+            subject: allSubjects,
             discounts: discounts,
             correlation: correlation,
             caption: caption,
@@ -63,7 +61,6 @@ export async function subjectpost(req: Request, res: Response) {
             titleshow: false
         });
 
-        console.log(nextpage, 'nextpage')
         res.render('subjectpost.ejs', data, (err, html) => {
             if (ejsError(err, res) === true) return;
             res.end(html);
@@ -73,5 +70,4 @@ export async function subjectpost(req: Request, res: Response) {
         console.error(err);
         res.end('error in parsing: ' + err.message);
     }
-
 };

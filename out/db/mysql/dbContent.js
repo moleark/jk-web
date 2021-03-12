@@ -301,6 +301,13 @@ class DbContent extends db_1.Db {
             return { name: "" };
         });
     }
+    /**
+     * 分页获取某栏目（subjectid）中的贴文
+     * @param id 栏目id
+     * @param pageStart
+     * @param pageSize
+     * @returns
+     */
     subjectPost(id, pageStart, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlSubjectPost, [id, pageStart, pageSize]);
@@ -313,7 +320,11 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
-    getSubject() {
+    /**
+     *
+     * @returns
+     */
+    getAllSubjects() {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlSubject);
             return ret;

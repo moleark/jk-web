@@ -42,7 +42,7 @@ export async function post(req: Request, res: Response) {
 
         //获取栏目
         let subject: any[];
-        subject = await Dbs.content.getSubject();
+        subject = await Dbs.content.getAllSubjects();
         content = await renderPostArticle(req, current);
 
         let data = buildData(req, {

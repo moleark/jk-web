@@ -128,6 +128,7 @@ export class DbContent extends Db {
             ORDER BY b.update desc
             LIMIT ?,?;
         `;
+
         this.sqlSubject = `
             SELECT 	a.*
             FROM    ${db}.tv_subject AS a
@@ -321,6 +322,13 @@ export class DbContent extends Db {
         return { name: "" };
     }
 
+    /**
+     * 分页获取某栏目（subjectid）中的贴文 
+     * @param id 栏目id
+     * @param pageStart 
+     * @param pageSize 
+     * @returns 
+     */
     async subjectPost(id: any, pageStart: number, pageSize: number): Promise<any> {
         const ret = await this.tableFromSql(this.sqlSubjectPost, [id, pageStart, pageSize]);
         return ret;
@@ -331,7 +339,11 @@ export class DbContent extends Db {
         return ret;
     }
 
-    async getSubject(): Promise<any> {
+    /**
+     * 
+     * @returns 
+     */
+    async getAllSubjects(): Promise<any> {
         const ret = await this.tableFromSql(this.sqlSubject);
         return ret;
     }

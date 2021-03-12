@@ -55,7 +55,7 @@ function privacy(req, res) {
             }
             //获取栏目
             let subject;
-            subject = yield db_1.Dbs.content.getSubject();
+            subject = yield db_1.Dbs.content.getAllSubjects();
             let data = tools_1.buildData(req, {
                 subject: subject,
                 discounts: discounts,

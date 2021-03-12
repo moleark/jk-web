@@ -12,23 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.information = void 0;
 const db_1 = require("../db");
 const tools_1 = require("../tools");
+const setPreNextPage_1 = require("../tools/setPreNextPage");
 function information(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let rootPath = tools_1.getRootPath(req);
         try {
             let discounts = [];
             let correlation = [];
             //获取当前页贴文
-            let postpage;
-            let pageCount;
+            let pageIndex;
             let pageSize = 10;
-            pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
-            postpage = yield db_1.Dbs.content.informationPage(pageCount * pageSize, pageSize);
-            let nextpage = pageCount + 1;
-            let prepage = pageCount - 1;
+            pageIndex = req.query.pageIndex ? parseInt(req.query.pageIndex) : 0;
+            let postpage = yield db_1.Dbs.content.informationPage(pageIndex * pageSize, pageSize + 1);
+            let { prepage, nextpage } = setPreNextPage_1.setPreNextPage(pageIndex, pageSize, postpage.length);
+            if (nextpage > 0)
+                postpage.pop();
             //获取栏目
             let subject;
-            subject = yield db_1.Dbs.content.getSubject();
+            subject = yield db_1.Dbs.content.getAllSubjects();
             //获取产品目录树根节点
             const rootcategories = yield db_1.Dbs.product.getRootCategories();
             //获取热点贴文
@@ -44,11 +44,10 @@ function information(req, res) {
             //相关贴文
             correlation = yield db_1.Dbs.content.getCorrelationPost(0);
             let data = tools_1.buildData(req, {
-                nextpage: rootPath + 'information/?pageCount=' + nextpage,
-                prepage: rootPath + 'information/?pageCount=' + prepage,
-                path: rootPath + 'post/',
+                nextpage: nextpage,
+                prepage: prepage,
                 post: postpage,
-                pageCount: pageCount,
+                pageIndex: pageIndex,
                 hotPosts: cacheHotPosts,
                 subject: subject,
                 discounts: discounts,
@@ -56,7 +55,6 @@ function information(req, res) {
                 rootcategories: rootcategories,
                 titleshow: true
             });
-            console.log(nextpage, 'nextpage');
             res.render('information.ejs', data, (err, html) => {
                 if (tools_1.ejsError(err, res) === true)
                     return;

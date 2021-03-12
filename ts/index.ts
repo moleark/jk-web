@@ -20,6 +20,7 @@ import { apiRouter } from './api';
     //app.use(useLog());
     app.locals.easyTime = easyTime;
 
+    // 全局错误处理handler(文档上说这个要在调用其他的use方法之后调用)
     app.use((err: any, req: Request, res: Response, next: NextFunction) => {
         res.status(err.status || 500);
         res.render('error', {

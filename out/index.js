@@ -28,6 +28,7 @@ const api_1 = require("./api");
         let app = express();
         //app.use(useLog());
         app.locals.easyTime = tools_1.easyTime;
+        // 全局错误处理handler(文档上说这个要在调用其他的use方法之后调用)
         app.use((err, req, res, next) => {
             res.status(err.status || 500);
             res.render('error', {
