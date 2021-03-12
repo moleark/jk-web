@@ -11,6 +11,7 @@ import { page } from './pages/page';
 import * as session from 'express-session';
 import { MemoryStore } from 'express-session';
 import { apiRouter } from './api';
+import { legacyRouter } from './legacyUrl';
 
 (async function () {
     Dbs.init();
@@ -105,7 +106,9 @@ import { apiRouter } from './api';
         homeRouter.get(element.url, page);
     });
     app.use('/', homeRouter);
+    app.use('/', legacyRouter);
     app.use('/jk-web', homeRouter);
+    app.use('/jk-web', legacyRouter);
     app.use('/api', apiRouter);
     app.use('/jk-web/api', apiRouter);
     //app.get('/wayne-ligsh-text', wayneLigshTest);

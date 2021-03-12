@@ -14,6 +14,12 @@ const ejs = require("ejs");
 const _ = require("lodash");
 const db_1 = require("../db");
 const tools_1 = require("../tools");
+/**
+ * 渲染单个产品（已不再使用，有jk-cart替换）
+ * @param req
+ * @param res
+ * @returns
+ */
 function product(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let id = req.params.id;

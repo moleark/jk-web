@@ -21,6 +21,7 @@ const page_1 = require("./pages/page");
 const session = require("express-session");
 const express_session_1 = require("express-session");
 const api_1 = require("./api");
+const legacyUrl_1 = require("./legacyUrl");
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         db_1.Dbs.init();
@@ -106,7 +107,9 @@ const api_1 = require("./api");
             pages_1.homeRouter.get(element.url, page_1.page);
         });
         app.use('/', pages_1.homeRouter);
+        app.use('/', legacyUrl_1.legacyRouter);
         app.use('/jk-web', pages_1.homeRouter);
+        app.use('/jk-web', legacyUrl_1.legacyRouter);
         app.use('/api', api_1.apiRouter);
         app.use('/jk-web/api', api_1.apiRouter);
         //app.get('/wayne-ligsh-text', wayneLigshTest);
