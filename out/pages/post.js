@@ -13,14 +13,14 @@ exports.renderPostContent = exports.renderPostArticle = exports.formattedTable =
 const ejs = require("ejs");
 const db_1 = require("../db");
 const tools_1 = require("../tools");
-function post(req, res) {
+function post(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
         let id = req.params.id;
         //获取内容
         const ret = yield db_1.Dbs.content.postFromId(id);
         if (ret.length === 0) {
-            res.status(404).end();
+            next();
             return;
         }
         try {

@@ -21,19 +21,6 @@ import { legacyRouter } from './legacyUrl';
     //app.use(useLog());
     app.locals.easyTime = easyTime;
 
-    // 全局错误处理handler(文档上说这个要在调用其他的use方法之后调用)
-    app.use(async (err: any, req: Request, res: Response, next: NextFunction) => {
-        res.status(err.status || 500);
-        let data = await buildData(req, {});
-        res.render('error.ejs', data);
-        /*
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-        */
-    });
-
     // 使用 body-parser 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
@@ -117,6 +104,18 @@ import { legacyRouter } from './legacyUrl';
     app.use('/jk-web/api', apiRouter);
     //app.get('/wayne-ligsh-text', wayneLigshTest);
     //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
+
+    app.use(async (req: Request, res: Response, next: NextFunction) => {
+        res.status(404).render('error.ejs', await buildData(req));
+    })
+    // 全局错误处理handler(文档上说这个要在调用其他的use方法之后调用)
+    app.use(async (err: any, req: Request, res: Response, next: NextFunction) => {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
 
     // 监听服务
     let port = config.get<number>('port');

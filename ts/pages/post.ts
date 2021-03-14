@@ -1,15 +1,15 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as ejs from 'ejs';
 import { Dbs } from "../db";
 import { getRootPath, viewPath, ejsSuffix, ipHit, ejsError, buildData, hmToEjs } from "../tools";
 
-export async function post(req: Request, res: Response) {
+export async function post(req: Request, res: Response, next: NextFunction) {
     let rootPath = getRootPath(req);
     let id = req.params.id;
     //获取内容
     const ret = await Dbs.content.postFromId(id);
     if (ret.length === 0) {
-        res.status(404).end();
+        next();
         return;
     }
 

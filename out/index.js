@@ -29,18 +29,6 @@ const legacyUrl_1 = require("./legacyUrl");
         let app = express();
         //app.use(useLog());
         app.locals.easyTime = tools_1.easyTime;
-        // 全局错误处理handler(文档上说这个要在调用其他的use方法之后调用)
-        app.use((err, req, res, next) => __awaiter(this, void 0, void 0, function* () {
-            res.status(err.status || 500);
-            let data = yield tools_1.buildData(req, {});
-            res.render('error.ejs', data);
-            /*
-            res.render('error', {
-                message: err.message,
-                error: err
-            });
-            */
-        }));
         // 使用 body-parser 
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json());
@@ -118,6 +106,17 @@ const legacyUrl_1 = require("./legacyUrl");
         app.use('/jk-web/api', api_1.apiRouter);
         //app.get('/wayne-ligsh-text', wayneLigshTest);
         //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
+        app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            res.status(404).render('error.ejs', yield tools_1.buildData(req));
+        }));
+        // 全局错误处理handler(文档上说这个要在调用其他的use方法之后调用)
+        app.use((err, req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            res.status(err.status || 500);
+            res.render('error', {
+                message: err.message,
+                error: err
+            });
+        }));
         // 监听服务
         let port = config.get('port');
         app.listen(port, '0.0.0.0', () => __awaiter(this, void 0, void 0, function* () {
