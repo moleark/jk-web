@@ -13,23 +13,62 @@ exports.legacyRouter = void 0;
 const express_1 = require("express");
 const db_1 = require("../db");
 exports.legacyRouter = express_1.Router({ mergeParams: true });
-exports.legacyRouter.get(/^\/CH\/products\/(.+?)\.html$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let oldProductId = req.params[0];
+exports.legacyRouter.get(/^\/(CH|en)\/products\/(.+?)\.html$/i, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    let oldProductId = req.params[1];
     let product = yield db_1.Dbs.product.getProductByNo(oldProductId);
     if (product) {
         res.redirect('/product/' + product.id);
     }
+    else {
+        res.status(404);
+        next();
+    }
 }));
-exports.legacyRouter.get(/^\/CH\/products\/search\/fulltextsearch\/(.+?)\.html$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.redirect("/search/" + req.params[0]);
+exports.legacyRouter.get(/^\/(CH|en)\/products\/search\/(fulltextsearch|cas|mdl|originalid|description|mf|productname|chemid|methodtype|advancedSearch)\/(.+?)\.html$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // legacyRouter.get(/^\/(CH|en)\/products\/search\/fulltextsearch\/(.+)\.html$/i, async (req: Request, res: Response) => {
+    res.redirect("/search/" + req.params[2]);
 }));
-exports.legacyRouter.get([/^\/zh-cn\/product-catalog\/parent\/(\d+)\.html$/i,
-    /^\/zh-cn\/product-catalog\/(\d+)(\/\d+\/\d+)?.html$/i,
-    /^\/CH\/products\/search\/productcategory\/(\d+)(\/\d+)?.html$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let oldCategoryId = req.params[0];
-    let productCategory = yield db_1.Dbs.product.getProductByNo(oldCategoryId);
+exports.legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.html$/i,
+    /^\/(zh\-cn|en-us)\/product-catalog\/(\d+)(\/\d+\/\d+)?.html$/i,
+    /^\/(CH|en)\/products\/search\/productcategory\/(\d+)(\/\d+)?.html$/i], (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    let oldCategoryId = req.params[1];
+    let productCategory = yield db_1.Dbs.product.getCategoryByNo(oldCategoryId);
     if (productCategory) {
         res.redirect('/product-catalog/' + productCategory.id);
     }
+    else {
+        res.status(404);
+        next();
+    }
+}));
+exports.legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog.html$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/product-catalog");
+}));
+exports.legacyRouter.get([/^\/informationContent.aspx$/i, /^\/news.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/information");
+}));
+exports.legacyRouter.get(/^\/brand.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/ch/recommended-brand");
+}));
+exports.legacyRouter.get(/^\/contactUs.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/ch/contact");
+}));
+exports.legacyRouter.get(/^\/job.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/job");
+}));
+exports.legacyRouter.get(/^\/chemical.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/product-catalog/47");
+}));
+exports.legacyRouter.get(/^\/Sisanaly.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/product-catalog/470");
+}));
+exports.legacyRouter.get(/^\/LifeScience.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/product-catalog/1013");
+}));
+exports.legacyRouter.get(/^\/MaterialScience.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/product-catalog/1219");
+}));
+exports.legacyRouter.get(/^\/InstrumentConsumables.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/product-catalog/1545");
 }));
 //# sourceMappingURL=index.js.map
