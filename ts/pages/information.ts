@@ -22,9 +22,6 @@ export async function information(req: Request, res: Response) {
         let subject: any[];
         subject = await Dbs.content.getAllSubjects();
 
-        //获取产品目录树根节点
-        const rootcategories = await Dbs.product.getRootCategories();
-
         //获取热点贴文
         let cacheHotPosts: any[];
         let lastHotTick = 0;
@@ -40,7 +37,7 @@ export async function information(req: Request, res: Response) {
         //相关贴文
         correlation = await Dbs.content.getCorrelationPost(0);
 
-        let data = buildData(req, {
+        let data = await await buildData(req, {
             nextpage: nextpage,
             prepage: prepage,
             post: postpage,
@@ -49,7 +46,6 @@ export async function information(req: Request, res: Response) {
             subject: subject,
             discounts: discounts,
             correlation: correlation,
-            rootcategories: rootcategories,
             titleshow: true
         });
 

@@ -15,16 +15,11 @@ const cors = require("cors");
 const config = require("config");
 const home_1 = require("./home");
 const post_1 = require("./post");
-const category_1 = require("./category");
-const search_1 = require("./search");
-const product_1 = require("./product");
 const iframe_1 = require("./iframe");
 const language_1 = require("./language");
 const test_1 = require("./test");
-const shop_1 = require("./shop");
 const version_1 = require("./version");
 const law_1 = require("./law");
-const contact_1 = require("./contact");
 const webMap_1 = require("./webMap");
 const information_1 = require("./information");
 const allPosts_1 = require("./allPosts");
@@ -56,14 +51,16 @@ exports.homeRouter.get('/information', information_1.information);
 exports.homeRouter.get('/all-posts', allPosts_1.allPosts);
 exports.homeRouter.get('/webMap', webMap_1.webMap);
 // 这一组准备作废
-exports.homeRouter.get('/product-catalog/:current', category_1.category);
-exports.homeRouter.get('/search/:key', search_1.search);
-exports.homeRouter.get('/search', search_1.search);
-exports.homeRouter.get('/product/:id', product_1.product);
-exports.homeRouter.get('/shop', shop_1.shop); //转移到nginx中实现，免去在web中维护shop的麻烦
+/*
+homeRouter.get('/product-catalog/:current', category);
+homeRouter.get('/search/:key', search);
+homeRouter.get('/search', search);
+homeRouter.get('/product/:id', product);
+homeRouter.get('/shop', shop);   //转移到nginx中实现，免去在web中维护shop的麻烦
+homeRouter.get('/contact', contact);
+*/
 exports.homeRouter.get('/version', version_1.version);
 exports.homeRouter.get('/law', law_1.law);
-exports.homeRouter.get('/contact', contact_1.contact);
 exports.homeRouter.get('/test/*', test_1.test);
 exports.homeRouter.get('/cart', cart_1.cart);
 exports.homeRouter.get('/post_test/:id', post_test_1.post_test);

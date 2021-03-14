@@ -49,7 +49,7 @@ function product(req, res) {
             + body
             + '</div>'
             + homeFooter;
-        let data = tools_1.buildData(req, {
+        let data = yield tools_1.buildData(req, {
             product: product,
             packs: packs
         });

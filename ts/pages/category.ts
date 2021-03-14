@@ -15,7 +15,6 @@ export async function category(req: Request, res: Response) {
     let children = await Dbs.product.getChildrenCategories(currentId);
     category.children = children;
 
-    let rootcategories = await Dbs.product.getRootCategories();
     const categoryPost = await Dbs.content.categoryPost(currentId);
 
     let postArticle: string = "";
@@ -29,8 +28,7 @@ export async function category(req: Request, res: Response) {
     }
 
     let rootPath = getRootPath(req);
-    let data = buildData(req, {
-        rootcategories: rootcategories,
+    let data = await buildData(req, {
         current: current,
         category: category,
         postArticle: postArticle,

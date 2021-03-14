@@ -38,8 +38,6 @@ function page(req, res) {
                 bodys += body;
             });
             */
-            //获取产品目录树根节点
-            const rootcategories = yield db_1.Dbs.product.getRootCategories();
             let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
@@ -48,7 +46,9 @@ function page(req, res) {
                 + postArticleHtml
                 + homeFooter;
             title = ret[0].caption;
-            let data = tools_1.buildData(req, { $title: title, rootcategories: rootcategories, titleshow: true });
+            let data = yield tools_1.buildData(req, {
+                $title: title, titleshow: true
+            });
             let html = ejs.render(template, data);
             res.end(html);
         }

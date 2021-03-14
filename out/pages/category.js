@@ -24,7 +24,6 @@ function category(req, res) {
         }
         let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
         category.children = children;
-        let rootcategories = yield db_1.Dbs.product.getRootCategories();
         const categoryPost = yield db_1.Dbs.content.categoryPost(currentId);
         let postArticle = "";
         const explainlist = yield db_1.Dbs.content.getCategoryInstruction(currentId);
@@ -36,8 +35,7 @@ function category(req, res) {
             }
         }
         let rootPath = tools_1.getRootPath(req);
-        let data = tools_1.buildData(req, {
-            rootcategories: rootcategories,
+        let data = yield tools_1.buildData(req, {
             current: current,
             category: category,
             postArticle: postArticle,

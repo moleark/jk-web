@@ -25,7 +25,7 @@ function pointProductDetail(req, res) {
             let content = pointProductDetail[0].content;
             content = tools_1.hmToEjs(content);
             detailContent = jk + hmInclude + content;
-            let datas = tools_1.buildData(req, {});
+            let datas = yield tools_1.buildData(req);
             detailContent = ejs.render(detailContent, datas);
             res.send(detailContent);
         }

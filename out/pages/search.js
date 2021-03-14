@@ -37,14 +37,11 @@ function search(req, res) {
             + homeFooter;
         let nextpage = pageCount + 1;
         let prepage = pageCount - 1;
-        //获取产品目录树根节点
-        const rootcategories = yield db_1.Dbs.product.getRootCategories();
-        let data = tools_1.buildData(req, {
+        let data = yield tools_1.buildData(req, {
             nextpage: rootPath + 'search/' + key + '/?pageCount=' + nextpage,
             prepage: rootPath + 'search/' + key + '/?pageCount=' + prepage,
             products: products,
             pageCount: pageCount,
-            rootcategories: rootcategories,
             titleshow: true
         });
         let html = ejs.render(template, data);

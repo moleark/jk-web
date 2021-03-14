@@ -34,15 +34,11 @@ export async function search(req: Request, res: Response) {
     let nextpage: number = pageCount + 1;
     let prepage: number = pageCount - 1;
 
-    //获取产品目录树根节点
-    const rootcategories = await Dbs.product.getRootCategories();
-
-    let data = buildData(req, {
+    let data = await buildData(req, {
         nextpage: rootPath + 'search/' + key + '/?pageCount=' + nextpage,
         prepage: rootPath + 'search/' + key + '/?pageCount=' + prepage,
         products: products,
         pageCount: pageCount,
-        rootcategories: rootcategories,
         titleshow: true
     });
 

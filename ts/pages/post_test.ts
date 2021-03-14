@@ -32,8 +32,6 @@ export async function post_test(req: Request, res: Response, next: NextFunction)
         if (postproduct.length === 0) {
             postproduct = await Dbs.content.getRecommendProducts(id);
         }
-        //获取产品目录树根节点
-        const rootcategories = await Dbs.product.getRootCategories();
 
         //获取贴点贴文
         let cacheHotPosts: any[];
@@ -49,7 +47,7 @@ export async function post_test(req: Request, res: Response, next: NextFunction)
         subject = await Dbs.content.getAllSubjects();
         content = await renderPostArticle(req, current);
 
-        let data = buildData(req, {
+        let data = await buildData(req, {
             $title: current.caption,
             path: rootPath + 'post/',
             current: current,
@@ -57,7 +55,6 @@ export async function post_test(req: Request, res: Response, next: NextFunction)
             discounts: discounts,
             correlation: correlation,
             hotPosts: cacheHotPosts,
-            rootcategories: rootcategories,
             content: content,
             postsubject: postsubject,
             postproduct: postproduct,

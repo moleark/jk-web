@@ -49,14 +49,16 @@ homeRouter.get('/all-posts', allPosts);
 homeRouter.get('/webMap', webMap);
 
 // 这一组准备作废
+/*
 homeRouter.get('/product-catalog/:current', category);
 homeRouter.get('/search/:key', search);
 homeRouter.get('/search', search);
 homeRouter.get('/product/:id', product);
 homeRouter.get('/shop', shop);   //转移到nginx中实现，免去在web中维护shop的麻烦
+homeRouter.get('/contact', contact);
+*/
 homeRouter.get('/version', version);
 homeRouter.get('/law', law);
-homeRouter.get('/contact', contact);
 homeRouter.get('/test/*', test);
 homeRouter.get('/cart', cart);
 homeRouter.get('/post_test/:id', post_test);

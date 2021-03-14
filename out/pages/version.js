@@ -26,7 +26,7 @@ function version(req, res) {
                 return JSON.parse(_packageJson.toString());
             }
             const rootcategories = yield db_1.Dbs.product.getRootCategories();
-            let data = tools_1.buildData(req, { version: cbDataPackage.version, rootcategories: rootcategories });
+            let data = yield tools_1.buildData(req, { version: cbDataPackage.version, rootcategories: rootcategories });
             let header = ejs.fileLoader(tools_2.viewPath + 'headers/header' + tools_2.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + tools_2.ejsSuffix).toString();
             let body = ejs.fileLoader(tools_2.viewPath + 'version.ejs').toString();

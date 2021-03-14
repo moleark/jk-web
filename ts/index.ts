@@ -5,7 +5,7 @@ import * as path from 'path';
 import { Request, Response, NextFunction, Application } from 'express';
 import * as express from 'express';
 import { homeRouter } from './pages';
-import { easyTime } from './tools';
+import { buildData, easyTime } from './tools';
 import { Dbs } from './db';
 import { page } from './pages/page';
 import * as session from 'express-session';
@@ -22,12 +22,16 @@ import { legacyRouter } from './legacyUrl';
     app.locals.easyTime = easyTime;
 
     // 全局错误处理handler(文档上说这个要在调用其他的use方法之后调用)
-    app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    app.use(async (err: any, req: Request, res: Response, next: NextFunction) => {
         res.status(err.status || 500);
+        let data = await buildData(req, {});
+        res.render('error.ejs', data);
+        /*
         res.render('error', {
             message: err.message,
             error: err
         });
+        */
     });
 
     // 使用 body-parser 

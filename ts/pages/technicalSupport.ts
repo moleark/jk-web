@@ -10,14 +10,14 @@ export async function technicalSupport(req: Request, res: Response) {
     const sortName = await Dbs.productIndex.getSortNameIntervalGroup(SALESREGION);
 
     let list = [];
-    for(var i = 0; i < sortName.length; i++ ) {
+    for (var i = 0; i < sortName.length; i++) {
         let subSortName = await Dbs.productIndex.SortNameInterval(SALESREGION, sortName[i].id);
         list.push(subSortName)
     }
-    let data = buildData(req, {
+    let data = await buildData(req, {
         productPath: '',
         sortName: '',
-      
+
     });
     res.render('technicalSupport.ejs', data, (err, html) => {
         if (ejsError(err, res) === true) return;

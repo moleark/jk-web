@@ -14,7 +14,7 @@ export async function productCategory(req: Request, res: Response) {
     productpage = await Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize)
     let nextpage: number = pageCount + 1;
     let prepage: number = pageCount - 1;
-    let data = buildData(req, {
+    let data = await buildData(req, {
         nextpage: rootPath + 'product-catalog/' + currentId + '/?pageCount=' + nextpage,
         prepage: rootPath + 'product-catalog/' + currentId + '/?pageCount=' + prepage,
         current: current,

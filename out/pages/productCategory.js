@@ -25,7 +25,7 @@ function productCategory(req, res) {
         productpage = yield db_1.Dbs.product.searchProductByCategory(currentId, pageCount * pageSize, pageSize);
         let nextpage = pageCount + 1;
         let prepage = pageCount - 1;
-        let data = tools_2.buildData(req, {
+        let data = yield tools_2.buildData(req, {
             nextpage: rootPath + 'product-catalog/' + currentId + '/?pageCount=' + nextpage,
             prepage: rootPath + 'product-catalog/' + currentId + '/?pageCount=' + prepage,
             current: current,

@@ -34,8 +34,6 @@ function subjectpost(req, res) {
             //获取栏目
             let allSubjects;
             allSubjects = yield db_1.Dbs.content.getAllSubjects();
-            //获取产品目录树根节点
-            const rootcategories = yield db_1.Dbs.product.getRootCategories();
             //获取热点贴文
             let cacheHotPosts;
             let lastHotTick = 0;
@@ -48,7 +46,7 @@ function subjectpost(req, res) {
             discounts = yield db_1.Dbs.content.getDiscountsPost(0);
             //相关贴文
             correlation = yield db_1.Dbs.content.getCorrelationPost(0);
-            let data = tools_1.buildData(req, {
+            let data = yield tools_1.buildData(req, {
                 nextpage: nextpage,
                 prepage: prepage,
                 currentSubjectId: currentId,
@@ -59,7 +57,6 @@ function subjectpost(req, res) {
                 discounts: discounts,
                 correlation: correlation,
                 caption: caption,
-                rootcategories: rootcategories,
                 titleshow: false
             });
             res.render('subjectpost.ejs', data, (err, html) => {

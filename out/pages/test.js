@@ -16,7 +16,7 @@ const tools_2 = require("../tools");
 function test(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            let data = tools_1.buildData(req, undefined);
+            let data = yield tools_1.buildData(req, undefined);
             let header = ejs.fileLoader(tools_2.viewPath + 'headers/header' + tools_2.ejsSuffix).toString();
             let jk = ejs.fileLoader(tools_2.viewPath + '/headers/jk' + tools_2.ejsSuffix).toString();
             let hmInclude = ejs.fileLoader(tools_2.viewPath + '/headers/hm' + tools_2.ejsSuffix).toString();

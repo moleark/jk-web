@@ -37,8 +37,6 @@ function post(req, res) {
             postsubject = yield db_1.Dbs.content.postSubject(id);
             //获取贴文产品
             postproduct = yield db_1.Dbs.content.getPostProduct(id);
-            //获取产品目录树根节点
-            const rootcategories = yield db_1.Dbs.product.getRootCategories();
             //获取贴点贴文
             let cacheHotPosts;
             let lastHotTick = 0;
@@ -51,14 +49,13 @@ function post(req, res) {
             let subject;
             subject = yield db_1.Dbs.content.getAllSubjects();
             content = yield renderPostArticle(req, current);
-            let data = tools_1.buildData(req, {
+            let data = yield tools_1.buildData(req, {
                 $title: current.caption,
                 path: rootPath + 'post/',
                 subject: subject,
                 discounts: discounts,
                 correlation: correlation,
                 hotPosts: cacheHotPosts,
-                rootcategories: rootcategories,
                 postArticle: content,
                 postsubject: postsubject,
                 postproduct: postproduct,
@@ -135,9 +132,9 @@ function formattedTableRow(productlist) {
  */
 function renderPostArticle(req, article) {
     return __awaiter(this, void 0, void 0, function* () {
-        // return ejs.render(template, buildData(req, { article }));
+        // return ejs.render(template, await buildData(req, { article }));
         let result = '';
-        // content = ejs.render(template, buildData(req, { article }));
+        // content = ejs.render(template, await buildData(req, { article }));
         let content = yield renderPostContent(req, article);
         ejs.renderFile(tools_1.viewPath + '/post/post-article.ejs', { postArticle: article, content }, (error, str) => {
             result = str;
@@ -161,7 +158,7 @@ function renderPostContent(req, article) {
         let template = ejs.fileLoader(tools_1.viewPath + '/headers/jk' + tools_1.ejsSuffix).toString()
             + ejs.fileLoader(tools_1.viewPath + '/headers/hm' + tools_1.ejsSuffix).toString()
             + content;
-        return ejs.render(template, tools_1.buildData(req, { article }));
+        return ejs.render(template, yield tools_1.buildData(req, { article }));
     });
 }
 exports.renderPostContent = renderPostContent;

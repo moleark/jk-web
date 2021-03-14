@@ -14,7 +14,7 @@ const tools_1 = require("../tools");
 const tools_2 = require("../tools");
 function webMap(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        let data = tools_2.buildData(req, {
+        let data = yield tools_2.buildData(req, {
             nextpage: ''
         });
         res.render('webMap.ejs', data, (err, html) => {

@@ -28,8 +28,6 @@ export async function page(req: Request, res: Response) {
             bodys += body;
         });
         */
-        //获取产品目录树根节点
-        const rootcategories = await Dbs.product.getRootCategories();
 
         let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
         let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
@@ -43,7 +41,9 @@ export async function page(req: Request, res: Response) {
             + homeFooter;
         title = ret[0].caption;
 
-        let data = buildData(req, { $title: title, rootcategories: rootcategories, titleshow: true });
+        let data = await buildData(req, {
+            $title: title, titleshow: true
+        });
         let html = ejs.render(template, data);
         res.end(html);
     }

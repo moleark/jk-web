@@ -11,12 +11,12 @@ export async function productName(req: Request, res: Response) {
     let subSortName = await Dbs.productIndex.SortNameInterval(SALESREGION, sortName[0].id);
 
     let list = [];
-    console.log(sortName,'sortName')
-    for(var i = 0; i < sortName.length; i++ ) {
+    console.log(sortName, 'sortName')
+    for (var i = 0; i < sortName.length; i++) {
         let subSortName = await Dbs.productIndex.SortNameInterval(SALESREGION, sortName[i].id);
         list.push(subSortName)
     }
-    let data = buildData(req, {
+    let data = await buildData(req, {
         productPath: rootPath + 'search/',
         sortName: sortName,
         subSortName: subSortName,

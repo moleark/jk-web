@@ -13,13 +13,10 @@ exports.language = void 0;
 const ejs = require("ejs");
 const tools_1 = require("../tools");
 const tools_2 = require("../tools");
-const db_1 = require("../db");
 function language(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            //获取产品目录树根节点
-            const rootcategories = yield db_1.Dbs.product.getRootCategories();
-            let data = tools_1.buildData(req, { rootcategories });
+            let data = yield tools_1.buildData(req);
             let header = ejs.fileLoader(tools_2.viewPath + 'headers/header' + tools_2.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_2.viewPath + 'headers/home-header' + tools_2.ejsSuffix).toString();
             let body = ejs.fileLoader(tools_2.viewPath + 'language/language.ejs').toString();

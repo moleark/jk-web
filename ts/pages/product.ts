@@ -44,7 +44,7 @@ export async function product(req: Request, res: Response) {
         + '</div>'
         + homeFooter;
 
-    let data = buildData(req, {
+    let data = await buildData(req, {
         product: product,
         packs: packs
     });
