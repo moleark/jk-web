@@ -41,6 +41,33 @@ exports.legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.ht
         next();
     }
 }));
+/**
+ * 待完善
+ */
+exports.legacyRouter.get([/^\/ProductResources.aspx$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect('/product/mscu/msds');
+    /*
+    let { query } = req;
+    if (!query) {
+        res.redirect('/product/mscu/msds');
+        return;
+    }
+
+    let { langugage, originalId, type } = query;
+    switch (type) {
+        case 'coa':
+            break;
+        case 'msds':
+            break;
+        case "spec":
+            break;
+        case "usermanu":
+            break;
+        default:
+            break;
+    }
+    */
+}));
 exports.legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog.html$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog");
 }));

@@ -33,6 +33,34 @@ legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.html$/i,
         }
     });
 
+/**
+ * 待完善 
+ */
+legacyRouter.get([/^\/ProductResources.aspx$/i], async (req: Request, res: Response) => {
+    res.redirect('/product/mscu/msds');
+    /*
+    let { query } = req;
+    if (!query) {
+        res.redirect('/product/mscu/msds');
+        return;
+    }
+
+    let { langugage, originalId, type } = query;
+    switch (type) {
+        case 'coa':
+            break;
+        case 'msds':
+            break;
+        case "spec":
+            break;
+        case "usermanu":
+            break;
+        default:
+            break;
+    }
+    */
+});
+
 legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog.html$/i], async (req: Request, res: Response) => {
     res.redirect("/product-catalog");
 });
