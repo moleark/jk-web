@@ -37,6 +37,8 @@ const legacyUrl_1 = require("./legacyUrl");
                 return undefined;
             return value;
         });
+        // 
+        app.set('trust proxy', true);
         var sessionCookieOptions = config.get('sessionCookieOptions');
         app.use(session({
             name: sessionCookieOptions.name,
@@ -50,11 +52,11 @@ const legacyUrl_1 = require("./legacyUrl");
         }));
         app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
             //let json = res.json;
-            let s = req.socket;
+            let { method, ip, body } = req;
             let p = '';
-            if (req.method !== 'GET')
-                p = JSON.stringify(req.body);
-            console.log('\n=== %s:%s - %s %s %s', s.remoteAddress, s.remotePort, req.method, req.originalUrl, p);
+            if (method !== 'GET')
+                p = JSON.stringify(body);
+            console.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
             try {
                 yield next();
             }

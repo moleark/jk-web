@@ -28,6 +28,8 @@ import { legacyRouter } from './legacyUrl';
         if (value === null) return undefined;
         return value;
     });
+    // 
+    app.set('trust proxy', true);
 
     var sessionCookieOptions = config.get<any>('sessionCookieOptions');
     app.use(session({
@@ -43,10 +45,10 @@ import { legacyRouter } from './legacyUrl';
 
     app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         //let json = res.json;
-        let s = req.socket;
+        let { method, ip, body } = req;
         let p = '';
-        if (req.method !== 'GET') p = JSON.stringify(req.body);
-        console.log('\n=== %s:%s - %s %s %s', s.remoteAddress, s.remotePort, req.method, req.originalUrl, p);
+        if (method !== 'GET') p = JSON.stringify(body);
+        console.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
         try {
             await next();
         }
