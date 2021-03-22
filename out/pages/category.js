@@ -13,13 +13,14 @@ exports.category = void 0;
 const tools_1 = require("../tools");
 const db_1 = require("../db");
 const post_1 = require("./post");
-function category(req, res) {
+function category(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let current = req.params.current;
         let currentId = Number(current);
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
         if (!category) {
-            res.status(404).end();
+            res.status(404);
+            next();
             return;
         }
         let children = yield db_1.Dbs.product.getChildrenCategories(currentId);

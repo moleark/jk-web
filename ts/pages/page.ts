@@ -1,14 +1,15 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Dbs } from "../db";
 import { viewPath, ejsSuffix, ejsError, buildData } from "../tools";
 import * as ejs from 'ejs';
 import { renderPostContent } from "./post";
 
-export async function page(req: Request, res: Response) {
+export async function page(req: Request, res: Response, next: NextFunction) {
     try {
         const ret = await Dbs.content.getPage(req.path);
         if (ret.length === 0) {
-            res.status(404).end();
+            res.status(404);
+            next();
             return;
         }
 

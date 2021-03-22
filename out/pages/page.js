@@ -14,12 +14,13 @@ const db_1 = require("../db");
 const tools_1 = require("../tools");
 const ejs = require("ejs");
 const post_1 = require("./post");
-function page(req, res) {
+function page(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const ret = yield db_1.Dbs.content.getPage(req.path);
             if (ret.length === 0) {
-                res.status(404).end();
+                res.status(404);
+                next();
                 return;
             }
             let template, title, postArticleHtml;

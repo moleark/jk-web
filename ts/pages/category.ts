@@ -1,14 +1,15 @@
-import { Request, Response } from "express";
-import { ejsError, getRootPath, buildData, hmToEjs, viewPath, ejsSuffix } from "../tools";
+import { NextFunction, Request, Response } from "express";
+import { ejsError, getRootPath, buildData } from "../tools";
 import { Dbs } from "../db";
 import { renderPostArticle } from "./post";
 
-export async function category(req: Request, res: Response) {
+export async function category(req: Request, res: Response, next: NextFunction) {
     let current = req.params.current;
     let currentId = Number(current);
     let category = await Dbs.product.getCategoryById(currentId);
     if (!category) {
-        res.status(404).end();
+        res.status(404);
+        next();
         return;
     }
 
