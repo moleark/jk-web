@@ -17,6 +17,7 @@ const getProductsInCatalog_1 = require("./getProductsInCatalog");
 const replacePostContentUrl_1 = require("../tools/replacePostContentUrl");
 exports.apiRouter = express_1.Router({ mergeParams: true });
 exports.apiRouter.get(['/search/:key', '/search/:key/:pageNumber(\\d+)', '/search/:key?debug'], search_1.search);
+exports.apiRouter.get('/product/search', search_1.search);
 exports.apiRouter.get(['/product-catalog/:catalog/products', '/product-catalog/:catalog/products/:pageNumber(\\d+)', '/product-catalog/:catalog/products?debug'], getProductsInCatalog_1.getProductsInCatalog);
 // 中石化登录地址
 exports.apiRouter.get('/epec/login', epec_1.epecLogin);

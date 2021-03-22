@@ -6,6 +6,7 @@ import { replacePostContentUrl } from "../tools/replacePostContentUrl";
 
 export const apiRouter = Router({ mergeParams: true });
 apiRouter.get(['/search/:key', '/search/:key/:pageNumber(\\d+)', '/search/:key?debug'], search);
+apiRouter.get('/product/search', search);
 apiRouter.get(['/product-catalog/:catalog/products', '/product-catalog/:catalog/products/:pageNumber(\\d+)', '/product-catalog/:catalog/products?debug'], getProductsInCatalog);
 
 // 中石化登录地址
