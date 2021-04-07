@@ -17,22 +17,26 @@ function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let { query } = req;
         let { account, onlyCode } = query;
-        if (!account || !onlyCode)
+        if (!account || !onlyCode) {
             res.redirect("/login");
+            return;
+        }
         let epecUser = yield db_1.Dbs.jointPlatform.getUserByName(account);
-        if (!epecUser)
+        if (!epecUser) {
             res.redirect("/login");
+            return;
+        }
         // 调用epec接口验证
         let epecOptions = config_1.default.get('epec');
-        let { epec_loginCallBack } = epecOptions;
+        let { epec_loginCallBack, epec_loginSuccessRedirect } = epecOptions;
         let response = yield node_fetch_1.default(epec_loginCallBack);
         if (response.ok) {
             let content = yield response.json();
             if (content.result) {
                 // OK
-                // 设置登录成功
+                // 记录此次登录请求，并使用此登录请求的id实现在客户端的再次验证
                 // 导航到默认界面
-                res.redirect("epec_loginEpecRedirect");
+                res.redirect(epec_loginSuccessRedirect + "?token=");
             }
         }
         res.redirect("/login");

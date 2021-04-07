@@ -9,9 +9,9 @@ export class DbEPEC extends Db {
 
         let db = this.databaseName;
         this.sqlGetUser = `
-            SELECT   
+            SELECT  webUser, password, username 
             FROM    ${db}.tv_epecUser
-            where   sh.$unit = 24 and sh.name = ?;
+            where   $unit = 24 and username = ?;
         `;
     }
 
