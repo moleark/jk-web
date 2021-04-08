@@ -15,7 +15,7 @@ export class DbEPEC extends Db {
             where   username = ?;
         `;
 
-        this.sqlSaveLoginReq = `insert into \`${db}\`.tv_epecloginpending(token, webuser, password, username, createtime)
+        this.sqlSaveLoginReq = `insert into \`${db}\`.tv_epecloginpending(token, myUsername, password, epecUsername, createtime)
             values(?, ?, ?, ?, now()); `;
     }
 
@@ -54,7 +54,7 @@ export class DbEPEC extends Db {
      * @returns 
      */
     async getLoginReq(token: string): Promise<any> {
-        const ret = await this.tableFromSql(`select webUser, password, userName from \`${this.databaseName}\`.tv_epecloginpending where token = ?`, [token]);
+        const ret = await this.tableFromSql(`select myUsername, password, epecUsername from \`${this.databaseName}\`.tv_epecloginpending where token = ?`, [token]);
         if (ret && ret.length > 0) {
             this.execSql(`delete from \`${this.databaseName}\`.tv_epecloginpending where token = ?;`, [token]);
             return ret[0];

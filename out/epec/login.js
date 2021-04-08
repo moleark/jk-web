@@ -14,6 +14,7 @@ const db_1 = require("../db");
 const config = require("config");
 const node_fetch_1 = require("node-fetch");
 const uuid_1 = require("uuid");
+const getUserRegisted_1 = require("../tools/getUserRegisted");
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let { query } = req;
@@ -39,11 +40,14 @@ function login(req, res) {
                 // 记录此次登录请求，并使用此登录请求的id实现在客户端的再次验证
                 let token = uuid_1.v4();
                 let { webUser, password, username } = epecUser;
-                let success = yield jointPlatform.saveLoginReq(token, webUser, password, username);
-                // 导航到默认界面
-                if (success) {
-                    res.redirect(epec_loginSuccessRedirect + "?lgtk=" + token);
-                    return;
+                let userInfo = yield getUserRegisted_1.getUserRegisted(webUser);
+                if (userInfo) {
+                    let success = yield jointPlatform.saveLoginReq(token, userInfo.name, password, username);
+                    // 导航到默认界面
+                    if (success) {
+                        res.redirect(epec_loginSuccessRedirect + "?lgtk=" + token);
+                        return;
+                    }
                 }
             }
         }
@@ -64,7 +68,7 @@ function clientLogin(req, res) {
             let { jointPlatform } = db_1.Dbs;
             let loginReq = yield jointPlatform.getLoginReq(lgtk);
             if (loginReq) {
-                res.json({ user: loginReq.webUser, password: loginReq.password });
+                res.json({ user: loginReq.myUsername, password: loginReq.password });
                 return;
             }
         }

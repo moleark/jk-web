@@ -20,7 +20,7 @@ class DbEPEC extends db_1.Db {
             FROM    \`${db}\`.tv_epecuser
             where   username = ?;
         `;
-        this.sqlSaveLoginReq = `insert into \`${db}\`.tv_epecloginpending(token, webuser, password, username, createtime)
+        this.sqlSaveLoginReq = `insert into \`${db}\`.tv_epecloginpending(token, myUsername, password, epecUsername, createtime)
             values(?, ?, ?, ?, now()); `;
     }
     /**
@@ -62,7 +62,7 @@ class DbEPEC extends db_1.Db {
      */
     getLoginReq(token) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(`select webUser, password, userName from \`${this.databaseName}\`.tv_epecloginpending where token = ?`, [token]);
+            const ret = yield this.tableFromSql(`select myUsername, password, epecUsername from \`${this.databaseName}\`.tv_epecloginpending where token = ?`, [token]);
             if (ret && ret.length > 0) {
                 this.execSql(`delete from \`${this.databaseName}\`.tv_epecloginpending where token = ?;`, [token]);
                 return ret[0];

@@ -3,6 +3,7 @@ import { Dbs } from "../db";
 import * as config from 'config';
 import fetch from "node-fetch";
 import { v4 as uuidv4 } from 'uuid';
+import { getUserRegisted } from "../tools/getUserRegisted";
 
 export async function login(req: Request, res: Response) {
 
@@ -32,11 +33,14 @@ export async function login(req: Request, res: Response) {
             // 记录此次登录请求，并使用此登录请求的id实现在客户端的再次验证
             let token = uuidv4();
             let { webUser, password, username } = epecUser;
-            let success = await jointPlatform.saveLoginReq(token, webUser, password, username);
-            // 导航到默认界面
-            if (success) {
-                res.redirect(epec_loginSuccessRedirect + "?lgtk=" + token);
-                return;
+            let userInfo = await getUserRegisted(webUser);
+            if (userInfo) {
+                let success = await jointPlatform.saveLoginReq(token, userInfo.name, password, username);
+                // 导航到默认界面
+                if (success) {
+                    res.redirect(epec_loginSuccessRedirect + "?lgtk=" + token);
+                    return;
+                }
             }
         }
     }
@@ -55,7 +59,7 @@ export async function clientLogin(req: Request, res: Response) {
         let { jointPlatform } = Dbs;
         let loginReq = await jointPlatform.getLoginReq(lgtk);
         if (loginReq) {
-            res.json({ user: loginReq.webUser, password: loginReq.password });
+            res.json({ user: loginReq.myUsername, password: loginReq.password });
             return;
         }
     }
