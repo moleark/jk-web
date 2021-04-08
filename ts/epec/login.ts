@@ -63,4 +63,5 @@ export async function clientLogin(req: Request, res: Response) {
             return;
         }
     }
+    res.status(404).end();
 }

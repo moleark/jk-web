@@ -72,6 +72,7 @@ function clientLogin(req, res) {
                 return;
             }
         }
+        res.status(404).end();
     });
 }
 exports.clientLogin = clientLogin;
