@@ -17,9 +17,11 @@ class DbEPEC extends db_1.Db {
         let db = this.databaseName;
         this.sqlGetUser = `
             SELECT  webUser, password, username 
-            FROM    ${db}.tv_epecUser
-            where   $unit = 24 and username = ?;
+            FROM    \`${db}\`.tv_epecuser
+            where   username = ?;
         `;
+        this.sqlSaveLoginReq = `insert into \`${db}\`.tv_epecloginpending(token, webuser, password, username, createtime)
+            values(?, ?, ?, ?, now()); `;
     }
     /**
      * 获取
@@ -30,6 +32,41 @@ class DbEPEC extends db_1.Db {
             const ret = yield this.tableFromSql(this.sqlGetUser, [loginName]);
             if (ret && ret.length > 0)
                 return ret[0];
+            return undefined;
+        });
+    }
+    /**
+     *
+     * @param token
+     * @param webUser
+     * @param password
+     * @param username
+     * @returns
+     */
+    saveLoginReq(token, webUser, password, username) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this.execSql(this.sqlSaveLoginReq, [token, webUser, password, username]);
+                return true;
+            }
+            catch (error) {
+                console.error(error);
+                return false;
+            }
+        });
+    }
+    /**
+     *
+     * @param token
+     * @returns
+     */
+    getLoginReq(token) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(`select webUser, password, userName from \`${this.databaseName}\`.tv_epecloginpending where token = ?`, [token]);
+            if (ret && ret.length > 0) {
+                this.execSql(`delete from \`${this.databaseName}\`.tv_epecloginpending where token = ?;`, [token]);
+                return ret[0];
+            }
             return undefined;
         });
     }

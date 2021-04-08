@@ -1,4 +1,5 @@
 import { login } from './login';
+import { clientLogin } from './login';
 
 /**
  * 和epec的对接说明：
@@ -21,4 +22,4 @@ import { login } from './login';
  * 5. 发票:
  */
 
-export { login as epecLogin };
+export { login as epecLogin, clientLogin as epecClientLogin };

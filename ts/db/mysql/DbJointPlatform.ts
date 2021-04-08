@@ -3,6 +3,7 @@ import { Db } from './db';
 export class DbEPEC extends Db {
 
     private sqlGetUser: string;
+    private sqlSaveLoginReq: string;
 
     constructor() {
         super('joint-uq-platform');
@@ -10,9 +11,12 @@ export class DbEPEC extends Db {
         let db = this.databaseName;
         this.sqlGetUser = `
             SELECT  webUser, password, username 
-            FROM    ${db}.tv_epecUser
-            where   $unit = 24 and username = ?;
+            FROM    \`${db}\`.tv_epecuser
+            where   username = ?;
         `;
+
+        this.sqlSaveLoginReq = `insert into \`${db}\`.tv_epecloginpending(token, webuser, password, username, createtime)
+            values(?, ?, ?, ?, now()); `;
     }
 
     /**
@@ -23,6 +27,38 @@ export class DbEPEC extends Db {
         const ret = await this.tableFromSql(this.sqlGetUser, [loginName]);
         if (ret && ret.length > 0)
             return ret[0];
+        return undefined;
+    }
+
+    /**
+     * 
+     * @param token 
+     * @param webUser 
+     * @param password 
+     * @param username 
+     * @returns 
+     */
+    async saveLoginReq(token: string, webUser: string, password: string, username: string): Promise<boolean> {
+        try {
+            await this.execSql(this.sqlSaveLoginReq, [token, webUser, password, username])
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+
+    /**
+     * 
+     * @param token 
+     * @returns 
+     */
+    async getLoginReq(token: string): Promise<any> {
+        const ret = await this.tableFromSql(`select webUser, password, userName from \`${this.databaseName}\`.tv_epecloginpending where token = ?`, [token]);
+        if (ret && ret.length > 0) {
+            this.execSql(`delete from \`${this.databaseName}\`.tv_epecloginpending where token = ?;`, [token]);
+            return ret[0];
+        }
         return undefined;
     }
 }

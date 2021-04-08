@@ -9,10 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = void 0;
+exports.clientLogin = exports.login = void 0;
 const db_1 = require("../db");
-const config_1 = require("config");
+const config = require("config");
 const node_fetch_1 = require("node-fetch");
+const uuid_1 = require("uuid");
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let { query } = req;
@@ -21,13 +22,14 @@ function login(req, res) {
             res.redirect("/login");
             return;
         }
-        let epecUser = yield db_1.Dbs.jointPlatform.getUserByName(account);
+        let { jointPlatform } = db_1.Dbs;
+        let epecUser = yield jointPlatform.getUserByName(account);
         if (!epecUser) {
             res.redirect("/login");
             return;
         }
         // 调用epec接口验证
-        let epecOptions = config_1.default.get('epec');
+        let epecOptions = config.get('epec');
         let { epec_loginCallBack, epec_loginSuccessRedirect } = epecOptions;
         let response = yield node_fetch_1.default(epec_loginCallBack);
         if (response.ok) {
@@ -35,12 +37,38 @@ function login(req, res) {
             if (content.result) {
                 // OK
                 // 记录此次登录请求，并使用此登录请求的id实现在客户端的再次验证
+                let token = uuid_1.v4();
+                let { webUser, password, username } = epecUser;
+                let success = yield jointPlatform.saveLoginReq(token, webUser, password, username);
                 // 导航到默认界面
-                res.redirect(epec_loginSuccessRedirect + "?token=");
+                if (success) {
+                    res.redirect(epec_loginSuccessRedirect + "?lgtk=" + token);
+                    return;
+                }
             }
         }
         res.redirect("/login");
     });
 }
 exports.login = login;
+/**
+ *
+ * @param req
+ * @param res
+ */
+function clientLogin(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let { query } = req;
+        let { lgtk } = query;
+        if (lgtk) {
+            let { jointPlatform } = db_1.Dbs;
+            let loginReq = yield jointPlatform.getLoginReq(lgtk);
+            if (loginReq) {
+                res.json({ user: loginReq.webUser, password: loginReq.password });
+                return;
+            }
+        }
+    });
+}
+exports.clientLogin = clientLogin;
 //# sourceMappingURL=login.js.map

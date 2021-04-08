@@ -62,7 +62,13 @@ legacyRouter.get([/^\/ProductResources.aspx$/i], async (req: Request, res: Respo
 });
 
 legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog.html$/i], async (req: Request, res: Response) => {
-    res.redirect("/product-catalog");
+    let querystring = '';
+    let { originalUrl } = req;
+    let pos = originalUrl.indexOf('?');
+    if (pos > 0) {
+        querystring = originalUrl.substring(pos);
+    }
+    res.redirect("/product-catalog" + querystring);
 });
 
 legacyRouter.get([/^\/informationContent.aspx$/i, /^\/news.aspx/i], async (req: Request, res: Response) => {

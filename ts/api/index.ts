@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import { search } from "./search";
-import { epecLogin } from "../epec";
+import { epecLogin, epecClientLogin } from "../epec";
 import { getProductsInCatalog } from "./getProductsInCatalog";
 import { replacePostContentUrl } from "../tools/replacePostContentUrl";
 
@@ -11,6 +11,8 @@ apiRouter.get(['/product-catalog/:catalog/products', '/product-catalog/:catalog/
 
 // 中石化登录地址
 apiRouter.get('/epec/login', epecLogin);
+// 二次登录验证
+apiRouter.get('/epec/clientLogin', epecClientLogin);
 
 // 药物所登录地址
 apiRouter.get('/UserIdentify.ashx', epecLogin);

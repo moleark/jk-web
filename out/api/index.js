@@ -21,6 +21,8 @@ exports.apiRouter.get('/product/search', search_1.search);
 exports.apiRouter.get(['/product-catalog/:catalog/products', '/product-catalog/:catalog/products/:pageNumber(\\d+)', '/product-catalog/:catalog/products?debug'], getProductsInCatalog_1.getProductsInCatalog);
 // 中石化登录地址
 exports.apiRouter.get('/epec/login', epec_1.epecLogin);
+// 二次登录验证
+exports.apiRouter.get('/epec/clientLogin', epec_1.epecClientLogin);
 // 药物所登录地址
 exports.apiRouter.get('/UserIdentify.ashx', epec_1.epecLogin);
 // 临时用于修改贴文内容中旧的url 
