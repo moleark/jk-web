@@ -86,6 +86,6 @@
     },
     "epec": {
         "epec_loginCallBack": "",
-        "epec_loginSuccessRedirect": "",
+        "epec_loginSuccessRedirect": ""
     }
 }
