@@ -51,7 +51,7 @@
     },
     "selfBrands": [2, 8],
     "MSCUPath": "D://zwgKing//",
-    "MSCUCorsOrigins": ["http://localhost:7798", "https://c.jkchemical.com", "https://web.jkchemical.com"],
+    "MSCUCorsOrigins": ["http://localhost:7798", "https://c.jkchemical.com", "https://web.jkchemical.com", "https://jkchemical.com", "https://www.jkchemical.com"],
     "sessionCookieOptions": {
         "name": "4c71-aac3",
         "secure": false,
