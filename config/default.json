@@ -80,5 +80,12 @@
         "aliCretPath":""
     },
     "privacyId": 168,
-    "esBaseUrl": "https://c.jkchemical.com/elasticsearch"
+    "esBaseUrl": "https://c.jkchemical.com/elasticsearch",
+    "joint": {
+        "loginSuccessRedirect": "/zh-CN/product-catalog.html"
+    },
+    "epec": {
+        "epec_loginCallBack": "",
+        "epec_loginSuccessRedirect": "",
+    }
 }
