@@ -24,8 +24,7 @@ exports.apiRouter.get(['/product-catalog/:catalog/products', '/product-catalog/:
 exports.apiRouter.get('/epec/login', epec_1.epecLogin);
 // 二次登录验证(要删除)
 exports.apiRouter.get('/epec/clientLogin', joint_1.clientLogin);
-// 药物所登录地址
-exports.apiRouter.get(/^\/UserIdentify.ashx$/i, epec_1.epecLogin);
+// 药物所登录地址配置再legacyUrl中
 // 二次登录验证
 exports.apiRouter.get('/joint/clientLogin', joint_1.clientLogin);
 // 临时用于修改贴文内容中旧的url 

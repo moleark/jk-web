@@ -15,9 +15,7 @@ apiRouter.get('/epec/login', epecLogin);
 // 二次登录验证(要删除)
 apiRouter.get('/epec/clientLogin', clientLogin);
 
-// 药物所登录地址
-apiRouter.get(/^\/UserIdentify.ashx$/i, epecLogin);
-
+// 药物所登录地址配置再legacyUrl中
 // 二次登录验证
 apiRouter.get('/joint/clientLogin', clientLogin);
 

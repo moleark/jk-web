@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.legacyRouter = void 0;
 const express_1 = require("express");
 const db_1 = require("../db");
+const neotrident_1 = require("../neotrident");
 exports.legacyRouter = express_1.Router({ mergeParams: true });
 exports.legacyRouter.get(/^\/(CH|en)\/products\/(.+?)\.html$/i, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let oldProductId = req.params[1];
@@ -104,4 +105,6 @@ exports.legacyRouter.get(/^\/MaterialScience.aspx$/i, (req, res) => __awaiter(vo
 exports.legacyRouter.get(/^\/InstrumentConsumables.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog/1545");
 }));
+// 药物所登录地址
+exports.legacyRouter.get(/^\/UserIdentity.ashx$/i, neotrident_1.neotridentLogin);
 //# sourceMappingURL=index.js.map

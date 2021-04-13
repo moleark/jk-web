@@ -19,7 +19,9 @@ export class DbJointPlatform extends Db {
         this.sqlSaveLoginReq = `insert into \`${db}\`.tv_epecloginpending(token, myUsername, password, epecUsername, createtime)
             values(?, ?, ?, ?, now()); `;
 
-        this.sqlGetUserByLoginKey = `select webUser, username, password, organization, team from \`${db}\`.tv_neotrident where sharedSecret = ?`;
+        this.sqlGetUserByLoginKey = `select webUser, username, password, organization, team 
+            from \`${db}\`.tv_neotridentuser
+            where sharedSecret = ?`;
     }
 
     /**
