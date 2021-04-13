@@ -1,8 +1,9 @@
 import { Request, Response, Router } from "express";
 import { search } from "./search";
-import { epecLogin, epecClientLogin } from "../epec";
+import { epecLogin } from "../epec";
 import { getProductsInCatalog } from "./getProductsInCatalog";
 import { replacePostContentUrl } from "../tools/replacePostContentUrl";
+import { clientLogin } from "../joint";
 
 export const apiRouter = Router({ mergeParams: true });
 apiRouter.get(['/search/:key', '/search/:key/:pageNumber(\\d+)', '/search/:key?debug'], search);
@@ -11,11 +12,14 @@ apiRouter.get(['/product-catalog/:catalog/products', '/product-catalog/:catalog/
 
 // 中石化登录地址
 apiRouter.get('/epec/login', epecLogin);
-// 二次登录验证
-apiRouter.get('/epec/clientLogin', epecClientLogin);
+// 二次登录验证(要删除)
+apiRouter.get('/epec/clientLogin', clientLogin);
 
 // 药物所登录地址
-apiRouter.get('/UserIdentify.ashx', epecLogin);
+apiRouter.get(/^\/UserIdentify.ashx$/i, epecLogin);
+
+// 二次登录验证
+apiRouter.get('/joint/clientLogin', clientLogin);
 
 
 // 临时用于修改贴文内容中旧的url 

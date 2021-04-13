@@ -1,15 +1,16 @@
 import { Db } from './db';
 
-export class DbEPEC extends Db {
+export class DbJointPlatform extends Db {
 
-    private sqlGetUser: string;
+    private sqlGetEpecUser: string;
+    private sqlGetUserByLoginKey: string;
     private sqlSaveLoginReq: string;
 
     constructor() {
         super('joint-uq-platform');
 
         let db = this.databaseName;
-        this.sqlGetUser = `
+        this.sqlGetEpecUser = `
             SELECT  webUser, password, username 
             FROM    \`${db}\`.tv_epecuser
             where   username = ?;
@@ -17,6 +18,8 @@ export class DbEPEC extends Db {
 
         this.sqlSaveLoginReq = `insert into \`${db}\`.tv_epecloginpending(token, myUsername, password, epecUsername, createtime)
             values(?, ?, ?, ?, now()); `;
+
+        this.sqlGetUserByLoginKey = `select webUser, username, password, organization, team from \`${db}\`.tv_neotrident where sharedSecret = ?`;
     }
 
     /**
@@ -24,7 +27,19 @@ export class DbEPEC extends Db {
      * @param loginName
      */
     async getUserByName(loginName: string): Promise<any> {
-        const ret = await this.tableFromSql(this.sqlGetUser, [loginName]);
+        const ret = await this.tableFromSql(this.sqlGetEpecUser, [loginName]);
+        if (ret && ret.length > 0)
+            return ret[0];
+        return undefined;
+    }
+
+    /**
+     * 
+     * @param key 
+     * @returns 
+     */
+    async getUserByLoginKey(key: string): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlGetUserByLoginKey, [key]);
         if (ret && ret.length > 0)
             return ret[0];
         return undefined;

@@ -46,22 +46,3 @@ export async function login(req: Request, res: Response) {
     }
     res.redirect("/login");
 }
-
-/**
- * 
- * @param req 
- * @param res 
- */
-export async function clientLogin(req: Request, res: Response) {
-    let { query } = req;
-    let { lgtk } = query;
-    if (lgtk) {
-        let { jointPlatform } = Dbs;
-        let loginReq = await jointPlatform.getLoginReq(lgtk);
-        if (loginReq) {
-            res.json({ user: loginReq.myUsername, password: loginReq.password });
-            return;
-        }
-    }
-    res.status(404).end();
-}

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.clientLogin = exports.login = void 0;
+exports.login = void 0;
 const db_1 = require("../db");
 const config = require("config");
 const node_fetch_1 = require("node-fetch");
@@ -55,25 +55,4 @@ function login(req, res) {
     });
 }
 exports.login = login;
-/**
- *
- * @param req
- * @param res
- */
-function clientLogin(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let { query } = req;
-        let { lgtk } = query;
-        if (lgtk) {
-            let { jointPlatform } = db_1.Dbs;
-            let loginReq = yield jointPlatform.getLoginReq(lgtk);
-            if (loginReq) {
-                res.json({ user: loginReq.myUsername, password: loginReq.password });
-                return;
-            }
-        }
-        res.status(404).end();
-    });
-}
-exports.clientLogin = clientLogin;
 //# sourceMappingURL=login.js.map

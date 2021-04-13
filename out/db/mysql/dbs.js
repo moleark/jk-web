@@ -18,7 +18,7 @@ class Dbs {
         Dbs.pointshop = new dbPointShop_1.DbPointShop();
         Dbs.productMSCU = new dbProductMSCU_1.DbProductMSCU();
         Dbs.orderPayment = new DbOrderPayment_1.DbOrderPayment();
-        Dbs.jointPlatform = new DbJointPlatform_1.DbEPEC();
+        Dbs.jointPlatform = new DbJointPlatform_1.DbJointPlatform();
     }
 }
 exports.Dbs = Dbs;

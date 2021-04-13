@@ -9,19 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DbEPEC = void 0;
+exports.DbJointPlatform = void 0;
 const db_1 = require("./db");
-class DbEPEC extends db_1.Db {
+class DbJointPlatform extends db_1.Db {
     constructor() {
         super('joint-uq-platform');
         let db = this.databaseName;
-        this.sqlGetUser = `
+        this.sqlGetEpecUser = `
             SELECT  webUser, password, username 
             FROM    \`${db}\`.tv_epecuser
             where   username = ?;
         `;
         this.sqlSaveLoginReq = `insert into \`${db}\`.tv_epecloginpending(token, myUsername, password, epecUsername, createtime)
             values(?, ?, ?, ?, now()); `;
+        this.sqlGetUserByLoginKey = `select webUser, username, password, organization, team from \`${db}\`.tv_neotrident where sharedSecret = ?`;
     }
     /**
      * 获取
@@ -29,7 +30,20 @@ class DbEPEC extends db_1.Db {
      */
     getUserByName(loginName) {
         return __awaiter(this, void 0, void 0, function* () {
-            const ret = yield this.tableFromSql(this.sqlGetUser, [loginName]);
+            const ret = yield this.tableFromSql(this.sqlGetEpecUser, [loginName]);
+            if (ret && ret.length > 0)
+                return ret[0];
+            return undefined;
+        });
+    }
+    /**
+     *
+     * @param key
+     * @returns
+     */
+    getUserByLoginKey(key) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlGetUserByLoginKey, [key]);
             if (ret && ret.length > 0)
                 return ret[0];
             return undefined;
@@ -71,5 +85,5 @@ class DbEPEC extends db_1.Db {
         });
     }
 }
-exports.DbEPEC = DbEPEC;
+exports.DbJointPlatform = DbJointPlatform;
 //# sourceMappingURL=DbJointPlatform.js.map
