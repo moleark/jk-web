@@ -15,7 +15,7 @@ const config = require("config");
 const node_fetch_1 = require("node-fetch");
 const uuid_1 = require("uuid");
 const getUserRegisted_1 = require("../tools/getUserRegisted");
-const https_1 = require("https");
+const https = require("https");
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let { originalUrl, query } = req;
@@ -38,7 +38,7 @@ function login(req, res) {
             let response = yield node_fetch_1.default(epec_loginCallBack + `?account=${account}&onlyCode=${onlyCode}`, {
                 method: 'GET',
                 headers: { "Content-Type": "application/json" },
-                agent: new https_1.default.Agent({ rejectUnauthorized: false })
+                agent: new https.Agent({ rejectUnauthorized: false })
             });
             console.debug('epec login call back status', response.status);
             if (response.ok) {

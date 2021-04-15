@@ -4,7 +4,7 @@ import * as config from 'config';
 import fetch from "node-fetch";
 import { v4 as uuidv4 } from 'uuid';
 import { getUserRegisted } from "../tools/getUserRegisted";
-import https from 'https';
+import * as https from 'https';
 
 export async function login(req: Request, res: Response) {
 
