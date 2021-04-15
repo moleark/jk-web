@@ -12,6 +12,10 @@ import * as session from 'express-session';
 import { MemoryStore } from 'express-session';
 import { apiRouter } from './api';
 import { legacyRouter } from './legacyUrl';
+import * as log4js from 'log4js';
+
+log4js.configure(config.get<any>('log4js'));
+const logger = log4js.getLogger();
 
 (async function () {
     Dbs.init();
@@ -49,6 +53,7 @@ import { legacyRouter } from './legacyUrl';
         let p = '';
         if (method !== 'GET') p = JSON.stringify(body);
         console.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
+        logger.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
         try {
             await next();
         }

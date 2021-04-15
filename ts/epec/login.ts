@@ -5,11 +5,12 @@ import fetch from "node-fetch";
 import { v4 as uuidv4 } from 'uuid';
 import { getUserRegisted } from "../tools/getUserRegisted";
 import * as https from 'https';
+import { epecLogger } from "./logger";
 
 export async function login(req: Request, res: Response) {
 
     let { originalUrl, query } = req;
-    console.debug(originalUrl);
+    epecLogger.debug(originalUrl);
     let { account, onlyCode } = query;
     if (!account || !onlyCode) {
         res.redirect("/login");
@@ -19,6 +20,7 @@ export async function login(req: Request, res: Response) {
     let { jointPlatform } = Dbs;
     let epecUser = await jointPlatform.getUserByName(account);
     if (!epecUser) {
+        epecLogger.warn('epec login account %s does not exits.', account);
         res.redirect("/login");
         return;
     }
@@ -33,10 +35,10 @@ export async function login(req: Request, res: Response) {
             headers: { "Content-Type": "application/json" },
             agent: new https.Agent({ rejectUnauthorized: false })
         });
-        console.debug('epec login call back status', response.status);
+        epecLogger.debug('epec login call back status', response.status);
         if (response.ok) {
             let content = await response.json();
-            console.debug('epec login call back content: ', content);
+            epecLogger.debug('epec login call back content: ', content);
             if (content.result) {
                 // OK
                 // 记录此次登录请求，并使用此登录请求的id实现在客户端的再次验证
@@ -52,9 +54,11 @@ export async function login(req: Request, res: Response) {
                     }
                 }
             }
+        } else {
+            epecLogger.error('epec login call back response status error: ', response.status);
         }
     } catch (error) {
-        console.error('epec login call back error: ', error);
+        epecLogger.error('epec login call back error: ', error);
     }
     res.redirect("/login");
 }

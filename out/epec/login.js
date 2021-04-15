@@ -16,10 +16,11 @@ const node_fetch_1 = require("node-fetch");
 const uuid_1 = require("uuid");
 const getUserRegisted_1 = require("../tools/getUserRegisted");
 const https = require("https");
+const logger_1 = require("./logger");
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let { originalUrl, query } = req;
-        console.debug(originalUrl);
+        logger_1.epecLogger.debug(originalUrl);
         let { account, onlyCode } = query;
         if (!account || !onlyCode) {
             res.redirect("/login");
@@ -28,6 +29,7 @@ function login(req, res) {
         let { jointPlatform } = db_1.Dbs;
         let epecUser = yield jointPlatform.getUserByName(account);
         if (!epecUser) {
+            logger_1.epecLogger.warn('epec login account %s does not exits.', account);
             res.redirect("/login");
             return;
         }
@@ -40,10 +42,10 @@ function login(req, res) {
                 headers: { "Content-Type": "application/json" },
                 agent: new https.Agent({ rejectUnauthorized: false })
             });
-            console.debug('epec login call back status', response.status);
+            logger_1.epecLogger.debug('epec login call back status', response.status);
             if (response.ok) {
                 let content = yield response.json();
-                console.debug('epec login call back content: ', content);
+                logger_1.epecLogger.debug('epec login call back content: ', content);
                 if (content.result) {
                     // OK
                     // 记录此次登录请求，并使用此登录请求的id实现在客户端的再次验证
@@ -60,9 +62,12 @@ function login(req, res) {
                     }
                 }
             }
+            else {
+                logger_1.epecLogger.error('epec login call back response status error: ', response.status);
+            }
         }
         catch (error) {
-            console.error('epec login call back error: ', error);
+            logger_1.epecLogger.error('epec login call back error: ', error);
         }
         res.redirect("/login");
     });

@@ -87,5 +87,16 @@
     "epec": {
         "epec_loginCallBack": "",
         "epec_loginSuccessRedirect": ""
+    },
+    "log4js": {
+        "appenders": {
+            "default": {"type": "file", "filename": "./logs/jk-web.log", "maxLogSize": 1024000000},
+            "epec": {"type": "file", "filename": "./logs/jk-web-epec.log", "maxLogSize": 1024000000}
+        },
+        "categories": {
+            "default": {"appenders": ["default"], "level": "all"},
+            "epec": {"appenders": ["epec"], "level": "all"}
+        },
+        "pm2": false
     }
 }

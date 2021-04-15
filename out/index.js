@@ -22,6 +22,9 @@ const session = require("express-session");
 const express_session_1 = require("express-session");
 const api_1 = require("./api");
 const legacyUrl_1 = require("./legacyUrl");
+const log4js = require("log4js");
+log4js.configure(config.get('log4js'));
+const logger = log4js.getLogger();
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         db_1.Dbs.init();
@@ -57,6 +60,7 @@ const legacyUrl_1 = require("./legacyUrl");
             if (method !== 'GET')
                 p = JSON.stringify(body);
             console.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
+            logger.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
             try {
                 yield next();
             }
