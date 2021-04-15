@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Dbs } from "../db";
-import c, * as config from 'config';
+import * as config from 'config';
 import fetch from "node-fetch";
 import { v4 as uuidv4 } from 'uuid';
 import { getUserRegisted } from "../tools/getUserRegisted";
