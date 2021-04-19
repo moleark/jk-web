@@ -14,6 +14,7 @@
 </head>
 
 <body>
+ 
   <!--Only For Mobile-->
   <div class="mobile-wrap display-mobile">
     <div class="w-30">
@@ -180,6 +181,7 @@
     </div>
     <!--Only For Mobile End-->
   <section class="container mt-lg-2">
+
     <div class="row">
       <div class="col-lg-3 product-side display-desktop">
         <h2>产品分类</h2>
@@ -244,97 +246,145 @@
             </div>
           </div>
           <div class="col-lg-10 each-product">
+          	<a href="#"><img src="img/icon/favorite-icon.svg" width="25px" class="favorite"></a>
             <h3><a href="">Bis(tert-butylperoxyisopropyl)benzene, 96%
             <br>双[1-(叔丁基过氧)-1-甲基乙基]苯</a></h3>
             <p>产品编号：519861 | CAS：25155-25-3 | 品牌：J&K</p>
             <div class="text-right">
-              <a class="button ahover display-desktop" >详情</a>
+              <input type="checkbox" name="toggle" id="toggle" class="toggle-button ahover display-desktop" />
+              <label for="toggle"></label>
             </div>
           </div>
-          <div class="col-lg-12">
-            <div class="stable  mt-lg-2">
+          <div class="col-lg-12 mt-lg-2">
+            <div class="stable">
               <div class="table-responsive-vertical shadow-z-1">
                 <!-- Table starts here -->
-                <table id="table" class="table article-product-table">
-                  <thead>
-                    <tr class="article-product-list">
-                      <th>包装</th>
-                      <th>预计发运期</th>
-                      <th>价格</th>
-                      <th>数量</th>
-                      <th>加入购物车</th>
-                      <th>收藏夹</th>
-                    </tr>
-                  </thead>
-                    <tbody>
-                      <tr class="article-product-list">
-                        <td data-title="包装" class="text-right red">25ML</td>
-                        <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
-                        <td data-title="价格" class=" red">
-                          <div class="item-product-price">
-                            <p class="inline subdescription">¥406<span  class="old-price"></span></p>   /
-                            <p class="inline price-num">¥300</p>
-                            <div></div>
-                          </div>
-                        </td>
-                        <td data-title="数量">
-                          <div class="quantity">
-                            <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt="" /></button>
-                            <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="" />
-                            </button>
-                          </div>
-                          <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
-                        </td>
-                      </tr>
-                      <tr class="article-product-list">
-                        <td data-title="包装" class="text-right red">50ML</td>
-                        <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
-                        <td data-title="价格" class=" red">
-                          <div class="item-product-price">
-                            <p class="inline subdescription">¥406<span  class="old-price"></span></p>   /
-                            <p class="inline price-num">¥300</p>
-                            <div></div>
-                          </div>
-                        </td>
-                        <td data-title="数量">
-                          <div class="quantity">
-                            <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt="" /></button>
-                            <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="" />
-                            </button>
-                          </div>
-                          <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
-                        </td>
-                       
-                      </tr>
-                      <tr class="article-product-list">
-                        <td data-title="包装" class="text-right red">100ML</td>
-                        <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
-                        <td data-title="价格" class=" red">
-                          <div class="item-product-price">
-                            <p class="inline subdescription">¥406<span  class="old-price"></span></p>   /
-                            <p class="inline price-num">¥300</p>
-                            <div></div>
-                          </div>
-                        </td>
-                        <td data-title="数量">
-                          <div class="quantity">
-                            <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt="" /></button>
-                            <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="" />
-                            </button>
-                          </div>
-                          <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
-                        </td>
-                       
-                      </tr>
-                    </tbody>
-                  </table>
+               <div class="table-responsive-vertical shadow-z-1">
+                        <!-- Table starts here -->
+                        <table id="table" class="table article-product-table" style="margin-bottom: 0;">
+                          <thead>
+                            <tr class="article-product-list back-color">
+                              <th style="width: 100px;">包装</th>
+                              <th>库存</th>
+                              <th style="width: 35%;">价格(RMB)</th>
+                              <th style="width: 25%;">数量</th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                              <tr class="article-product-list">
+                                <td data-title="包装" style="border-bottom: 1px solid #eee;line-height:35px;">500 ML</td>
+                                <td data-title="库存" style="border-bottom: 1px solid #eee;line-height:35px;"> <span>河北 &gt; 10</span></td>
+                                <td data-title="价格" class=" red" style="border-bottom: 1px solid #eee;line-height:35px;">
+                                  <div class="item-product-price">
+                                    <p class="inline subdescription">406<span class="old-price"></span></p>   /
+                                    <p class="inline price-num">300</p>
+                                    <div></div>
+                                  </div>
+                                </td>
+                                <td data-title="数量" style="border-bottom: 1px solid #eee;">
+                                  <div class="quantity">
+                                    <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt=""></button>
+                                    <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="">
+                                    </button>
+                                  </div>
+                                  </td>
+                              </tr>
+                              <tr class="article-product-list">
+                                <td data-title="包装" style="background: #f9f9f9;border-bottom: 1px solid #eee;line-height:35px;">500 ML</td>
+                                <td data-title="库存" style="background: #f9f9f9;border-bottom: 1px solid #eee;line-height:35px;"> <span>河北 &gt; 10</span></td>
+                                <td data-title="价格" class=" red" style="background: #f9f9f9;border-bottom: 1px solid #eee;line-height:35px;">
+                                  <div class="item-product-price">
+                                    <p class="inline subdescription">406<span class="old-price"></span></p>   /
+                                    <p class="inline price-num">300</p>
+                                    <div></div>
+                                  </div>
+                                </td>
+                                <td data-title="数量" style="background: #f9f9f9;border-bottom: 1px solid #eee;">
+                                  <div class="quantity">
+                                    <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt=""></button>
+                                    <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="">
+                                    </button>
+                                  </div>
+                                  
+                              </td></tr>
+                            </tbody>
+                          </table>
+                      </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-12"><hr></div>
+          <hr style="width: 97%;height: 1px;margin-bottom: 35px;">
+          <div class="col-lg-2">
+            <div class="img-wrap">
+              <a href="#"><img src="img/prodcut-img.png"></a>
+            </div>
+          </div>
+          <div class="col-lg-10 each-product">
+          	<a href="#"><img src="img/icon/favorite-save.svg" width="25px" class="favorite"></a>
+            <h3><a href="">Bis(tert-butylperoxyisopropyl)benzene, 96%
+              <br>双[1-(叔丁基过氧)-1-甲基乙基]苯</a></h3>
+            <p>产品编号：519861 | CAS：25155-25-3 | 品牌：J&K</p>
+            <div class="text-right">
+              <input type="checkbox" name="toggle2" id="toggle2" class="toggle-button ahover2 display-desktop" />
+              <label for="toggle2"></label>
+            </div>
+          </div>
+          <div class="col-lg-12 mt-lg-2">
+            <div  class="stable2" >
+             <div class="table-responsive-vertical shadow-z-1">
+                        <!-- Table starts here -->
+                        <table id="table" class="table article-product-table" style="margin-bottom: 0;">
+                          <thead>
+                            <tr class="article-product-list back-color">
+                              <th style="width: 100px;">包装</th>
+                              <th>库存</th>
+                              <th style="width: 35%;">价格(RMB)</th>
+                              <th style="width: 25%;">数量</th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                              <tr class="article-product-list">
+                                <td data-title="包装" style="border-bottom: 1px solid #eee;line-height:35px;">500 ML</td>
+                                <td data-title="库存" style="border-bottom: 1px solid #eee;line-height:35px;"> <span>河北 &gt; 10</span></td>
+                                <td data-title="价格" class=" red" style="border-bottom: 1px solid #eee;line-height:35px;">
+                                  <div class="item-product-price">
+                                    <p class="inline subdescription">406<span class="old-price"></span></p>   /
+                                    <p class="inline price-num">300</p>
+                                    <div></div>
+                                  </div>
+                                </td>
+                                <td data-title="数量" style="border-bottom: 1px solid #eee;">
+                                  <div class="quantity">
+                                    <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt=""></button>
+                                    <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="">
+                                    </button>
+                                  </div>
+                                  </td>
+                              </tr>
+                              <tr class="article-product-list">
+                                <td data-title="包装" style="background: #f9f9f9;border-bottom: 1px solid #eee;line-height:35px;">500 ML</td>
+                                <td data-title="库存" style="background: #f9f9f9;border-bottom: 1px solid #eee;line-height:35px;"> <span>河北 &gt; 10</span></td>
+                                <td data-title="价格" class=" red" style="background: #f9f9f9;border-bottom: 1px solid #eee;line-height:35px;">
+                                  <div class="item-product-price">
+                                    <p class="inline subdescription">406<span class="old-price"></span></p>   /
+                                    <p class="inline price-num">300</p>
+                                    <div></div>
+                                  </div>
+                                </td>
+                                <td data-title="数量" style="background: #f9f9f9;border-bottom: 1px solid #eee;">
+                                  <div class="quantity">
+                                    <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt=""></button>
+                                    <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="">
+                                    </button>
+                                  </div>
+                                  
+                              </td></tr>
+                            </tbody>
+                          </table>
+                      </div>
+            </div>
+          </div>
+          <hr style="width: 97%;height: 1px;margin-bottom: 35px;">
           <div class="col-lg-2">
             <div class="img-wrap">
               <a href="#"><img src="img/prodcut-img.png"></a>
@@ -345,72 +395,69 @@
               <br>双[1-(叔丁基过氧)-1-甲基乙基]苯</a></h3>
             <p>产品编号：519861 | CAS：25155-25-3 | 品牌：J&K</p>
             <div class="text-right">
-              <a class="button ahover2  display-desktop" >详情</a>
+              <input type="checkbox" name="toggle3" id="toggle3" class="toggle-button ahover3 display-desktop" />
+              <label for="toggle3"></label>
             </div>
           </div>
-          <div class="col-lg-12">
-            <div  class="stable2  mt-lg-2" >
+          <div class="col-lg-12 mt-lg-2">
+            <div  class="stable3" >
               <div class="table-responsive-vertical shadow-z-1">
                 <!-- Table starts here -->
-                <table id="table" class="table article-product-table">
-                  <thead>
-                    <tr class="article-product-list">
-                      <th>包装</th>
-                      <th>预计发运期</th>
-                      <th>价格</th>
-                      <th>数量</th>
-                      <th>加入购物车</th>
-                      <th>收藏夹</th>
-                    </tr>
-                  </thead>
-                    <tbody>
-                      <tr class="article-product-list">
-                        <td data-title="包装" class=" red">500ML</td>
-                        <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
-                        <td data-title="价格" class=" red">
-                          <div class="item-product-price">
-                            <p class="inline subdescription">¥406<span  class="old-price"></span></p>   /
-                            <p class="inline price-num">¥300</p>
-                            <div></div>
-                          </div>
-                        </td>
-                        <td data-title="数量">
-                          <div class="quantity">
-                            <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt="" /></button>
-                            <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="" />
-                            </button>
-                          </div>
-                          <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
-                        </td>
-                      </tr>
-                      <tr class="article-product-list">
-                        <td data-title="包装" class=" red">500ML</td>
-                        <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
-                        <td data-title="价格" class=" red">
-                          <div class="item-product-price">
-                            <p class="inline subdescription">¥406<span  class="old-price"></span></p>   /
-                            <p class="inline price-num">¥300</p>
-                            <div></div>
-                          </div>
-                        </td>
-                        <td data-title="数量">
-                          <div class="quantity">
-                            <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt="" /></button>
-                            <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="" />
-                            </button>
-                          </div>
-                          <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
-                        </td>
-                       
-                      </tr>
-                    </tbody>
-                  </table>
+               <div class="table-responsive-vertical shadow-z-1">
+                        <!-- Table starts here -->
+                        <table id="table" class="table article-product-table" style="margin-bottom: 0;">
+                          <thead>
+                            <tr class="article-product-list back-color">
+                              <th style="width: 100px;">包装</th>
+                              <th>库存</th>
+                              <th style="width: 35%;">价格(RMB)</th>
+                              <th style="width: 25%;">数量</th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                              <tr class="article-product-list">
+                                <td data-title="包装" style="border-bottom: 1px solid #eee;line-height:35px;">500 ML</td>
+                                <td data-title="库存" style="border-bottom: 1px solid #eee;line-height:35px;"> <span>河北 &gt; 10</span></td>
+                                <td data-title="价格" class=" red" style="border-bottom: 1px solid #eee;line-height:35px;">
+                                  <div class="item-product-price">
+                                    <p class="inline subdescription">406<span class="old-price"></span></p>   /
+                                    <p class="inline price-num">300</p>
+                                    <div></div>
+                                  </div>
+                                </td>
+                                <td data-title="数量" style="border-bottom: 1px solid #eee;">
+                                  <div class="quantity">
+                                    <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt=""></button>
+                                    <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="">
+                                    </button>
+                                  </div>
+                                  </td>
+                              </tr>
+                              <tr class="article-product-list">
+                                <td data-title="包装" style="background: #f9f9f9;border-bottom: 1px solid #eee;line-height:35px;">500 ML</td>
+                                <td data-title="库存" style="background: #f9f9f9;border-bottom: 1px solid #eee;line-height:35px;"> <span>河北 &gt; 10</span></td>
+                                <td data-title="价格" class=" red" style="background: #f9f9f9;border-bottom: 1px solid #eee;line-height:35px;">
+                                  <div class="item-product-price">
+                                    <p class="inline subdescription">406<span class="old-price"></span></p>   /
+                                    <p class="inline price-num">300</p>
+                                    <div></div>
+                                  </div>
+                                </td>
+                                <td data-title="数量" style="background: #f9f9f9;border-bottom: 1px solid #eee;">
+                                  <div class="quantity">
+                                    <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt=""></button>
+                                    <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="">
+                                    </button>
+                                  </div>
+                                  
+                              </td></tr>
+                            </tbody>
+                          </table>
+                      </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-12"><hr></div>
+          <hr style="width: 97%;height: 1px;margin-bottom: 35px;">
           <div class="col-lg-2">
             <div class="img-wrap">
               <a href="#"><img src="img/prodcut-img.png"></a>
@@ -421,11 +468,12 @@
               <br>双[1-(叔丁基过氧)-1-甲基乙基]苯</a></h3>
             <p>产品编号：519861 | CAS：25155-25-3 | 品牌：J&K</p>
             <div class="text-right">
-              <a class="button ahover3  display-desktop" >详情</a>
+              <input type="checkbox" name="toggle4" id="toggle4" class="toggle-button ahover4 display-desktop" />
+              <label for="toggle4"></label>
             </div>
           </div>
-          <div class="col-lg-12">
-            <div  class="stable3  mt-lg-2" >
+          <div class="col-lg-12 mt-lg-2">
+            <div  class="stable4" >
               <div class="table-responsive-vertical shadow-z-1">
                 <!-- Table starts here -->
                 <table id="table" class="table article-product-table">
@@ -436,12 +484,11 @@
                       <th>价格</th>
                       <th>数量</th>
                       <th>加入购物车</th>
-                      <th>收藏夹</th>
                     </tr>
                   </thead>
                     <tbody>
                       <tr class="article-product-list">
-                        <td data-title="包装" class=" red">500ML</td>
+                        <td data-title="包装" class="mint">500ML</td>
                         <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
                         <td data-title="价格" class=" red">
                           <div class="item-product-price">
@@ -457,11 +504,10 @@
                             </button>
                           </div>
                           <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
                         </td>
                       </tr>
                       <tr class="article-product-list">
-                        <td data-title="包装" class=" red">500ML</td>
+                        <td data-title="包装" class="mint">500ML</td>
                         <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
                         <td data-title="价格" class=" red">
                           <div class="item-product-price">
@@ -477,7 +523,6 @@
                             </button>
                           </div>
                           <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
                         </td>
                        
                       </tr>
@@ -486,7 +531,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-12"><hr></div>
+          <hr style="width: 97%;height: 1px;margin-bottom: 35px;">
           <div class="col-lg-2">
             <div class="img-wrap">
               <a href="#"><img src="img/prodcut-img.png"></a>
@@ -497,12 +542,12 @@
               <br>双[1-(叔丁基过氧)-1-甲基乙基]苯</a></h3>
             <p>产品编号：519861 | CAS：25155-25-3 | 品牌：J&K</p>
             <div class="text-right">
-              <a class="button ahover4  display-desktop" >详情</a>
+             <input type="checkbox" name="toggle" id="toggle5" class="toggle-button ahover5 display-desktop" />
+              <label for="toggle5"></label>
             </div>
           </div>
-         
-          <div class="col-lg-12">
-            <div  class="stable4  mt-lg-2" >
+          <div class="col-lg-12 mt-lg-2">
+            <div  class="stable5" >
               <div class="table-responsive-vertical shadow-z-1">
                 <!-- Table starts here -->
                 <table id="table" class="table article-product-table">
@@ -513,12 +558,11 @@
                       <th>价格</th>
                       <th>数量</th>
                       <th>加入购物车</th>
-                      <th>收藏夹</th>
                     </tr>
                   </thead>
                     <tbody>
                       <tr class="article-product-list">
-                        <td data-title="包装" class=" red">500ML</td>
+                        <td data-title="包装" class="mint">500ML</td>
                         <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
                         <td data-title="价格" class=" red">
                           <div class="item-product-price">
@@ -534,11 +578,10 @@
                             </button>
                           </div>
                           <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
                         </td>
                       </tr>
                       <tr class="article-product-list">
-                        <td data-title="包装" class=" red">500ML</td>
+                        <td data-title="包装" class="mint">500ML</td>
                         <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
                         <td data-title="价格" class=" red">
                           <div class="item-product-price">
@@ -554,83 +597,6 @@
                             </button>
                           </div>
                           <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
-                        </td>
-                       
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-12"><hr></div>
-          <div class="col-lg-2">
-            <div class="img-wrap">
-              <a href="#"><img src="img/prodcut-img.png"></a>
-            </div>
-          </div>
-          <div class="col-lg-10 each-product">
-            <h3><a href="">Bis(tert-butylperoxyisopropyl)benzene, 96%
-              <br>双[1-(叔丁基过氧)-1-甲基乙基]苯</a></h3>
-            <p>产品编号：519861 | CAS：25155-25-3 | 品牌：J&K</p>
-            <div class="text-right">
-              <a class="button ahover5  display-desktop" >详情</a>
-            </div>
-          </div>
-          <div class="col-lg-12">
-            <div  class="stable5  mt-lg-2" >
-              <div class="table-responsive-vertical shadow-z-1">
-                <!-- Table starts here -->
-                <table id="table" class="table article-product-table">
-                  <thead>
-                    <tr class="article-product-list">
-                      <th>包装</th>
-                      <th>预计发运期</th>
-                      <th>价格</th>
-                      <th>数量</th>
-                      <th>加入购物车</th>
-                      <th>收藏夹</th>
-                    </tr>
-                  </thead>
-                    <tbody>
-                      <tr class="article-product-list">
-                        <td data-title="包装" class=" red">500ML</td>
-                        <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
-                        <td data-title="价格" class=" red">
-                          <div class="item-product-price">
-                            <p class="inline subdescription">¥406<span  class="old-price"></span></p>   /
-                            <p class="inline price-num">¥300</p>
-                            <div></div>
-                          </div>
-                        </td>
-                        <td data-title="数量">
-                          <div class="quantity">
-                            <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt="" /></button>
-                            <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="" />
-                            </button>
-                          </div>
-                          <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
-                        </td>
-                      </tr>
-                      <tr class="article-product-list">
-                        <td data-title="包装" class=" red">500ML</td>
-                        <td data-title="预计发运期"> <span class="mint">现货，1个工作日</span></td>
-                        <td data-title="价格" class=" red">
-                          <div class="item-product-price">
-                            <p class="inline subdescription">¥406<span  class="old-price"></span></p>   /
-                            <p class="inline price-num">¥300</p>
-                            <div></div>
-                          </div>
-                        </td>
-                        <td data-title="数量">
-                          <div class="quantity">
-                            <button class="minus-btn" type="button" name="button"><img src="img/minus.png" alt="" /></button>
-                            <input type="text" name="name" value="1"><button class="plus-btn" type="button" name="button"><img src="img/plus.png" alt="" />
-                            </button>
-                          </div>
-                          <td data-title="加入购物车"><a href="#"><img src="img/icon/cart.svg" width="25px"></a></td>
-                          <td data-title="收藏夹"><a href="#"><img src="img/icon/favorite.svg" width="25px"></a></td>
                         </td>
                        
                       </tr>
@@ -686,10 +652,7 @@
             <div class="footer-title">浏览</div>
             <ul>
               <li><a href="#">资讯中心</a></li>
-              <li><a href="#">质量证书(COA)</a></li>
               <li><a href="#">安全说明书(SDS)</a></li>
-              <li><a href="#">大包装与定制生产</a></li>
-              <li><a href="#">订购指南</a></li>
               <li><a href="#">产品</a></li>
               <ul>
                 <li><a href="#">有机化学</a></li>
@@ -698,17 +661,18 @@
                 <li><a href="#">材料科学</a></li>
                 <li><a href="#">仪器耗材</a></li>
               </ul>
+               <li><a href="#">危险品购买提示</a></li>
             </ul>
           </div>  
           <div class="col-lg-3 col-xs-6">
-            <div class="footer-title">联系我们</div>
+            <div class="footer-title"><a href="#">联系我们</a></div>
             <div class="contact ">
               电话：<br>400-666-7788<br>+86 10 8284 8833
             </div>
-            <div class="contact mt-lg-28 mb-lg-58">
+            <div class="contact">
               传真：<br>+86 10 8284 9933
             </div>
-            <div class="contact mb-lg-2">
+            <div class="contact">
               电子邮件：<br>
               <a href="mailto:jkinfo@jkchemical.com">jkinfo@jkchemical.com</a><br><a href="mailto:jkinfo@jk-sci.com">jkinfo@jk-sci.com</a>
             </div>
@@ -757,7 +721,9 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery/jk.js"></script>
   <script type="text/javascript">
- 
+ $("button").click(function(){
+  $("div").animate({left:'250px'});
+}); 
     </script>
 </body>
 
