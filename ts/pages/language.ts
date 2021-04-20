@@ -7,9 +7,7 @@ import { Dbs } from "../db";
 
 export async function language(req: Request, res: Response) {
     try {
-        //获取产品目录树根节点
-        const rootcategories = await Dbs.product.getRootCategories();
-        let data = buildData(req, { rootcategories });
+        let data = await buildData(req);
 
         let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
         let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();

@@ -34,16 +34,30 @@
         "order": {
             "database": "order",
             "connection": "connection"
+        },
+        "joint-uq-platform": {
+            "database": "joint-uq-platform",
+            "connection": "connection"
         }
     },
     "ex": "null",
     "SALESREGION": 1,
     "CHINESE": 196,
     "shopJsPath": {
-
+        "runtime": "http://localhost:7798/static/js/bundle.js",
+        "module": "http://localhost:7798/static/js/0.chunk.js",
+        "module2": "http://localhost:7798/static/js/1.chunk.js",
+        "main": "http://localhost:7798/static/js/main.chunk.js"
     },
     "selfBrands": [2, 8],
     "MSCUPath": "D://zwgKing//",
+    "MSCUCorsOrigins": ["http://localhost:7798", "https://c.jkchemical.com", "https://web.jkchemical.com", "https://jkchemical.com", "https://www.jkchemical.com"],
+    "sessionCookieOptions": {
+        "name": "4c71-aac3",
+        "secure": false,
+        "httpOnly": true,
+        "maxAge": 1800000
+    },
     "FILELANGVER":{
         "197": "CN",
         "52": "EN",
@@ -52,19 +66,37 @@
     },
     "wxPay":{
         "wxPayParam":{
-            "appid": "wx74beb9b6fe52f561",
-            "mch_id": "1300077401",
-            "notify_url": "http://www.weixin.qq.com/wxpay/pay.php"
+            "appid": "",
+            "mch_id": "",
+            "notify_url": ""
         },
-        "wxSecretKey":"526ba202ee1a714498402913b5f15dcc"
+        "wxSecretKey":""
     },
     "aliPay":{
         "aliPayParam":{
-            "appId": "2021002110619307",
-            "notify_url": "http://api.test.alipay.net/atinterface/receive_notify.htm"
+            "appId": "",
+            "notify_url": ""
         },
-        "aliCretPath":"C:\\Users\\z539\\Desktop\\cref\\"
+        "aliCretPath":""
     },
     "privacyId": 168,
-    "esBaseUrl": "https://c.jkchemical.com/elasticsearch"
+    "esBaseUrl": "https://c.jkchemical.com/elasticsearch",
+    "joint": {
+        "loginSuccessRedirect": "/zh-CN/product-catalog.html"
+    },
+    "epec": {
+        "epec_loginCallBack": "",
+        "epec_loginSuccessRedirect": ""
+    },
+    "log4js": {
+        "appenders": {
+            "default": {"type": "file", "filename": "./logs/jk-web.log", "maxLogSize": 1024000000},
+            "epec": {"type": "file", "filename": "./logs/jk-web-epec.log", "maxLogSize": 1024000000}
+        },
+        "categories": {
+            "default": {"appenders": ["default"], "level": "all"},
+            "epec": {"appenders": ["epec"], "level": "all"}
+        },
+        "pm2": false
+    }
 }

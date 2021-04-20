@@ -1,4 +1,3 @@
-//import * as cors from 'cors';
 import * as config from 'config';
 import * as bodyParser from 'body-parser';
 import * as ejs from 'ejs';
@@ -6,12 +5,17 @@ import * as path from 'path';
 import { Request, Response, NextFunction, Application } from 'express';
 import * as express from 'express';
 import { homeRouter } from './pages';
-import { easyTime } from './tools';
+import { buildData, easyTime } from './tools';
 import { Dbs } from './db';
 import { page } from './pages/page';
 import * as session from 'express-session';
 import { MemoryStore } from 'express-session';
 import { apiRouter } from './api';
+import { legacyRouter } from './legacyUrl';
+import * as log4js from 'log4js';
+
+log4js.configure(config.get<any>('log4js'));
+const logger = log4js.getLogger();
 
 (async function () {
     Dbs.init();
@@ -21,43 +25,35 @@ import { apiRouter } from './api';
     //app.use(useLog());
     app.locals.easyTime = easyTime;
 
-    app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-
     // 使用 body-parser 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
-    //app.use(cors());
     app.set('json replacer', (key: string, value: any) => {
         if (value === null) return undefined;
         return value;
     });
+    // 
+    app.set('trust proxy', true);
 
+    var sessionCookieOptions = config.get<any>('sessionCookieOptions');
     app.use(session({
+        name: sessionCookieOptions.name,
         secret: 'session-cat',//keyboard cat
-        name: 'session-cat',
         resave: false,
         saveUninitialized: false,
         unset: 'destroy',
         rolling: true,
         store: new MemoryStore(),
-        cookie: {
-            maxAge: 60 * 1000 * 30,
-            secure: false,
-        }
+        cookie: sessionCookieOptions
     }));
 
     app.use(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
         //let json = res.json;
-        let s = req.socket;
+        let { method, ip, body } = req;
         let p = '';
-        if (req.method !== 'GET') p = JSON.stringify(req.body);
-        console.log('\n=== %s:%s - %s %s %s', s.remoteAddress, s.remotePort, req.method, req.originalUrl, p);
+        if (method !== 'GET') p = JSON.stringify(body);
+        console.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
+        logger.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
         try {
             await next();
         }
@@ -108,11 +104,25 @@ import { apiRouter } from './api';
         homeRouter.get(element.url, page);
     });
     app.use('/', homeRouter);
+    app.use('/', legacyRouter);
     app.use('/jk-web', homeRouter);
+    app.use('/jk-web', legacyRouter);
     app.use('/api', apiRouter);
     app.use('/jk-web/api', apiRouter);
     //app.get('/wayne-ligsh-text', wayneLigshTest);
     //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
+
+    app.use(async (req: Request, res: Response, next: NextFunction) => {
+        res.status(404).render('error.ejs', await buildData(req));
+    })
+    // 全局错误处理handler(文档上说这个要在调用其他的use方法之后调用)
+    app.use(async (err: any, req: Request, res: Response, next: NextFunction) => {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
 
     // 监听服务
     let port = config.get<number>('port');

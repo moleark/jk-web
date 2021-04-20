@@ -4,9 +4,9 @@ import { buildData } from "../tools";
 import { Dbs } from "../db";
 
 export async function webMap(req: Request, res: Response) {
-  
- 
-    let data = buildData(req, {
+
+
+    let data = await buildData(req, {
         nextpage: ''
     });
 

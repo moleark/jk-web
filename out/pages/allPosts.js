@@ -16,7 +16,12 @@ let lastHomeTick = Date.now();
 let cacheHtml;
 let cacheHotPosts;
 let lastHotTick = 0;
-//测试
+/**
+ * TODO: 准备作废
+ * @param req
+ * @param res
+ * @returns
+ */
 function allPosts(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         let rootPath = tools_1.getRootPath(req);
@@ -32,7 +37,7 @@ function allPosts(req, res) {
             ;
         }
         const ret = yield db_1.Dbs.content.allPosts();
-        let data = tools_1.buildData(req, {
+        let data = yield tools_1.buildData(req, {
             path: rootPath + 'post/',
             news: ret,
         });

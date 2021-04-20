@@ -1,30 +1,26 @@
 import { Request, Response } from "express";
 import { Dbs } from "../db";
 import { buildData, getRootPath, ejsError } from "../tools";
+import { setPreNextPage } from "../tools/setPreNextPage";
 
 export async function information(req: Request, res: Response) {
-    let rootPath = getRootPath(req);
 
     try {
         let discounts: any[] = [];
         let correlation: any[] = [];
 
         //获取当前页贴文
-        let postpage: any[];
-        let pageCount: number;
+        let pageIndex: number;
         let pageSize: number = 10;
-        pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
-        postpage = await Dbs.content.informationPage(pageCount * pageSize, pageSize)
-
-        let nextpage: number = pageCount + 1;
-        let prepage: number = pageCount - 1
+        pageIndex = req.query.pageIndex ? parseInt(req.query.pageIndex) : 0;
+        let postpage: any[] = await Dbs.content.informationPage(pageIndex * pageSize, pageSize + 1)
+        let { prepage, nextpage } = setPreNextPage(pageIndex, pageSize, postpage.length);
+        if (nextpage > 0)
+            postpage.pop();
 
         //获取栏目
         let subject: any[];
-        subject = await Dbs.content.getSubject();
-
-        //获取产品目录树根节点
-        const rootcategories = await Dbs.product.getRootCategories();
+        subject = await Dbs.content.getAllSubjects();
 
         //获取热点贴文
         let cacheHotPosts: any[];
@@ -41,21 +37,18 @@ export async function information(req: Request, res: Response) {
         //相关贴文
         correlation = await Dbs.content.getCorrelationPost(0);
 
-        let data = buildData(req, {
-            nextpage: rootPath + 'information/?pageCount=' + nextpage,
-            prepage: rootPath + 'information/?pageCount=' + prepage,
-            path: rootPath + 'post/',
+        let data = await await buildData(req, {
+            nextpage: nextpage,
+            prepage: prepage,
             post: postpage,
-            pageCount: pageCount,
+            pageIndex: pageIndex,
             hotPosts: cacheHotPosts,
             subject: subject,
             discounts: discounts,
             correlation: correlation,
-            rootcategories: rootcategories,
             titleshow: true
         });
 
-        console.log(nextpage, 'nextpage')
         res.render('information.ejs', data, (err, html) => {
             if (ejsError(err, res) === true) return;
             res.end(html);

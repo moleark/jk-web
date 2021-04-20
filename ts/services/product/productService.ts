@@ -18,6 +18,7 @@ class ProductService {
 
         if (!key)
             throw '';
+        key = key.trim();
 
         let from = (pageNumber - 1) * pageSize;
         let param: Search = {
@@ -83,6 +84,72 @@ class ProductService {
             let { took, hits } = body;
             let { total, hits: ihits } = hits;
             return { took, total, hits: ihits.map((e: any) => { return Object.assign({ "sort": e.sort, "_score": e._score }, e._source); }) };
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+
+    /**
+     * 
+     * @param catalogId 
+     * @param pageNumber 
+     * @param pageSize 
+     * @param debug 
+     */
+    async getProductsInCatalog(catalogId: number, pageNumber = 1, pageSize = 20, debug = false) {
+
+        if (!catalogId)
+            throw '';
+
+        let from = (pageNumber - 1) * pageSize;
+        let param: Search = {
+            index: "productproductcatalog",
+            from: from,
+            size: pageSize,
+            body: {
+                query: {
+                    term: { catalog: { value: catalogId } }
+                },
+                sort: [
+                    "_score",
+                    { "order": "asc" }
+                ]
+            }
+        };
+
+        try {
+            // 查询过程，从目录树索引中查询得到所包含的productid，然后再根据此id到product索引中再次查询
+            // 第二次的查询结果合并到第一次的查询结果中
+            let esResult = await this.esClient.search(param);
+            if (debug)
+                return esResult;
+            let { body } = esResult;
+            let { took, hits } = body;
+            let { total, hits: ihits } = hits;
+            let productIds = ihits.map((e: any) => e._source.product);
+            let param2: Search = {
+                index: "products",
+                size: pageSize,
+                body: {
+                    query: { ids: { values: productIds } }
+                }
+            }
+            let esResult2 = await this.esClient.search(param2);
+            let { body: body2 } = esResult2;
+            let { hits: hits2 } = body2;
+            let { hits: ihits2 } = hits2;
+
+            return {
+                took,
+                total,
+                hits: ihits.map((e: any) => {
+                    let product = ihits2.find((p: any) => p._source.id === e._source.product);
+                    if (product)
+                        return Object.assign({ "sort": e.sort, "_score": e._score }, product._source);
+                })
+            };
         } catch (error) {
             console.log(error);
             throw error;

@@ -23,7 +23,7 @@ function technicalSupport(req, res) {
             let subSortName = yield db_1.Dbs.productIndex.SortNameInterval(tools_1.SALESREGION, sortName[i].id);
             list.push(subSortName);
         }
-        let data = tools_1.buildData(req, {
+        let data = yield tools_1.buildData(req, {
             productPath: '',
             sortName: '',
         });

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Dbs } from "../db";
-import { renderPostArticle } from "./post";
+import { renderPostContent } from "./post";
 
 export async function categoryInstruction(req: Request, res: Response) {
     let current = req.params.current;
@@ -13,7 +13,8 @@ export async function categoryInstruction(req: Request, res: Response) {
         const ret = await Dbs.content.postFromId(postID);
         if (ret.length > 0) {
             let postArticle = ret[0];
-            explain = await renderPostArticle(req, postArticle);
+            // explain = await renderPostArticle(req, postArticle);
+            explain = await renderPostContent(req, postArticle);
             res.send(explain);
         }
     } else {

@@ -16,7 +16,7 @@ export async function pointProductDetail(req: Request, res: Response) {
         let content = pointProductDetail[0].content;
         content = hmToEjs(content);
         detailContent = jk + hmInclude + content;
-        let datas = buildData(req, {});
+        let datas = await buildData(req);
         detailContent = ejs.render(detailContent, datas);
         res.send(detailContent);
     } else {

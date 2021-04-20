@@ -14,12 +14,13 @@ const db_1 = require("../db");
 const tools_1 = require("../tools");
 const ejs = require("ejs");
 const post_1 = require("./post");
-function page(req, res) {
+function page(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const ret = yield db_1.Dbs.content.getPage(req.path);
             if (ret.length === 0) {
-                res.status(404).end();
+                res.status(404);
+                next();
                 return;
             }
             let template, title, postArticleHtml;
@@ -38,8 +39,6 @@ function page(req, res) {
                 bodys += body;
             });
             */
-            //获取产品目录树根节点
-            const rootcategories = yield db_1.Dbs.product.getRootCategories();
             let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
             let homeFooter = ejs.fileLoader(tools_1.viewPath + 'footers/home-footer' + tools_1.ejsSuffix).toString();
@@ -48,7 +47,9 @@ function page(req, res) {
                 + postArticleHtml
                 + homeFooter;
             title = ret[0].caption;
-            let data = tools_1.buildData(req, { $title: title, rootcategories: rootcategories, titleshow: true });
+            let data = yield tools_1.buildData(req, {
+                $title: title, titleshow: true
+            });
             let html = ejs.render(template, data);
             res.end(html);
         }

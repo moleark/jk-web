@@ -22,7 +22,7 @@ function casSubclass(req, res) {
         let pageSize = 5;
         pageCount = req.query.pageCount ? parseInt(req.query.pageCount) : 0;
         const casList = yield db_1.Dbs.productIndex.getCASByInterval(tools_1.SALESREGION, +current);
-        let data = tools_1.buildData(req, {
+        let data = yield tools_1.buildData(req, {
             current: current,
             casList: casList,
             productPath: rootPath + 'search/'

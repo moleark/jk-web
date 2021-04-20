@@ -2,7 +2,7 @@
 <%- include('headers/home-header.ejs') -%>
 
 <div class="banner"
-    style="background: url(<%=$root%>img/bg-01.png);background-size: cover; background-position: center bottom;background-repeat: no-repeat;">
+    style="background: url(<%=$root%>images/bg-01.png);background-size: cover; background-position: center bottom;background-repeat: no-repeat;">
     <div class="container">
         <div class="banner-info">
             <h1>
@@ -16,7 +16,9 @@
         <div class="breadcrumbs">
             <a href="<%=$root%>">首页</a>
             <a href="<%=$root%>information">资讯中心 </a>
-            <span><%=caption%></span>
+            <span>
+                <%=caption%>
+            </span>
         </div>
     </div>
 </div>
@@ -24,23 +26,27 @@
 <div class="container mt-lg-5">
     <div class="row">
         <div class="col-lg-9 article">
-            <% for(var i=0;i<post.length;i++){ 
-                let {id, caption, disp, date, by, image, name} = post[i];
-            %>
-            <div class="article-list row">
-                <div class="col-lg-3">
-                    <a href="<%=path+id%>"><img src="<%=image%>" class="w-100 "></a>
-                </div>
-                <div class="col-lg-9">
-                    <h2 class="h1"> <a href="<%=path+id%>"><%=caption%></a></h2>
-                    <div class="h-sub">
-                        <a href="#"><%=name%></a>
+            <% for(var i=0;i<post.length;i++){ let {id, caption, disp, date, by, image, name}=post[i]; %>
+                <div class="article-list row">
+                    <div class="col-lg-3">
+                        <a href="<%=$root + 'post/' + id%>"><img src="<%=image%>" class="w-100 "></a>
                     </div>
-                    <p class="mt-lg-24"><a href="<%=path+id%>"><%=disp%></a></p>
+                    <div class="col-lg-9">
+                        <h2 class="h1"> <a href="<%=$root + 'post/' + id%>">
+                                <%=caption%>
+                            </a></h2>
+                        <div class="h-sub">
+                            <a href="#">
+                                <%=name%>
+                            </a>
+                        </div>
+                        <p class="mt-lg-24"><a href="<%=$root + 'post/' + id%>">
+                                <%=disp%>
+                            </a></p>
+                    </div>
                 </div>
-            </div>
-            <hr />
-            <% } %>
+                <hr />
+                <% } %>
         </div>
         <div class="col-lg-3">
             <%- include('right/subject.ejs') -%>
@@ -49,15 +55,11 @@
 
     <div class="mt-lg-65">
         <ul class="pagination justify-content-center">
-            <% if (pageCount==0) { %>
-            <li class="page-item"><a class="page-link">上一页</a></li>
-            <% } else { %>
-            <li class="page-item"><a class="page-link" href="<%=prepage%>">上一页</a></li>
+            <% if (prepage > -1) { %>
+                <li class="page-item"><a class="page-link" href="<%=$root + 'subjectpost/' + currentSubjectId + '?pageIndex=' + prepage%>">上一页</a></li>
             <% } %>
-            <% if (post.length<10) { %>
-            <li class="page-item"><a class="page-link">下一页</a></li>
-            <% } else { %>
-            <li class="page-item"><a class="page-link" href="<%=nextpage%>">下一页</a></li>
+            <% if (nextpage > 0) { %>
+                <li class="page-item"><a class="page-link" href="<%=$root + 'subjectpost/' + currentSubjectId + '?pageIndex=' + nextpage%>">下一页</a></li>
             <% } %>
         </ul>
     </div>

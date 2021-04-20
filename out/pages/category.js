@@ -13,18 +13,18 @@ exports.category = void 0;
 const tools_1 = require("../tools");
 const db_1 = require("../db");
 const post_1 = require("./post");
-function category(req, res) {
+function category(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let current = req.params.current;
         let currentId = Number(current);
         let category = yield db_1.Dbs.product.getCategoryById(currentId);
         if (!category) {
-            res.status(404).end();
+            res.status(404);
+            next();
             return;
         }
         let children = yield db_1.Dbs.product.getChildrenCategories(currentId);
         category.children = children;
-        let rootcategories = yield db_1.Dbs.product.getRootCategories();
         const categoryPost = yield db_1.Dbs.content.categoryPost(currentId);
         let postArticle = "";
         const explainlist = yield db_1.Dbs.content.getCategoryInstruction(currentId);
@@ -36,14 +36,13 @@ function category(req, res) {
             }
         }
         let rootPath = tools_1.getRootPath(req);
-        let data = tools_1.buildData(req, {
-            rootcategories: rootcategories,
+        let data = yield tools_1.buildData(req, {
             current: current,
             category: category,
             postArticle: postArticle,
             categoryPost: categoryPost,
-            path: rootPath + 'category/',
-            productPath: rootPath + 'productCategory/',
+            path: rootPath + 'product-catalog/',
+            productPath: rootPath + 'product-catalog/',
             postpath: rootPath + 'post/',
             titleshow: true
         });

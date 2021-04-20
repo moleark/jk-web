@@ -1,4 +1,6 @@
 import { Router, Request, Response } from 'express';
+import * as cors from 'cors';
+import * as config from 'config';
 import { home } from './home';
 import { post } from './post';
 import { category } from './category';
@@ -39,42 +41,54 @@ import { Dbs } from '../db';
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
 homeRouter.get('/post/:id', post);
-homeRouter.get('/category/:current', category);
-homeRouter.get('/productcategory/:current', category);
+
+homeRouter.get('/iframe', iframe);
+homeRouter.get('/information', information);
+
+homeRouter.get('/all-posts', allPosts);
+homeRouter.get('/webMap', webMap);
+
+// 这一组准备作废
+/*
+homeRouter.get('/product-catalog/:current', category);
 homeRouter.get('/search/:key', search);
 homeRouter.get('/search', search);
 homeRouter.get('/product/:id', product);
-homeRouter.get('/iframe', iframe);
 homeRouter.get('/shop', shop);   //转移到nginx中实现，免去在web中维护shop的麻烦
+homeRouter.get('/contact', contact);
+*/
 homeRouter.get('/version', version);
 homeRouter.get('/law', law);
-homeRouter.get('/contact', contact);
-homeRouter.get('/information', information);
-homeRouter.get('/all-posts', allPosts);
-homeRouter.get('/language', language);
-homeRouter.get('/webMap', webMap);
 homeRouter.get('/test/*', test);
+homeRouter.get('/cart', cart);
+homeRouter.get('/post_test/:id', post_test);
+
+// 这一组暂未上线
 homeRouter.get('/productCategory', productCategory);
 homeRouter.get('/cas', cas);
 homeRouter.get('/productName', productName);
 homeRouter.get('/ProductResources', ProductResources);
 homeRouter.get('/casSubclass/:current', casSubclass);
 homeRouter.get('/technicalSupport', technicalSupport);
+homeRouter.get('/language', language);
+
 homeRouter.get('/subjectpost/:current', subjectpost);
-homeRouter.get('/cart', cart);
-homeRouter.get('/post_test/:id', post_test);
 
 homeRouter.get('/partial/categoryinstruction/:current', categoryInstruction);
 homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail);
 
+const MSCUCorsOptions = {
+    origin: config.get<[]>("MSCUCorsOrigins"),
+    credentials: true
+}
 homeRouter.get('/partial/captcha', captcha);
 homeRouter.get('/partial/productMsdsVersion/:origin', productMsdsVersions);
-homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', productMsdsFileByOrigin);
-homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', productSpecFileByOrigin);
+homeRouter.get('/partial/productMsdsFileByOrigin/:lang/:origin/:captcha', cors(MSCUCorsOptions), productMsdsFileByOrigin);
+homeRouter.get('/partial/productSpecFileByOrigin/:origin/:captcha', cors(MSCUCorsOptions), productSpecFileByOrigin);
 
 
-homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', productMsdsFile);
-homeRouter.get('/partial/productSpecFile/:productid/:captcha', productSpecFile);
+homeRouter.get('/partial/productMsdsFile/:lang/:productid/:captcha', cors(MSCUCorsOptions), productMsdsFile);
+homeRouter.get('/partial/productSpecFile/:productid/:captcha', cors(MSCUCorsOptions), productSpecFile);
 
 
 homeRouter.get('/partial/orderPayment/:payid/:appid/:orderid', orderPayment);
@@ -83,9 +97,9 @@ homeRouter.get('/partial/wxpay/notice', wxNotice);
 
 
 //delete
-homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', productPdfFile);  // 保持兼容，暂时保留
+homeRouter.get('/partial/productpdffile/:captcha/:lang/:productid', cors(MSCUCorsOptions), productPdfFile);  // 保持兼容，暂时保留
 
-homeRouter.get('/privacy', privacy);  // 保持兼容，暂时保留
+// homeRouter.get('/privacy', privacy);  // 保持兼容，暂时保留
 
 homeRouter.post('/addroute', async (req: Request, res: Response) => {
     let { body } = req;
@@ -95,5 +109,12 @@ homeRouter.post('/addroute', async (req: Request, res: Response) => {
         if (ret.length > 0)
             homeRouter.get(pagePath, page);
     }
+    res.status(200).end();
+});
+homeRouter.get('/initDynamicRoute', async (req: Request, res: Response) => {
+    let ret = await Dbs.content.getRoute();
+    ret.forEach(e => {
+        homeRouter.get(e.url, page);
+    });
     res.status(200).end();
 });

@@ -37,9 +37,6 @@ export async function privacy(req: Request, res: Response) {
                 + homeFooter;
         }
 
-        //获取产品目录树根节点
-        const rootcategories = await Dbs.product.getRootCategories();
-
         //获取贴点贴文
         let cacheHotPosts: any[];
         let lastHotTick = 0;
@@ -51,14 +48,13 @@ export async function privacy(req: Request, res: Response) {
 
         //获取栏目
         let subject: any[];
-        subject = await Dbs.content.getSubject();
+        subject = await Dbs.content.getAllSubjects();
 
-        let data = buildData(req, {
+        let data = await buildData(req, {
             subject: subject,
             discounts: discounts,
             correlation: correlation,
             hotPosts: cacheHotPosts,
-            rootcategories: rootcategories,
             content: content,
             titleshow: false
         });

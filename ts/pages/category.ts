@@ -1,21 +1,21 @@
-import { Request, Response } from "express";
-import { ejsError, getRootPath, buildData, hmToEjs, viewPath, ejsSuffix } from "../tools";
+import { NextFunction, Request, Response } from "express";
+import { ejsError, getRootPath, buildData } from "../tools";
 import { Dbs } from "../db";
 import { renderPostArticle } from "./post";
 
-export async function category(req: Request, res: Response) {
+export async function category(req: Request, res: Response, next: NextFunction) {
     let current = req.params.current;
     let currentId = Number(current);
     let category = await Dbs.product.getCategoryById(currentId);
     if (!category) {
-        res.status(404).end();
+        res.status(404);
+        next();
         return;
     }
 
     let children = await Dbs.product.getChildrenCategories(currentId);
     category.children = children;
 
-    let rootcategories = await Dbs.product.getRootCategories();
     const categoryPost = await Dbs.content.categoryPost(currentId);
 
     let postArticle: string = "";
@@ -29,14 +29,13 @@ export async function category(req: Request, res: Response) {
     }
 
     let rootPath = getRootPath(req);
-    let data = buildData(req, {
-        rootcategories: rootcategories,
+    let data = await buildData(req, {
         current: current,
         category: category,
         postArticle: postArticle,
         categoryPost: categoryPost,
-        path: rootPath + 'category/',
-        productPath: rootPath + 'productCategory/',
+        path: rootPath + 'product-catalog/',
+        productPath: rootPath + 'product-catalog/',
         postpath: rootPath + 'post/',
         titleshow: true
     });

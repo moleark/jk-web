@@ -5,6 +5,7 @@ import { DbProductIndex } from "./dbProductIndex";
 import { DbPointShop } from "./dbPointShop";
 import { DbProductMSCU } from "./dbProductMSCU";
 import { DbOrderPayment } from "./DbOrderPayment";
+import { DbJointPlatform } from "./DbJointPlatform";
 
 export class Dbs {
     static unit = 24;
@@ -14,6 +15,8 @@ export class Dbs {
     static pointshop: DbPointShop;
     static productMSCU: DbProductMSCU;
     static orderPayment: DbOrderPayment;
+    static jointPlatform: DbJointPlatform;
+
 
     static init() {
         Db.init();
@@ -23,6 +26,7 @@ export class Dbs {
         Dbs.pointshop = new DbPointShop();
         Dbs.productMSCU = new DbProductMSCU();
         Dbs.orderPayment = new DbOrderPayment();
+        Dbs.jointPlatform = new DbJointPlatform();
     }
 }
 

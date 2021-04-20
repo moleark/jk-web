@@ -28,7 +28,7 @@
     %>
     <div class="side-main-pic">
         <div class="img-wrap img-promo mb-lg-1">
-            <a href="<%=path+id%>"><img src="<%=image%>"></a>
+            <a href="<%=$root + 'post/' + id%>"><img src="<%=image%>"></a>
         </div>
         <div class="side-main-pic-info txt-line-clamp">
             <p><%=caption%></p>
@@ -48,7 +48,7 @@
     <div class="overflow">
         <div class="post-preview p-flot txt-line-clamp mt-lg-1">
             <span class="mint">|</span>
-            <p><a href="<%=path+post%>"><%=caption%></a></p>
+            <p><a href="<%=$root + 'post/' + post%>"><%=caption%></a></p>
         </div>
     </div>
     <hr class="mobile-divider">
@@ -72,7 +72,7 @@
     <div class="overflow">
         <div class="post-preview p-flot txt-line-clamp mt-lg-1">
             <span class="mint">|</span>
-            <p><a href="<%=path+id%>"><%=caption%></a></p>
+            <p><a href="<%=$root + 'post/' + id%>"><%=caption%></a></p>
         </div>
     </div>
     <hr class="mobile-divider">

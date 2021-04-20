@@ -301,6 +301,13 @@ class DbContent extends db_1.Db {
             return { name: "" };
         });
     }
+    /**
+     * 分页获取某栏目（subjectid）中的贴文
+     * @param id 栏目id
+     * @param pageStart
+     * @param pageSize
+     * @returns
+     */
     subjectPost(id, pageStart, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlSubjectPost, [id, pageStart, pageSize]);
@@ -313,7 +320,11 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
-    getSubject() {
+    /**
+     *
+     * @returns
+     */
+    getAllSubjects() {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlSubject);
             return ret;
@@ -369,6 +380,22 @@ class DbContent extends db_1.Db {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetRecommendProducts, [id]);
             return ret;
+        });
+    }
+    /**
+     * 修改贴文内容（用于替换内容中的url)
+     * @param id
+     * @param content
+     */
+    replaceContentUrl(id, content) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this.execSql(`update ${this.databaseName}.tv_post set content = ? where id = ?`, [content, id]);
+            }
+            catch (error) {
+                console.error(error);
+                throw error;
+            }
         });
     }
 }

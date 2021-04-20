@@ -5,8 +5,7 @@ import { Dbs } from "../db";
 
 export async function ProductResources(req: Request, res: Response) {
 
-
-    let data = buildData(req, {
+    let data = await await buildData(req, {
         nextpage: ''
     });
 

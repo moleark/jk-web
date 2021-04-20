@@ -15,7 +15,7 @@ export async function cart(req: Request, res: Response) {
         + '</div>'
         + homeFooter;
 
-    let data = buildData(req, {});
+    let data = await buildData(req, {});
 
     let html = ejs.render(template, data);
     res.end(html);

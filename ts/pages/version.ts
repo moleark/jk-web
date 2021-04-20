@@ -16,7 +16,7 @@ export async function version(req: Request, res: Response) {
 		}
 
 		const rootcategories = await Dbs.product.getRootCategories();
-		let data = buildData(req, { version: cbDataPackage.version, rootcategories: rootcategories });
+		let data = await buildData(req, { version: cbDataPackage.version, rootcategories: rootcategories });
 
 		let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
 		let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();

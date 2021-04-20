@@ -6,7 +6,7 @@ import { viewPath, ejsSuffix } from "../tools";
 
 export async function test(req: Request, res: Response) {
 	try {
-		let data = buildData(req, undefined);
+		let data = await buildData(req, undefined);
 
 		let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
 		let jk = ejs.fileLoader(viewPath + '/headers/jk' + ejsSuffix).toString();

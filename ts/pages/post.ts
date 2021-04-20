@@ -1,15 +1,15 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as ejs from 'ejs';
 import { Dbs } from "../db";
 import { getRootPath, viewPath, ejsSuffix, ipHit, ejsError, buildData, hmToEjs } from "../tools";
 
-export async function post(req: Request, res: Response) {
+export async function post(req: Request, res: Response, next: NextFunction) {
     let rootPath = getRootPath(req);
     let id = req.params.id;
     //获取内容
     const ret = await Dbs.content.postFromId(id);
     if (ret.length === 0) {
-        res.status(404).end();
+        next();
         return;
     }
 
@@ -28,8 +28,6 @@ export async function post(req: Request, res: Response) {
         postsubject = await Dbs.content.postSubject(id);
         //获取贴文产品
         postproduct = await Dbs.content.getPostProduct(id);
-        //获取产品目录树根节点
-        const rootcategories = await Dbs.product.getRootCategories();
 
         //获取贴点贴文
         let cacheHotPosts: any[];
@@ -42,17 +40,16 @@ export async function post(req: Request, res: Response) {
 
         //获取栏目
         let subject: any[];
-        subject = await Dbs.content.getSubject();
+        subject = await Dbs.content.getAllSubjects();
         content = await renderPostArticle(req, current);
 
-        let data = buildData(req, {
+        let data = await buildData(req, {
             $title: current.caption,
             path: rootPath + 'post/',
             subject: subject,
             discounts: discounts,
             correlation: correlation,
             hotPosts: cacheHotPosts,
-            rootcategories: rootcategories,
             postArticle: content,
             postsubject: postsubject,
             postproduct: postproduct,
@@ -133,9 +130,9 @@ function formattedTableRow(productlist: any[]) {
  */
 export async function renderPostArticle(req: Request, article: any) {
 
-    // return ejs.render(template, buildData(req, { article }));
+    // return ejs.render(template, await buildData(req, { article }));
     let result = '';
-    // content = ejs.render(template, buildData(req, { article }));
+    // content = ejs.render(template, await buildData(req, { article }));
     let content = await renderPostContent(req, article);
     ejs.renderFile<void>(viewPath + '/post/post-article.ejs', { postArticle: article, content }, (error: Error, str: string) => {
         result = str;
@@ -161,5 +158,5 @@ export async function renderPostContent(req: Request, article: any) {
         + ejs.fileLoader(viewPath + '/headers/hm' + ejsSuffix).toString()
         + content;
 
-    return ejs.render(template, buildData(req, { article }));
+    return ejs.render(template, await buildData(req, { article }));
 }

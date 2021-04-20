@@ -38,14 +38,6 @@ export async function home(req: Request, res: Response) {
             lastHotTick = now;
             cacheHotPosts = await Dbs.content.getHotPost();
         }
-        //获取根目录节点
-        const rootcategories = await Dbs.product.getRootCategories();
-        for (let i = 0; i < rootcategories.length; i++) {
-            let category = rootcategories[i];
-            let { id } = category;
-            rootcategories[i].children = await Dbs.product.getChildrenCategories(id);
-        }
-
         let header = ejs.fileLoader(viewPath + 'headers/header' + ejsSuffix).toString();
         let homeHeader = ejs.fileLoader(viewPath + 'headers/home-header' + ejsSuffix).toString();
         let home = ejs.fileLoader(viewPath + 'home' + ejsSuffix).toString();
@@ -56,14 +48,13 @@ export async function home(req: Request, res: Response) {
             + homeFooter;
 
         console.log(rootPath, 'rootPath')
-        let data = buildData(req, {
+        let data = await buildData(req, {
             path: rootPath + 'post/',
             slideshow: slideshow,
             information: information,
             hots: cacheHotPosts,
             discounts: discounts,
             recommend: recommend,
-            rootcategories: rootcategories,
             titleshow: true
         });
         let html = ejs.render(template, data);

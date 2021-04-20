@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//import * as cors from 'cors';
 const config = require("config");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -22,6 +21,10 @@ const page_1 = require("./pages/page");
 const session = require("express-session");
 const express_session_1 = require("express-session");
 const api_1 = require("./api");
+const legacyUrl_1 = require("./legacyUrl");
+const log4js = require("log4js");
+log4js.configure(config.get('log4js'));
+const logger = log4js.getLogger();
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         db_1.Dbs.init();
@@ -29,42 +32,35 @@ const api_1 = require("./api");
         let app = express();
         //app.use(useLog());
         app.locals.easyTime = tools_1.easyTime;
-        app.use((err, req, res, next) => {
-            res.status(err.status || 500);
-            res.render('error', {
-                message: err.message,
-                error: err
-            });
-        });
         // 使用 body-parser 
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json());
-        //app.use(cors());
         app.set('json replacer', (key, value) => {
             if (value === null)
                 return undefined;
             return value;
         });
+        // 
+        app.set('trust proxy', true);
+        var sessionCookieOptions = config.get('sessionCookieOptions');
         app.use(session({
+            name: sessionCookieOptions.name,
             secret: 'session-cat',
-            name: 'session-cat',
             resave: false,
             saveUninitialized: false,
             unset: 'destroy',
             rolling: true,
             store: new express_session_1.MemoryStore(),
-            cookie: {
-                maxAge: 60 * 1000 * 30,
-                secure: false,
-            }
+            cookie: sessionCookieOptions
         }));
         app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
             //let json = res.json;
-            let s = req.socket;
+            let { method, ip, body } = req;
             let p = '';
-            if (req.method !== 'GET')
-                p = JSON.stringify(req.body);
-            console.log('\n=== %s:%s - %s %s %s', s.remoteAddress, s.remotePort, req.method, req.originalUrl, p);
+            if (method !== 'GET')
+                p = JSON.stringify(body);
+            console.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
+            logger.log('\n=== %s - %s %s %s', ip, req.method, req.originalUrl, p);
             try {
                 yield next();
             }
@@ -109,11 +105,24 @@ const api_1 = require("./api");
             pages_1.homeRouter.get(element.url, page_1.page);
         });
         app.use('/', pages_1.homeRouter);
+        app.use('/', legacyUrl_1.legacyRouter);
         app.use('/jk-web', pages_1.homeRouter);
+        app.use('/jk-web', legacyUrl_1.legacyRouter);
         app.use('/api', api_1.apiRouter);
         app.use('/jk-web/api', api_1.apiRouter);
         //app.get('/wayne-ligsh-text', wayneLigshTest);
         //app.get('/jk-web/wayne-ligsh-text', wayneLigshTest);
+        app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            res.status(404).render('error.ejs', yield tools_1.buildData(req));
+        }));
+        // 全局错误处理handler(文档上说这个要在调用其他的use方法之后调用)
+        app.use((err, req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            res.status(err.status || 500);
+            res.render('error', {
+                message: err.message,
+                error: err
+            });
+        }));
         // 监听服务
         let port = config.get('port');
         app.listen(port, '0.0.0.0', () => __awaiter(this, void 0, void 0, function* () {

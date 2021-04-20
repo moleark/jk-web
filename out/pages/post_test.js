@@ -40,8 +40,6 @@ function post_test(req, res, next) {
             if (postproduct.length === 0) {
                 postproduct = yield db_1.Dbs.content.getRecommendProducts(id);
             }
-            //获取产品目录树根节点
-            const rootcategories = yield db_1.Dbs.product.getRootCategories();
             //获取贴点贴文
             let cacheHotPosts;
             let lastHotTick = 0;
@@ -52,9 +50,9 @@ function post_test(req, res, next) {
             }
             //获取栏目
             let subject;
-            subject = yield db_1.Dbs.content.getSubject();
+            subject = yield db_1.Dbs.content.getAllSubjects();
             content = yield post_1.renderPostArticle(req, current);
-            let data = tools_1.buildData(req, {
+            let data = yield tools_1.buildData(req, {
                 $title: current.caption,
                 path: rootPath + 'post/',
                 current: current,
@@ -62,7 +60,6 @@ function post_test(req, res, next) {
                 discounts: discounts,
                 correlation: correlation,
                 hotPosts: cacheHotPosts,
-                rootcategories: rootcategories,
                 content: content,
                 postsubject: postsubject,
                 postproduct: postproduct,

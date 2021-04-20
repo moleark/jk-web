@@ -23,6 +23,13 @@ class DbProduct extends db_1.Db {
                     inner join ${db}.tv_productcategoryinclusion as ppi on ppi.category = pc.id and ppi.salesregion = ? and ppi.total > 0
             where   pc.$unit = 24 and pc.id = ? and pcl.language = ?;
         `;
+        this.sqlGetCategoryByNo = `
+            SELECT  pc.id, pc.no, pc.parent, pc.isLeaf, pc.orderWithinParent, pcl.name
+            FROM    ${db}.tv_productcategory pc
+                    inner join ${db}.tv_productcategory_productcategorylanguage pcl on pcl.owner = pc.id
+                    inner join ${db}.tv_productcategoryinclusion as ppi on ppi.category = pc.id and ppi.salesregion = ? and ppi.total > 0
+            where   pc.$unit = 24 and pc.no = ? and pcl.language = ?;
+        `;
         this.sqlGetChildrenCategories = `
             SELECT  pc.id, pc.no, pc.parent, pc.isLeaf, pc.orderWithinParent, pcl.name
             FROM    ${db}.tv_productcategory pc
@@ -68,6 +75,11 @@ class DbProduct extends db_1.Db {
                 left join ${db}.tv_brand as b on p.$unit = b.$unit and p.brand = b.id
                 LEFT join ${db}.tv_productchemical as pc on p.$unit = pc.$unit and p.id = pc.product
         WHERE 	pp.$unit =? AND pp.salesRegion=? `;
+        this.sqlGetProductByNo = `
+            select  id, brand, origin, description, descriptionc, imageurl, no, isvalid
+            from    ${db}.tv_productx
+            where   $unit = 24 and no = ?
+        `;
     }
     /**
      *
@@ -76,6 +88,14 @@ class DbProduct extends db_1.Db {
     getCategoryById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetCategoryById, [tools_1.SALESREGION, id, tools_1.CHINESE]);
+            if (ret && ret.length > 0)
+                return ret[0];
+            return undefined;
+        });
+    }
+    getCategoryByNo(no) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlGetCategoryByNo, [tools_1.SALESREGION, no, tools_1.CHINESE]);
             if (ret && ret.length > 0)
                 return ret[0];
             return undefined;
@@ -140,6 +160,18 @@ class DbProduct extends db_1.Db {
                 return [];
             const ret = yield this.tableFromSql(this.sqlSearchProductByOrigin + start + origin + ")", [24, 5]);
             return ret;
+        });
+    }
+    /**
+     * 根据no获取产品信息
+     * @param no
+     * @returns
+     */
+    getProductByNo(no) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlGetProductByNo, [no]);
+            if (ret.length > 0)
+                return ret[0];
         });
     }
 }

@@ -43,8 +43,6 @@ function privacy(req, res) {
                     + content
                     + homeFooter;
             }
-            //获取产品目录树根节点
-            const rootcategories = yield db_1.Dbs.product.getRootCategories();
             //获取贴点贴文
             let cacheHotPosts;
             let lastHotTick = 0;
@@ -55,13 +53,12 @@ function privacy(req, res) {
             }
             //获取栏目
             let subject;
-            subject = yield db_1.Dbs.content.getSubject();
-            let data = tools_1.buildData(req, {
+            subject = yield db_1.Dbs.content.getAllSubjects();
+            let data = yield tools_1.buildData(req, {
                 subject: subject,
                 discounts: discounts,
                 correlation: correlation,
                 hotPosts: cacheHotPosts,
-                rootcategories: rootcategories,
                 content: content,
                 titleshow: false
             });

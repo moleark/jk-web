@@ -23,7 +23,7 @@ function cart(req, res) {
             + body
             + '</div>'
             + homeFooter;
-        let data = tools_1.buildData(req, {});
+        let data = yield tools_1.buildData(req, {});
         let html = ejs.render(template, data);
         res.end(html);
     });

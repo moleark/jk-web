@@ -48,13 +48,6 @@ function home(req, res) {
                 lastHotTick = now;
                 cacheHotPosts = yield db_1.Dbs.content.getHotPost();
             }
-            //获取根目录节点
-            const rootcategories = yield db_1.Dbs.product.getRootCategories();
-            for (let i = 0; i < rootcategories.length; i++) {
-                let category = rootcategories[i];
-                let { id } = category;
-                rootcategories[i].children = yield db_1.Dbs.product.getChildrenCategories(id);
-            }
             let header = ejs.fileLoader(tools_1.viewPath + 'headers/header' + tools_1.ejsSuffix).toString();
             let homeHeader = ejs.fileLoader(tools_1.viewPath + 'headers/home-header' + tools_1.ejsSuffix).toString();
             let home = ejs.fileLoader(tools_1.viewPath + 'home' + tools_1.ejsSuffix).toString();
@@ -64,14 +57,13 @@ function home(req, res) {
                 + home
                 + homeFooter;
             console.log(rootPath, 'rootPath');
-            let data = tools_1.buildData(req, {
+            let data = yield tools_1.buildData(req, {
                 path: rootPath + 'post/',
                 slideshow: slideshow,
                 information: information,
                 hots: cacheHotPosts,
                 discounts: discounts,
                 recommend: recommend,
-                rootcategories: rootcategories,
                 titleshow: true
             });
             let html = ejs.render(template, data);

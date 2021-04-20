@@ -23,7 +23,8 @@ function categoryInstruction(req, res) {
             const ret = yield db_1.Dbs.content.postFromId(postID);
             if (ret.length > 0) {
                 let postArticle = ret[0];
-                explain = yield post_1.renderPostArticle(req, postArticle);
+                // explain = await renderPostArticle(req, postArticle);
+                explain = yield post_1.renderPostContent(req, postArticle);
                 res.send(explain);
             }
         }
