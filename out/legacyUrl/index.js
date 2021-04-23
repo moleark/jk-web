@@ -30,8 +30,8 @@ exports.legacyRouter.get(/^\/(CH|en)\/products\/search\/(fulltextsearch|cas|mdl|
     res.redirect("/search/" + req.params[2]);
 }));
 exports.legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.html$/i,
-    /^\/(zh\-cn|en-us)\/product-catalog\/(\d+)(\/\d+\/\d+)?.html$/i,
-    /^\/(CH|en)\/products\/search\/productcategory\/(\d+)(\/\d+)?.html$/i], (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    /^\/(zh\-cn|en-us)\/product-catalog\/(\d+)(\/\d+\/\d+)?\.html$/i,
+    /^\/(CH|en)\/products\/search\/productcategory\/(\d+)(\/\d+)?\.html$/i], (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let oldCategoryId = req.params[1];
     let productCategory = yield db_1.Dbs.product.getCategoryByNo(oldCategoryId);
     if (productCategory) {
@@ -43,13 +43,13 @@ exports.legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.ht
     }
 }));
 //  
-exports.legacyRouter.get(/^(\/(CH|EN))?\/index(.(aspx|html))?$/i, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^(\/(CH|EN))?\/index(\.(aspx|html))?$/i, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect('/');
 }));
 /**
  * 待完善
  */
-exports.legacyRouter.get([/^\/ProductResources.aspx$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/ProductResources\.aspx$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect('/product/mscu/msds');
     /*
     let { query } = req;
@@ -73,7 +73,7 @@ exports.legacyRouter.get([/^\/ProductResources.aspx$/i], (req, res) => __awaiter
     }
     */
 }));
-exports.legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog.html$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog\.html$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let querystring = '';
     let { originalUrl } = req;
     let pos = originalUrl.indexOf('?');
@@ -82,36 +82,40 @@ exports.legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog.html$/i], (req, r
     }
     res.redirect("/product-catalog" + querystring);
 }));
-exports.legacyRouter.get([/^\/Company-inf.aspx$/i, /^\/company-core.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// 原有的各种产品索引界面暂时处理为导航到“产品目录首页”
+exports.legacyRouter.get([/^\/(en|ch)\/products\/index\/(cas|functional_group|productname|elements|methodtype).{0,30}\.html$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/product-catalog");
+}));
+exports.legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/ch/about");
 }));
-exports.legacyRouter.get([/^\/informationContent.aspx$/i, /^\/news.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/informationContent\.aspx$/i, /^\/news\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/information");
 }));
-exports.legacyRouter.get(/^\/brand.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^\/brand\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/ch/recommended-brand");
 }));
-exports.legacyRouter.get(/^\/contactUs.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^\/contactUs\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/ch/contact");
 }));
-exports.legacyRouter.get(/^\/job.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^\/job\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/job");
 }));
-exports.legacyRouter.get(/^\/chemical.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^\/chemical\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog/47");
 }));
-exports.legacyRouter.get(/^\/Sisanaly.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^\/Sisanaly\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog/470");
 }));
-exports.legacyRouter.get(/^\/LifeScience.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^\/LifeScience\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog/1013");
 }));
-exports.legacyRouter.get(/^\/MaterialScience.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^\/MaterialScience\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog/1219");
 }));
-exports.legacyRouter.get(/^\/InstrumentConsumables.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^\/InstrumentConsumables\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog/1545");
 }));
 // 药物所登录地址
-exports.legacyRouter.get(/^\/UserIdentity.ashx$/i, neotrident_1.neotridentLogin);
+exports.legacyRouter.get(/^\/UserIdentity\.ashx$/i, neotrident_1.neotridentLogin);
 //# sourceMappingURL=index.js.map

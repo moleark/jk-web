@@ -20,8 +20,8 @@ legacyRouter.get(/^\/(CH|en)\/products\/search\/(fulltextsearch|cas|mdl|original
 });
 
 legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.html$/i,
-    /^\/(zh\-cn|en-us)\/product-catalog\/(\d+)(\/\d+\/\d+)?.html$/i,
-    /^\/(CH|en)\/products\/search\/productcategory\/(\d+)(\/\d+)?.html$/i],
+    /^\/(zh\-cn|en-us)\/product-catalog\/(\d+)(\/\d+\/\d+)?\.html$/i,
+    /^\/(CH|en)\/products\/search\/productcategory\/(\d+)(\/\d+)?\.html$/i],
     async (req: Request, res: Response, next: NextFunction) => {
         let oldCategoryId = req.params[1];
         let productCategory = await Dbs.product.getCategoryByNo(oldCategoryId);
@@ -34,14 +34,14 @@ legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.html$/i,
     });
 
 //  
-legacyRouter.get(/^(\/(CH|EN))?\/index(.(aspx|html))?$/i, async (req: Request, res: Response, next: NextFunction) => {
+legacyRouter.get(/^(\/(CH|EN))?\/index(\.(aspx|html))?$/i, async (req: Request, res: Response, next: NextFunction) => {
     res.redirect('/');
 })
 
 /**
  * 待完善 
  */
-legacyRouter.get([/^\/ProductResources.aspx$/i], async (req: Request, res: Response) => {
+legacyRouter.get([/^\/ProductResources\.aspx$/i], async (req: Request, res: Response) => {
     res.redirect('/product/mscu/msds');
     /*
     let { query } = req;
@@ -66,7 +66,7 @@ legacyRouter.get([/^\/ProductResources.aspx$/i], async (req: Request, res: Respo
     */
 });
 
-legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog.html$/i], async (req: Request, res: Response) => {
+legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog\.html$/i], async (req: Request, res: Response) => {
     let querystring = '';
     let { originalUrl } = req;
     let pos = originalUrl.indexOf('?');
@@ -76,45 +76,50 @@ legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog.html$/i], async (req: Req
     res.redirect("/product-catalog" + querystring);
 });
 
-legacyRouter.get([/^\/Company-inf.aspx$/i, /^\/company-core.aspx/i], async (req: Request, res: Response) => {
+// 原有的各种产品索引界面暂时处理为导航到“产品目录首页”
+legacyRouter.get([/^\/(EN|CH)\/products\/index\/(cas|functional_group|productname|elements|methodtype).{0,30}\.html$/i], async (req: Request, res: Response) => {
+    res.redirect("/product-catalog");
+});
+
+legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i], async (req: Request, res: Response) => {
     res.redirect("/ch/about");
 });
 
-legacyRouter.get([/^\/informationContent.aspx$/i, /^\/news.aspx/i], async (req: Request, res: Response) => {
+legacyRouter.get([/^\/informationContent\.aspx$/i, /^\/news\.aspx/i], async (req: Request, res: Response) => {
     res.redirect("/information");
 });
 
-legacyRouter.get(/^\/brand.aspx$/i, async (req: Request, res: Response) => {
+legacyRouter.get(/^\/brand\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/ch/recommended-brand");
 });
 
-legacyRouter.get(/^\/contactUs.aspx$/i, async (req: Request, res: Response) => {
+legacyRouter.get(/^\/contactUs\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/ch/contact");
 });
 
-legacyRouter.get(/^\/job.aspx$/i, async (req: Request, res: Response) => {
+legacyRouter.get(/^\/job\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/job");
 });
 
-legacyRouter.get(/^\/chemical.aspx$/i, async (req: Request, res: Response) => {
+legacyRouter.get(/^\/chemical\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/product-catalog/47");
 });
 
-legacyRouter.get(/^\/Sisanaly.aspx$/i, async (req: Request, res: Response) => {
+legacyRouter.get(/^\/Sisanaly\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/product-catalog/470");
 });
 
-legacyRouter.get(/^\/LifeScience.aspx$/i, async (req: Request, res: Response) => {
+legacyRouter.get(/^\/LifeScience\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/product-catalog/1013");
 });
 
-legacyRouter.get(/^\/MaterialScience.aspx$/i, async (req: Request, res: Response) => {
+legacyRouter.get(/^\/MaterialScience\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/product-catalog/1219");
 });
 
-legacyRouter.get(/^\/InstrumentConsumables.aspx$/i, async (req: Request, res: Response) => {
+legacyRouter.get(/^\/InstrumentConsumables\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/product-catalog/1545");
 });
 
 // 药物所登录地址
-legacyRouter.get(/^\/UserIdentity.ashx$/i, neotridentLogin);
+legacyRouter.get(/^\/UserIdentity\.ashx$/i, neotridentLogin);
