@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.legacyRouter = void 0;
 const express_1 = require("express");
 const db_1 = require("../db");
-const neotrident_1 = require("../neotrident");
 exports.legacyRouter = express_1.Router({ mergeParams: true });
 exports.legacyRouter.get(/^\/(CH|en)\/products\/(.+?)\.html$/i, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let oldProductId = req.params[1];
@@ -83,7 +82,7 @@ exports.legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog\.html$/i], (req, 
     res.redirect("/product-catalog" + querystring);
 }));
 // 原有的各种产品索引界面暂时处理为导航到“产品目录首页”
-exports.legacyRouter.get([/^\/(en|ch)\/products\/index\/(cas|functional_group|productname|elements|methodtype).{0,30}\.html$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/(EN|CH)\/products\/index\/(cas|functional_group|productname|elements|methodtype).{0,30}\.html$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog");
 }));
 exports.legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -116,6 +115,4 @@ exports.legacyRouter.get(/^\/MaterialScience\.aspx$/i, (req, res) => __awaiter(v
 exports.legacyRouter.get(/^\/InstrumentConsumables\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog/1545");
 }));
-// 药物所登录地址
-exports.legacyRouter.get(/^\/UserIdentity\.ashx$/i, neotrident_1.neotridentLogin);
 //# sourceMappingURL=index.js.map

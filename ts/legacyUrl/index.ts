@@ -1,6 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { Dbs } from '../db';
-import { neotridentLogin } from '../neotrident';
 
 export const legacyRouter = Router({ mergeParams: true });
 legacyRouter.get(/^\/(CH|en)\/products\/(.+?)\.html$/i, async (req: Request, res: Response, next: NextFunction) => {
@@ -120,6 +119,3 @@ legacyRouter.get(/^\/MaterialScience\.aspx$/i, async (req: Request, res: Respons
 legacyRouter.get(/^\/InstrumentConsumables\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/product-catalog/1545");
 });
-
-// 药物所登录地址
-legacyRouter.get(/^\/UserIdentity\.ashx$/i, neotridentLogin);

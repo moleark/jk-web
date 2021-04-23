@@ -4,6 +4,7 @@ import { epecLogin } from "../epec";
 import { getProductsInCatalog } from "./getProductsInCatalog";
 import { replacePostContentUrl } from "../tools/replacePostContentUrl";
 import { clientLogin } from "../joint";
+import { neotridentLogin } from "../neotrident";
 
 export const apiRouter = Router({ mergeParams: true });
 apiRouter.get(['/search/:key', '/search/:key/:pageNumber(\\d+)', '/search/:key?debug'], search);
@@ -34,3 +35,6 @@ apiRouter.get('/replacePostContentUrl/:from(\\d+)-:to(\\d+)', async (req: Reques
         rep.json(error);
     }
 })
+
+// 药物所登录地址
+apiRouter.get(/^\/UserIdentity\.ashx$/i, neotridentLogin);
