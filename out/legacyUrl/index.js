@@ -42,6 +42,10 @@ exports.legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.ht
         next();
     }
 }));
+//  
+exports.legacyRouter.get(/^(\/(CH|EN))?\/index(.(aspx|html))?$/i, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect('/');
+}));
 /**
  * 待完善
  */
@@ -77,6 +81,9 @@ exports.legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog.html$/i], (req, r
         querystring = originalUrl.substring(pos);
     }
     res.redirect("/product-catalog" + querystring);
+}));
+exports.legacyRouter.get([/^\/Company-inf.aspx$/i, /^\/company-core.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/ch/about");
 }));
 exports.legacyRouter.get([/^\/informationContent.aspx$/i, /^\/news.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/information");
