@@ -42,7 +42,7 @@ exports.legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.ht
     }
 }));
 //  
-exports.legacyRouter.get(/^(\/(CH|EN))?\/index(\.(aspx|html))?$/i, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get(/^(\/(CH|EN))?\/index(\.(aspx|html|asp))?$/i, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect('/');
 }));
 /**
@@ -82,16 +82,20 @@ exports.legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog\.html$/i], (req, 
     res.redirect("/product-catalog" + querystring);
 }));
 // 原有的各种产品索引界面暂时处理为导航到“产品目录首页”
-exports.legacyRouter.get([/^\/(EN|CH)\/products\/index\/(cas|functional_group|productname|elements|methodtype).{0,30}\.html$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/(EN|CH)\/products\/index\/(cas|functional_group|productname|elements|methodtype).{0,30}\.html$/i,
+    /^\/(EN|CH)\/products\/(jkchemical|Category|Compound|methodtype).{0,30}\.html/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog");
 }));
-exports.legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i, /^\/jk\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/ch/about");
 }));
-exports.legacyRouter.get([/^\/informationContent\.aspx$/i, /^\/news\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/vip\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/ch/promise");
+}));
+exports.legacyRouter.get([/^\/informationContent\.aspx$/i, /^\/news\.aspx/i, /^\/information\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/information");
 }));
-exports.legacyRouter.get(/^\/brand\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/brand\.aspx$/i, /^\/AccuStandard\.aspx/i, /^\/stremchemicals\.aspx/i, /^\/KeyOrganics\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/ch/recommended-brand");
 }));
 exports.legacyRouter.get(/^\/contactUs\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -114,5 +118,15 @@ exports.legacyRouter.get(/^\/MaterialScience\.aspx$/i, (req, res) => __awaiter(v
 }));
 exports.legacyRouter.get(/^\/InstrumentConsumables\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog/1545");
+}));
+// 原网站菜单“会员服务”菜单
+exports.legacyRouter.get(/^\/Member\/Share\/Shopping\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/cart");
+}));
+exports.legacyRouter.get(/^\/Member\/Center\/SaleOrderList\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/myOrders");
+}));
+exports.legacyRouter.get(/^\/login\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/login");
 }));
 //# sourceMappingURL=index.js.map

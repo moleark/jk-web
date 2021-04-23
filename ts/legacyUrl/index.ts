@@ -33,7 +33,7 @@ legacyRouter.get([/^\/(zh\-cn|en-us)\/product-catalog\/parent\/(\d+)\.html$/i,
     });
 
 //  
-legacyRouter.get(/^(\/(CH|EN))?\/index(\.(aspx|html))?$/i, async (req: Request, res: Response, next: NextFunction) => {
+legacyRouter.get(/^(\/(CH|EN))?\/index(\.(aspx|html|asp))?$/i, async (req: Request, res: Response, next: NextFunction) => {
     res.redirect('/');
 })
 
@@ -76,21 +76,27 @@ legacyRouter.get([/^\/(en\-US|zh\-CN)\/product-catalog\.html$/i], async (req: Re
 });
 
 // 原有的各种产品索引界面暂时处理为导航到“产品目录首页”
-legacyRouter.get([/^\/(EN|CH)\/products\/index\/(cas|functional_group|productname|elements|methodtype).{0,30}\.html$/i], async (req: Request, res: Response) => {
-    res.redirect("/product-catalog");
-});
+legacyRouter.get([/^\/(EN|CH)\/products\/index\/(cas|functional_group|productname|elements|methodtype).{0,30}\.html$/i,
+    /^\/(EN|CH)\/products\/(jkchemical|Category|Compound|methodtype).{0,30}\.html/i], async (req: Request, res: Response) => {
+        res.redirect("/product-catalog");
+    });
 
-legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i], async (req: Request, res: Response) => {
+legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i, /^\/jk\.aspx/i], async (req: Request, res: Response) => {
     res.redirect("/ch/about");
 });
 
-legacyRouter.get([/^\/informationContent\.aspx$/i, /^\/news\.aspx/i], async (req: Request, res: Response) => {
+legacyRouter.get([/^\/vip\.aspx/i], async (req: Request, res: Response) => {
+    res.redirect("/ch/promise");
+});
+
+legacyRouter.get([/^\/informationContent\.aspx$/i, /^\/news\.aspx/i, /^\/information\.aspx/i], async (req: Request, res: Response) => {
     res.redirect("/information");
 });
 
-legacyRouter.get(/^\/brand\.aspx$/i, async (req: Request, res: Response) => {
-    res.redirect("/ch/recommended-brand");
-});
+legacyRouter.get([/^\/brand\.aspx$/i, /^\/AccuStandard\.aspx/i, /^\/stremchemicals\.aspx/i, /^\/KeyOrganics\.aspx/i],
+    async (req: Request, res: Response) => {
+        res.redirect("/ch/recommended-brand");
+    });
 
 legacyRouter.get(/^\/contactUs\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/ch/contact");
@@ -118,4 +124,17 @@ legacyRouter.get(/^\/MaterialScience\.aspx$/i, async (req: Request, res: Respons
 
 legacyRouter.get(/^\/InstrumentConsumables\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/product-catalog/1545");
+});
+
+// 原网站菜单“会员服务”菜单
+legacyRouter.get(/^\/Member\/Share\/Shopping\.aspx$/i, async (req: Request, res: Response) => {
+    res.redirect("/cart");
+});
+
+legacyRouter.get(/^\/Member\/Center\/SaleOrderList\.aspx$/i, async (req: Request, res: Response) => {
+    res.redirect("/myOrders");
+});
+
+legacyRouter.get(/^\/login\.aspx$/i, async (req: Request, res: Response) => {
+    res.redirect("/login");
 });
