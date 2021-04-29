@@ -86,7 +86,7 @@ exports.legacyRouter.get([/^\/(EN|CH)\/products\/index\/(cas|functional_group|pr
     /^\/(EN|CH)\/products\/(jkchemical|Category|Compound|methodtype).{0,30}\.html/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/product-catalog");
 }));
-exports.legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i, /^\/jk\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i, /^\/jk\.aspx/i, /^\/aboutus\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/ch/about");
 }));
 exports.legacyRouter.get([/^\/vip\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -95,13 +95,14 @@ exports.legacyRouter.get([/^\/vip\.aspx/i], (req, res) => __awaiter(void 0, void
 exports.legacyRouter.get([/^\/informationContent\.aspx$/i, /^\/news\.aspx/i, /^\/information\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/information");
 }));
-exports.legacyRouter.get([/^\/brand\.aspx$/i, /^\/AccuStandard\.aspx/i, /^\/stremchemicals\.aspx/i, /^\/KeyOrganics\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/brand\.aspx$/i, /^\/AccuStandard\.aspx/i, /^\/stremchemicals\.aspx/i, /^\/KeyOrganics\.aspx/i,
+    /^\/synthesis\.aspx/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/ch/recommended-brand");
 }));
 exports.legacyRouter.get(/^\/contactUs\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/ch/contact");
 }));
-exports.legacyRouter.get(/^\/job\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.legacyRouter.get([/^\/job\.aspx$/i, /^\/careers\.aspx$/i], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/job");
 }));
 exports.legacyRouter.get(/^\/chemical\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {

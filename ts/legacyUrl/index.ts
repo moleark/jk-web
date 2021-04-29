@@ -81,7 +81,7 @@ legacyRouter.get([/^\/(EN|CH)\/products\/index\/(cas|functional_group|productnam
         res.redirect("/product-catalog");
     });
 
-legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i, /^\/jk\.aspx/i], async (req: Request, res: Response) => {
+legacyRouter.get([/^\/Company-inf\.aspx$/i, /^\/company-core\.aspx/i, /^\/jk\.aspx/i, /^\/aboutus\.aspx/i], async (req: Request, res: Response) => {
     res.redirect("/ch/about");
 });
 
@@ -93,7 +93,8 @@ legacyRouter.get([/^\/informationContent\.aspx$/i, /^\/news\.aspx/i, /^\/informa
     res.redirect("/information");
 });
 
-legacyRouter.get([/^\/brand\.aspx$/i, /^\/AccuStandard\.aspx/i, /^\/stremchemicals\.aspx/i, /^\/KeyOrganics\.aspx/i],
+legacyRouter.get([/^\/brand\.aspx$/i, /^\/AccuStandard\.aspx/i, /^\/stremchemicals\.aspx/i, /^\/KeyOrganics\.aspx/i,
+    /^\/synthesis\.aspx/i],
     async (req: Request, res: Response) => {
         res.redirect("/ch/recommended-brand");
     });
@@ -102,7 +103,7 @@ legacyRouter.get(/^\/contactUs\.aspx$/i, async (req: Request, res: Response) => 
     res.redirect("/ch/contact");
 });
 
-legacyRouter.get(/^\/job\.aspx$/i, async (req: Request, res: Response) => {
+legacyRouter.get([/^\/job\.aspx$/i, /^\/careers\.aspx$/i], async (req: Request, res: Response) => {
     res.redirect("/job");
 });
 
