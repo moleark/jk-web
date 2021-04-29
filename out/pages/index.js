@@ -43,6 +43,7 @@ const wxPay_1 = require("./orderPayment/wxPay");
 const notice_1 = require("./orderPayment/notice");
 const page_1 = require("./page");
 const db_1 = require("../db");
+const productApplication_1 = require("./productApplication");
 exports.homeRouter = express_1.Router({ mergeParams: true });
 exports.homeRouter.get('/', home_1.home);
 exports.homeRouter.get('/post/:id', post_1.post);
@@ -74,6 +75,7 @@ exports.homeRouter.get('/technicalSupport', technicalSupport_1.technicalSupport)
 exports.homeRouter.get('/language', language_1.language);
 exports.homeRouter.get('/subjectpost/:current', subjectpost_1.subjectpost);
 exports.homeRouter.get('/partial/categoryinstruction/:current', categoryinstruction_1.categoryInstruction);
+exports.homeRouter.get('/partial/productapplication/:current', productApplication_1.productApplication);
 exports.homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail_1.pointProductDetail);
 const MSCUCorsOptions = {
     origin: config.get("MSCUCorsOrigins"),

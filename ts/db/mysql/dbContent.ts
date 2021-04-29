@@ -20,6 +20,7 @@ export class DbContent extends Db {
     private sqlSlideshow: string;
     private sqlPostProduct: string;
     private sqlGetRecommendProducts: string;
+    private sqlProductApplicationPost: string;
 
     constructor() {
         super('content');
@@ -152,6 +153,12 @@ export class DbContent extends Db {
             select  post, url 
             from    ${db}.tv_postpage
             where   url = ?
+        `;
+
+        this.sqlProductApplicationPost = `
+            select  product, post 
+            from    ${db}.tv_productdescriptionpost
+            where   product = ? 
         `;
 
         /*
@@ -340,7 +347,7 @@ export class DbContent extends Db {
     }
 
     /**
-     * 
+     * 获取所有栏目
      * @returns 
      */
     async getAllSubjects(): Promise<any> {
@@ -348,16 +355,29 @@ export class DbContent extends Db {
         return ret;
     }
 
+    /**
+     * 获取有特定url贴文的url(要配置到路由中)
+     * @returns 
+     */
     async getRoute(): Promise<any> {
         const ret = await this.tableFromSql(this.sqlRouter);
         return ret;
     }
 
+    /**
+     *  
+     * @param url 
+     * @returns 
+     */
     async getPage(url: string): Promise<any> {
         const ret = await this.tableFromSql(this.sqlPagePost, [url]);
         return ret;
     }
 
+    /**
+     * 获取热点贴文
+     * @returns 
+     */
     async getHotPost(): Promise<any> {
         const ret = await this.tableFromSql(this.sqlHotPost);
         return ret;
@@ -378,6 +398,11 @@ export class DbContent extends Db {
         return ret;
     }
 
+    /**
+     * 获取贴文后的附加产品(人工附加) 
+     * @param id 
+     * @returns 
+     */
     async getPostProduct(id: any): Promise<any> {
         const ret = await this.tableFromSql(this.sqlPostProduct, [id]);
         return ret;
@@ -391,6 +416,17 @@ export class DbContent extends Db {
         const ret = await this.tableFromSql(this.sqlGetRecommendProducts, [id]);
         return ret;
     }
+
+    /**
+     * 获取贴文（内容为“产品应用”）
+     * @param productId 
+     * @returns 
+     */
+    async getProductApplication(productId: number): Promise<any> {
+        const ret = await this.tableFromSql(this.sqlProductApplicationPost, [productId]);
+        return ret;
+    }
+
 
     /**
      * 修改贴文内容（用于替换内容中的url) 

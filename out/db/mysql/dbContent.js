@@ -132,6 +132,11 @@ class DbContent extends db_1.Db {
             from    ${db}.tv_postpage
             where   url = ?
         `;
+        this.sqlProductApplicationPost = `
+            select  product, post 
+            from    ${db}.tv_productdescriptionpost
+            where   product = ? 
+        `;
         /*
         this.sqlPagePost = `
             SELECT  a.name, c.content, b.sort
@@ -321,7 +326,7 @@ class DbContent extends db_1.Db {
         });
     }
     /**
-     *
+     * 获取所有栏目
      * @returns
      */
     getAllSubjects() {
@@ -330,18 +335,31 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
+    /**
+     * 获取有特定url贴文的url(要配置到路由中)
+     * @returns
+     */
     getRoute() {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlRouter);
             return ret;
         });
     }
+    /**
+     *
+     * @param url
+     * @returns
+     */
     getPage(url) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlPagePost, [url]);
             return ret;
         });
     }
+    /**
+     * 获取热点贴文
+     * @returns
+     */
     getHotPost() {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlHotPost);
@@ -366,6 +384,11 @@ class DbContent extends db_1.Db {
             return ret;
         });
     }
+    /**
+     * 获取贴文后的附加产品(人工附加)
+     * @param id
+     * @returns
+     */
     getPostProduct(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlPostProduct, [id]);
@@ -379,6 +402,17 @@ class DbContent extends db_1.Db {
     getRecommendProducts(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const ret = yield this.tableFromSql(this.sqlGetRecommendProducts, [id]);
+            return ret;
+        });
+    }
+    /**
+     * 获取贴文（内容为“产品应用”）
+     * @param productId
+     * @returns
+     */
+    getProductApplication(productId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const ret = yield this.tableFromSql(this.sqlProductApplicationPost, [productId]);
             return ret;
         });
     }

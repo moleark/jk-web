@@ -3,16 +3,11 @@ import * as cors from 'cors';
 import * as config from 'config';
 import { home } from './home';
 import { post } from './post';
-import { category } from './category';
-import { search } from './search';
-import { product } from './product';
 import { iframe } from './iframe';
 import { language } from './language'
 import { test } from './test';
-import { shop } from './shop';
 import { version } from './version';
 import { law } from './law';
-import { contact } from './contact';
 import { webMap } from './webMap'
 import { information } from './information';
 import { allPosts } from './allPosts';
@@ -34,9 +29,9 @@ import { productSpecFile, productSpecFileByOrigin } from './ProductMSCU/productS
 import { orderPayment } from './orderPayment/orderPayment';
 import { wxOrderQuery } from './orderPayment/wxPay';
 import { wxNotice } from './orderPayment/notice';
-import { privacy } from './privacy';
 import { page } from './page';
 import { Dbs } from '../db';
+import { productApplication } from './productApplication';
 
 export const homeRouter = Router({ mergeParams: true });
 homeRouter.get('/', home);
@@ -75,6 +70,7 @@ homeRouter.get('/language', language);
 homeRouter.get('/subjectpost/:current', subjectpost);
 
 homeRouter.get('/partial/categoryinstruction/:current', categoryInstruction);
+homeRouter.get('/partial/productapplication/:current', productApplication);
 homeRouter.get('/partial/pointproductdetail/:current', pointProductDetail);
 
 const MSCUCorsOptions = {
