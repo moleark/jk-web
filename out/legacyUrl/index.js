@@ -130,4 +130,16 @@ exports.legacyRouter.get(/^\/Member\/Center\/SaleOrderList\.aspx$/i, (req, res) 
 exports.legacyRouter.get(/^\/login\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect("/login");
 }));
+exports.legacyRouter.get(/^\/PersonalInfo\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/meInfo");
+}));
+exports.legacyRouter.get(/^\/Favorite\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/favorites");
+}));
+exports.legacyRouter.get(/^\/ChangePassword\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/password");
+}));
+exports.legacyRouter.get(/^\/PointsSearch\.aspx$/i, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.redirect("/pointshop");
+}));
 //# sourceMappingURL=index.js.map

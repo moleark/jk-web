@@ -139,3 +139,19 @@ legacyRouter.get(/^\/Member\/Center\/SaleOrderList\.aspx$/i, async (req: Request
 legacyRouter.get(/^\/login\.aspx$/i, async (req: Request, res: Response) => {
     res.redirect("/login");
 });
+
+legacyRouter.get(/^\/PersonalInfo\.aspx$/i, async (req: Request, res: Response) => {
+    res.redirect("/meInfo");
+});
+
+legacyRouter.get(/^\/Favorite\.aspx$/i, async (req: Request, res: Response) => {
+    res.redirect("/favorites");
+});
+
+legacyRouter.get(/^\/ChangePassword\.aspx$/i, async (req: Request, res: Response) => {
+    res.redirect("/password");
+});
+
+legacyRouter.get(/^\/PointsSearch\.aspx$/i, async (req: Request, res: Response) => {
+    res.redirect("/pointshop");
+});
