@@ -33,6 +33,7 @@ function login(req, res) {
             res.redirect("/login");
             return;
         }
+        logger_1.epecLogger.debug('epec  epecUser: ', epecUser);
         // 调用epec接口验证
         let epecOptions = config.get('epec');
         let { epec_loginCallBack, epec_loginSuccessRedirect } = epecOptions;
@@ -52,10 +53,12 @@ function login(req, res) {
                     let token = uuid_1.v4();
                     let { webUser, password, username } = epecUser;
                     let userInfo = yield getUserRegisted_1.getUserRegisted(webUser);
+                    logger_1.epecLogger.debug('epec getUserRegisted userInfo: ', userInfo, token);
                     if (userInfo) {
                         let success = yield jointPlatform.saveLoginReq(token, userInfo.name, password, username);
                         // 导航到默认界面
                         if (success) {
+                            logger_1.epecLogger.debug('epec redirect : ', epec_loginSuccessRedirect + "?lgtk=" + token);
                             res.redirect(epec_loginSuccessRedirect + "?lgtk=" + token);
                             return;
                         }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Dbs = void 0;
+exports.Db = exports.Dbs = void 0;
 const db_1 = require("./db");
 const dbContent_1 = require("./dbContent");
 const dbProduct_1 = require("./dbProduct");

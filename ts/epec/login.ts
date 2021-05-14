@@ -24,7 +24,7 @@ export async function login(req: Request, res: Response) {
         res.redirect("/login");
         return;
     }
-
+    epecLogger.debug('epec  epecUser: ', epecUser);
     // 调用epec接口验证
     let epecOptions = config.get<any>('epec');
     let { epec_loginCallBack, epec_loginSuccessRedirect } = epecOptions;
@@ -38,6 +38,7 @@ export async function login(req: Request, res: Response) {
         epecLogger.debug('epec login call back status', response.status);
         if (response.ok) {
             let content = await response.json();
+
             epecLogger.debug('epec login call back content: ', content);
             if (content.result) {
                 // OK
@@ -45,10 +46,14 @@ export async function login(req: Request, res: Response) {
                 let token = uuidv4();
                 let { webUser, password, username } = epecUser;
                 let userInfo = await getUserRegisted(webUser);
+                epecLogger.debug('epec getUserRegisted userInfo: ', userInfo, token);
                 if (userInfo) {
+
                     let success = await jointPlatform.saveLoginReq(token, userInfo.name, password, username);
                     // 导航到默认界面
                     if (success) {
+                        epecLogger.debug('epec redirect : ', epec_loginSuccessRedirect + "?lgtk=" + token);
+
                         res.redirect(epec_loginSuccessRedirect + "?lgtk=" + token);
                         return;
                     }
