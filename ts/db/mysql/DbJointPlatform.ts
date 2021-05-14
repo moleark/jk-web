@@ -1,3 +1,4 @@
+import { epecLogger } from '../../epec/logger';
 import { Db } from './db';
 
 export class DbJointPlatform extends Db {
@@ -60,7 +61,7 @@ export class DbJointPlatform extends Db {
             await this.execSql(this.sqlSaveLoginReq, [token, webUser, password, username])
             return true;
         } catch (error) {
-            console.error(error);
+            epecLogger.error(error);
             return false;
         }
     }

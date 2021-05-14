@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DbJointPlatform = void 0;
+const logger_1 = require("../../epec/logger");
 const db_1 = require("./db");
 class DbJointPlatform extends db_1.Db {
     constructor() {
@@ -66,7 +67,7 @@ class DbJointPlatform extends db_1.Db {
                 return true;
             }
             catch (error) {
-                console.error(error);
+                logger_1.epecLogger.error(error);
                 return false;
             }
         });
