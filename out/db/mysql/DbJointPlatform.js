@@ -26,6 +26,11 @@ class DbJointPlatform extends db_1.Db {
         this.sqlGetUserByLoginKey = `select webUser, username, password, organization, team 
             from \`${db}\`.tv_neotridentuser
             where sharedSecret = ?`;
+        this.sqlSaveapirawcontent = `INSERT INTO \`${db}\`.tv_apirawcontent(platform, api, content)
+            VALUES(?, ?, ?)`;
+        this.sqlSavePunchOutRequest = `INSERT INTO \`${db}\`.tv_punchoutsetuprequest(platform, body, fromdomain, fromidentity, todomain,
+            toidentity, senderdomain, senderidentity, senderuseragent, sendersharedsecret, browserformposturl, buyercookie, payloadid)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     }
     /**
      * 获取
@@ -85,6 +90,34 @@ class DbJointPlatform extends db_1.Db {
                 return ret[0];
             }
             return undefined;
+        });
+    }
+    /**
+     * 诺华保存源数据
+     * @param platform
+     * @param apiName
+     * @param content
+     * @param payloadID
+     */
+    saveApirawContent(platform, apiName, content) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this.execSql(this.sqlSaveapirawcontent, [platform, apiName, content]);
+            }
+            catch (error) {
+                throw error;
+            }
+        });
+    }
+    savePunchOutSetupRequest(platform, jsonObj, xmlBody) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let { payloadID, Header: punchoutHeader, Request: punchoutRequest } = jsonObj.cXML;
+            try {
+                yield this.execSql(this.sqlSavePunchOutRequest, [platform, xmlBody, punchoutHeader.From.Credential.domain, punchoutHeader.From.Credential.Identity, punchoutHeader.To.Credential.domain, punchoutHeader.To.Credential.Identity, punchoutHeader.Sender.Credential.domain, punchoutHeader.Sender.Credential.Identity, punchoutHeader.Sender.UserAgent, punchoutHeader.Sender.Credential.SharedSecret, punchoutRequest.BrowserFormPost.URL, punchoutRequest.PunchOutSetupRequest.BuyerCookie, payloadID]);
+            }
+            catch (error) {
+                throw error;
+            }
         });
     }
 }

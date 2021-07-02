@@ -6,6 +6,8 @@ export class DbJointPlatform extends Db {
     private sqlGetEpecUser: string;
     private sqlGetUserByLoginKey: string;
     private sqlSaveLoginReq: string;
+    private sqlSaveapirawcontent: string;
+    private sqlSavePunchOutRequest: string;
 
     constructor() {
         super('joint-uq-platform');
@@ -23,6 +25,13 @@ export class DbJointPlatform extends Db {
         this.sqlGetUserByLoginKey = `select webUser, username, password, organization, team 
             from \`${db}\`.tv_neotridentuser
             where sharedSecret = ?`;
+
+        this.sqlSaveapirawcontent = `INSERT INTO \`${db}\`.tv_apirawcontent(platform, api, content)
+            VALUES(?, ?, ?)`;
+
+        this.sqlSavePunchOutRequest = `INSERT INTO \`${db}\`.tv_punchoutsetuprequest(platform, body, fromdomain, fromidentity, todomain,
+            toidentity, senderdomain, senderidentity, senderuseragent, sendersharedsecret, browserformposturl, buyercookie, payloadid)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     }
 
     /**
@@ -78,5 +87,31 @@ export class DbJointPlatform extends Db {
             return ret[0];
         }
         return undefined;
+    }
+
+    /**
+     * 诺华保存源数据
+     * @param platform 
+     * @param apiName 
+     * @param content 
+     * @param payloadID 
+     */
+    async saveApirawContent(platform: number, apiName: string, content: any): Promise<any> {
+
+        try {
+            await this.execSql(this.sqlSaveapirawcontent, [platform, apiName, content])
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async savePunchOutSetupRequest(platform: number, jsonObj: any, xmlBody: any): Promise<any> {
+        let { payloadID, Header: punchoutHeader, Request: punchoutRequest } = jsonObj.cXML;
+        try {
+
+            await this.execSql(this.sqlSavePunchOutRequest, [platform, xmlBody, punchoutHeader.From.Credential.domain, punchoutHeader.From.Credential.Identity, punchoutHeader.To.Credential.domain, punchoutHeader.To.Credential.Identity, punchoutHeader.Sender.Credential.domain, punchoutHeader.Sender.Credential.Identity, punchoutHeader.Sender.UserAgent, punchoutHeader.Sender.Credential.SharedSecret, punchoutRequest.BrowserFormPost.URL, punchoutRequest.PunchOutSetupRequest.BuyerCookie, payloadID])
+        } catch (error) {
+            throw error;
+        }
     }
 }

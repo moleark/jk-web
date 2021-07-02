@@ -5,6 +5,7 @@ import { getProductsInCatalog } from "./getProductsInCatalog";
 import { replacePostContentUrl } from "../tools/replacePostContentUrl";
 import { clientLogin } from "../joint";
 import { neotridentLogin } from "../neotrident";
+import { authentication } from "../punchout/PunchOut";
 
 export const apiRouter = Router({ mergeParams: true });
 apiRouter.get(['/search/:key', '/search/:key/:pageNumber(\\d+)', '/search/:key?debug'], search);
@@ -35,6 +36,9 @@ apiRouter.get('/replacePostContentUrl/:from(\\d+)-:to(\\d+)', async (req: Reques
         rep.json(error);
     }
 })
+
+// 诺华用户认证
+apiRouter.post(/^\/PunchOut\.aspx$/i, authentication)
 
 // 药物所登录地址
 apiRouter.get(/^\/UserIdentity\.ashx$/i, neotridentLogin);

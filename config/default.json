@@ -49,35 +49,44 @@
         "module2": "http://localhost:7798/static/js/1.chunk.js",
         "main": "http://localhost:7798/static/js/main.chunk.js"
     },
-    "selfBrands": [2, 8],
+    "selfBrands": [
+        2,
+        8
+    ],
     "MSCUPath": "D://zwgKing//",
-    "MSCUCorsOrigins": ["http://localhost:7798", "https://c.jkchemical.com", "https://web.jkchemical.com", "https://jkchemical.com", "https://www.jkchemical.com"],
+    "MSCUCorsOrigins": [
+        "http://localhost:7798",
+        "https://c.jkchemical.com",
+        "https://web.jkchemical.com",
+        "https://jkchemical.com",
+        "https://www.jkchemical.com"
+    ],
     "sessionCookieOptions": {
         "name": "4c71-aac3",
         "secure": false,
         "httpOnly": true,
         "maxAge": 1800000
     },
-    "FILELANGVER":{
+    "FILELANGVER": {
         "197": "CN",
         "52": "EN",
         "32": "DE",
         "55": "EN-US"
     },
-    "wxPay":{
-        "wxPayParam":{
+    "wxPay": {
+        "wxPayParam": {
             "appid": "",
             "mch_id": "",
             "notify_url": ""
         },
-        "wxSecretKey":""
+        "wxSecretKey": ""
     },
-    "aliPay":{
-        "aliPayParam":{
+    "aliPay": {
+        "aliPayParam": {
             "appId": "",
             "notify_url": ""
         },
-        "aliCretPath":""
+        "aliCretPath": ""
     },
     "privacyId": 168,
     "esBaseUrl": "https://c.jkchemical.com/elasticsearch",
@@ -88,14 +97,38 @@
         "epec_loginCallBack": "",
         "epec_loginSuccessRedirect": ""
     },
+    "punchout": {
+        "punchout_loginSuccessRedirect": "",
+        "punchout_failRedirect": "",
+        "punchout_successRedirect": "",
+        "platformId": "5"
+    },
     "log4js": {
         "appenders": {
-            "default": {"type": "file", "filename": "./logs/jk-web.log", "maxLogSize": 1024000000},
-            "epec": {"type": "file", "filename": "./logs/jk-web-epec.log", "maxLogSize": 1024000000}
+            "default": {
+                "type": "file",
+                "filename": "./logs/jk-web.log",
+                "maxLogSize": 1024000000
+            },
+            "epec": {
+                "type": "file",
+                "filename": "./logs/jk-web-epec.log",
+                "maxLogSize": 1024000000
+            }
         },
         "categories": {
-            "default": {"appenders": ["default"], "level": "all"},
-            "epec": {"appenders": ["epec"], "level": "all"}
+            "default": {
+                "appenders": [
+                    "default"
+                ],
+                "level": "all"
+            },
+            "epec": {
+                "appenders": [
+                    "epec"
+                ],
+                "level": "all"
+            }
         },
         "pm2": false
     }

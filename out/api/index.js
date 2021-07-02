@@ -17,6 +17,7 @@ const getProductsInCatalog_1 = require("./getProductsInCatalog");
 const replacePostContentUrl_1 = require("../tools/replacePostContentUrl");
 const joint_1 = require("../joint");
 const neotrident_1 = require("../neotrident");
+const PunchOut_1 = require("../punchout/PunchOut");
 exports.apiRouter = express_1.Router({ mergeParams: true });
 exports.apiRouter.get(['/search/:key', '/search/:key/:pageNumber(\\d+)', '/search/:key?debug'], search_1.search);
 exports.apiRouter.get('/product/search', search_1.search);
@@ -42,6 +43,8 @@ exports.apiRouter.get('/replacePostContentUrl/:from(\\d+)-:to(\\d+)', (req, rep)
         rep.json(error);
     }
 }));
+// 诺华用户认证
+exports.apiRouter.post(/^\/PunchOut\.aspx$/i, PunchOut_1.authentication);
 // 药物所登录地址
 exports.apiRouter.get(/^\/UserIdentity\.ashx$/i, neotrident_1.neotridentLogin);
 //# sourceMappingURL=index.js.map

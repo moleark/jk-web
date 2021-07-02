@@ -9,8 +9,7 @@ export async function login(req: Request, res: Response) {
     let { query } = req;
     let { key } = query;
     if (!key) {
-        res.redirect("/login");
-        return;
+        return res.status(404).redirect("/login");
     }
 
     let { jointPlatform: jointPlatform } = Dbs;
@@ -27,10 +26,16 @@ export async function login(req: Request, res: Response) {
         let success = await jointPlatform.saveLoginReq(token, userInfo.name, password, username);
         // 导航到默认界面
         if (success) {
-            let jointOptions = config.get<any>('joint');
-            let { loginSuccessRedirect } = jointOptions;
-            res.redirect(loginSuccessRedirect + "?lgtk=" + token);
-            return;
+
+            // 诺华
+            if (key == "FEF7A870-35FE-4723-A563-DE8CA890AADF") {
+                let { punchout_loginSuccessRedirect } = config.get('punchout');
+                return res.redirect(punchout_loginSuccessRedirect + "?lgtk=" + token);
+            }
+            else {
+                let { loginSuccessRedirect } = config.get('joint');
+                return res.redirect(loginSuccessRedirect + "?lgtk=" + token);
+            }
         }
     }
 }
