@@ -36,7 +36,7 @@
         "date-fns": "^2.22.1",
         "dateformat": "^3.0.3",
         "ejs": "^3.0.1",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "express-session": "^1.17.1",
         "fast-xml-parser": "^3.19.0",
         "iconv-lite": "^0.6.2",
