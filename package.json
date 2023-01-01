@@ -31,7 +31,7 @@
         "bignumber.js": "^9.0.1",
         "body-parser": "^1.19.0",
         "captchapng": "0.0.1",
-        "config": "^3.2.5",
+        "config": "^3.3.8",
         "cors": "^2.8.5",
         "date-fns": "^2.22.1",
         "dateformat": "^3.0.3",
